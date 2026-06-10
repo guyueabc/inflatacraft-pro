@@ -1,0 +1,200 @@
+"use client";
+
+import Link from "next/link";
+import { cn } from "@/lib/utils";
+import {
+  Phone,
+  Mail,
+  MapPin,
+  ArrowRight,
+  Globe,
+  AtSign,
+  Camera,
+  Building2,
+  Play,
+} from "lucide-react";
+
+const FOOTER_COLUMNS = [
+  {
+    title: "Products",
+    links: [
+      { label: "Custom Inflatables", href: "/products/custom" },
+      { label: "Inflatable Arches", href: "/products/arches" },
+      { label: "Inflatable Tents", href: "/products/tents" },
+      { label: "Inflatable Costumes", href: "/products/costumes" },
+      { label: "Giant Replicas", href: "/products/replicas" },
+      { label: "Inflatable Games", href: "/products/games" },
+      { label: "All Products", href: "/products" },
+    ],
+  },
+  {
+    title: "Company",
+    links: [
+      { label: "About Us", href: "/about" },
+      { label: "Our Process", href: "/how-it-works" },
+      { label: "Gallery", href: "/gallery" },
+      { label: "Blog", href: "/blog" },
+      { label: "Careers", href: "/careers" },
+      { label: "Press & Media", href: "/press" },
+    ],
+  },
+  {
+    title: "Resources",
+    links: [
+      { label: "FAQ", href: "/faq" },
+      { label: "Design Guidelines", href: "/resources/design-guidelines" },
+      { label: "Material Specs", href: "/resources/material-specs" },
+      { label: "Shipping Info", href: "/resources/shipping" },
+      { label: "Warranty", href: "/resources/warranty" },
+      { label: "Returns & Refunds", href: "/resources/returns" },
+      { label: "Privacy Policy", href: "/privacy" },
+      { label: "Terms of Service", href: "/terms" },
+    ],
+  },
+  {
+    title: "Contact",
+    links: [
+      { label: "Request Quote", href: "/request-quote" },
+      { label: "Contact Sales", href: "/contact" },
+      { label: "Support", href: "/support" },
+      { label: "Wholesale", href: "/wholesale" },
+    ],
+  },
+] as const;
+
+const SOCIAL_LINKS = [
+  { label: "Facebook", href: "#", icon: Globe },
+  { label: "Twitter", href: "#", icon: AtSign },
+  { label: "Instagram", href: "#", icon: Camera },
+  { label: "LinkedIn", href: "#", icon: Building2 },
+  { label: "YouTube", href: "#", icon: Play },
+] as const;
+
+export function Footer() {
+  return (
+    <footer className="bg-navy-900 text-white">
+      {/* Main Footer */}
+      <div className="container mx-auto px-4 py-16">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-6">
+          {/* Brand + Newsletter Column (spans 2) */}
+          <div className="sm:col-span-2">
+            {/* Logo */}
+            <Link href="/" className="mb-4 inline-flex items-center gap-2">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/10">
+                <span className="text-lg font-bold text-white">IP</span>
+              </div>
+              <span className="text-xl font-bold tracking-tight text-white">
+                InflataCraft
+              </span>
+              <span className="text-xl font-semibold tracking-tight text-red-400">
+                Pro
+              </span>
+            </Link>
+
+            <p className="mb-6 max-w-sm text-sm leading-relaxed text-white/60">
+              Premium custom inflatable manufacturing for businesses worldwide.
+              From concept to creation — we bring your brand to life at scale.
+            </p>
+
+            {/* Newsletter */}
+            <div className="mb-6">
+              <h4 className="mb-2 text-sm font-semibold uppercase tracking-wider text-white/80">
+                Stay Inflated
+              </h4>
+              <p className="mb-3 text-sm text-white/50">
+                Get tips, case studies, and exclusive offers.
+              </p>
+              <form
+                onSubmit={(e) => e.preventDefault()}
+                className="flex gap-2"
+              >
+                <label htmlFor="footer-email" className="sr-only">
+                  Email address
+                </label>
+                <input
+                  id="footer-email"
+                  type="email"
+                  placeholder="your@email.com"
+                  className="flex-1 rounded-md border border-white/20 bg-white/10 px-3 py-2 text-sm text-white placeholder:text-white/40 focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500"
+                />
+                <button
+                  type="submit"
+                  className="flex items-center gap-1 rounded-md bg-red-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-red-500"
+                >
+                  Subscribe
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </button>
+              </form>
+            </div>
+
+            {/* Social Links */}
+            <div className="flex items-center gap-3">
+              {SOCIAL_LINKS.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  aria-label={social.label}
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-white/60 transition-colors hover:border-red-500 hover:bg-red-600 hover:text-white"
+                >
+                  <social.icon className="h-4 w-4" />
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Link Columns */}
+          {FOOTER_COLUMNS.map((column) => (
+            <div key={column.title}>
+              <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white/80">
+                {column.title}
+              </h4>
+              <ul className="space-y-2.5">
+                {column.links.map((link) => (
+                  <li key={link.label}>
+                    <Link
+                      href={link.href}
+                      className="text-sm text-white/50 transition-colors hover:text-red-400"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Bottom Bar */}
+      <div className="border-t border-white/10">
+        <div className="container mx-auto flex flex-col items-center justify-between gap-4 px-4 py-6 sm:flex-row">
+          {/* Copyright */}
+          <p className="text-sm text-white/40">
+            &copy; {new Date().getFullYear()} InflataCraft Pro. All rights
+            reserved.
+          </p>
+
+          {/* Badges */}
+          <div className="flex flex-wrap items-center gap-6 text-sm text-white/40">
+            <span className="flex items-center gap-1.5">
+              <span className="text-xs font-semibold uppercase tracking-widest text-white/60">
+                Made in
+              </span>
+              <span className="inline-flex items-center rounded bg-red-600 px-2 py-0.5 text-xs font-bold text-white">
+                USA
+              </span>
+            </span>
+            <span className="flex items-center gap-1.5">
+              <span className="text-xs font-semibold uppercase tracking-widest text-white/60">
+                BBB Rating
+              </span>
+              <span className="inline-flex items-center rounded bg-white/10 px-2 py-0.5 text-xs font-bold text-white">
+                A+
+              </span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
