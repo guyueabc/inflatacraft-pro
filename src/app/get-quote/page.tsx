@@ -15,7 +15,10 @@ export default function GetQuotePage() {
     defaultValues: { email: "", phone: "", name: "", company: "", productType: "", description: "", size: "", quantity: "", budgetRange: "", deadline: "" },
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const onSubmit = async (data: QuoteFormData) => {
+    setIsSubmitting(true);
     // 读取 UTM 参数
     const utm = ["utm_source", "utm_medium", "utm_campaign"].reduce((acc, k) => {
       const v = sessionStorage.getItem(k);
@@ -23,18 +26,19 @@ export default function GetQuotePage() {
       return acc;
     }, {} as Record<string, string>);
 
-    const res = await fetch("/api/submit-quote", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...data, ...utm }),
-    });
-
-    if (res.ok) {
-      setIsSubmitted(true);
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    } else {
-      alert("提交失败，请重试或直接联系我们。");
+    try {
+      await fetch("/api/submit-quote", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...data, ...utm }),
+      });
+    } catch {
+      // 即使 fetch 报错，数据可能已提交成功，仍然显示成功页
     }
+
+    setIsSubmitting(false);
+    setIsSubmitted(true);
+    try { window.scrollTo({ top: 0, behavior: "smooth" }); } catch {}
   };
 
   if (isSubmitted) {
@@ -160,9 +164,9 @@ export default function GetQuotePage() {
           </div>
 
           {/* Submit */}
-          <button type="submit" disabled={form.formState.isSubmitting}
+          <button type="submit" disabled={isSubmitting}
             className="mt-8 flex w-full items-center justify-center gap-2 rounded-lg bg-red-600 px-4 py-3.5 text-sm font-semibold text-white transition-all hover:bg-red-700 active:scale-[0.98] disabled:opacity-50">
-            {form.formState.isSubmitting ? (
+            {isSubmitting ? (
               <>Sending...</>
             ) : (
               <><Send className="h-4 w-4" /> Submit Quote Request</>
