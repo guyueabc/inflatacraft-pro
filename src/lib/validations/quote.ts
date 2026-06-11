@@ -1,55 +1,21 @@
 import { z } from "zod";
 
-// ---- Phase 1 ----
-export const quotePhase1Schema = z.object({
-  name: z
-    .string()
-    .min(2, "Name must be at least 2 characters")
-    .max(100, "Name is too long"),
-  email: z.string().email("Please enter a valid email address"),
-  phone: z
-    .string()
-    .min(7, "Please enter a valid phone number")
-    .max(20, "Phone number is too long"),
-  productType: z
-    .string()
-    .min(1, "Please select a product type"),
+// 只需要邮箱和电话 — 其余全部可选
+export const quoteSchema = z.object({
+  email: z.string().email("请输入有效的邮箱地址"),
+  phone: z.string().min(7, "请输入有效的电话号码"),
+  name: z.string().optional().or(z.literal("")),
+  company: z.string().optional().or(z.literal("")),
+  productType: z.string().optional().or(z.literal("")),
+  description: z.string().optional().or(z.literal("")),
+  size: z.string().optional().or(z.literal("")),
+  quantity: z.string().optional().or(z.literal("")),
+  budgetRange: z.string().optional().or(z.literal("")),
+  deadline: z.string().optional().or(z.literal("")),
 });
 
-export type QuotePhase1Data = z.infer<typeof quotePhase1Schema>;
+export type QuoteFormData = z.infer<typeof quoteSchema>;
 
-// ---- Phase 2 ----
-export const quotePhase2Schema = z.object({
-  company: z.string().max(200, "Company name is too long").optional().or(z.literal("")),
-  description: z
-    .string()
-    .min(20, "Please provide at least 20 characters describing your project")
-    .max(5000, "Description is too long"),
-  size: z.string().min(1, "Please enter approximate size"),
-  quantity: z
-    .string()
-    .min(1, "Please enter a quantity")
-    .refine(
-      (val) => !isNaN(Number(val)) && Number(val) > 0,
-      "Quantity must be a positive number"
-    ),
-  budgetRange: z.string().min(1, "Please select a budget range"),
-  deadline: z.string().min(1, "Please select a deadline"),
-  captcha: z
-    .string()
-    .min(1, "Please answer the security question")
-    .refine((val) => String(val).trim() === "7", {
-      message: "Incorrect answer — please try again",
-    }),
-});
-
-export type QuotePhase2Data = z.infer<typeof quotePhase2Schema>;
-
-// ---- Combined ----
-export const quoteFullSchema = quotePhase1Schema.merge(quotePhase2Schema);
-export type QuoteFormData = z.infer<typeof quoteFullSchema>;
-
-// ---- Constants ----
 export const PRODUCT_TYPES = [
   "Giant Product Replica",
   "Inflatable Mascot",
@@ -57,7 +23,6 @@ export const PRODUCT_TYPES = [
   "Inflatable Costume",
   "Inflatable Tent",
   "Inflatable Game / Obstacle",
-  "Inflatable Slide",
   "Custom Shape / Other",
 ] as const;
 
