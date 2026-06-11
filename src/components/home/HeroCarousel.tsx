@@ -24,7 +24,7 @@ const SLIDES: Slide[] = [
     ctaPrimary: { label: "Get Free Quote", href: "/request-quote" },
     ctaSecondary: { label: "View Gallery", href: "/gallery" },
     placeholderLabel: "Giant Product Replica",
-    imageSrc: "/images/products/pharma-pill-bottle-inflatable/pharma-pill-bottle-inflatable-2.jpg?v=1",
+    imageSrc: "/images/products/hero-slide-1.jpg?v=2",
   },
   {
     id: 2,

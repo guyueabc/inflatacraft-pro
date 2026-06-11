@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { FloatingCTA } from "@/components/layout/FloatingCTA";
+import { Analytics } from "@/components/layout/Analytics";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -28,6 +29,9 @@ export const metadata: Metadata = {
     "inflatable arches",
     "advertising inflatables",
   ],
+  verification: {
+    google: "YOUR_GOOGLE_SITE_VERIFICATION",
+  },
 };
 
 export default function RootLayout({
@@ -41,6 +45,7 @@ export default function RootLayout({
       className={`${inter.variable} ${montserrat.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-white text-gray-800">
+        <Analytics />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

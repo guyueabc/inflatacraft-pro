@@ -166,3 +166,39 @@ model GalleryItem {
   @@index([industry])
   @@index([productType])
 }
+
+// ─── Analytics Tables ────────────────────────────────────────────────────────
+
+model PageView {
+  id         Int      @id @default(autoincrement())
+  page       String
+  referrer   String   @default("")
+  utmSource  String?  @map("utm_source")
+  utmMedium  String?  @map("utm_medium")
+  utmCampaign String? @map("utm_campaign")
+  utmTerm    String?  @map("utm_term")
+  utmContent String?  @map("utm_content")
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  @@map("page_views")
+  @@index([page])
+  @@index([utmSource, utmMedium, utmCampaign])
+  @@index([createdAt])
+}
+
+model FormSubmission {
+  id        String   @id @default(cuid())
+  formType  String   @map("form_type") // quote, contact, newsletter
+  data      Json     @default("{}")
+  page      String   @default("/")
+  referrer  String   @default("")
+  utmSource String?  @map("utm_source")
+  utmMedium String?  @map("utm_medium")
+  utmCampaign String? @map("utm_campaign")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("form_submissions")
+  @@index([formType])
+  @@index([createdAt])
+  @@index([utmSource, utmMedium])
+}
