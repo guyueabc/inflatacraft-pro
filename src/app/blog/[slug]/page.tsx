@@ -2,6 +2,7 @@
 
 import { useParams } from "next/navigation";
 import Link from "next/link";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import {
@@ -18,6 +19,8 @@ import {
   Link2,
   ChevronRight,
   BookOpen,
+  ChevronDown,
+  List,
 } from "lucide-react";
 
 // ── Types ────────────────────────────────────────────────────────────────────
@@ -194,6 +197,7 @@ export default function BlogDetailPage() {
   const params = useParams();
   const slug = params.slug as string;
   const post = BLOG_DATA[slug];
+  const [mobileTocOpen, setMobileTocOpen] = useState(false);
 
   if (!post) {
     return (
@@ -282,6 +286,37 @@ export default function BlogDetailPage() {
         <div className="grid gap-12 lg:grid-cols-[1fr_280px]">
           {/* ── Article Body ── */}
           <article className="min-w-0">
+            {/* Mobile TOC (collapsible) */}
+            <div className="mb-8 lg:hidden">
+              <button
+                onClick={() => setMobileTocOpen(!mobileTocOpen)}
+                className="flex w-full items-center justify-between rounded-xl border border-gray-200 bg-white p-4 shadow-sm text-left"
+              >
+                <span className="flex items-center gap-2 font-heading text-base font-bold text-navy-900">
+                  <List className="h-4 w-4 text-navy-400" />
+                  Table of Contents
+                </span>
+                <ChevronDown className={cn(
+                  "h-5 w-5 text-gray-400 transition-transform",
+                  mobileTocOpen && "rotate-180"
+                )} />
+              </button>
+              {mobileTocOpen && (
+                <nav className="mt-2 rounded-xl border border-gray-200 bg-white p-4 shadow-sm space-y-1">
+                  {toc.map((heading, idx) => (
+                    <a
+                      key={idx}
+                      href={`#section-${idx}`}
+                      onClick={() => setMobileTocOpen(false)}
+                      className="block rounded-lg px-3 py-2 text-sm text-gray-600 transition-colors hover:bg-navy-50 hover:text-navy-700"
+                    >
+                      {idx + 1}. {heading}
+                    </a>
+                  ))}
+                </nav>
+              )}
+            </div>
+
             <div className="prose-custom space-y-10">
               {post.sections.map((section, idx) => (
                 <motion.div

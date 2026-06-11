@@ -73,7 +73,7 @@ export function Header() {
             </a>
             <a
               href="mailto:sales@inflatacraftpro.com"
-              className="flex items-center gap-1.5 hover:text-red-400 transition-colors"
+              className="hidden sm:flex items-center gap-1.5 hover:text-red-400 transition-colors"
             >
               <Mail className="h-3.5 w-3.5" />
               <span>sales@inflatacraftpro.com</span>
@@ -81,9 +81,10 @@ export function Header() {
           </div>
           <Link
             href="/request-quote"
-            className="inline-flex items-center rounded-md bg-red-600 px-4 py-1.5 text-sm font-semibold text-white transition-colors hover:bg-red-500"
+            className="inline-flex items-center rounded-md bg-red-600 px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-red-500 sm:px-4 sm:text-sm"
           >
-            Request Quote
+            <span className="hidden sm:inline">Request Quote</span>
+            <span className="sm:hidden">Quote</span>
           </Link>
         </div>
       </div>
@@ -141,15 +142,27 @@ export function Header() {
           </Link>
         </div>
 
-        {/* Mobile Hamburger */}
-        <button
-          type="button"
-          className="flex items-center justify-center rounded-md p-2 text-navy-700 transition-colors hover:bg-navy-50 lg:hidden"
-          onClick={() => setMobileMenuOpen(true)}
-          aria-label="Open menu"
-        >
-          <Menu className="h-6 w-6" />
-        </button>
+        {/* Mobile Actions */}
+        <div className="flex items-center gap-1 lg:hidden">
+          <Link
+            href="/cart"
+            className="relative rounded-md p-2 text-navy-700 transition-colors hover:bg-navy-50"
+            aria-label="Shopping cart"
+          >
+            <ShoppingCart className="h-5 w-5" />
+            <span className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-red-600 text-[10px] font-bold text-white">
+              0
+            </span>
+          </Link>
+          <button
+            type="button"
+            className="flex items-center justify-center rounded-md p-2 text-navy-700 transition-colors hover:bg-navy-50"
+            onClick={() => setMobileMenuOpen(true)}
+            aria-label="Open menu"
+          >
+            <Menu className="h-6 w-6" />
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu Overlay */}

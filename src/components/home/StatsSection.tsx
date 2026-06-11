@@ -99,10 +99,10 @@ function AnimatedCounter({
 
 export function StatsSection() {
   return (
-    <section className="bg-navy-800 py-20 md:py-24">
+    <section className="bg-navy-800 py-12 sm:py-16 md:py-20 lg:py-24">
       <div className="container mx-auto px-4">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="font-heading text-3xl font-bold tracking-tight text-white md:text-4xl">
+          <h2 className="font-heading text-2xl font-bold tracking-tight text-white sm:text-3xl md:text-4xl">
             By the Numbers
           </h2>
           <p className="mt-4 text-lg text-navy-300">

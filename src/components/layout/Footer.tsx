@@ -106,7 +106,7 @@ export function Footer() {
               </p>
               <form
                 onSubmit={(e) => e.preventDefault()}
-                className="flex gap-2"
+                className="flex flex-col gap-2 sm:flex-row"
               >
                 <label htmlFor="footer-email" className="sr-only">
                   Email address
@@ -128,7 +128,7 @@ export function Footer() {
             </div>
 
             {/* Social Links */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center justify-center gap-3 sm:justify-start">
               {SOCIAL_LINKS.map((social) => (
                 <a
                   key={social.label}
@@ -175,7 +175,7 @@ export function Footer() {
           </p>
 
           {/* Badges */}
-          <div className="flex flex-wrap items-center gap-6 text-sm text-white/40">
+          <div className="flex flex-col items-center gap-3 text-sm text-white/40 sm:flex-row sm:gap-6">
             <span className="flex items-center gap-1.5">
               <span className="text-xs font-semibold uppercase tracking-widest text-white/60">
                 Made in

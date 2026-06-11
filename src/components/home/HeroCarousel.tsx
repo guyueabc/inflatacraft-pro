@@ -79,7 +79,7 @@ export function HeroCarousel() {
 
   return (
     <section
-      className="relative flex min-h-[600px] items-center overflow-hidden bg-navy-900 md:min-h-[700px]"
+      className="relative flex min-h-[500px] items-center overflow-hidden bg-navy-900 sm:min-h-[600px] md:min-h-[700px]"
       onMouseEnter={() => setIsAutoPlaying(false)}
       onMouseLeave={() => setIsAutoPlaying(true)}
       role="region"
@@ -107,7 +107,7 @@ export function HeroCarousel() {
       </AnimatePresence>
 
       {/* Content */}
-      <div className="container relative z-10 mx-auto px-4 py-20 md:py-28">
+      <div className="container relative z-10 mx-auto px-4 py-12 sm:py-16 md:py-20 lg:py-28">
         <AnimatePresence mode="wait">
           <motion.div
             key={slide.id}
@@ -116,24 +116,24 @@ export function HeroCarousel() {
             exit={{ opacity: 0, y: -30 }}
             transition={{ duration: 0.5 }}
           >
-            <h1 className="max-w-3xl font-heading text-4xl font-extrabold leading-tight tracking-tight text-white md:text-5xl lg:text-6xl">
+            <h1 className="max-w-3xl font-heading text-3xl font-extrabold leading-tight tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl">
               {slide.headline}
             </h1>
-            <p className="mt-4 max-w-xl text-lg text-navy-200 md:text-xl">
+            <p className="mt-4 max-w-xl text-base text-navy-200 sm:text-lg md:text-xl">
               {slide.subheadline}
             </p>
 
             {/* CTAs */}
-            <div className="mt-8 flex flex-wrap gap-4">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:gap-4">
               <Link
                 href={slide.ctaPrimary.href}
-                className="inline-flex items-center rounded-lg bg-red-600 px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-red-600/30 transition-all hover:bg-red-500 hover:shadow-red-500/40 active:scale-95"
+                className="inline-flex items-center justify-center rounded-lg bg-red-600 px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-red-600/30 transition-all hover:bg-red-500 hover:shadow-red-500/40 active:scale-95 sm:w-auto"
               >
                 {slide.ctaPrimary.label}
               </Link>
               <Link
                 href={slide.ctaSecondary.href}
-                className="inline-flex items-center rounded-lg border-2 border-white/30 px-8 py-3.5 text-base font-semibold text-white backdrop-blur-sm transition-all hover:border-white/60 hover:bg-white/10 active:scale-95"
+                className="inline-flex items-center justify-center rounded-lg border-2 border-white/30 px-8 py-3.5 text-base font-semibold text-white backdrop-blur-sm transition-all hover:border-white/60 hover:bg-white/10 active:scale-95 sm:w-auto"
               >
                 {slide.ctaSecondary.label}
               </Link>
@@ -142,14 +142,14 @@ export function HeroCarousel() {
         </AnimatePresence>
 
         {/* Trust Badges */}
-        <div className="mt-14 flex flex-wrap gap-8">
+        <div className="mt-10 flex flex-wrap gap-4 sm:mt-14 sm:gap-8">
           {TRUST_BADGES.map((badge) => (
             <div
               key={badge.label}
-              className="flex items-center gap-2 text-white/80"
+              className="flex items-center gap-1.5 text-white/80 sm:gap-2"
             >
-              <badge.icon className="h-5 w-5 text-red-400" />
-              <span className="text-sm font-medium">{badge.label}</span>
+              <badge.icon className="h-4 w-4 text-red-400 sm:h-5 sm:w-5" />
+              <span className="text-xs font-medium sm:text-sm">{badge.label}</span>
             </div>
           ))}
         </div>
@@ -159,18 +159,18 @@ export function HeroCarousel() {
       <button
         type="button"
         onClick={prev}
-        className="absolute left-4 top-1/2 z-20 -translate-y-1/2 rounded-full bg-white/10 p-2.5 text-white backdrop-blur-sm transition-all hover:bg-white/25 md:left-6"
+        className="absolute left-2 top-1/2 z-20 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white backdrop-blur-sm transition-all hover:bg-white/25 sm:left-4 sm:p-2.5 md:left-6"
         aria-label="Previous slide"
       >
-        <ChevronLeft className="h-6 w-6" />
+        <ChevronLeft className="h-5 w-5 sm:h-6 sm:w-6" />
       </button>
       <button
         type="button"
         onClick={next}
-        className="absolute right-4 top-1/2 z-20 -translate-y-1/2 rounded-full bg-white/10 p-2.5 text-white backdrop-blur-sm transition-all hover:bg-white/25 md:right-6"
+        className="absolute right-2 top-1/2 z-20 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white backdrop-blur-sm transition-all hover:bg-white/25 sm:right-4 sm:p-2.5 md:right-6"
         aria-label="Next slide"
       >
-        <ChevronRight className="h-6 w-6" />
+        <ChevronRight className="h-5 w-5 sm:h-6 sm:w-6" />
       </button>
 
       {/* Dots */}

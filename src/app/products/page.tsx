@@ -152,12 +152,12 @@ export default function ProductsPage() {
             </div>
 
             {/* Sort */}
-            <div className="hidden sm:flex items-center gap-2">
-              <ArrowUpDown className="h-4 w-4 text-gray-400" />
+            <div className="flex items-center gap-2 sm:flex-1">
+              <ArrowUpDown className="h-4 w-4 text-gray-400 shrink-0" />
               <select
                 value={sort}
                 onChange={(e) => setSort(e.target.value as SortValue)}
-                className="rounded-lg border border-gray-300 bg-white py-2 pl-2 pr-8 text-sm font-medium text-navy-700 focus:border-navy-500 focus:outline-none focus:ring-2 focus:ring-navy-500/20"
+                className="w-full rounded-lg border border-gray-300 bg-white py-2 pl-2 pr-8 text-sm font-medium text-navy-700 focus:border-navy-500 focus:outline-none focus:ring-2 focus:ring-navy-500/20 sm:w-auto"
               >
                 {SORT_OPTIONS.map((opt) => (
                   <option key={opt.value} value={opt.value}>
@@ -407,7 +407,7 @@ function ProductCard({ product }: { product: (typeof products)[number] }) {
       className="group flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all hover:border-navy-300 hover:shadow-lg"
     >
       {/* Product image */}
-      <div className="relative aspect-[4/3] overflow-hidden bg-gradient-to-br from-navy-100 to-navy-200">
+      <div className="relative aspect-video sm:aspect-[4/3] overflow-hidden bg-gradient-to-br from-navy-100 to-navy-200">
         <img
           src={`${product.images[0]}?v=1`}
           alt={product.name}

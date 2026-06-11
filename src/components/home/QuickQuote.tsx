@@ -58,7 +58,7 @@ export function QuickQuote() {
 
   if (status === "success") {
     return (
-      <section className="bg-red-600 py-20 md:py-28">
+      <section className="bg-red-600 py-12 sm:py-16 md:py-20 lg:py-28">
         <div className="container mx-auto px-4 text-center">
           <SuccessMessage />
         </div>
@@ -67,10 +67,10 @@ export function QuickQuote() {
   }
 
   return (
-    <section className="bg-red-600 py-20 md:py-28">
+    <section className="bg-red-600 py-12 sm:py-16 md:py-20 lg:py-28">
       <div className="container mx-auto px-4">
         <div className="mx-auto max-w-3xl text-center">
-          <h2 className="font-heading text-3xl font-bold tracking-tight text-white md:text-4xl">
+          <h2 className="font-heading text-2xl font-bold tracking-tight text-white sm:text-3xl md:text-4xl">
             Get a Free Quote
           </h2>
           <p className="mt-4 text-lg text-red-100">
@@ -171,7 +171,7 @@ export function QuickQuote() {
               type="submit"
               disabled={status === "submitting"}
               className={cn(
-                "inline-flex items-center gap-2 rounded-lg bg-white px-10 py-3.5 text-base font-bold text-red-600 shadow-lg transition-all hover:bg-red-50 active:scale-95",
+                "inline-flex w-full items-center justify-center gap-2 rounded-lg bg-white px-10 py-3.5 text-base font-bold text-red-600 shadow-lg transition-all hover:bg-red-50 active:scale-95 sm:w-auto",
                 status === "submitting" && "cursor-not-allowed opacity-70"
               )}
             >

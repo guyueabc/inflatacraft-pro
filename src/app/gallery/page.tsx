@@ -271,7 +271,7 @@ export default function GalleryPage() {
           style={{ backgroundImage: "radial-gradient(circle at 20px 20px, white 1px, transparent 0)", backgroundSize: "40px 40px" }} />
         <div className="container relative mx-auto max-w-7xl text-center">
           <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-red-400">Our Portfolio</p>
-          <h1 className="font-heading text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl">
+          <h1 className="font-heading text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">
             Project Gallery
           </h1>
           <p className="mx-auto mt-4 max-w-xl text-lg text-navy-300">
@@ -283,9 +283,9 @@ export default function GalleryPage() {
       {/* ── Compact Filter Bar ── */}
       <div className="sticky top-[73px] z-30 border-b border-gray-200 bg-white/95 shadow-sm backdrop-blur">
         <div className="container mx-auto max-w-7xl px-4 py-3">
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
             {/* Search */}
-            <div className="relative flex-1 min-w-[200px] max-w-sm">
+            <div className="relative w-full sm:flex-1 sm:min-w-[200px] sm:max-w-sm">
               <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
               <input
                 type="text" placeholder="Search projects..."
@@ -300,11 +300,11 @@ export default function GalleryPage() {
               )}
             </div>
             {/* Industry pills */}
-            <div className="flex flex-wrap gap-1.5">
+            <div className="flex gap-1.5 overflow-x-auto pb-1 sm:flex-wrap sm:pb-0">
               {INDUSTRIES.map((ind) => (
                 <button key={ind} onClick={() => setIndustryFilter(ind)}
                   className={cn(
-                    "rounded-full px-3 py-1.5 text-xs font-medium transition-all",
+                    "rounded-full px-2 py-1 text-[10px] font-medium transition-all sm:px-3 sm:py-1.5 sm:text-xs",
                     industryFilter === ind
                       ? "bg-navy-700 text-white shadow-sm"
                       : "bg-gray-100 text-gray-600 hover:bg-gray-200"
@@ -312,11 +312,11 @@ export default function GalleryPage() {
               ))}
             </div>
             {/* Product type pills */}
-            <div className="flex flex-wrap gap-1.5">
+            <div className="flex gap-1.5 overflow-x-auto pb-1 sm:flex-wrap sm:pb-0">
               {PRODUCT_TYPES.map((pt) => (
                 <button key={pt} onClick={() => setProductFilter(pt)}
                   className={cn(
-                    "rounded-full px-3 py-1.5 text-xs font-medium transition-all",
+                    "rounded-full px-2 py-1 text-[10px] font-medium transition-all sm:px-3 sm:py-1.5 sm:text-xs",
                     productFilter === pt
                       ? "bg-red-600 text-white shadow-sm"
                       : "bg-gray-100 text-gray-600 hover:bg-gray-200"
@@ -362,13 +362,13 @@ export default function GalleryPage() {
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.95 }}
                     transition={{ duration: 0.25 }}
-                    className="group relative flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all hover:shadow-xl hover:-translate-y-1"
+                    className="group relative flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all hover:shadow-xl hover:-translate-y-1 w-full"
                   >
                     {/* Image */}
                     <button
                       type="button"
                       onClick={() => setSelectedItem(item)}
-                      className="relative aspect-[4/3] w-full overflow-hidden bg-gradient-to-br from-navy-50 to-navy-100"
+                      className="relative aspect-video sm:aspect-[4/3] w-full overflow-hidden bg-gradient-to-br from-navy-50 to-navy-100"
                     >
                       {/* Skeleton placeholder */}
                       {!imageLoaded[item.id] && (
@@ -520,11 +520,11 @@ export default function GalleryPage() {
           <p className="mt-4 text-lg text-navy-300">
             Let's build an inflatable that makes your brand impossible to ignore.
           </p>
-          <div className="mt-8 flex justify-center gap-4">
-            <Link href="/get-quote" className="rounded-lg bg-red-600 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-red-700">
+          <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center sm:gap-4">
+            <Link href="/get-quote" className="w-full rounded-lg bg-red-600 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-red-700 sm:w-auto">
               Start Your Project
             </Link>
-            <Link href="/contact" className="rounded-lg border border-white/20 bg-white/10 px-6 py-3 text-sm font-semibold text-white backdrop-blur transition-colors hover:bg-white/20">
+            <Link href="/contact" className="w-full rounded-lg border border-white/20 bg-white/10 px-6 py-3 text-sm font-semibold text-white backdrop-blur transition-colors hover:bg-white/20 sm:w-auto">
               Contact Sales
             </Link>
           </div>

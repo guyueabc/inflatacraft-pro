@@ -66,10 +66,10 @@ const CATEGORIES: Category[] = [
 
 export function ProductCategories() {
   return (
-    <section className="bg-gray-50 py-20 md:py-28">
+    <section className="bg-gray-50 py-12 sm:py-16 md:py-20 lg:py-28">
       <div className="container mx-auto px-4">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="font-heading text-3xl font-bold tracking-tight text-navy-900 md:text-4xl">
+          <h2 className="font-heading text-2xl font-bold tracking-tight text-navy-900 sm:text-3xl md:text-4xl">
             Explore Our Products
           </h2>
           <p className="mt-4 text-lg text-gray-600">

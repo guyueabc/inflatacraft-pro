@@ -200,8 +200,8 @@ export default function ContactPage() {
                 exit={{ opacity: 0, scale: 0.95 }}
                 className="mx-auto max-w-xl py-16 text-center"
               >
-                <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-green-100">
-                  <CheckCircle2 className="h-12 w-12 text-green-600" />
+                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-green-100 sm:h-24 sm:w-24">
+                  <CheckCircle2 className="h-8 w-8 text-green-600 sm:h-12 sm:w-12" />
                 </div>
                 <h2 className="mt-8 font-heading text-3xl font-bold text-navy-900 md:text-4xl">
                   Message Sent!
@@ -266,7 +266,7 @@ export default function ContactPage() {
               >
                 {/* Left: Contact Form (spans 3 cols) */}
                 <div className="lg:col-span-3">
-                  <div className="rounded-2xl border border-navy-200 bg-white p-8 shadow-sm">
+                  <div className="rounded-2xl border border-navy-200 bg-white p-5 shadow-sm sm:p-8">
                     <h2 className="font-heading text-2xl font-bold text-navy-900 mb-2">
                       Send Us a Message
                     </h2>

@@ -41,8 +41,8 @@ export default function GetQuotePage() {
     return (
       <div className="flex min-h-[calc(100vh-200px)] items-center justify-center px-4 py-16">
         <div className="mx-auto max-w-lg text-center">
-          <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-green-100">
-            <CheckCircle2 className="h-10 w-10 text-green-600" />
+          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-green-100 sm:h-20 sm:w-20">
+            <CheckCircle2 className="h-8 w-8 text-green-600 sm:h-10 sm:w-10" />
           </div>
           <h1 className="mt-6 font-heading text-3xl font-bold text-navy-900">Quote Request Received!</h1>
           <p className="mt-3 leading-relaxed text-gray-600">
@@ -69,7 +69,7 @@ export default function GetQuotePage() {
           <p className="mt-3 text-gray-600">Just your email and phone — we&apos;ll handle the rest.</p>
         </div>
 
-        <form onSubmit={form.handleSubmit(onSubmit)} className="rounded-xl border border-navy-200 bg-white p-8 shadow-sm" noValidate>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="rounded-xl border border-navy-200 bg-white p-5 shadow-sm sm:p-8" noValidate>
           {/* ── Required: Email + Phone ── */}
           <div className="mb-8 rounded-lg border-2 border-red-200 bg-red-50/30 p-5">
             <p className="mb-4 text-sm font-semibold text-red-700">Required — we need these to contact you</p>
