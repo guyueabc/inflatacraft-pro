@@ -32,7 +32,8 @@ type ProductType =
   | "Mascots"
   | "Arches"
   | "Costumes"
-  | "Tents";
+  | "Tents"
+  | "Games";
 
 interface GalleryItem {
   id: number;
@@ -68,6 +69,7 @@ const PRODUCT_TYPES: ProductType[] = [
   "Arches",
   "Costumes",
   "Tents",
+  "Games",
 ];
 
 const GALLERY_ITEMS: GalleryItem[] = [
@@ -122,14 +124,14 @@ const GALLERY_ITEMS: GalleryItem[] = [
     features: ["Full-wrap print", "15min setup", "UV-resistant", "Multiple sizes"],
   },
   {
-    id: 6, slug: "giant-pill-bottle-display", clientName: "Giant Product Bottle",
-    industry: "Medical", productType: "Product Replicas",
-    description: "Oversized bottle-shaped inflatable for healthcare marketing and pharmacy promotions, making medical products visible and approachable at clinics and health fairs.",
-    testimonial: "The giant bottle display sparked conversations about our products that would never have happened with a traditional booth.",
-    testimonialAuthor: "Dr. Rachel Kim", testimonialRole: "Health Program Director",
-    gradient: "from-emerald-400 via-green-500 to-teal-500",
-    imageSrc: "/images/products/pharma-pill-bottle-inflatable/pharma-pill-bottle-inflatable-2.jpg?v=1",
-    features: ["Easy-clean surface", "Medical-grade material", "Portable", "Indoor/outdoor"],
+    id: 6, slug: "inflatable-gorilla-suit", clientName: "Inflatable Gorilla Suit",
+    industry: "Retail", productType: "Costumes",
+    description: "Realistic inflatable gorilla costume worn at promotional events, instantly turning any staff member into a viral-worthy attention magnet.",
+    testimonial: "We sent a gorilla-suited team member to our store opening and the photos went viral locally. Best $900 we ever spent.",
+    testimonialAuthor: "Frank Delgado", testimonialRole: "Store Owner",
+    gradient: "from-gray-600 via-gray-700 to-gray-800",
+    imageSrc: "/images/products/gorilla-mascot-suit/gorilla-mascot-suit-1.jpg?v=1",
+    features: ["Battery fan", "Fits up to 6'6\"", "Realistic print", "5-7hr runtime"],
   },
   {
     id: 7, slug: "inflatable-walking-costume", clientName: "Inflatable Character Costume",
@@ -142,14 +144,14 @@ const GALLERY_ITEMS: GalleryItem[] = [
     features: ["Battery fan", "Lightweight", "Breathable", "One-size adjustable"],
   },
   {
-    id: 8, slug: "outdoor-beverage-replica", clientName: "Outdoor Beverage Replica",
-    industry: "Food & Beverage", productType: "Product Replicas",
-    description: "Tall inflatable beverage can standing prominently in an outdoor setting, a proven way to boost brand visibility at sports events, concerts, and roadside promotions.",
-    testimonial: "We placed this at our flagship store opening and people were posting photos before we even officially launched.",
-    testimonialAuthor: "Alex Tran", testimonialRole: "Brand Manager",
-    gradient: "from-lime-400 via-green-500 to-emerald-600",
-    imageSrc: "/images/products/giant-soda-can-replica/giant-soda-can-replica-2.jpg?v=1",
-    features: ["15ft height", "Metallic finish", "Logo panels", "All-weather rated"],
+    id: 8, slug: "giant-obstacle-course", clientName: "Giant Obstacle Course",
+    industry: "Sports", productType: "Games",
+    description: "Massive inflatable obstacle course set up at an outdoor festival, providing competitive fun for corporate team building, school events, and community festivals.",
+    testimonial: "Our company retreat had actual adults racing through this like kids. Team morale went through the roof.",
+    testimonialAuthor: "Rachel Dunn", testimonialRole: "HR Director",
+    gradient: "from-blue-500 via-purple-500 to-pink-500",
+    imageSrc: "/images/products/inflatable-obstacle-course/inflatable-obstacle-course-1.jpg?v=1",
+    features: ["60ft length", "Multiple obstacles", "Industrial blowers", "Safety certified"],
   },
   {
     id: 9, slug: "sky-dancer-tube-man", clientName: "Sky Dancer Tube Man",
@@ -162,14 +164,14 @@ const GALLERY_ITEMS: GalleryItem[] = [
     features: ["10-20ft options", "Continuous motion", "All-weather", "Low power usage"],
   },
   {
-    id: 10, slug: "concert-venue-arch", clientName: "Concert Venue Archway",
-    industry: "Food & Beverage", productType: "Arches",
-    description: "Iconic bottle-shaped inflatable archway designed for concert and festival entrances, combining brand identity with functional crowd flow management.",
-    testimonial: "The arch created an Instagram-worthy entrance that our fans lined up to photograph. Brand visibility went through the roof.",
-    testimonialAuthor: "Maya Johnson", testimonialRole: "Festival Creative Director",
-    gradient: "from-red-500 via-red-600 to-red-700",
-    imageSrc: "/images/products/finish-line-arch/finish-line-arch-2.jpg?v=1",
-    features: ["RGB lighting sync", "Weather sealed", "Custom audio", "Modular design"],
+    id: 10, slug: "giant-dart-board-game", clientName: "Giant Dart Board Game",
+    industry: "Sports", productType: "Games",
+    description: "Oversized inflatable dart board with velcro balls, a carnival-style attraction perfect for trade show booths, school fairs, and corporate picnics.",
+    testimonial: "Our trade show booth went from 'meh' to 'most visited' as soon as we added this game. Lead generation tripled.",
+    testimonialAuthor: "Steve Kim", testimonialRole: "Trade Show Manager",
+    gradient: "from-red-500 via-green-500 to-blue-500",
+    imageSrc: "/images/products/interactive-dart-board/interactive-dart-board-1.jpg?v=1",
+    features: ["10ft diameter", "Velcro balls included", "Quick setup", "Indoor/outdoor"],
   },
   {
     id: 11, slug: "retail-outreach-tent", clientName: "Community Event Tent",
@@ -192,14 +194,14 @@ const GALLERY_ITEMS: GalleryItem[] = [
     features: ["Soft-touch exterior", "Child-friendly", "Easy transport", "Indoor/outdoor"],
   },
   {
-    id: 13, slug: "promotional-air-dancer", clientName: "Promotional Air Dancer",
-    industry: "Retail", productType: "Product Replicas",
-    description: "Vibrant tube-style air dancer inflatable waving above a retail storefront, the ultimate low-cost, high-visibility tool for sales events and grand openings.",
-    testimonial: "Sales jumped 22% on the weekends we used the air dancer. It's become a permanent part of our promotional toolkit.",
-    testimonialAuthor: "Kevin Barnes", testimonialRole: "Store Manager",
-    gradient: "from-blue-700 via-blue-800 to-gray-800",
-    imageSrc: "/images/products/dancing-tube-man/dancing-tube-man-2.jpg?v=1",
-    features: ["Quick inflation", "Low power", "Color options", "Weatherproof"],
+    id: 13, slug: "portable-event-dome", clientName: "Portable Event Dome",
+    industry: "Retail", productType: "Tents",
+    description: "Compact inflatable dome structure providing an enclosed branded environment for VIP experiences, product demos, and immersive pop-up activations.",
+    testimonial: "The dome gave our pop-up store a premium feel that customers didn't expect. It elevated the entire brand experience.",
+    testimonialAuthor: "Marco Silva", testimonialRole: "Pop-Up Experience Designer",
+    gradient: "from-teal-400 via-cyan-500 to-blue-500",
+    imageSrc: "/images/products/pop-up-dome-canopy/pop-up-dome-canopy-1.jpg?v=1",
+    features: ["12ft diameter", "Climate control", "LED lighting", "Quick deploy"],
   },
   {
     id: 14, slug: "wearable-can-costume", clientName: "Wearable Can Costume",
@@ -222,14 +224,14 @@ const GALLERY_ITEMS: GalleryItem[] = [
     features: ["Industrial blowers", "Heavy-duty fabric", "Custom colors", "Pro-grade stitching"],
   },
   {
-    id: 16, slug: "geodesic-event-dome", clientName: "Geodesic Event Dome",
-    industry: "Food & Beverage", productType: "Tents",
-    description: "Striking geodesic inflatable dome structure used for immersive brand experiences, VIP lounges, and interactive product showcases at outdoor events.",
-    testimonial: "The dome became the centerpiece of our festival activation. People waited in line just to see what was inside.",
-    testimonialAuthor: "Nina Petrov", testimonialRole: "Experiential Marketing Lead",
-    gradient: "from-red-500 via-yellow-400 to-red-500",
-    imageSrc: "/images/products/pop-up-dome-canopy/pop-up-dome-canopy-2.jpg?v=1",
-    features: ["Climate controlled", "LED lighting", "Modular panels", "20ft diameter"],
+    id: 16, slug: "stadium-entry-tunnel", clientName: "Stadium Entry Tunnel",
+    industry: "Sports", productType: "Arches",
+    description: "Dramatic inflatable player entry tunnel built for stadium sports events, creating an unforgettable moment when teams burst onto the field.",
+    testimonial: "The tunnel entrance transformed our game-day experience. Fans now arrive early just to see the team run out.",
+    testimonialAuthor: "Coach Martinez", testimonialRole: "Head of Game Day Operations",
+    gradient: "from-red-600 via-orange-500 to-yellow-400",
+    imageSrc: "/images/products/helmet-tunnel-arch/helmet-tunnel-arch-2.jpg?v=1",
+    features: ["40ft tunnel", "Heavy-duty fabric", "Custom branding", "Industrial blowers"],
   },
 ];
 
