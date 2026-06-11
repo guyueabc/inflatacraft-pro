@@ -16,12 +16,25 @@ export default function GetQuotePage() {
   });
 
   const onSubmit = async (data: QuoteFormData) => {
-    await new Promise((r) => setTimeout(r, 1000));
-    try {
-      await fetch("/api/quotes", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
-    } catch {}
-    setIsSubmitted(true);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    // 读取 UTM 参数
+    const utm = ["utm_source", "utm_medium", "utm_campaign"].reduce((acc, k) => {
+      const v = sessionStorage.getItem(k);
+      if (v) acc[k] = v;
+      return acc;
+    }, {} as Record<string, string>);
+
+    const res = await fetch("/api/submit-quote", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ...data, ...utm }),
+    });
+
+    if (res.ok) {
+      setIsSubmitted(true);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      alert("提交失败，请重试或直接联系我们。");
+    }
   };
 
   if (isSubmitted) {
