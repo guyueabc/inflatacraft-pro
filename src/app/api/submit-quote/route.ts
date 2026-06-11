@@ -1,26 +1,51 @@
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
+/** 每 IP 每 24 小时最大提交次数 */
+const MAX_SUBMISSIONS_PER_IP = 5;
+
+function getClientIp(request: NextRequest): string {
+  // Vercel 代理会设置 x-forwarded-for / x-real-ip
+  return (
+    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    request.headers.get("x-real-ip") ||
+    "0.0.0.0"
+  );
+}
+
 /**
  * POST /api/submit-quote
  * 公开接口 — 无需登录，接收访客报价请求
- * 仅邮箱+电话必填，其余选填
+ * 防滥用：每 IP 每 24 小时最多 5 次提交
  */
 export async function POST(request: NextRequest) {
   try {
+    const ip = getClientIp(request);
     const body = await request.json();
-
-    // 提取 UTM 参数（从 sessionStorage 或 URL）
-    const utmSource = body.utm_source || "";
-    const utmMedium = body.utm_medium || "";
-    const utmCampaign = body.utm_campaign || "";
 
     // 校验必填项
     if (!body.email || !body.phone) {
       return NextResponse.json({ error: "Email and phone are required" }, { status: 400 });
     }
 
-    // 存入 form_submissions 表
+    // 检查 24 小时内提交次数
+    const twentyFourHoursAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
+    const recentCount = await prisma.formSubmission.count({
+      where: {
+        formType: "quote",
+        ipAddress: ip,
+        createdAt: { gte: twentyFourHoursAgo },
+      },
+    });
+
+    if (recentCount >= MAX_SUBMISSIONS_PER_IP) {
+      return NextResponse.json(
+        { error: "Too many submissions. Please try again tomorrow." },
+        { status: 429 }
+      );
+    }
+
+    // 存入 form_submissions
     const submission = await prisma.formSubmission.create({
       data: {
         formType: "quote",
@@ -36,9 +61,10 @@ export async function POST(request: NextRequest) {
           budgetRange: body.budgetRange || "",
           deadline: body.deadline || "",
         },
-        utmSource,
-        utmMedium,
-        utmCampaign,
+        ipAddress: ip,
+        utmSource: body.utm_source || "",
+        utmMedium: body.utm_medium || "",
+        utmCampaign: body.utm_campaign || "",
       },
     });
 
@@ -51,8 +77,7 @@ export async function POST(request: NextRequest) {
 
 /**
  * GET /api/submit-quote
- * 查看最近的提交（简单后台查看）
- * 生产环境应加密码保护
+ * 查看最近的提交
  */
 export async function GET(request: NextRequest) {
   try {
@@ -66,6 +91,7 @@ export async function GET(request: NextRequest) {
       select: {
         id: true,
         data: true,
+        ipAddress: true,
         utmSource: true,
         utmMedium: true,
         utmCampaign: true,

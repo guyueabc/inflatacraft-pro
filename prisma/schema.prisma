@@ -192,6 +192,7 @@ model FormSubmission {
   data      Json     @default("{}")
   page      String   @default("/")
   referrer  String   @default("")
+  ipAddress String?  @map("ip_address")
   utmSource String?  @map("utm_source")
   utmMedium String?  @map("utm_medium")
   utmCampaign String? @map("utm_campaign")
@@ -200,5 +201,6 @@ model FormSubmission {
   @@map("form_submissions")
   @@index([formType])
   @@index([createdAt])
+  @@index([ipAddress, createdAt])
   @@index([utmSource, utmMedium])
 }
