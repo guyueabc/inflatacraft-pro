@@ -82,7 +82,7 @@ export default function GetQuotePage() {
           <p className="mt-3 text-gray-600">Just your email and phone — we&apos;ll handle the rest.</p>
         </div>
 
-        <form onSubmit={form.handleSubmit(onSubmit)} className="rounded-xl border border-navy-200 bg-white p-5 shadow-sm sm:p-8" noValidate>
+        <div className="rounded-xl border border-navy-200 bg-white p-5 shadow-sm sm:p-8">
           {/* ── Required: Email + Phone ── */}
           <div className="mb-8 rounded-lg border-2 border-red-200 bg-red-50/30 p-5">
             <p className="mb-4 text-sm font-semibold text-red-700">Required — we need these to contact you</p>
@@ -173,7 +173,8 @@ export default function GetQuotePage() {
           </div>
 
           {/* Submit */}
-          <button type="submit" disabled={isSubmitting}
+          <button type="button" disabled={isSubmitting}
+            onClick={() => form.handleSubmit(onSubmit)()}
             className="mt-8 flex w-full items-center justify-center gap-2 rounded-lg bg-red-600 px-4 py-3.5 text-sm font-semibold text-white transition-all hover:bg-red-700 active:scale-[0.98] disabled:opacity-50">
             {isSubmitting ? (
               <>Sending...</>
@@ -182,7 +183,7 @@ export default function GetQuotePage() {
             )}
           </button>
           <p className="mt-3 text-center text-xs text-gray-400">We respect your privacy. No spam, ever.</p>
-        </form>
+        </div>
       </div>
     </div>
   );
