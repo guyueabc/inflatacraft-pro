@@ -59,7 +59,7 @@ const BLOG_DATA: Record<string, BlogDetail> = {
     category: "Industry Trends",
     author: "James Morrison",
     authorBio:
-      "James Morrison is the VP of Marketing Strategy at InflataCraft Pro. With 15 years in experiential marketing, he's helped over 200 brands deploy inflatable activations that drive measurable business results.",
+      "James Morrison is the VP of Marketing Strategy at inflatablemodel. With 15 years in experiential marketing, he's helped over 200 brands deploy inflatable activations that drive measurable business results.",
     authorAvatar: "JM",
     date: "2026-06-01",
     readTime: "8 min read",
@@ -100,7 +100,7 @@ const BLOG_DATA: Record<string, BlogDetail> = {
       {
         heading: "Durability = Long-Term ROI",
         content: [
-          "Unlike a digital ad that disappears when the budget runs out, a well-made inflatable is a capital asset. Professional-grade inflatables from InflataCraft Pro come with 2-3 year warranties and can last 5+ years with proper care.",
+          "Unlike a digital ad that disappears when the budget runs out, a well-made inflatable is a capital asset. Professional-grade inflatables from inflatablemodel come with 2-3 year warranties and can last 5+ years with proper care.",
           "This means the ROI calculation should span multiple events, multiple years, and multiple campaigns. A single inflatable deployed at 4 events per year over 5 years can generate 20x or more the initial investment.",
           "Consider LuxeMart's canopy tent order: 200 custom-printed tents produced for a sidewalk sale event. Two years later, those same tents are still in active use at store locations nationwide, having participated in dozens of events each. The cost-per-impression has dropped to fractions of a cent.",
         ],
@@ -129,7 +129,7 @@ const BLOG_DATA: Record<string, BlogDetail> = {
     category: "How-To Guides",
     author: "Sarah Kim",
     authorBio:
-      "Sarah Kim is Lead Product Designer at InflataCraft Pro. She has designed over 300 custom inflatables for brands ranging from startups to Fortune 500 companies.",
+      "Sarah Kim is Lead Product Designer at inflatablemodel. She has designed over 300 custom inflatables for brands ranging from startups to Fortune 500 companies.",
     authorAvatar: "SK",
     date: "2026-05-28",
     readTime: "6 min read",

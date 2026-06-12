@@ -65,18 +65,18 @@ export function Header() {
         <div className="container mx-auto flex items-center justify-between px-4 py-2 text-sm">
           <div className="flex items-center gap-6">
             <a
-              href="tel:1-800-INFLATA"
+              href="tel:+86 1576427736"
               className="flex items-center gap-1.5 hover:text-red-400 transition-colors"
             >
               <Phone className="h-3.5 w-3.5" />
-              <span>1-800-INFLATA</span>
+              <span>+86 1576427736</span>
             </a>
             <a
-              href="mailto:sales@inflatacraftpro.com"
+              href="mailto:inflatablemodel@showlovein.com"
               className="hidden sm:flex items-center gap-1.5 hover:text-red-400 transition-colors"
             >
               <Mail className="h-3.5 w-3.5" />
-              <span>sales@inflatacraftpro.com</span>
+              <span>inflatablemodel@showlovein.com</span>
             </a>
           </div>
           <Link
@@ -96,14 +96,14 @@ export function Header() {
           <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-navy-700">
             <span className="text-lg font-bold text-white">IP</span>
           </div>
-          <div className="hidden sm:block">
-            <span className="text-xl font-bold tracking-tight text-navy-900">
-              InflataCraft
-            </span>
-            <span className="ml-1 text-xl font-semibold tracking-tight text-red-600">
-              Pro
-            </span>
-          </div>
+          <span className="hidden sm:block">
+          <span className="text-xl font-bold tracking-tight text-navy-900">
+            inflatablemodel
+          </span>
+          <span className="ml-1 text-xl font-semibold tracking-tight text-red-600">
+              
+          </span>
+          </span>
         </Link>
 
         {/* Desktop Nav Links */}

@@ -42,9 +42,9 @@ const FAQ_DATA: FAQCategory[] = [
     items: [
       {
         id: "gen-1",
-        question: "What is InflataCraft Pro?",
+        question: "What is inflatablemodel?",
         answer:
-          "InflataCraft Pro is a USA-based custom inflatable manufacturer specializing in giant product replicas, mascots, arches, costumes, and tents for B2B brands. We serve Fortune 500 companies, sports franchises, marketing agencies, and growing businesses that need high-impact brand activations. Every product is engineered in-house and built with premium materials in our US manufacturing facility.",
+          "inflatablemodel is a USA-based custom inflatable manufacturer specializing in giant product replicas, mascots, arches, costumes, and tents for B2B brands. We serve Fortune 500 companies, sports franchises, marketing agencies, and growing businesses that need high-impact brand activations. Every product is engineered in-house and built with premium materials in our US manufacturing facility.",
       },
       {
         id: "gen-2",
@@ -56,7 +56,7 @@ const FAQ_DATA: FAQCategory[] = [
         id: "gen-3",
         question: "Where are your products manufactured?",
         answer:
-          "All InflataCraft Pro products are designed, engineered, and manufactured in the United States. Our facility is located in the Midwest, allowing us to maintain rigorous quality control standards and offer fast turnaround times to clients across North America. We never outsource production overseas.",
+          "All inflatablemodel products are designed, engineered, and manufactured in the United States. Our facility is located in the Midwest, allowing us to maintain rigorous quality control standards and offer fast turnaround times to clients across North America. We never outsource production overseas.",
       },
       {
         id: "gen-4",
@@ -66,7 +66,7 @@ const FAQ_DATA: FAQCategory[] = [
       },
       {
         id: "gen-5",
-        question: "What makes InflataCraft Pro different from other manufacturers?",
+        question: "What makes inflatablemodel different from other manufacturers?",
         answer:
           "Three things: quality, speed, and partnership. We use premium materials (210D-500D fabrics, not the thin 70D used by budget manufacturers), we deliver in 2-6 weeks (not 8-16), and we provide free 3D renderings before you commit. Our engineering team actively suggests design improvements that make your inflatable more impactful and more durable. Every client gets a dedicated project manager from first sketch to final delivery.",
       },
@@ -80,7 +80,7 @@ const FAQ_DATA: FAQCategory[] = [
         id: "order-1",
         question: "How do I get a quote?",
         answer:
-          "Getting a quote is fast and free. Submit your project details through our online quote form at /get-quote, email us at sales@inflatacraftpro.com, or call 1-800-INFLATA. We'll need to know: the type of inflatable you want, approximate size, quantity, deadline, and any reference images. Most quotes are returned within 24 hours.",
+          "Getting a quote is fast and free. Submit your project details through our online quote form at /get-quote, email us at inflatablemodel@showlovein.com, or call +86 1576427736. We'll need to know: the type of inflatable you want, approximate size, quantity, deadline, and any reference images. Most quotes are returned within 24 hours.",
       },
       {
         id: "order-2",
@@ -212,7 +212,7 @@ const FAQ_DATA: FAQCategory[] = [
         id: "maint-4",
         question: "What is your warranty policy?",
         answer:
-          "All InflataCraft Pro products come with a comprehensive warranty: 2 years on standard products (210D fabric), 3 years on premium products (300D+ fabric or 500D Cordura). The warranty covers manufacturing defects, seam failures, and print delamination under normal use. Blowers and electronic components carry a 1-year manufacturer warranty.",
+          "All inflatablemodel products come with a comprehensive warranty: 2 years on standard products (210D fabric), 3 years on premium products (300D+ fabric or 500D Cordura). The warranty covers manufacturing defects, seam failures, and print delamination under normal use. Blowers and electronic components carry a 1-year manufacturer warranty.",
       },
       {
         id: "maint-5",
@@ -464,14 +464,14 @@ export default function FAQPage() {
 
           <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
             <a
-              href="tel:1-800-INFLATA"
+              href="tel:+86 1576427736"
               className="inline-flex w-full items-center justify-center gap-2 rounded-xl border-2 border-navy-300 px-8 py-4 text-base font-semibold text-navy-700 transition-all hover:border-navy-700 hover:bg-navy-50 sm:w-auto"
             >
               <Phone className="h-5 w-5" />
-              1-800-INFLATA
+              +86 1576427736
             </a>
             <a
-              href="mailto:sales@inflatacraftpro.com"
+              href="mailto:inflatablemodel@showlovein.com"
               className="inline-flex w-full items-center justify-center gap-2 rounded-xl border-2 border-navy-300 px-8 py-4 text-base font-semibold text-navy-700 transition-all hover:border-navy-700 hover:bg-navy-50 sm:w-auto"
             >
               <Mail className="h-5 w-5" />

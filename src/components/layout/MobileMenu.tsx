@@ -74,10 +74,10 @@ export function MobileMenu({ isOpen, onClose, navLinks }: MobileMenuProps) {
               <span className="text-base font-bold text-white">IP</span>
             </div>
             <span className="text-lg font-bold tracking-tight text-navy-900">
-              InflataCraft
+              inflatablemodel
             </span>
             <span className="text-lg font-semibold tracking-tight text-red-600">
-              Pro
+              
             </span>
           </Link>
           <button
@@ -138,18 +138,18 @@ export function MobileMenu({ isOpen, onClose, navLinks }: MobileMenuProps) {
         <div className="border-t px-4 py-4">
           <div className="flex flex-col gap-2 text-sm text-navy-500">
             <a
-              href="tel:1-800-INFLATA"
+              href="tel:+86 1576427736"
               className="flex items-center gap-2 hover:text-navy-700 transition-colors"
             >
               <Phone className="h-4 w-4" />
-              1-800-INFLATA
+              +86 1576427736
             </a>
             <a
-              href="mailto:sales@inflatacraftpro.com"
+              href="mailto:inflatablemodel@showlovein.com"
               className="flex items-center gap-2 hover:text-navy-700 transition-colors"
             >
               <Mail className="h-4 w-4" />
-              sales@inflatacraftpro.com
+              inflatablemodel@showlovein.com
             </a>
           </div>
         </div>

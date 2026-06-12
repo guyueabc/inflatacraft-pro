@@ -84,10 +84,10 @@ export function Footer() {
                 <span className="text-lg font-bold text-white">IP</span>
               </div>
               <span className="text-xl font-bold tracking-tight text-white">
-                InflataCraft
+                inflatablemodel
               </span>
               <span className="text-xl font-semibold tracking-tight text-red-400">
-                Pro
+                
               </span>
             </Link>
 
@@ -170,7 +170,7 @@ export function Footer() {
         <div className="container mx-auto flex flex-col items-center justify-between gap-4 px-4 py-6 sm:flex-row">
           {/* Copyright */}
           <p className="text-sm text-white/40">
-            &copy; {new Date().getFullYear()} InflataCraft Pro. All rights
+            &copy; {new Date().getFullYear()} inflatablemodel. All rights
             reserved.
           </p>
 

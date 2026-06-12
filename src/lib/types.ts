@@ -1,4 +1,4 @@
-// ─── InflataCraft Pro — Shared TypeScript Types ──────────────────────────────
+// ─── inflatablemodel — Shared TypeScript Types ──────────────────────────────
 //
 // These types mirror the Prisma schema but live in the application layer.
 // They are used by API routes, server components, and form handling.

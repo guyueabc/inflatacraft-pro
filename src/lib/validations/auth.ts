@@ -43,5 +43,5 @@ export type SignUpFormData = z.infer<typeof signUpSchema>;
 
 export const ROLES = [
   { value: "customer", label: "Customer — I want to order custom inflatables" },
-  { value: "distributor", label: "Distributor — I want to resell InflataCraft products" },
+  { value: "distributor", label: "Distributor — I want to resell inflatablemodel products" },
 ] as const;

@@ -17,7 +17,7 @@ const TESTIMONIALS: Testimonial[] = [
   {
     id: 1,
     quote:
-      "InflataCraft Pro turned our product into a 30-foot spectacle. The trade show booth traffic tripled, and we landed our biggest retail partner within two weeks of the event.",
+      "inflatablemodel turned our product into a 30-foot spectacle. The trade show booth traffic tripled, and we landed our biggest retail partner within two weeks of the event.",
     clientName: "Marcus Chen",
     company: "VP Marketing, FrostBite Brewing",
     rating: 5,
@@ -49,7 +49,7 @@ const TESTIMONIALS: Testimonial[] = [
   {
     id: 5,
     quote:
-      "Working with InflataCraft Pro felt like having an extension of our creative team. They suggested improvements to our design that made the inflatable more impactful and more durable.",
+      "Working with inflatablemodel felt like having an extension of our creative team. They suggested improvements to our design that made the inflatable more impactful and more durable.",
     clientName: "David Park",
     company: "Creative Director, TurboCharge Energy",
     rating: 5,

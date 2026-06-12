@@ -52,7 +52,7 @@ export default function SignInPage() {
             Welcome back
           </h1>
           <p className="mt-2 text-gray-600">
-            Sign in to your InflataCraft Pro account
+            Sign in to your inflatablemodel account
           </p>
         </div>
 

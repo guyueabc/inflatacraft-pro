@@ -63,7 +63,7 @@ export default function SignUpPage() {
             Create your account
           </h1>
           <p className="mt-2 text-gray-600">
-            Join InflataCraft Pro and start ordering custom inflatables
+            Join inflatablemodel and start ordering custom inflatables
           </p>
         </div>
 

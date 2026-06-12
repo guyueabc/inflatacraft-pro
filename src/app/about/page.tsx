@@ -74,7 +74,7 @@ const TEAM_MEMBERS: TeamMember[] = [
   {
     name: "Michael Reynolds",
     role: "Founder & CEO",
-    bio: "Founded InflataCraft in 2003 after 15 years in industrial textile manufacturing. A hands-on leader who still reviews every major project design.",
+    bio: "Founded inflatablemodel in 2003 after 15 years in industrial textile manufacturing. A hands-on leader who still reviews every major project design.",
     initials: "MR",
   },
   {
@@ -114,7 +114,7 @@ const MILESTONES: Milestone[] = [
     year: "2003",
     title: "Founded in Detroit, MI",
     description:
-      "Michael Reynolds launches InflataCraft from a 2,000 sq ft workshop with three employees, focusing on custom inflatable mascots for local sports teams.",
+      "Michael Reynolds launches inflatablemodel from a 2,000 sq ft workshop with three employees, focusing on custom inflatable mascots for local sports teams.",
   },
   {
     year: "2006",
@@ -132,7 +132,7 @@ const MILESTONES: Milestone[] = [
     year: "2013",
     title: "Launched Distributor Program",
     description:
-      "Created the InflataCraft Pro distributor network, enabling agencies and promotional product companies to offer custom inflatables under their own brand.",
+      "Created the inflatablemodel distributor network, enabling agencies and promotional product companies to offer custom inflatables under their own brand.",
   },
   {
     year: "2016",
@@ -217,7 +217,7 @@ export default function AboutPage() {
                 Crafting Giant Impressions Since 2003
               </h1>
               <p className="mt-6 text-lg text-navy-300 leading-relaxed max-w-xl">
-                For over 20 years, InflataCraft Pro has been the trusted
+                For over 20 years, inflatablemodel has been the trusted
                 manufacturing partner for brands that demand the extraordinary.
                 From Fortune 500 product launches to Super Bowl halftime shows,
                 we engineer inflatables that stop crowds and make headlines.
@@ -249,7 +249,7 @@ export default function AboutPage() {
               <div className="relative aspect-[4/3] rounded-2xl bg-gradient-to-br from-navy-800 to-navy-700 border border-white/10 overflow-hidden">
                 <img
                   src="/images/products/custom-inflatable-event-tent/custom-inflatable-event-tent-1.jpg?v=1"
-                  alt="InflataCraft Pro Manufacturing Facility"
+                  alt="inflatablemodel Manufacturing Facility"
                   loading="lazy"
                   className="absolute inset-0 h-full w-full object-cover"
                 />
@@ -277,7 +277,7 @@ export default function AboutPage() {
               <div className="relative aspect-[4/3] rounded-2xl bg-gradient-to-br from-navy-100 to-navy-50 border border-navy-200 overflow-hidden">
                 <img
                   src="/images/products/pop-up-dome-canopy/pop-up-dome-canopy-1.jpg?v=1"
-                  alt="InflataCraft Pro Headquarters"
+                  alt="inflatablemodel Headquarters"
                   loading="lazy"
                   className="absolute inset-0 h-full w-full object-cover"
                 />
@@ -297,7 +297,7 @@ export default function AboutPage() {
                 From Workshop to Industry Leader
               </h2>
               <p className="mt-4 text-gray-600 leading-relaxed">
-                InflataCraft started in 2003 in a small Detroit workshop with a
+                inflatablemodel started in 2003 in a small Detroit workshop with a
                 single industrial sewing machine and a belief that brands
                 deserved better inflatables. Founder Michael Reynolds, a veteran
                 of industrial textile manufacturing, saw an industry dominated by
@@ -311,7 +311,7 @@ export default function AboutPage() {
                 made clients feel like partners, not order numbers.
               </p>
               <p className="mt-4 text-gray-600 leading-relaxed">
-                Today, InflataCraft Pro operates from a 50,000 square foot
+                Today, inflatablemodel operates from a 50,000 square foot
                 facility with over 85 employees. We&apos;ve completed more than
                 5,000 projects for 200+ brands across 30+ countries. But our
                 founding principle hasn&apos;t changed: every single inflatable
@@ -385,7 +385,7 @@ export default function AboutPage() {
                 Our 50,000 sq ft Manufacturing Facility
               </h2>
               <p className="mt-4 text-gray-600 leading-relaxed">
-                Every InflataCraft Pro product is designed, engineered, and
+                Every inflatablemodel product is designed, engineered, and
                 manufactured under one roof in the United States. Our facility
                 combines advanced technology with skilled craftsmanship to
                 deliver exceptional quality on every project.
@@ -426,7 +426,7 @@ export default function AboutPage() {
               <div className="relative aspect-[3/4] rounded-2xl bg-gradient-to-br from-navy-100 to-navy-50 border border-navy-200 overflow-hidden">
                 <img
                   src="/images/products/pop-up-dome-canopy/pop-up-dome-canopy-1.jpg?v=1"
-                  alt="InflataCraft Pro Production Floor"
+                  alt="inflatablemodel Production Floor"
                   loading="lazy"
                   className="absolute inset-0 h-full w-full object-cover"
                 />
@@ -567,11 +567,11 @@ export default function AboutPage() {
             </div>
             <div className="flex flex-col items-center gap-4 sm:flex-row">
               <a
-                href="tel:1-800-INFLATA"
+                href="tel:+86 1576427736"
                 className="inline-flex items-center gap-2 rounded-lg border-2 border-white/30 px-6 py-3.5 text-base font-semibold text-white backdrop-blur-sm transition-all hover:border-white/60 hover:bg-white/10"
               >
                 <Phone className="h-5 w-5" />
-                1-800-INFLATA
+                +86 1576427736
               </a>
               <Link
                 href="/get-quote"

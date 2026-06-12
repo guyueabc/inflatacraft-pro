@@ -34,7 +34,7 @@ export function ValueProps() {
       <div className="container mx-auto px-4">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="font-heading text-2xl font-bold tracking-tight text-navy-900 sm:text-3xl md:text-4xl">
-            Why Choose InflataCraft Pro?
+            Why Choose inflatablemodel?
           </h2>
           <p className="mt-4 text-lg text-gray-600">
             Three reasons the world's biggest brands trust us with their

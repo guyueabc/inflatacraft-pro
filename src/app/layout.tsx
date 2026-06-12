@@ -18,7 +18,7 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "InflataCraft Pro — Custom Inflatable Manufacturing",
+  title: "inflatablemodel — Custom Inflatable Manufacturing",
   description:
     "Giant product replicas, mascots, arches, costumes, and tents. 3-6 week turnaround. Made in USA. Free 3D renderings. Scale your brand 100x.",
   keywords: [

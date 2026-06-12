@@ -55,7 +55,7 @@ const GALLERY_DATA: Record<string, GalleryDetail> = {
     description:
       "20-foot tall realistic beer can replica for nationwide summer festival tour.",
     fullDescription:
-      "FrostBite Brewing approached InflataCraft Pro with an ambitious vision: a 20-foot tall, photo-realistic replica of their flagship FrostBite Lager can that would tour 18 major summer festivals across the United States. The challenge was creating an inflatable that could withstand the rigors of constant setup, teardown, and transport while maintaining showroom-quality appearance under intense festival lighting conditions — both day and night.",
+      "FrostBite Brewing approached inflatablemodel with an ambitious vision: a 20-foot tall, photo-realistic replica of their flagship FrostBite Lager can that would tour 18 major summer festivals across the United States. The challenge was creating an inflatable that could withstand the rigors of constant setup, teardown, and transport while maintaining showroom-quality appearance under intense festival lighting conditions — both day and night.",
     gradient: "from-amber-400 via-orange-500 to-red-500",
     gradientLight: "from-amber-100 via-orange-100 to-red-100",
     features: [
@@ -77,7 +77,7 @@ const GALLERY_DATA: Record<string, GalleryDetail> = {
       { label: "Warranty", value: "2 years" },
     ],
     testimonial:
-      "InflataCraft Pro turned our product into a 30-foot spectacle. The trade show booth traffic tripled, and we landed our biggest retail partner within two weeks of the event. The attention to detail on the can's labeling was extraordinary — it looked like a real can blown up to impossible proportions.",
+      "inflatablemodel turned our product into a 30-foot spectacle. The trade show booth traffic tripled, and we landed our biggest retail partner within two weeks of the event. The attention to detail on the can's labeling was extraordinary — it looked like a real can blown up to impossible proportions.",
     testimonialAuthor: "Marcus Chen",
     testimonialRole: "VP Marketing",
     testimonialCompany: "FrostBite Brewing",
@@ -339,11 +339,11 @@ export default function GalleryDetailPage() {
                   <ArrowRight className="h-4 w-4" />
                 </Link>
                 <a
-                  href="tel:1-800-INFLATA"
+                  href="tel:+86 1576427736"
                   className="inline-flex items-center gap-2 rounded-lg border-2 border-white/30 px-6 py-3 text-sm font-semibold backdrop-blur-sm transition-all hover:border-white/60 hover:bg-white/10"
                 >
                   <Phone className="h-4 w-4" />
-                  1-800-INFLATA
+                  +86 1576427736
                 </a>
               </div>
             </div>

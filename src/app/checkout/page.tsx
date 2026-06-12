@@ -701,7 +701,7 @@ export default function CheckoutPage() {
                   </button>
 
                   <p className="mt-3 text-center text-xs text-gray-400">
-                    By placing your order, you agree to InflataCraft Pro&apos;s{" "}
+                    By placing your order, you agree to inflatablemodel&apos;s{" "}
                     <Link
                       href="/terms"
                       className="underline hover:text-gray-600"

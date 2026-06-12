@@ -55,14 +55,14 @@ const CONTACT_CARDS = [
   {
     icon: Phone,
     title: "Phone",
-    lines: ["1-800-INFLATA", "(313) 555-0142"],
-    action: { label: "Call Now", href: "tel:1-800-INFLATA" },
+    lines: ["+86 1576427736", "(313) 555-0142"],
+    action: { label: "Call Now", href: "tel:+86 1576427736" },
   },
   {
     icon: Mail,
     title: "Email",
-    lines: ["sales@inflatacraftpro.com", "support@inflatacraftpro.com"],
-    action: { label: "Send Email", href: "mailto:sales@inflatacraftpro.com" },
+    lines: ["inflatablemodel@showlovein.com", "support@inflatacraftpro.com"],
+    action: { label: "Send Email", href: "mailto:inflatablemodel@showlovein.com" },
   },
   {
     icon: MapPin,
