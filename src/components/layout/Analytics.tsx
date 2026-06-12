@@ -22,7 +22,23 @@ function GoogleAdsGlobalTag() {
         id="google-ads-gtag-config"
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{
-          __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${GOOGLE_ADS_ID}');`,
+          __html: [
+            `window.dataLayer=window.dataLayer||[];`,
+            `function gtag(){dataLayer.push(arguments);}`,
+            `gtag('js',new Date());`,
+            `gtag('config','${GOOGLE_ADS_ID}');`,
+            `// 转化追踪函数 — 表单提交时调用`,
+            `function gtag_report_conversion(url){`,
+            `  var callback=function(){if(typeof(url)!='undefined'){window.location=url;}};`,
+            `  gtag('event','conversion',{`,
+            `    'send_to':'${GOOGLE_ADS_ID}/TYNLCJu0_70cEPWM6vZD',`,
+            `    'value':1.0,`,
+            `    'currency':'CNY',`,
+            `    'event_callback':callback`,
+            `  });`,
+            `  return false;`,
+            `}`,
+          ].join("\n"),
         }}
       />
     </>

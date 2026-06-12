@@ -39,13 +39,16 @@ export default function GetQuotePage() {
 
     setIsSubmitting(false);
     setIsSubmitted(true);
-    // 标记转化信号 — Analytics 组件会检测并推送 Google Ads 转化
+    // 标记转化信号
     sessionStorage.setItem("quote_submitted", "true");
-    // 推送 GTM 转化事件
+    // Google Ads 转化追踪
     (window as any).dataLayer?.push({ event: "quote_form_submitted" });
-    // Google Ads 转化追踪 (如果 gtag 已加载)
     if (typeof (window as any).gtag === "function") {
-      (window as any).gtag("event", "conversion", { send_to: "AW-18234377845/quote_submit" });
+      (window as any).gtag("event", "conversion", { send_to: "AW-18234377845/TYNLCJu0_70cEPWM6vZD", value: 1.0, currency: "CNY" });
+    }
+    // 同时调用 Google Ads 指定的转化函数
+    if (typeof (window as any).gtag_report_conversion === "function") {
+      (window as any).gtag_report_conversion();
     }
     try { window.scrollTo({ top: 0, behavior: "smooth" }); } catch {}
   };
