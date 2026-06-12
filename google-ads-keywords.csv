@@ -1,0 +1,26 @@
+Campaign,Ad Group,Campaign Type,Language,Networks,Max CPC,Keyword,Match Type
+Search | Brand,Brand,Budget $5/day,en,Google Search,0.50,[inflatablemodel],Exact
+Search | Brand,Brand,Budget $5/day,en,Google Search,0.50,[inflatablemodel.com.cn],Exact
+Search | Brand,Brand,Budget $5/day,en,Google Search,0.50,"""inflatablemodel"" custom inflatable",Phrase
+Search | Product Replicas,Giant Replicas,Budget $8/day,en,Google Search,5.00,[custom inflatable manufacturer],Exact
+Search | Product Replicas,Giant Replicas,Budget $8/day,en,Google Search,5.00,[giant inflatable product replica],Exact
+Search | Product Replicas,Giant Replicas,Budget $8/day,en,Google Search,5.00,[inflatable replica manufacturer],Exact
+Search | Product Replicas,Giant Replicas,Budget $8/day,en,Google Search,4.00,[custom giant inflatable],Exact
+Search | Product Replicas,Giant Replicas,Budget $8/day,en,Google Search,4.00,[giant inflatable display],Exact
+Search | Product Replicas,Giant Replicas,Budget $8/day,en,Google Search,3.00,+custom +inflatable +manufacturer,Broad
+Search | Product Replicas,Giant Replicas,Budget $8/day,en,Google Search,3.00,+giant +inflatable +replica,Broad
+Search | Product Replicas,Giant Replicas,Budget $8/day,en,Google Search,3.00,"""custom inflatable"" advertising",Phrase
+Search | Product Replicas,Giant Replicas,Budget $8/day,en,Google Search,3.00,"""giant inflatable"" trade show",Phrase
+Search | Arches,Inflatable Arches,Budget $5/day,en,Google Search,4.00,[inflatable arch manufacturer],Exact
+Search | Arches,Inflatable Arches,Budget $5/day,en,Google Search,4.00,[custom inflatable arch],Exact
+Search | Arches,Inflatable Arches,Budget $5/day,en,Google Search,3.00,[inflatable finish line arch],Exact
+Search | Arches,Inflatable Arches,Budget $5/day,en,Google Search,3.00,[branded inflatable arch],Exact
+Search | Arches,Inflatable Arches,Budget $5/day,en,Google Search,2.00,+inflatable +event +arch,Broad
+Search | Costumes,Inflatable Costumes,Budget $3/day,en,Google Search,3.00,[custom inflatable costume],Exact
+Search | Costumes,Inflatable Costumes,Budget $3/day,en,Google Search,3.00,[inflatable mascot costume],Exact
+Search | Costumes,Inflatable Costumes,Budget $3/day,en,Google Search,2.00,+wearable +inflatable +advertising,Broad
+Search | Tents,Inflatable Tents,Budget $3/day,en,Google Search,3.00,[custom inflatable event tent],Exact
+Search | Tents,Inflatable Tents,Budget $3/day,en,Google Search,3.00,[inflatable canopy trade show],Exact
+Search | Tents,Inflatable Tents,Budget $3/day,en,Google Search,2.00,+branded +inflatable +shelter,Broad
+Search | Mascots,Inflatable Mascots,Budget $3/day,en,Google Search,3.00,[custom inflatable mascot],Exact
+Search | Mascots,Inflatable Mascots,Budget $3/day,en,Google Search,3.00,[giant inflatable character],Exact
