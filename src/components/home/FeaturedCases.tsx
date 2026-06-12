@@ -150,7 +150,7 @@ export function FeaturedCases() {
         >
           <AnimatePresence mode="popLayout">
             {filtered.map((study) => (
-              <motion.div
+              <motion.article
                 key={study.id}
                 layout
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -193,7 +193,7 @@ export function FeaturedCases() {
                     <ArrowUpRight className="h-3.5 w-3.5" />
                   </Link>
                 </div>
-              </motion.div>
+              </motion.article>
             ))}
           </AnimatePresence>
         </motion.div>
