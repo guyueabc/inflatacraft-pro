@@ -45,7 +45,7 @@ export default function GetQuotePage() {
     (window as any).dataLayer?.push({ event: "quote_form_submitted" });
     // Google Ads 转化追踪 (如果 gtag 已加载)
     if (typeof (window as any).gtag === "function") {
-      (window as any).gtag("event", "conversion", { send_to: "AW-CONVERSION_ID/QUOTE_LABEL" });
+      (window as any).gtag("event", "conversion", { send_to: "AW-18234377845/quote_submit" });
     }
     try { window.scrollTo({ top: 0, behavior: "smooth" }); } catch {}
   };

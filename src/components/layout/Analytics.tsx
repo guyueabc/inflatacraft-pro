@@ -4,7 +4,32 @@ import Script from "next/script";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, Suspense } from "react";
 
-// ── Google Tag Manager ───────────────────────────────────────────────────────
+// Google Ads 账号 ID
+const GOOGLE_ADS_ID = "AW-18234377845";
+
+// ── Google Ads 全局代码 (gtag.js) ────────────────────────────────────────────
+
+function GoogleAdsGlobalTag() {
+  return (
+    <>
+      <Script
+        id="google-ads-gtag-src"
+        strategy="afterInteractive"
+        src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ADS_ID}`}
+        async
+      />
+      <Script
+        id="google-ads-gtag-config"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${GOOGLE_ADS_ID}');`,
+        }}
+      />
+    </>
+  );
+}
+
+// ── Google Tag Manager (可选) ────────────────────────────────────────────────
 
 function GTM() {
   const gtmId = process.env.NEXT_PUBLIC_GTM_ID;
@@ -23,30 +48,6 @@ function GTM() {
         <iframe src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`}
           height="0" width="0" style={{ display: "none", visibility: "hidden" }} />
       </noscript>
-    </>
-  );
-}
-
-// ── Google Ads 基础代码 (gtag.js) ────────────────────────────────────────────
-
-function GoogleAdsTracking() {
-  const gtagId = process.env.NEXT_PUBLIC_GA4_ID; // GA4 = Google Ads 共用
-  if (!gtagId) return null;
-
-  return (
-    <>
-      <Script
-        id="gtag-base"
-        strategy="afterInteractive"
-        src={`https://www.googletagmanager.com/gtag/js?id=${gtagId}`}
-      />
-      <Script
-        id="gtag-config"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${gtagId}',{linker:{domains:['inflatablemodel.com.cn'],accept_incoming:true}});`,
-        }}
-      />
     </>
   );
 }
@@ -79,13 +80,11 @@ function UTMTracker() {
     const hasAdParam = adParams.some((p) => searchParams?.has(p));
     if (!hasAdParam) return;
 
-    // 持久化到 sessionStorage
     adParams.forEach((p) => {
       const val = searchParams?.get(p);
       if (val) sessionStorage.setItem(p, val);
     });
 
-    // 推送到 dataLayer (GTM)
     const captured: Record<string, string> = {};
     adParams.forEach((p) => {
       const val = searchParams?.get(p);
@@ -107,7 +106,7 @@ function ConversionTracker() {
     if (pathname === "/get-quote" && sessionStorage.getItem("quote_submitted") === "true") {
       (window as any).dataLayer?.push({ event: "conversion_quote_submitted" });
       if (typeof (window as any).gtag === "function") {
-        (window as any).gtag("event", "conversion", { send_to: "AW-CONVERSION_ID/QUOTE_LABEL" });
+        (window as any).gtag("event", "conversion", { send_to: `${GOOGLE_ADS_ID}/quote_submit` });
       }
       sessionStorage.removeItem("quote_submitted");
     }
@@ -118,7 +117,7 @@ function ConversionTracker() {
       el.setAttribute("data-tracked", "true");
       el.addEventListener("click", () => {
         (window as any).dataLayer?.push({ event: "phone_click", phone_href: el.getAttribute("href") });
-        (window as any).gtag?.("event", "conversion", { send_to: "AW-CONVERSION_ID/PHONE_LABEL" });
+        (window as any).gtag?.("event", "conversion", { send_to: `${GOOGLE_ADS_ID}/phone_call` });
       });
     });
 
@@ -128,6 +127,7 @@ function ConversionTracker() {
       el.setAttribute("data-tracked", "true");
       el.addEventListener("click", () => {
         (window as any).dataLayer?.push({ event: "whatsapp_click" });
+        (window as any).gtag?.("event", "conversion", { send_to: `${GOOGLE_ADS_ID}/whatsapp_chat` });
       });
     });
   }, [pathname]);
@@ -149,8 +149,8 @@ function UTMTrackerWrapper() {
 export function Analytics() {
   return (
     <>
+      <GoogleAdsGlobalTag />
       <GTM />
-      <GoogleAdsTracking />
       <MetaPixel />
       <UTMTrackerWrapper />
     </>
