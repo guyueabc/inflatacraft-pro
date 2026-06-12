@@ -193,6 +193,7 @@ model FormSubmission {
   page      String   @default("/")
   referrer  String   @default("")
   ipAddress String?  @map("ip_address")
+  gclid     String?  // Google Ads Click ID
   utmSource String?  @map("utm_source")
   utmMedium String?  @map("utm_medium")
   utmCampaign String? @map("utm_campaign")

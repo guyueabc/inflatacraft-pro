@@ -62,6 +62,7 @@ export async function POST(request: NextRequest) {
           deadline: body.deadline || "",
         },
         ipAddress: ip,
+        gclid: body.gclid || "",
         utmSource: body.utm_source || "",
         utmMedium: body.utm_medium || "",
         utmCampaign: body.utm_campaign || "",

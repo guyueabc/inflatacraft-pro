@@ -19,8 +19,9 @@ export default function GetQuotePage() {
 
   const onSubmit = async (data: QuoteFormData) => {
     setIsSubmitting(true);
-    // 读取 UTM 参数
-    const utm = ["utm_source", "utm_medium", "utm_campaign"].reduce((acc, k) => {
+    // 读取所有广告参数
+    const adParams = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "gclid", "gbraid", "wbraid", "fbclid"];
+    const utm = adParams.reduce((acc, k) => {
       const v = sessionStorage.getItem(k);
       if (v) acc[k] = v;
       return acc;
@@ -38,6 +39,14 @@ export default function GetQuotePage() {
 
     setIsSubmitting(false);
     setIsSubmitted(true);
+    // 标记转化信号 — Analytics 组件会检测并推送 Google Ads 转化
+    sessionStorage.setItem("quote_submitted", "true");
+    // 推送 GTM 转化事件
+    (window as any).dataLayer?.push({ event: "quote_form_submitted" });
+    // Google Ads 转化追踪 (如果 gtag 已加载)
+    if (typeof (window as any).gtag === "function") {
+      (window as any).gtag("event", "conversion", { send_to: "AW-CONVERSION_ID/QUOTE_LABEL" });
+    }
     try { window.scrollTo({ top: 0, behavior: "smooth" }); } catch {}
   };
 
