@@ -1,0 +1,27 @@
+Campaign,Ad Group,Keyword,Match Type,Max CPC
+Search | InflatableModel,Brand,Budget ¥10/day,[inflatablemodel],Exact,3
+Search | InflatableModel,Brand,Budget ¥10/day,[inflatablemodel.com.cn],Exact,3
+Search | InflatableModel,Brand,Budget ¥10/day,"""inflatable model"" manufacturing",Phrase,8
+Search | InflatableModel,Manufacturer,Budget ¥60/day,[custom inflatable manufacturer],Exact,45
+Search | InflatableModel,Manufacturer,Budget ¥60/day,[giant inflatable product replica],Exact,35
+Search | InflatableModel,Manufacturer,Budget ¥60/day,[inflatable replica manufacturer],Exact,35
+Search | InflatableModel,Manufacturer,Budget ¥60/day,[custom inflatable mascot manufacturer],Exact,30
+Search | InflatableModel,Manufacturer,Budget ¥60/day,[inflatable arch manufacturer],Exact,28
+Search | InflatableModel,Products,Budget ¥50/day,[giant inflatable advertising],Exact,18
+Search | InflatableModel,Products,Budget ¥50/day,[inflatable trade show display],Exact,20
+Search | InflatableModel,Products,Budget ¥50/day,[custom inflatable advertising],Exact,18
+Search | InflatableModel,Products,Budget ¥50/day,[custom inflatable costume],Exact,15
+Search | InflatableModel,Products,Budget ¥50/day,[inflatable obstacle course],Exact,12
+Search | InflatableModel,Products,Budget ¥50/day,[inflatable dome for event],Exact,12
+Search | InflatableModel,Products,Budget ¥50/day,[inflatable finish line arch],Exact,12
+Search | InflatableModel,Products,Budget ¥50/day,[inflatable event tent],Exact,15
+Search | InflatableModel,Products,Budget ¥50/day,[custom inflatable canopy],Exact,15
+Search | InflatableModel,Products,Budget ¥50/day,[giant inflatable mascot],Exact,15
+Search | InflatableModel,Products,Budget ¥50/day,[inflatable brand activation],Exact,18
+Search | InflatableModel,Discovery,Budget ¥30/day,+giant +inflatable +replica,Broad,15
+Search | InflatableModel,Discovery,Budget ¥30/day,+custom +inflatable +arch,Broad,12
+Search | InflatableModel,Discovery,Budget ¥30/day,+inflatable +event +tent,Broad,12
+Search | InflatableModel,Discovery,Budget ¥30/day,+custom +inflatable +mascot,Broad,12
+Search | InflatableModel,Discovery,Budget ¥30/day,+inflatable +advertising +outdoor,Broad,10
+Search | InflatableModel,Discovery,Budget ¥30/day,"""custom inflatable"" manufacturer",Phrase,35
+Search | InflatableModel,Discovery,Budget ¥30/day,"""giant inflatable"" advertising",Phrase,18
