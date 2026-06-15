@@ -1,7 +1,3 @@
-// Prisma Schema for InflataCraft Pro
-// B2B Inflatable Manufacturing Platform
-// PostgreSQL + Next.js 14+ App Router
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,197 +7,50 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// ─── Enums ───────────────────────────────────────────────────────────────────
-
-enum UserRole {
-  CUSTOMER
-  DISTRIBUTOR
-  ADMIN
-}
-
-enum QuoteStatus {
-  DRAFT
-  SUBMITTED
-  UNDER_REVIEW
-  PRICING
-  AWAITING_APPROVAL
-  APPROVED
-  REJECTED
-}
-
-enum RenderingStatus {
-  PENDING
-  APPROVED
-  REJECTED
-}
-
-enum OrderStatus {
-  PENDING_PAYMENT
-  PAYMENT_CONFIRMED
-  IN_PRODUCTION
-  QUALITY_CHECK
-  SHIPPED
-  IN_TRANSIT
-  DELIVERED
-  CANCELLED
-}
-
-// ─── Models ──────────────────────────────────────────────────────────────────
-
 model User {
-  id           String    @id @default(cuid())
-  email        String    @unique
-  passwordHash String?
-  name         String?
-  company      String?
-  phone        String?
-  role         UserRole  @default(CUSTOMER)
-  verified     Boolean   @default(false)
-  createdAt    DateTime  @default(now()) @map("created_at")
-  updatedAt    DateTime  @updatedAt @map("updated_at")
-
-  quotes       Quote[]
-  orders       Order[]
-
-  @@map("users")
-  @@index([email])
-  @@index([role])
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  password      String?
+  image         String?
+  role          String    @default("USER")
+  accounts      Account[]
+  sessions      Session[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
 }
 
-model Quote {
-  id           String       @id @default(cuid())
-  userId       String       @map("user_id")
-  status       QuoteStatus  @default(DRAFT)
-  productType  String?      @map("product_type")
-  description  String?
-  images       String[]     @default([])
-  size         String?
-  quantity     Int?
-  budget       Decimal?     @db.Decimal(10, 2)
-  deadline     DateTime?
-  quotedPrice  Decimal?     @db.Decimal(10, 2) @map("quoted_price")
-  createdAt    DateTime     @default(now()) @map("created_at")
-  updatedAt    DateTime     @updatedAt @map("updated_at")
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
-  renderings  Rendering[]
-  orders      Order[]
-
-  @@map("quotes")
-  @@index([userId])
-  @@index([status])
-  @@index([userId, status])
+  @@unique([provider, providerAccountId])
 }
 
-model Rendering {
-  id          String           @id @default(cuid())
-  quoteId     String           @map("quote_id")
-  imageUrl    String           @map("image_url")
-  annotations Json             @default("{}")
-  status      RenderingStatus  @default(PENDING)
-  createdAt   DateTime         @default(now()) @map("created_at")
-
-  quote       Quote            @relation(fields: [quoteId], references: [id], onDelete: Cascade)
-
-  @@map("renderings")
-  @@index([quoteId])
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-model Order {
-  id               String       @id @default(cuid())
-  userId           String       @map("user_id")
-  quoteId          String?      @map("quote_id")
-  status           OrderStatus  @default(PENDING_PAYMENT)
-  items            Json         @default("[]")
-  total            Decimal      @db.Decimal(12, 2)
-  shippingAddress  Json         @map("shipping_address")
-  trackingNumber   String?      @map("tracking_number")
-  timeline         Json         @default("[]")
-  createdAt        DateTime     @default(now()) @map("created_at")
-  updatedAt        DateTime     @updatedAt @map("updated_at")
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
 
-  user  User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  quote Quote? @relation(fields: [quoteId], references: [id], onDelete: SetNull)
-
-  @@map("orders")
-  @@index([userId])
-  @@index([status])
-  @@index([userId, status])
-}
-
-model Product {
-  id          String   @id @default(cuid())
-  name        String
-  slug        String   @unique
-  description String?
-  price       Decimal? @db.Decimal(10, 2)
-  category    String
-  images      String[] @default([])
-  specs       Json     @default("{}")
-  inStock     Boolean  @default(true) @map("in_stock")
-  leadTime    String?  @map("lead_time")
-  featured    Boolean  @default(false)
-
-  @@map("products")
-  @@index([slug])
-  @@index([category])
-  @@index([featured])
-  @@index([category, featured])
-}
-
-model GalleryItem {
-  id          String   @id @default(cuid())
-  title       String
-  clientName  String   @map("client_name")
-  industry    String
-  productType String   @map("product_type")
-  images      String[] @default([])
-  videoUrl    String?  @map("video_url")
-  description String?
-  testimonial String?
-  featured    Boolean  @default(false)
-
-  @@map("gallery_items")
-  @@index([featured])
-  @@index([industry])
-  @@index([productType])
-}
-
-// ─── Analytics Tables ────────────────────────────────────────────────────────
-
-model PageView {
-  id         Int      @id @default(autoincrement())
-  page       String
-  referrer   String   @default("")
-  utmSource  String?  @map("utm_source")
-  utmMedium  String?  @map("utm_medium")
-  utmCampaign String? @map("utm_campaign")
-  utmTerm    String?  @map("utm_term")
-  utmContent String?  @map("utm_content")
-  createdAt  DateTime @default(now()) @map("created_at")
-
-  @@map("page_views")
-  @@index([page])
-  @@index([utmSource, utmMedium, utmCampaign])
-  @@index([createdAt])
-}
-
-model FormSubmission {
-  id        String   @id @default(cuid())
-  formType  String   @map("form_type") // quote, contact, newsletter
-  data      Json     @default("{}")
-  page      String   @default("/")
-  referrer  String   @default("")
-  ipAddress String?  @map("ip_address")
-  gclid     String?  // Google Ads Click ID
-  utmSource String?  @map("utm_source")
-  utmMedium String?  @map("utm_medium")
-  utmCampaign String? @map("utm_campaign")
-  createdAt DateTime @default(now()) @map("created_at")
-
-  @@map("form_submissions")
-  @@index([formType])
-  @@index([createdAt])
-  @@index([ipAddress, createdAt])
-  @@index([utmSource, utmMedium])
+  @@unique([identifier, token])
 }

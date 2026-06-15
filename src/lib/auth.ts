@@ -1,71 +1,58 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
+import bcrypt from "bcryptjs";
+import { PrismaAdapter } from "@auth/prisma-adapter";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
+  adapter: PrismaAdapter(prisma),
   providers: [
     Google({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      clientId: process.env.AUTH_GOOGLE_ID || process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.AUTH_GOOGLE_SECRET || process.env.GOOGLE_CLIENT_SECRET!,
     }),
     Credentials({
-      name: "credentials",
       credentials: {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        // TODO: Replace with real DB lookup + bcrypt compare
-        if (!credentials?.email || !credentials?.password) return null;
+        const { email, password } = credentials as { email: string; password: string };
+        if (!email || !password) return null;
 
-        // Placeholder — replace with Prisma query
-        if (
-          credentials.email === "demo@inflatacraft.com" &&
-          credentials.password === "demo123"
-        ) {
-          return {
-            id: "1",
-            email: "demo@inflatacraft.com",
-            name: "Demo User",
-            role: "CUSTOMER",
-          };
-        }
-        return null;
+        const user = await prisma.user.findUnique({ where: { email } });
+        if (!user || !user.password) return null;
+
+        const isValid = await bcrypt.compare(password, user.password);
+        if (!isValid) return null;
+
+        return { id: user.id, email: user.email, name: user.name };
       },
     }),
   ],
+  pages: {
+    signIn: "/login",
+    newUser: "/register",
+    error: "/login",
+  },
+  session: { strategy: "jwt" },
   callbacks: {
     async jwt({ token, user }) {
-      if (user) {
-        token.id = user.id;
-        token.role = (user as any).role;
-      }
+      if (user) { token.id = user.id; }
       return token;
     },
     async session({ session, token }) {
       if (session.user) {
-        (session.user as any).id = token.id;
-        (session.user as any).role = token.role;
+        (session.user as Record<string, unknown>).id = token.id;
       }
       return session;
     },
   },
-  pages: {
-    signIn: "/auth/signin",
-    error: "/auth/error",
-  },
-  session: {
-    strategy: "jwt",
-  },
 });
 
-/**
- * Convenience wrapper: get the current session in Server Components / API routes.
- *
- * Usage:
- *   import { getServerSession } from "@/lib/auth";
- *   const session = await getServerSession();
- */
 export async function getServerSession() {
   return auth();
 }
