@@ -3,9 +3,8 @@
 import { useState, use } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { cn, formatPrice } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import { getProductBySlug, getRelatedProducts } from "@/lib/data/products";
-import { AddToCartButton } from "@/components/cart/AddToCartButton";
 import {
   Share2,
   ExternalLink,
@@ -137,58 +136,28 @@ export default function ProductDetailPage({
               {product.longDescription || product.description}
             </p>
 
-            {/* Price */}
+            {/* Price / Quote */}
             <div className="mb-6">
-              {product.price ? (
-                <div className="flex items-baseline gap-2">
-                  <span className="text-3xl font-bold text-navy-900">
-                    {formatPrice(product.price)}
-                  </span>
-                  <span className="text-sm text-gray-500">USD</span>
-                </div>
-              ) : (
-                <div className="rounded-lg border-2 border-red-200 bg-red-50 p-4">
-                  <p className="text-lg font-semibold text-red-700">
-                    Custom Quote Required
-                  </p>
-                  <p className="mt-1 text-sm text-red-600">
-                    This is a fully custom product. Pricing varies based on size, materials, and complexity.
-                  </p>
-                </div>
-              )}
+              <div className="rounded-lg border-2 border-red-200 bg-red-50 p-4">
+                <p className="text-lg font-semibold text-red-700">
+                  Custom Quote Required
+                </p>
+                <p className="mt-1 text-sm text-red-600">
+                  Pricing varies based on size, materials, and complexity. Contact us for a free quote.
+                </p>
+              </div>
             </div>
 
-            {/* Add to Cart or Quote */}
+            {/* Get a Quote */}
             <div className="mb-8">
-              {product.price && !product.isCustom ? (
-                <AddToCartButton
-                  productId={product.id}
-                  name={product.name}
-                  price={product.price}
-                  image={product.images[0]}
-                  isCustom={false}
-                  variant="large"
-                />
-              ) : (
-                <div className="flex flex-wrap gap-3">
-                  <a
-                    href={`/get-quote?product=${encodeURIComponent(product.name)}`}
-                    className="inline-flex items-center gap-2 rounded-lg bg-red-600 px-8 py-4 text-base font-semibold text-white transition-all hover:bg-red-700 active:scale-95"
-                  >
-                    Get Custom Quote
-                  </a>
-                  {product.price && (
-                    <AddToCartButton
-                      productId={product.id}
-                      name={product.name}
-                      price={product.price}
-                      image={product.images[0]}
-                      isCustom={false}
-                      variant="large"
-                    />
-                  )}
-                </div>
-              )}
+              <div className="flex flex-wrap gap-3">
+                <a
+                  href={`/get-quote?product=${encodeURIComponent(product.name)}`}
+                  className="inline-flex items-center gap-2 rounded-lg bg-red-600 px-8 py-4 text-base font-semibold text-white transition-all hover:bg-red-700 active:scale-95"
+                >
+                  Get Custom Quote
+                </a>
+              </div>
             </div>
 
             {/* Quick highlights */}
@@ -403,15 +372,9 @@ export default function ProductDetailPage({
                       {rp.name}
                     </h3>
                     <div className="mt-auto pt-2">
-                      {rp.price ? (
-                        <span className="text-base font-bold text-navy-900">
-                          {formatPrice(rp.price)}
-                        </span>
-                      ) : (
-                        <span className="text-xs font-semibold text-red-600">
+                      <span className="text-xs font-semibold text-red-600">
                           Custom Quote
                         </span>
-                      )}
                     </div>
                   </div>
                 </Link>

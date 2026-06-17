@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { cn, formatPrice } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import { useCartStore, type CartItem } from "@/stores/cartStore";
 import {
   ShoppingCart,
@@ -140,7 +140,7 @@ export default function CartPage() {
                     Subtotal ({itemCount} items)
                   </span>
                   <span className="font-semibold text-navy-900">
-                    {formatPrice(subtotal)}
+
                   </span>
                 </div>
 
@@ -150,7 +150,7 @@ export default function CartPage() {
                     <span className="font-semibold text-green-600">FREE</span>
                   ) : (
                     <span className="font-semibold text-navy-900">
-                      {formatPrice(shipping)}
+
                     </span>
                   )}
                 </div>
@@ -158,14 +158,14 @@ export default function CartPage() {
                 {shipping > 0 && (
                   <p className="text-xs text-gray-400">
                     Free shipping on orders over $500. Add{" "}
-                    {formatPrice(500 - subtotal)} more to qualify.
+
                   </p>
                 )}
 
                 <div className="flex justify-between">
                   <span className="text-gray-600">Tax (estimated)</span>
                   <span className="font-semibold text-navy-900">
-                    {formatPrice(tax)}
+
                   </span>
                 </div>
 
@@ -173,7 +173,7 @@ export default function CartPage() {
                   <div className="flex justify-between text-base">
                     <span className="font-bold text-navy-900">Total</span>
                     <span className="font-bold text-navy-900">
-                      {formatPrice(total)}
+
                     </span>
                   </div>
                 </div>
@@ -298,20 +298,9 @@ function CartItemRow({
 
           {/* Price */}
           <div className="text-right">
-            {item.price !== null ? (
-              <span className="text-sm font-bold text-navy-900">
-                {formatPrice(item.price * item.quantity)}
-              </span>
-            ) : (
-              <span className="text-sm font-semibold text-red-600">
-                Quote Pending
-              </span>
-            )}
-            {item.price !== null && item.quantity > 1 && (
-              <p className="text-xs text-gray-400">
-                {formatPrice(item.price)} each
-              </p>
-            )}
+            <span className="text-sm font-semibold text-red-600">
+              Quote Pending
+            </span>
           </div>
         </div>
       </div>

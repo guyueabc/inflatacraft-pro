@@ -46,17 +46,7 @@ export const CATEGORIES: ProductCategory[] = [
 
 export const SORT_OPTIONS = [
   { label: "Featured", value: "featured" },
-  { label: "Price: Low to High", value: "price-asc" },
-  { label: "Price: High to Low", value: "price-desc" },
   { label: "Newest", value: "newest" },
-] as const;
-
-export const PRICE_RANGES = [
-  { label: "Under $500", min: 0, max: 500 },
-  { label: "$500 – $1,000", min: 500, max: 1000 },
-  { label: "$1,000 – $5,000", min: 1000, max: 5000 },
-  { label: "$5,000+", min: 5000, max: Infinity },
-  { label: "Custom Quote", min: -1, max: -1 },
 ] as const;
 
 export const LEAD_TIMES = [

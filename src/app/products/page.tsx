@@ -1,13 +1,12 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
-import { cn, formatPrice } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import {
   products,
   CATEGORIES,
   SORT_OPTIONS,
-  PRICE_RANGES,
   LEAD_TIMES,
   type ProductCategory,
 } from "@/lib/data/products";
@@ -28,13 +27,32 @@ type SortValue = (typeof SORT_OPTIONS)[number]["value"];
 export default function ProductsPage() {
   const [search, setSearch] = useState("");
   const [selectedCategories, setSelectedCategories] = useState<ProductCategory[]>([]);
-  const [selectedPriceRange, setSelectedPriceRange] = useState<number | null>(null);
   const [selectedLeadTime, setSelectedLeadTime] = useState<string | null>(null);
   const [sort, setSort] = useState<SortValue>("featured");
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
 
-  const toggleCategory = (cat: ProductCategory) => {
+  
+  // Read ?category= from URL on mount
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const catParam = params.get("category");
+    if (catParam) {
+      const map: Record<string, ProductCategory> = {
+        replica: "Giant Product Replicas",
+        mascot: "Inflatable Mascots",
+        arch: "Inflatable Arches",
+        costume: "Inflatable Costumes",
+        tent: "Inflatable Tents",
+        game: "Inflatable Games",
+      };
+      const cat = map[catParam.toLowerCase()];
+      if (cat) setSelectedCategories([cat]);
+    }
+  }, []); // eslint-disable-line
+
+const toggleCategory = (cat: ProductCategory) => {
     setSelectedCategories((prev) =>
       prev.includes(cat) ? prev.filter((c) => c !== cat) : [...prev, cat]
     );
@@ -59,17 +77,6 @@ export default function ProductsPage() {
       filtered = filtered.filter((p) => selectedCategories.includes(p.category));
     }
 
-    // Price range filter
-    if (selectedPriceRange !== null) {
-      const range = PRICE_RANGES[selectedPriceRange];
-      if (range.max === -1) {
-        filtered = filtered.filter((p) => !p.price);
-      } else {
-        filtered = filtered.filter(
-          (p) => p.price && p.price >= range.min && p.price < range.max
-        );
-      }
-    }
 
     // Lead time filter
     if (selectedLeadTime) {
@@ -78,12 +85,6 @@ export default function ProductsPage() {
 
     // Sort
     switch (sort) {
-      case "price-asc":
-        filtered.sort((a, b) => (a.price ?? Infinity) - (b.price ?? Infinity));
-        break;
-      case "price-desc":
-        filtered.sort((a, b) => (b.price ?? 0) - (a.price ?? 0));
-        break;
       case "newest":
         filtered.reverse();
         break;
@@ -94,18 +95,16 @@ export default function ProductsPage() {
     }
 
     return filtered;
-  }, [search, selectedCategories, selectedPriceRange, selectedLeadTime, sort]);
+  }, [search, selectedCategories, selectedLeadTime, sort]);
 
   const hasActiveFilters =
     selectedCategories.length > 0 ||
-    selectedPriceRange !== null ||
-    selectedLeadTime !== null ||
+selectedLeadTime !== null ||
     search.trim().length > 0;
 
   const clearFilters = () => {
     setSearch("");
     setSelectedCategories([]);
-    setSelectedPriceRange(null);
     setSelectedLeadTime(null);
   };
 
@@ -273,34 +272,6 @@ export default function ProductsPage() {
                 </div>
               </div>
 
-              {/* Price Range */}
-              <div>
-                <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-navy-900">
-                  Price Range
-                </h3>
-                <div className="space-y-1.5">
-                  {PRICE_RANGES.map((range, idx) => (
-                    <label
-                      key={idx}
-                      className="flex cursor-pointer items-center gap-2.5 rounded-md px-2 py-1.5 text-sm text-gray-700 transition-colors hover:bg-gray-50"
-                    >
-                      <input
-                        type="radio"
-                        name="price-range"
-                        checked={selectedPriceRange === idx}
-                        onChange={() =>
-                          setSelectedPriceRange(
-                            selectedPriceRange === idx ? null : idx
-                          )
-                        }
-                        className="h-4 w-4 border-gray-300 text-navy-700 accent-navy-700 focus:ring-navy-500"
-                      />
-                      {range.label}
-                    </label>
-                  ))}
-                </div>
-              </div>
-
               {/* Lead Time */}
               <div>
                 <h3 className="mb-3 flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-navy-900">
@@ -440,15 +411,9 @@ function ProductCard({ product }: { product: (typeof products)[number] }) {
 
         <div className="mt-auto flex items-center justify-between border-t border-gray-100 pt-3">
           <div>
-            {product.price ? (
-              <span className="text-lg font-bold text-navy-900">
-                {formatPrice(product.price)}
-              </span>
-            ) : (
-              <span className="text-sm font-semibold text-red-600">
+            <span className="text-sm font-semibold text-red-600">
                 Custom Quote
               </span>
-            )}
           </div>
           <span className="rounded-lg border border-navy-300 px-3 py-1.5 text-xs font-semibold text-navy-700 transition-colors group-hover:border-navy-700 group-hover:bg-navy-700 group-hover:text-white">
             View Details
@@ -497,15 +462,9 @@ function ProductListItem({ product }: { product: (typeof products)[number] }) {
         </div>
         <div className="flex items-center justify-between">
           <div>
-            {product.price ? (
-              <span className="text-xl font-bold text-navy-900">
-                {formatPrice(product.price)}
-              </span>
-            ) : (
-              <span className="text-sm font-semibold text-red-600">
+            <span className="text-sm font-semibold text-red-600">
                 Custom Quote
               </span>
-            )}
           </div>
           <div className="flex items-center gap-3 text-xs text-gray-500">
             {product.leadTime && (

@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from "react";
 import Link from "next/link";
-import { cn, formatPrice } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import { useCartStore } from "@/stores/cartStore";
 import {
   Check,
@@ -303,7 +303,7 @@ export default function CheckoutPage() {
           <h1 className="text-3xl font-bold tracking-tight">Checkout</h1>
           <p className="mt-1 text-gray-300">
             {itemCount} item{itemCount !== 1 ? "s" : ""} ·{" "}
-            {formatPrice(total)}
+
           </p>
         </div>
       </section>
@@ -616,9 +616,7 @@ export default function CheckoutPage() {
                               Qty: {item.quantity}
                             </span>
                             <span className="font-semibold text-navy-900">
-                              {item.price !== null
-                                ? formatPrice(item.price * item.quantity)
-                                : "Quote Pending"}
+                              Quote Pending
                             </span>
                           </div>
                         </div>
@@ -695,7 +693,7 @@ export default function CheckoutPage() {
                     ) : (
                       <>
                         <Lock className="h-5 w-5" />
-                        Place Order — {formatPrice(total)}
+
                       </>
                     )}
                   </button>
@@ -743,7 +741,7 @@ export default function CheckoutPage() {
                     Subtotal ({itemCount} items)
                   </span>
                   <span className="font-semibold text-navy-900">
-                    {formatPrice(subtotal)}
+
                   </span>
                 </div>
                 <div className="flex justify-between">
@@ -752,21 +750,21 @@ export default function CheckoutPage() {
                     <span className="font-semibold text-green-600">FREE</span>
                   ) : (
                     <span className="font-semibold text-navy-900">
-                      {formatPrice(shipping)}
+
                     </span>
                   )}
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600">Tax (estimated)</span>
                   <span className="font-semibold text-navy-900">
-                    {formatPrice(tax)}
+
                   </span>
                 </div>
                 <div className="border-t border-gray-200 pt-3">
                   <div className="flex justify-between text-base">
                     <span className="font-bold text-navy-900">Total</span>
                     <span className="font-bold text-navy-900">
-                      {formatPrice(total)}
+
                     </span>
                   </div>
                 </div>
@@ -784,9 +782,7 @@ export default function CheckoutPage() {
                       <p className="text-xs text-gray-500">Qty: {item.quantity}</p>
                     </div>
                     <span className="text-xs font-semibold text-navy-900 shrink-0">
-                      {item.price !== null
-                        ? formatPrice(item.price * item.quantity)
-                        : "Quote"}
+                      Quote Pending
                     </span>
                   </div>
                 ))}
