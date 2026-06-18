@@ -23,7 +23,7 @@ export async function GET(request: NextRequest) {
   try {
     const { prisma } = await import("@/lib/prisma");
     await prisma.$executeRawUnsafe(
-      `INSERT INTO "PageView" (page, referrer, utm_source, utm_medium, utm_campaign, utm_term, utm_content, "createdAt")
+      `INSERT INTO "page_views" ("page", "referrer", "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "created_at")
        VALUES ($1, $2, $3, $4, $5, $6, $7, NOW())`,
       data.page, data.referrer, data.utm_source, data.utm_medium,
       data.utm_campaign, data.utm_term, data.utm_content

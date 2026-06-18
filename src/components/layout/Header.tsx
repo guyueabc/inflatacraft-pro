@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
@@ -146,10 +146,10 @@ export function Header() {
             </span>
           </button>
           <Link
-            href="/sign-in"
+            href="/get-quote"
             className="rounded-md border border-navy-300 px-4 py-2 text-sm font-medium text-navy-700 transition-colors hover:border-navy-700 hover:bg-navy-50"
           >
-            Sign In
+            Get Quote
           </Link>
         </div>
 

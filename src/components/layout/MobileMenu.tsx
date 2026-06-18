@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useRef } from "react";
 import Link from "next/link";
@@ -119,11 +119,11 @@ export function MobileMenu({ isOpen, onClose, navLinks }: MobileMenuProps) {
             Cart (0)
           </Link>
           <Link
-            href="/sign-in"
+            href="/get-quote"
             onClick={onClose}
             className="flex items-center justify-center rounded-md border border-navy-300 px-4 py-3 text-sm font-medium text-navy-700 transition-colors hover:border-navy-700 hover:bg-navy-50"
           >
-            Sign In
+            Get Quote
           </Link>
           <Link
             href="/request-quote"

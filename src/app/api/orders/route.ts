@@ -3,7 +3,6 @@ import { OrderStatus, Prisma } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
-import { getServerSession } from "@/lib/auth";
 
 // ─── Validation Schemas ─────────────────────────────────────────────────────
 
@@ -33,10 +32,7 @@ const createOrderSchema = z.object({
 
 export async function POST(request: NextRequest) {
   try {
-    const session = await getServerSession();
-    if (!session?.user?.id) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
+    
 
     const body = await request.json();
     const parsed = createOrderSchema.safeParse(body);
@@ -59,7 +55,7 @@ export async function POST(request: NextRequest) {
 
     const order = await prisma.order.create({
       data: {
-        userId: session.user.id,
+        userId: "public",
         quoteId: parsed.data.quoteId ?? null,
         status: "PENDING_PAYMENT",
         items: parsed.data.items,
@@ -80,17 +76,14 @@ export async function POST(request: NextRequest) {
 
 export async function GET(request: NextRequest) {
   try {
-    const session = await getServerSession();
-    if (!session?.user?.id) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
+    
 
     const { searchParams } = new URL(request.url);
     const status = searchParams.get("status") as OrderStatus | null;
     const limit = Math.min(Math.max(Number(searchParams.get("limit")) || 20, 1), 100);
     const offset = Math.max(Number(searchParams.get("offset")) || 0, 0);
 
-    const where: Prisma.OrderWhereInput = { userId: session.user.id };
+    const where: Prisma.OrderWhereInput = { userId: "public" };
     if (status) {
       where.status = status;
     }

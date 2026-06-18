@@ -1,5 +1,4 @@
 import { redirect } from "next/navigation";
-
-export default function SignInRedirect() {
-  redirect("/login");
+export default function RedirectToQuote() {
+  redirect("/get-quote");
 }

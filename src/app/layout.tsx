@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     "advertising inflatables",
   ],
   verification: {
-    google: "YOUR_GOOGLE_SITE_VERIFICATION",
+    google: "nWwctyDyo8qM_SM4TeYi9O28l5YC0hnS05h4WMig_pU",
   },
 };
 
@@ -44,7 +44,16 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${montserrat.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col bg-white text-gray-800">
+      
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({"@context": "https://schema.org", "@type": "Organization", "name": "InflatableModel", "url": "https://inflatablemodel.com.cn", "description": "Custom inflatable manufacturing - giant product replicas, mascots, arches, costumes, and tents. Made in USA.", "email": "info@inflatablemodel.com.cn", "areaServed": "Worldwide", "knowsAbout": ["Custom Inflatables", "Giant Product Replicas", "Inflatable Mascots", "Inflatable Arches", "Inflatable Costumes", "Inflatable Tents", "Inflatable Games"]})
+          }}
+        />
+      </head>
+<body className="flex min-h-full flex-col bg-white text-gray-800">
         <Analytics />
         <Header />
         <main className="flex-1">{children}</main>
