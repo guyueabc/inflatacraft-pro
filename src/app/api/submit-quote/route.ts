@@ -98,8 +98,8 @@ export async function POST(request: NextRequest) {
     const dingtalkResult = await notifyDingTalk(body);
     return NextResponse.json({ success: true, id: submission.id, dingtalk: dingtalkResult }, { status: 201 });
   } catch (error) {
-    console.error("[POST /api/submit-quote]", error);
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    console.error('[POST /api/submit-quote]', error);
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
 
