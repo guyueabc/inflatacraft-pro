@@ -71,7 +71,7 @@ export function FloatingCTA() {
 
         {/* Get Free Quote */}
         <Link
-          href="/request-quote"
+          href="/get-quote"
           className="flex items-center gap-2 rounded-full bg-red-600 px-5 py-3 text-sm font-semibold text-white shadow-lg transition-all hover:bg-red-500 hover:shadow-xl"
         >
           <MessageSquareText className="h-4 w-4" />
@@ -100,7 +100,7 @@ export function FloatingCTA() {
           <span className="hidden xs:inline">Chat</span>
         </a>
         <Link
-          href="/request-quote"
+          href="/get-quote"
           className="flex flex-[2] items-center justify-center gap-2 bg-red-600 py-3 text-sm font-semibold text-white transition-colors hover:bg-red-500"
         >
           <MessageSquareText className="h-4 w-4" />

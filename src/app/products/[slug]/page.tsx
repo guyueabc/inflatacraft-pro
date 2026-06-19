@@ -126,7 +126,7 @@ export default async function ProductDetailPage({
         }}
       />
 
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-white pb-24 md:pb-0">
         {/* Breadcrumb */}
         <div className="border-b border-gray-200 bg-white">
           <div className="container mx-auto max-w-7xl px-4 py-3">
@@ -261,23 +261,23 @@ export default async function ProductDetailPage({
               Technical Specifications
             </h2>
             <div className="overflow-hidden rounded-xl border border-gray-200 bg-white">
-              <table className="w-full text-left">
+              <div className="overflow-x-auto -mx-4 sm:mx-0"><table className="w-full min-w-[320px] text-left">
                 <tbody className="divide-y divide-gray-100">
                   {Object.entries(product.specs).map(([key, value], idx) => (
                     <tr
                       key={key}
                       className={idx % 2 === 0 ? "bg-white" : "bg-gray-50/50"}
                     >
-                      <td className="w-64 px-6 py-4 text-sm font-semibold text-navy-900 capitalize">
+                      <td className="w-32 sm:w-64 px-3 sm:px-6 py-4 text-sm font-semibold text-navy-900 capitalize">
                         {key.replace(/([A-Z])/g, " ").trim()}
                       </td>
-                      <td className="px-6 py-4 text-sm text-gray-700">
+                      <td className="px-3 sm:px-6 py-4 text-sm text-gray-700">
                         {value}
                       </td>
                     </tr>
                   ))}
                 </tbody>
-              </table>
+              </table></div>
             </div>
           </div>
         </section>
@@ -363,7 +363,17 @@ export default async function ProductDetailPage({
             </div>
           </section>
         )}
-      </div>
+      
+        {/* Mobile: Fixed bottom CTA */}
+        <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-gray-200 shadow-[0_-4px_20px_rgba(0,0,0,0.08)] px-4 py-3">
+          <a
+            href="/get-quote"
+            className="flex w-full items-center justify-center gap-2 rounded-lg bg-red-600 px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-red-600/20 transition-all hover:bg-red-500 active:scale-[0.98]"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Get Free Quote &mdash; Free 3D Rendering
+          </a>
+        </div></div>
     </>
   );
 }

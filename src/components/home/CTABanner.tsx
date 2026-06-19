@@ -25,7 +25,7 @@ export function CTABanner() {
               +86 15376427736
             </a>
             <Link
-              href="/request-quote"
+              href="/get-quote"
               className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-red-600 px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-red-600/30 transition-all hover:bg-red-500 hover:shadow-red-500/40 active:scale-95 sm:w-auto"
             >
               Get Free Quote

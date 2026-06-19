@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { cn } from "@/lib/utils";
-import { Send, Loader2, CheckCircle2 } from "lucide-react";
+import { Send, Loader2, CheckCircle2, Phone, MessageCircle } from "lucide-react";
 
 const PRODUCT_TYPES = [
   "Giant Product Replica",
@@ -117,13 +117,13 @@ export function QuickQuote() {
         >
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <div>
-              <label htmlFor="qq-email" className="sr-only">Email *</label>
+              <span className="mb-1 block text-xs font-medium text-red-200">Email *</span>
               <input
                 id="qq-email"
                 name="email"
                 type="email"
                 required
-                placeholder="Email Address *"
+                placeholder="you@company.com"
                 value={form.email}
                 onChange={handleChange}
                 className="w-full rounded-lg border-2 border-red-500 bg-white px-4 py-3 text-gray-900 placeholder-gray-400 transition-all focus:border-white focus:outline-none focus:ring-2 focus:ring-white/50"
@@ -131,13 +131,13 @@ export function QuickQuote() {
             </div>
 
             <div>
-              <label htmlFor="qq-phone" className="sr-only">Phone *</label>
+              <span className="mb-1 block text-xs font-medium text-red-200">Phone *</span>
               <input
                 id="qq-phone"
                 name="phone"
                 type="tel"
                 required
-                placeholder="Phone Number *"
+                placeholder="+1 (555) 000-0000"
                 value={form.phone}
                 onChange={handleChange}
                 className="w-full rounded-lg border-2 border-red-500 bg-white px-4 py-3 text-gray-900 placeholder-gray-400 transition-all focus:border-white focus:outline-none focus:ring-2 focus:ring-white/50"
@@ -145,12 +145,12 @@ export function QuickQuote() {
             </div>
 
             <div>
-              <label htmlFor="qq-name" className="sr-only">Full Name</label>
+              <span className="mb-1 block text-xs font-medium text-red-200">Name</span>
               <input
                 id="qq-name"
                 name="name"
                 type="text"
-                placeholder="Full Name (optional)"
+                placeholder="Your name (optional)"
                 value={form.name}
                 onChange={handleChange}
                 className="w-full rounded-lg border-2 border-red-500 bg-white px-4 py-3 text-gray-900 placeholder-gray-400 transition-all focus:border-white focus:outline-none focus:ring-2 focus:ring-white/50"
@@ -158,7 +158,7 @@ export function QuickQuote() {
             </div>
 
             <div>
-              <label htmlFor="qq-product" className="sr-only">Product Type</label>
+              <span className="mb-1 block text-xs font-medium text-red-200">Product Type</span>
               <select
                 id="qq-product"
                 name="productType"
@@ -166,7 +166,7 @@ export function QuickQuote() {
                 onChange={handleChange}
                 className="w-full rounded-lg border-2 border-red-500 bg-white px-4 py-3 text-gray-900 transition-all focus:border-white focus:outline-none focus:ring-2 focus:ring-white/50"
               >
-                <option value="">Product Type (optional)</option>
+                <option value="">Select type...</option>
                 {PRODUCT_TYPES.map((pt) => (
                   <option key={pt} value={pt}>{pt}</option>
                 ))}
@@ -215,6 +215,26 @@ function SuccessMessage() {
       </h3>
       <p className="mt-2 text-red-100">
         Our team will reach out within 24 hours with your custom estimate.
+      </p>
+      <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+        <a
+          href="tel:+8615376427736"
+          className="inline-flex items-center justify-center gap-2 rounded-lg bg-white/15 px-6 py-3 text-sm font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/25 active:scale-95"
+        >
+          <Phone className="h-4 w-4" />
+          Call Us Now
+        </a>
+        <a
+          href="https://wa.me/8615376427736"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center justify-center gap-2 rounded-lg bg-green-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-green-500/30 transition-all hover:bg-green-600 active:scale-95"
+        >
+          <MessageCircle className="h-4 w-4" />
+          Chat on WhatsApp
+        </a>
+      </div>
+      <p className="mt-4 text-sm text-red-200">
         Looking forward to bringing your brand to life!
       </p>
     </div>

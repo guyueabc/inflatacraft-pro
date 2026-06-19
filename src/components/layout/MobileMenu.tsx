@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useRef } from "react";
 import Link from "next/link";
@@ -126,7 +126,7 @@ export function MobileMenu({ isOpen, onClose, navLinks }: MobileMenuProps) {
             Get Quote
           </Link>
           <Link
-            href="/request-quote"
+            href="/get-quote"
             onClick={onClose}
             className="flex items-center justify-center rounded-md bg-red-600 px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-red-500"
           >

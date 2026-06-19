@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
@@ -91,7 +91,7 @@ export function Header() {
             </a>
           </div>
           <Link
-            href="/request-quote"
+            href="/get-quote"
             className="inline-flex items-center rounded-md bg-red-600 px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-red-500 sm:px-4 sm:text-sm"
           >
             <span className="hidden sm:inline">Request Quote</span>
