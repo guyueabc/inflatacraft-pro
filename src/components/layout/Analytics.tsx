@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Script from "next/script";
 import { usePathname } from "next/navigation";
@@ -64,6 +64,20 @@ function Tracker() {
   const [ready, setReady] = useState(false);
 
   useEffect(() => { setReady(true); }, []);
+
+  // Page view beacon — sends tracking data to Supabase via 1px GIF
+  useEffect(() => {
+    if (!ready) return;
+    const sp = new URLSearchParams(window.location.search);
+    const params = new URLSearchParams();
+    params.set("p", pathname || "/");
+    params.set("r", document.referrer || "");
+    ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"].forEach((k) => {
+      const v = sp.get(k);
+      if (v) params.set(k, v);
+    });
+    new Image().src = "/api/analytics/track?" + params.toString();
+  }, [pathname, ready]);
 
   useEffect(() => {
     if (!ready) return;

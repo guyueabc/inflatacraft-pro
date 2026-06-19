@@ -45,14 +45,45 @@ export function QuickQuote() {
     setStatus("submitting");
     setErrorMessage("");
 
+    if (!form.email || !form.phone) {
+      setStatus("idle");
+      setErrorMessage("Please provide your email and phone so we can reach you.");
+      return;
+    }
+
+    const adParams = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "gclid", "gbraid", "wbraid", "fbclid"];
+    const utm: Record<string, string> = {};
+    adParams.forEach((k) => { try { const v = sessionStorage.getItem(k); if (v) utm[k] = v; } catch {} });
+
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      const res = await fetch("/api/submit-quote", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          productType: form.productType,
+          ...utm,
+        }),
+      });
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({ error: "Network error" }));
+        throw new Error(err.error || "Submission failed");
+      }
+
+      sessionStorage.setItem("quote_submitted", "true");
+      (window as any).dataLayer?.push({ event: "quote_form_submitted" });
+      if (typeof (window as any).gtag === "function") {
+        (window as any).gtag("event", "conversion", { send_to: "AW-18234377845/quote_submit" });
+      }
+
       setStatus("success");
       setForm(initialForm);
-    } catch {
+    } catch (err: any) {
       setStatus("error");
-      setErrorMessage("Something went wrong. Please try again or call us directly.");
+      setErrorMessage(err.message || "Something went wrong. Please try again or call us directly.");
     }
   };
 
@@ -85,85 +116,66 @@ export function QuickQuote() {
           noValidate
         >
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {/* Name */}
             <div>
-              <label htmlFor="qq-name" className="sr-only">
-                Full Name
-              </label>
-              <input
-                id="qq-name"
-                name="name"
-                type="text"
-                required
-                placeholder="Full Name"
-                value={form.name}
-                onChange={handleChange}
-                className="w-full rounded-lg border-2 border-red-500 bg-white px-4 py-3 text-gray-900 placeholder-gray-400 transition-all focus:border-white focus:outline-none focus:ring-2 focus:ring-white/50"
-              />
-            </div>
-
-            {/* Email */}
-            <div>
-              <label htmlFor="qq-email" className="sr-only">
-                Email
-              </label>
+              <label htmlFor="qq-email" className="sr-only">Email *</label>
               <input
                 id="qq-email"
                 name="email"
                 type="email"
                 required
-                placeholder="Email Address"
+                placeholder="Email Address *"
                 value={form.email}
                 onChange={handleChange}
                 className="w-full rounded-lg border-2 border-red-500 bg-white px-4 py-3 text-gray-900 placeholder-gray-400 transition-all focus:border-white focus:outline-none focus:ring-2 focus:ring-white/50"
               />
             </div>
 
-            {/* Phone */}
             <div>
-              <label htmlFor="qq-phone" className="sr-only">
-                Phone
-              </label>
+              <label htmlFor="qq-phone" className="sr-only">Phone *</label>
               <input
                 id="qq-phone"
                 name="phone"
                 type="tel"
-                placeholder="Phone Number"
+                required
+                placeholder="Phone Number *"
                 value={form.phone}
                 onChange={handleChange}
                 className="w-full rounded-lg border-2 border-red-500 bg-white px-4 py-3 text-gray-900 placeholder-gray-400 transition-all focus:border-white focus:outline-none focus:ring-2 focus:ring-white/50"
               />
             </div>
 
-            {/* Product Type */}
             <div>
-              <label htmlFor="qq-product" className="sr-only">
-                Product Type
-              </label>
+              <label htmlFor="qq-name" className="sr-only">Full Name</label>
+              <input
+                id="qq-name"
+                name="name"
+                type="text"
+                placeholder="Full Name (optional)"
+                value={form.name}
+                onChange={handleChange}
+                className="w-full rounded-lg border-2 border-red-500 bg-white px-4 py-3 text-gray-900 placeholder-gray-400 transition-all focus:border-white focus:outline-none focus:ring-2 focus:ring-white/50"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="qq-product" className="sr-only">Product Type</label>
               <select
                 id="qq-product"
                 name="productType"
-                required
                 value={form.productType}
                 onChange={handleChange}
                 className="w-full rounded-lg border-2 border-red-500 bg-white px-4 py-3 text-gray-900 transition-all focus:border-white focus:outline-none focus:ring-2 focus:ring-white/50"
               >
-                <option value="" disabled>
-                  Product Type
-                </option>
+                <option value="">Product Type (optional)</option>
                 {PRODUCT_TYPES.map((pt) => (
-                  <option key={pt} value={pt}>
-                    {pt}
-                  </option>
+                  <option key={pt} value={pt}>{pt}</option>
                 ))}
               </select>
             </div>
           </div>
 
           {status === "error" && (
-            <p className="mt-4 text-center text-sm text-red-100">
-              {errorMessage}
-            </p>
+            <p className="mt-4 text-center text-sm text-red-100">{errorMessage}</p>
           )}
 
           <div className="mt-6 text-center">
@@ -194,7 +206,6 @@ export function QuickQuote() {
   );
 }
 
-/** Success state with checkmark animation */
 function SuccessMessage() {
   return (
     <div className="flex flex-col items-center">
