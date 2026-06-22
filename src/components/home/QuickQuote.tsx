@@ -104,7 +104,7 @@ export function QuickQuote() {
       sessionStorage.setItem("quote_submitted", "true");
       (window as any).dataLayer?.push({ event: "quote_form_submitted" });
       if (typeof (window as any).gtag === "function") {
-        (window as any).gtag("event", "conversion", { send_to: "AW-18234377845/quote_submit" });
+        (window as any).gtag("event", "conversion", { send_to: "AW-18234377845/TYNLCJu0_70cEPWM6vZD" });
       }
 
       setStatus("success");

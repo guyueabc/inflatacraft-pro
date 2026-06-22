@@ -72,7 +72,7 @@ function Tracker() {
     const params = new URLSearchParams();
     params.set("p", pathname || "/");
     params.set("r", document.referrer || "");
-    ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"].forEach((k) => {
+    ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "gclid", "gbraid", "wbraid"].forEach((k) => {
       const v = sp.get(k);
       if (v) params.set(k, v);
     });
@@ -96,10 +96,10 @@ function Tracker() {
 
   useEffect(() => {
     if (!ready) return;
-    if (pathname === "/get-quote" && sessionStorage.getItem("quote_submitted") === "true") {
+    if (sessionStorage.getItem("quote_submitted") === "true") {
       (window as any).dataLayer?.push({ event: "conversion_quote_submitted" });
       if (typeof (window as any).gtag === "function") {
-        (window as any).gtag("event", "conversion", { send_to: `${GOOGLE_ADS_ID}/quote_submit` });
+        (window as any).gtag("event", "conversion", { send_to: `${GOOGLE_ADS_ID}/TYNLCJu0_70cEPWM6vZD` });
       }
       sessionStorage.removeItem("quote_submitted");
     }

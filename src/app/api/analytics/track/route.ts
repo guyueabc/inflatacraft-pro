@@ -108,12 +108,14 @@ export async function GET(request: NextRequest) {
   try {
     await ensureVisitorLogTable();
 
-    // Insert page view
+    // Insert page view — auto-tag gclid as google/cpc
+    const gclid = searchParams.get("gclid") || searchParams.get("gbraid") || searchParams.get("wbraid") || "";
     await prisma.$executeRawUnsafe(
       `INSERT INTO "page_views" ("page", "referrer", "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "created_at")
        VALUES ($1, $2, $3, $4, $5, $6, $7, NOW())`,
       searchParams.get("p") || "/", searchParams.get("r") || "",
-      searchParams.get("utm_source") || "", searchParams.get("utm_medium") || "",
+      gclid ? "google" : (searchParams.get("utm_source") || ""),
+      gclid ? "cpc" : (searchParams.get("utm_medium") || ""),
       searchParams.get("utm_campaign") || "", searchParams.get("utm_term") || "",
       searchParams.get("utm_content") || ""
     );

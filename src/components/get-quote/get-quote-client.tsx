@@ -84,7 +84,7 @@ export function GetQuoteClient() {
     (window as any).dataLayer?.push({ event: "quote_form_submitted" });
     // Google Ads 杞寲杩借釜 (濡傛灉 gtag 宸插姞杞?
     if (typeof (window as any).gtag === "function") {
-      (window as any).gtag("event", "conversion", { send_to: "AW-18234377845/quote_submit" });
+      (window as any).gtag("event", "conversion", { send_to: "AW-18234377845/TYNLCJu0_70cEPWM6vZD" });
     }
     try { window.scrollTo({ top: 0, behavior: "smooth" }); } catch {}
   };
