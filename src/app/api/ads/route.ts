@@ -3,11 +3,11 @@ import { NextResponse } from "next/server";
 /**
  * GET /api/ads — ads.txt
  * Google Ads 发布者验证 + 广告平台授权
- * 访问地址: https://inflatablemodel.com.cn/ads.txt
+ * 访问地址: https://qddjtx.com/ads.txt
  */
 export async function GET() {
   const adsTxt = [
-    "# inflatablemodel.com.cn — ads.txt",
+    "# qddjtx.com — ads.txt",
     "# ====================================================",
     "# Google Ads — 将 PUB_ID 替换为你的 Google 发布商 ID",
     "# 获取地址: Google Ads → 工具 → 发布商 ID",

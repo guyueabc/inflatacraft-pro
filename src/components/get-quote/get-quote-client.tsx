@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { cn } from "@/lib/utils";
@@ -16,6 +17,44 @@ export function GetQuoteClient() {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Stash latest form values in a ref so beforeunload can read them
+  const formRef = useRef<QuoteFormData | null>(null);
+  const values = form.watch();
+
+  // Keep ref in sync
+  useEffect(() => { formRef.current = values; }, [values]);
+
+  // Save partial data to sessionStorage every 3s debounced
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (values.email) {
+        try { sessionStorage.setItem("partial_lead", JSON.stringify(values)); } catch {}
+      }
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, [values]);
+
+  // Before unload / page leave: send beacon with last-stashed partial
+  useEffect(() => {
+    const sendPartial = () => {
+      if (sessionStorage.getItem('partial_sent') === '1') return;
+      sessionStorage.setItem('partial_sent', '1');
+      const partial = formRef.current;
+      if (!partial?.email && !partial?.phone) return;
+      const adParams = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "gclid"];
+      const utm: Record<string, string> = {};
+      adParams.forEach((k) => { try { const v = sessionStorage.getItem(k); if (v) utm[k] = v; } catch {} });
+      navigator.sendBeacon("/api/analytics/partial-lead", JSON.stringify({ ...partial, ...utm }));
+    };
+    window.addEventListener("beforeunload", sendPartial);
+    window.addEventListener("pagehide", sendPartial);
+    return () => {
+      window.removeEventListener("beforeunload", sendPartial);
+      window.removeEventListener("pagehide", sendPartial);
+    };
+  }, []);
+
 
   const onSubmit = async (data: QuoteFormData) => {
     setIsSubmitting(true);
@@ -109,7 +148,7 @@ export function GetQuoteClient() {
                 {form.formState.errors.email && <p className="mt-1 text-xs text-red-600">{form.formState.errors.email.message}</p>}
               </div>
               <div>
-                <label htmlFor="q-phone" className="mb-1 block text-sm font-medium text-navy-700">Phone *</label>
+                <label htmlFor="q-phone" className="mb-1 block text-sm font-medium text-navy-700">Phone</label>
                 <div className="relative">
                   <Phone className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
                   <input id="q-phone" type="tel" placeholder="+1 (555) 000-0000" {...form.register("phone")}

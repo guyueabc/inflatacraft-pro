@@ -3,7 +3,7 @@ import { z } from "zod";
 // 只需要邮箱和电话 — 其余全部可选
 export const quoteSchema = z.object({
   email: z.string().email("请输入有效的邮箱地址"),
-  phone: z.string().min(7, "请输入有效的电话号码"),
+  phone: z.string().optional().or(z.literal("")),
   name: z.string().optional().or(z.literal("")),
   company: z.string().optional().or(z.literal("")),
   productType: z.string().optional().or(z.literal("")),

@@ -39,12 +39,12 @@ export function ProductListClient() {
     const catParam = params.get("category");
     if (catParam) {
       const map: Record<string, ProductCategory> = {
-        replica: "Giant Product Replicas",
-        mascot: "Inflatable Mascots",
-        arch: "Inflatable Arches",
-        costume: "Inflatable Costumes",
-        tent: "Inflatable Tents",
-        game: "Inflatable Games",
+        replica: "Product Replicas",
+        mascot: "Mascots",
+        arch: "Arches",
+        costume: "Costumes",
+        tent: "Tents",
+        game: "Games",
       };
       const cat = map[catParam.toLowerCase()];
       if (cat) setSelectedCategories([cat]);

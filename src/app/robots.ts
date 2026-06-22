@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/api/', '/account/', '/checkout', '/cart', '/auth/', '/login', '/register', '/sign-in', '/distributor-login'],
     },
-    sitemap: 'https://inflatablemodel.com.cn/sitemap.xml',
+    sitemap: 'https://qddjtx.com/sitemap.xml',
   }
 }

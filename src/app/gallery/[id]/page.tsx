@@ -56,8 +56,8 @@ export default async function GalleryDetailPage({
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: "https://inflatablemodel.com.cn" },
-              { "@type": "ListItem", position: 2, name: "Gallery", item: "https://inflatablemodel.com.cn/gallery" },
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://qddjtx.com" },
+              { "@type": "ListItem", position: 2, name: "Gallery", item: "https://qddjtx.com/gallery" },
               { "@type": "ListItem", position: 3, name: item.clientName },
             ],
           }),

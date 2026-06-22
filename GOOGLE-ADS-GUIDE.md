@@ -34,7 +34,7 @@
 ### 广告 A
 
 ```
-最终到达网址: https://inflatablemodel.com.cn/get-quote?utm_source=google&utm_medium=cpc&utm_campaign=search
+最终到达网址: https://qddjtx.com/get-quote?utm_source=google&utm_medium=cpc&utm_campaign=search
 标题 1: Custom Inflatable Manufacturer
 标题 2: Free 3D Rendering & Quote
 标题 3: 3-6 Week Turnaround
@@ -45,7 +45,7 @@
 ### 广告 B
 
 ```
-最终到达网址: https://inflatablemodel.com.cn/gallery?utm_source=google&utm_medium=cpc&utm_campaign=search_gallery
+最终到达网址: https://qddjtx.com/gallery?utm_source=google&utm_medium=cpc&utm_campaign=search_gallery
 标题 1: Giant Inflatable Replicas
 标题 2: See Our Case Studies
 标题 3: Made for Trade Shows & Events
@@ -56,7 +56,7 @@
 ### 广告 C
 
 ```
-最终到达网址: https://inflatablemodel.com.cn/get-quote?utm_source=google&utm_medium=cpc&utm_campaign=search_urgent
+最终到达网址: https://qddjtx.com/get-quote?utm_source=google&utm_medium=cpc&utm_campaign=search_urgent
 标题 1: Need an Inflatable Fast?
 标题 2: Rush Orders — 3 Weeks
 标题 3: Free Design & Quote

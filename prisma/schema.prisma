@@ -179,6 +179,7 @@ model PageView {
   utmCampaign String? @map("utm_campaign")
   utmTerm    String?  @map("utm_term")
   utmContent String?  @map("utm_content")
+  visitorId   String?  @map("visitor_id")
   createdAt  DateTime @default(now()) @map("created_at")
 
   @@map("page_views")
@@ -205,4 +206,21 @@ model FormSubmission {
   @@index([createdAt])
   @@index([ipAddress, createdAt])
   @@index([utmSource, utmMedium])
+}
+
+model PartialLead {
+  id        Int      @id @default(autoincrement())
+  email     String?
+  phone     String?
+  name      String?
+  company   String?
+  productType String? @map("product_type")
+  page      String   @default("/")
+  referrer  String   @default("")
+  utmSource String?  @map("utm_source")
+  utmMedium String?  @map("utm_medium")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("partial_leads")
+  @@index([createdAt])
 }

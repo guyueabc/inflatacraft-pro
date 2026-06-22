@@ -46,7 +46,7 @@ async function notifyDingTalk(data: Record<string, any>) {
     arr.push(k + ": " + v);
   }
   arr.push("");
-  arr.push("> inflatablemodel.com.cn");
+  arr.push("> qddjtx.com");
   const text = arr.join("\n\n");
 
   try {
@@ -68,8 +68,8 @@ export async function POST(request: NextRequest) {
   try {
     const ip = getClientIp(request);
     const body = await request.json();
-    if (!body.email || !body.phone) {
-      return NextResponse.json({ error: "Email and phone are required" }, { status: 400 });
+    if (!body.email) {
+      return NextResponse.json({ error: "Email is required" }, { status: 400 });
     }
     const twentyFourHoursAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
     const recentCount = await prisma.formSubmission.count({

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import React, { useState, useEffect, useRef, type FormEvent } from "react";
 import { cn } from "@/lib/utils";
 import { Send, Loader2, CheckCircle2, Phone, MessageCircle } from "lucide-react";
 
@@ -30,6 +30,34 @@ const initialForm: FormData = {
 
 export function QuickQuote() {
   const [form, setForm] = useState<FormData>(initialForm);
+  const formRef = useRef(form);
+  useEffect(() => { formRef.current = form; }, [form]);
+
+  // Save partial data to sessionStorage + beforeunload beacon
+  useEffect(() => {
+    const t = setTimeout(() => {
+      if (form.email) {
+        try { sessionStorage.setItem("partial_lead", JSON.stringify(form)); } catch {}
+      }
+    }, 3000);
+    return () => clearTimeout(t);
+  }, [form]);
+
+  useEffect(() => {
+    const send = () => {
+      if (sessionStorage.getItem('partial_sent') === '1') return;
+      sessionStorage.setItem('partial_sent', '1');
+      const d = formRef.current;
+      if (!d.email && !d.phone) return;
+      const adParams = ["utm_source","utm_medium","utm_campaign","utm_term","utm_content","gclid"];
+      const utm: Record<string,string> = {};
+      adParams.forEach((k) => { try { const v = sessionStorage.getItem(k); if (v) utm[k] = v; } catch {} });
+      navigator.sendBeacon("/api/analytics/partial-lead", JSON.stringify({ ...d, ...utm }));
+    };
+    window.addEventListener("beforeunload", send);
+    window.addEventListener("pagehide", send);
+    return () => { window.removeEventListener("beforeunload", send); window.removeEventListener("pagehide", send); };
+  }, []);
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -45,9 +73,9 @@ export function QuickQuote() {
     setStatus("submitting");
     setErrorMessage("");
 
-    if (!form.email || !form.phone) {
+    if (!form.email) {
       setStatus("idle");
-      setErrorMessage("Please provide your email and phone so we can reach you.");
+      setErrorMessage("Please provide your email so we can reach you.");
       return;
     }
 
@@ -131,7 +159,7 @@ export function QuickQuote() {
             </div>
 
             <div>
-              <span className="mb-1 block text-xs font-medium text-red-200">Phone *</span>
+              <span className="mb-1 block text-xs font-medium text-red-200">Phone</span>
               <input
                 id="qq-phone"
                 name="phone"

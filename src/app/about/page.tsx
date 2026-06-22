@@ -21,7 +21,7 @@ export default function AboutPage() {
             "@context": "https://schema.org",
             "@type": "AboutPage",
             name: "About InflatableModel",
-            url: "https://inflatablemodel.com.cn/about",
+            url: "https://qddjtx.com/about",
           }),
         }}
       />
