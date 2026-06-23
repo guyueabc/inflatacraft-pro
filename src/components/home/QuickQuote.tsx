@@ -262,8 +262,8 @@ function SuccessMessage() {
           Chat on WhatsApp
         </a>
       </div>
-      <p className="mt-4 text-sm text-red-200">
-        Looking forward to bringing your brand to life!
+      <p className="mt-4 text-center text-sm text-red-200">
+        No obligation · No spam · Response within 24 hours · <a href="/privacy" className="underline hover:text-white">Privacy Policy</a>
       </p>
     </div>
   );

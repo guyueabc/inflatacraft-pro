@@ -47,7 +47,7 @@ export function FloatingCTA() {
 
         {/* Phone Call */}
         <a
-          href="tel:+86 15376427736"
+          href="tel:+861****7736"
           className="flex h-11 w-11 items-center justify-center rounded-full bg-navy-700 text-white shadow-lg transition-all hover:bg-navy-800 hover:shadow-xl"
           aria-label="Call us"
           title="Call +86 15376427736"
@@ -82,7 +82,7 @@ export function FloatingCTA() {
       {/* Mobile: Sticky bottom bar */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 flex items-stretch bg-white border-t border-navy-200 shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
         <a
-          href="tel:+86 15376427736"
+          href="tel:+861****7736"
           className="flex flex-1 items-center justify-center gap-1.5 py-3 text-sm font-medium text-navy-700 transition-colors hover:bg-navy-50"
         >
           <Phone className="h-4 w-4" />
