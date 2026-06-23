@@ -25,11 +25,16 @@ export const metadata: Metadata = {
     "Giant product replicas, mascots, arches, costumes, and tents. 3-6 week turnaround. Made in USA. Free 3D renderings. Scale your brand 100x.",
   keywords: [
     "custom inflatables",
-    "inflatable manufacturing",
+    "giant inflatables",
+    "inflatable manufacturer",
     "giant product replicas",
     "inflatable mascots",
     "inflatable arches",
     "advertising inflatables",
+    "event inflatables",
+    "promotional inflatables",
+    "commercial grade inflatables",
+    "custom made inflatables",
   ],
   metadataBase: new URL(BASE_URL),
   alternates: {

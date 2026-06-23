@@ -24,7 +24,7 @@ const VALUE_PROPS: ValueProp[] = [
     icon: Flag,
     title: "Made in USA",
     description:
-      "Every inflatable is designed, cut, sewn, and finished domestically using commercial-grade materials. You get faster shipping, higher quality control, and U.S. labor standards.",
+      "Every inflatable is designed, cut, sewn, and finished domestically using commercial grade materials. You get faster shipping, higher quality control, and U.S. labor standards.",
   },
 ];
 
@@ -38,7 +38,7 @@ export function ValueProps() {
           </h2>
           <p className="mt-4 text-lg text-gray-600">
             Three reasons the world's biggest brands trust us with their
-            inflatable campaigns.
+            giant inflatables and custom advertising campaigns.
           </p>
         </div>
 

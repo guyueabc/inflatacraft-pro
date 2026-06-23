@@ -28,7 +28,7 @@ const STEPS: Step[] = [
     icon: Truck,
     title: "Production & Delivery",
     description:
-      "Once approved, we manufacture your inflatable in our U.S. facility using commercial-grade materials. In 3–6 weeks, your inflatable ships directly to your door.",
+      "Once approved, we manufacture your custom inflatable in our U.S. facility using commercial grade materials. In 3–6 weeks, your giant inflatable ships directly to your door.",
   },
 ];
 

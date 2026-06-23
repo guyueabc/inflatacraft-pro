@@ -20,7 +20,7 @@ const SLIDES: Slide[] = [
   {
     id: 1,
     headline: "Scale Your Brand 100×",
-    subheadline: "Custom Inflatable Manufacturing — 3–6 Week Turnaround",
+    subheadline: "Custom Inflatable Manufacturer — Giant Inflatables in 3–6 Weeks",
     ctaPrimary: { label: "Get Free Quote", href: "/get-quote" },
     ctaSecondary: { label: "View Gallery", href: "/gallery" },
     placeholderLabel: "Giant Product Replica",
@@ -29,7 +29,7 @@ const SLIDES: Slide[] = [
   {
     id: 2,
     headline: "Turn Your Product Into a Landmark",
-    subheadline: "Giant Inflatable Replicas That Stop Traffic & Drive Sales",
+    subheadline: "Giant Inflatable Replicas & Advertising Inflatables That Drive Sales",
     ctaPrimary: { label: "Get Free Quote", href: "/get-quote" },
     ctaSecondary: { label: "View Gallery", href: "/gallery" },
     placeholderLabel: "Inflatable Mascot",
@@ -38,7 +38,7 @@ const SLIDES: Slide[] = [
   {
     id: 3,
     headline: "From Sketch to Spectacle in Weeks",
-    subheadline: "Free 3D Renderings — Made in USA — BBB A+ Rated",
+    subheadline: "Free 3D Renderings — Made in USA — Event Inflatables & Promotional Inflatables",
     ctaPrimary: { label: "Get Free Quote", href: "/get-quote" },
     ctaSecondary: { label: "View Gallery", href: "/gallery" },
     placeholderLabel: "Custom Inflatable Arch",
