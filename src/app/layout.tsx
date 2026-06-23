@@ -17,6 +17,8 @@ const montserrat = Montserrat({
   weight: ["600", "700", "800"],
 });
 
+const BASE_URL = "https://www.qddjtx.com";
+
 export const metadata: Metadata = {
   title: "inflatablemodel — Custom Inflatable Manufacturing",
   description:
@@ -29,6 +31,8 @@ export const metadata: Metadata = {
     "inflatable arches",
     "advertising inflatables",
   ],
+  metadataBase: new URL(BASE_URL),
+  canonical: "/",
   verification: {
     google: "nWwctyDyo8qM_SM4TeYi9O28l5YC0hnS05h4WMig_pU",
   },
@@ -49,7 +53,7 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({"@context": "https://schema.org", "@type": "Organization", "name": "InflatableModel", "url": "https://qddjtx.com", "description": "Custom inflatable manufacturing - giant product replicas, mascots, arches, costumes, and tents. Made in USA.", "email": "info@qddjtx.com", "areaServed": "Worldwide", "knowsAbout": ["Custom Inflatables", "Giant Product Replicas", "Inflatable Mascots", "Inflatable Arches", "Inflatable Costumes", "Inflatable Tents", "Inflatable Games"]})
+            __html: JSON.stringify({"@context": "https://schema.org", "@type": "Organization", "name": "InflatableModel", "url": "https://www.qddjtx.com", "description": "Custom inflatable manufacturing - giant product replicas, mascots, arches, costumes, and tents. Made in USA.", "email": "inflatablemodel@showlovein.com", "telephone": "+8615376427736", "areaServed": "Worldwide", "knowsAbout": ["Custom Inflatables", "Giant Product Replicas", "Inflatable Mascots", "Inflatable Arches", "Inflatable Costumes", "Inflatable Tents", "Inflatable Games"]})
           }}
         />
       </head>

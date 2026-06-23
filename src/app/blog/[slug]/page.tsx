@@ -62,8 +62,8 @@ export default async function BlogDetailPage({
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: "https://qddjtx.com" },
-              { "@type": "ListItem", position: 2, name: "Blog", item: "https://qddjtx.com/blog" },
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://www.qddjtx.com" },
+              { "@type": "ListItem", position: 2, name: "Blog", item: "https://www.qddjtx.com/blog" },
               { "@type": "ListItem", position: 3, name: post.title },
             ],
           }),

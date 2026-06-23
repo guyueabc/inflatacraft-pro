@@ -14,6 +14,7 @@ export const metadata: Metadata = {
   title: "Custom Inflatables Manufacturer | Giant Replicas, Mascots & More | InflatableModel",
   description:
     "USA-made custom inflatables for advertising and events. Giant product replicas, mascots, arches, costumes, tents and games. 3-6 week turnaround. Free 3D renderings. Get a quote today.",
+  canonical: "https://www.qddjtx.com/",
   openGraph: {
     title: "Custom Inflatables Manufacturer | InflatableModel",
     description:
@@ -21,6 +22,7 @@ export const metadata: Metadata = {
     type: "website",
     siteName: "InflatableModel",
     locale: "en_US",
+    url: "https://www.qddjtx.com/",
   },
   twitter: {
     card: "summary_large_image",

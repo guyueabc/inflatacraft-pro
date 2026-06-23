@@ -21,7 +21,7 @@ export default function ContactPage() {
             '@context': 'https://schema.org',
             '@type': 'Organization',
             name: 'InflatableModel',
-            url: 'https://qddjtx.com',
+            url: 'https://www.qddjtx.com',
             contactPoint: {
               '@type': 'ContactPoint',
               telephone: '+86-157-6427-7366',

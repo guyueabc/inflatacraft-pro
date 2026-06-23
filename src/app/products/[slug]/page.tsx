@@ -102,13 +102,13 @@ export default async function ProductDetailPage({
                 "@type": "ListItem",
                 position: 1,
                 name: "Home",
-                item: "https://qddjtx.com",
+                item: "https://www.qddjtx.com",
               },
               {
                 "@type": "ListItem",
                 position: 2,
                 name: "Products",
-                item: "https://qddjtx.com/products",
+                item: "https://www.qddjtx.com/products",
               },
               {
                 "@type": "ListItem",

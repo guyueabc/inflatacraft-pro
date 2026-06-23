@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-const BASE_URL = "https://qddjtx.com";
+const BASE_URL = "https://www.qddjtx.com";
 
 export const metadata: Metadata = {
   title: "Custom Inflatable FAQ — Everything You Need to Know | inflatablemodel",

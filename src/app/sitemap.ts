@@ -4,7 +4,7 @@ import { BLOG_DATA } from '@/lib/data/blog'
 import { GALLERY_DATA } from '@/lib/data/gallery'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = 'https://qddjtx.com'
+  const base = 'https://www.qddjtx.com'
   const now = new Date()
 
   const core: MetadataRoute.Sitemap = [

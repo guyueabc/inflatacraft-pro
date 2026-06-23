@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 /**
  * GET /api/ads — ads.txt
  * Google Ads 发布者验证 + 广告平台授权
- * 访问地址: https://qddjtx.com/ads.txt
+ * 访问地址: https://www.qddjtx.com/ads.txt
  */
 export async function GET() {
   const adsTxt = [
