@@ -32,7 +32,9 @@ export const metadata: Metadata = {
     "advertising inflatables",
   ],
   metadataBase: new URL(BASE_URL),
-  canonical: "/",
+  alternates: {
+    canonical: "/",
+  },
   verification: {
     google: "nWwctyDyo8qM_SM4TeYi9O28l5YC0hnS05h4WMig_pU",
   },
