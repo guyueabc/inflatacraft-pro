@@ -35,7 +35,7 @@ function GoogleAdsGlobalTag() {
 
 function GTM() {
   const gtmId = process.env.NEXT_PUBLIC_GTM_ID;
-  if (!gtmId) return null;
+  if (!gtmId || gtmId.length < 5 || gtmId.includes("XXXX")) return null;
   return (
     <>
       <Script id="gtm-head" strategy="afterInteractive" dangerouslySetInnerHTML={{
