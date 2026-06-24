@@ -11,7 +11,7 @@ export default function AdminStatsPage() {
     <>
       {/* 隐藏网站Header/Footer/FloatingCTA */}
       <style dangerouslySetInnerHTML={{ __html: `
-        header, footer, [class*="FloatingCTA"], [class*="floating"] {
+        header, footer, [class*="FloatingCTA"], [class*="floating"], [class*="fixed"][class*="bottom"] {
           display: none !important;
         }
         body { background: #f3f4f6 !important; }

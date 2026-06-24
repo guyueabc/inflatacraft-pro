@@ -106,7 +106,7 @@ export default function AdminLoginPage() {
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: `
-        header, footer, [class*="FloatingCTA"], [class*="floating"] {
+        header, footer, [class*="FloatingCTA"], [class*="floating"], [class*="fixed"][class*="bottom"] {
           display: none !important;
         }
       ` }} />
