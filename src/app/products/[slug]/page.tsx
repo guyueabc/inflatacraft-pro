@@ -11,6 +11,8 @@ import {
   Star,
   Award,
   Printer,
+  CheckCircle2,
+  HelpCircle,
 } from "lucide-react";
 import type { Metadata } from "next";
 
@@ -20,7 +22,7 @@ export async function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
 }
 
-// Dynamic metadata for each product page
+// Dynamic metadata for each product page — GEO-optimized descriptions
 export async function generateMetadata({
   params,
 }: {
@@ -33,19 +35,21 @@ export async function generateMetadata({
     return { title: "Product Not Found" };
   }
 
+  const geoDescription = product.geoSummary || product.description;
+
   return {
-    title: product.name + " | InflatableModel",
-    description: product.description,
+    title: product.name + " | Custom Inflatable Manufacturer | InflatableModel",
+    description: geoDescription,
     openGraph: {
       title: product.name,
-      description: product.description,
+      description: geoDescription,
       images: product.images.slice(0, 4),
       type: "website",
     },
     twitter: {
       card: "summary_large_image",
       title: product.name,
-      description: product.description,
+      description: geoDescription,
       images: product.images.slice(0, 1),
     },
   };
@@ -65,12 +69,12 @@ export default async function ProductDetailPage({
 
   const related = getRelatedProducts(product, 4);
 
-  // Product JSON-LD structured data (no price = custom quote product)
+  // Product JSON-LD structured data — enhanced for GEO
   const productJsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
     name: product.name,
-    description: product.description,
+    description: product.geoSummary || product.description,
     image: product.images.slice(0, 10),
     category: product.category,
     brand: {
@@ -80,17 +84,43 @@ export default async function ProductDetailPage({
     manufacturer: {
       "@type": "Organization",
       name: "InflatableModel",
+      url: "https://www.qddjtx.com",
     },
     productionDate: "2024",
     isSimilarTo: [],
+    ...(product.price && {
+      offers: {
+        "@type": "Offer",
+        price: product.price,
+        priceCurrency: "USD",
+        availability: product.inStock
+          ? "https://schema.org/InStock"
+          : "https://schema.org/OutOfStock",
+      },
+    }),
   };
 
-  // Product JSON-LD structured data
+  // FAQPage JSON-LD — critical for AI engine citation
+  const faqJsonLd =
+    product.faqs && product.faqs.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: product.faqs.map((faq) => ({
+            "@type": "Question",
+            name: faq.question,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: faq.answer,
+            },
+          })),
+        }
+      : null;
+
   return (
     <>
       {/* JSON-LD structured data for Google Rich Results + AI visibility */}
-
-      {/* BreadcrumbList structured data */}
+      {/* BreadcrumbList */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -119,12 +149,18 @@ export default async function ProductDetailPage({
           }),
         }}
       />
+      {/* Product */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(productJsonLd),
-        }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
       />
+      {/* FAQPage — critical for AI citation */}
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
 
       <div className="min-h-screen bg-white pb-24 md:pb-0">
         {/* Breadcrumb */}
@@ -149,7 +185,7 @@ export default async function ProductDetailPage({
         {/* Product hero */}
         <section className="container mx-auto max-w-7xl px-4 py-8 lg:py-12">
           <div className="grid gap-8 lg:grid-cols-2">
-            {/* Image Gallery - Client Component */}
+            {/* Image Gallery */}
             <div>
               <div className="relative mb-4">
                 <div className="absolute left-4 top-4 z-10 flex gap-2">
@@ -181,9 +217,21 @@ export default async function ProductDetailPage({
                 {product.name}
               </h1>
 
-              <p className="mb-6 text-base leading-relaxed text-gray-600">
-                {product.longDescription || product.description}
-              </p>
+              {/* GEO Summary — conclusion-first, answer-optimized */}
+              {product.geoSummary && (
+                <div className="mb-6 rounded-xl border-l-4 border-navy-600 bg-navy-50 p-4">
+                  <p className="text-base leading-relaxed text-navy-900">
+                    {product.geoSummary}
+                  </p>
+                </div>
+              )}
+
+              {/* Fallback to longDescription if no geoSummary */}
+              {!product.geoSummary && (
+                <p className="mb-6 text-base leading-relaxed text-gray-600">
+                  {product.longDescription || product.description}
+                </p>
+              )}
 
               {/* Quote CTA */}
               <div className="mb-6">
@@ -248,11 +296,68 @@ export default async function ProductDetailPage({
                 </div>
               </div>
 
-              {/* Share - Client Component */}
+              {/* Share */}
               <ShareButton productName={product.name} />
             </div>
           </div>
         </section>
+
+        {/* GEO Comparison Table — AI loves structured comparison data */}
+        {product.comparison && product.comparison.length > 0 && (
+          <section className="border-t border-gray-200 bg-white py-12">
+            <div className="container mx-auto max-w-7xl px-4">
+              <h2 className="mb-2 text-2xl font-bold tracking-tight text-navy-900">
+                Why Choose {product.name}?
+              </h2>
+              <p className="mb-8 text-sm text-gray-500">
+                Comparison: InflatableModel vs. budget alternatives
+              </p>
+              <div className="overflow-hidden rounded-xl border border-gray-200 bg-white">
+                <div className="overflow-x-auto -mx-4 sm:mx-0">
+                  <table className="w-full min-w-[640px] text-left">
+                    <thead>
+                      <tr className="border-b border-gray-200 bg-gray-50">
+                        <th className="px-3 sm:px-6 py-4 text-sm font-bold text-navy-900">
+                          Feature
+                        </th>
+                        <th className="px-3 sm:px-6 py-4 text-sm font-bold text-navy-700">
+                          <span className="inline-flex items-center gap-1.5">
+                            <CheckCircle2 className="h-4 w-4 text-green-600" />
+                            InflatableModel
+                          </span>
+                        </th>
+                        <th className="px-3 sm:px-6 py-4 text-sm font-bold text-gray-400">
+                          Budget Alternative
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-100">
+                      {product.comparison.map((row, idx) => (
+                        <tr
+                          key={idx}
+                          className={idx % 2 === 0 ? "bg-white" : "bg-gray-50/50"}
+                        >
+                          <td className="px-3 sm:px-6 py-4 text-sm font-semibold text-navy-900">
+                            {row.feature}
+                          </td>
+                          <td className="px-3 sm:px-6 py-4 text-sm text-green-800">
+                            <span className="inline-flex items-start gap-1.5">
+                              <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-green-600" />
+                              {row.inflatablemodel}
+                            </span>
+                          </td>
+                          <td className="px-3 sm:px-6 py-4 text-sm text-gray-500">
+                            {row.budgetAlternative}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* Specs Table */}
         <section className="border-t border-gray-200 bg-gray-50 py-12">
@@ -281,6 +386,35 @@ export default async function ProductDetailPage({
             </div>
           </div>
         </section>
+
+        {/* GEO FAQ Section — buyer-verbatim questions with direct answers */}
+        {product.faqs && product.faqs.length > 0 && (
+          <section className="border-t border-gray-200 bg-white py-12">
+            <div className="container mx-auto max-w-4xl px-4">
+              <div className="mb-8 flex items-center gap-3">
+                <HelpCircle className="h-7 w-7 text-navy-600" />
+                <h2 className="text-2xl font-bold tracking-tight text-navy-900">
+                  Frequently Asked Questions
+                </h2>
+              </div>
+              <div className="space-y-4">
+                {product.faqs.map((faq, idx) => (
+                  <div
+                    key={idx}
+                    className="rounded-xl border border-gray-200 bg-gray-50/50 p-5"
+                  >
+                    <h3 className="mb-2 text-base font-semibold text-navy-900">
+                      {faq.question}
+                    </h3>
+                    <p className="text-sm leading-relaxed text-gray-700">
+                      {faq.answer}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* Trust badges */}
         <section className="border-t border-gray-200 bg-white py-12">
@@ -373,7 +507,8 @@ export default async function ProductDetailPage({
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
             Get Free Quote &mdash; Free 3D Rendering
           </a>
-        </div></div>
+        </div>
+      </div>
     </>
   );
 }

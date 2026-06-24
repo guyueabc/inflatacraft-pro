@@ -41,6 +41,7 @@ const FOOTER_COLUMNS = [
     title: "Resources",
     links: [
       { label: "FAQ", href: "/faq" },
+      { label: "Buying Guide", href: "/buying-guide" },
       { label: "Material Specs", href: "/products" },
       { label: "Shipping Info", href: "/how-it-works" },
       { label: "Warranty", href: "/faq" },
