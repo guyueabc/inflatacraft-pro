@@ -63,7 +63,7 @@ export default function PrivacyPolicyPage() {
             <a href="mailto:inflatablemodel@showlovein.com" className="text-red-600 underline">
               inflatablemodel@showlovein.com
             </a>{" "}
-            or call +86 153****7736.
+            or email us.
           </p>
         </section>
       </div>

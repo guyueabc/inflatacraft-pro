@@ -65,11 +65,11 @@ export function Header() {
         <div className="container mx-auto flex items-center justify-between px-4 py-2 text-sm">
           <div className="flex items-center gap-6">
             <a
-              href="tel:+8615376427736"
+              href="https://wa.me/8615376427736" target="_blank" rel="noopener noreferrer"
               className="flex items-center gap-1.5 hover:text-red-400 transition-colors"
             >
               <Phone className="h-3.5 w-3.5" />
-              <span>+86 153****7736</span>
+              <span></span>
             </a>
             <a
               href="https://wa.me/8615376427736"

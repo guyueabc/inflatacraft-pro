@@ -54,7 +54,7 @@ const FOOTER_COLUMNS = [
     links: [
       { label: "Request Quote", href: "/get-quote" },
       { label: "Contact Sales", href: "/contact" },
-      { label: "WhatsApp: +86 153****7736", href: "https://wa.me/8615376427736" },
+      { label: "WhatsApp", href: "https://wa.me/8615376427736" },
     ],
   },
 ] as const;

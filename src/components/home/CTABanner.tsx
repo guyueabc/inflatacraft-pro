@@ -18,11 +18,11 @@ export function CTABanner() {
 
           <div className="flex w-full flex-col items-center gap-4 sm:w-auto sm:flex-row">
             <a
-              href="tel:+861****7736"
+              href="https://wa.me/8615376427736"
               className="inline-flex w-full items-center justify-center gap-2 rounded-lg border-2 border-white/30 px-6 py-3.5 text-base font-semibold text-white backdrop-blur-sm transition-all hover:border-white/60 hover:bg-white/10 sm:w-auto"
             >
               <Phone className="h-5 w-5" />
-              +86 153****7736
+              
             </a>
             <Link
               href="/get-quote"

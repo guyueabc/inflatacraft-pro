@@ -394,11 +394,11 @@ export default function BuyingGuidePage() {
                 <ArrowRight className="h-5 w-5" />
               </Link>
               <a
-                href="tel:+8615376427736"
+                href="https://wa.me/8615376427736" target="_blank" rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-xl border-2 border-navy-300 px-8 py-4 text-base font-semibold text-navy-700 transition-all hover:border-navy-700 hover:bg-navy-50"
               >
                 <Phone className="h-5 w-5" />
-                +86 153****7736
+                
               </a>
               <a
                 href="mailto:inflatablemodel@showlovein.com"

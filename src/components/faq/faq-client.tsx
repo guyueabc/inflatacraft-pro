@@ -80,7 +80,7 @@ const FAQ_DATA: FAQCategory[] = [
         id: "order-1",
         question: "How do I get a quote?",
         answer:
-          "Getting a quote is fast and free. Submit your project details through our online quote form at /get-quote, email us at inflatablemodel@showlovein.com, or call +86 153****7736. We'll need to know: the type of inflatable you want, approximate size, quantity, deadline, and any reference images. Most quotes are returned within 24 hours.",
+          "Getting a quote is fast and free. Submit your project details through our online quote form at /get-quote, email us at inflatablemodel@showlovein.com, or email us. We'll need to know: the type of inflatable you want, approximate size, quantity, deadline, and any reference images. Most quotes are returned within 24 hours.",
       },
       {
         id: "order-2",
@@ -464,11 +464,11 @@ export function FAQPageClient() {
 
           <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
             <a
-              href="tel:+8615376427736"
+              href="https://wa.me/8615376427736" target="_blank" rel="noopener noreferrer"
               className="inline-flex w-full items-center justify-center gap-2 rounded-xl border-2 border-navy-300 px-8 py-4 text-base font-semibold text-navy-700 transition-all hover:border-navy-700 hover:bg-navy-50 sm:w-auto"
             >
               <Phone className="h-5 w-5" />
-              +86 153****7736
+              
             </a>
             <a
               href="mailto:inflatablemodel@showlovein.com"

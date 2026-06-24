@@ -246,11 +246,11 @@ function SuccessMessage() {
       </p>
       <div className="mt-6 flex flex-col gap-3 sm:flex-row">
         <a
-          href="tel:+8615376427736"
+          href="https://wa.me/8615376427736" target="_blank" rel="noopener noreferrer"
           className="inline-flex items-center justify-center gap-2 rounded-lg bg-white/15 px-6 py-3 text-sm font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/25 active:scale-95"
         >
           <Phone className="h-4 w-4" />
-          Call Us Now
+          WhatsApp Us
         </a>
         <a
           href="https://wa.me/8615376427736"

@@ -55,8 +55,8 @@ const CONTACT_CARDS = [
   {
     icon: Phone,
     title: "Phone",
-    lines: ["+86 153****7736", "(313) 555-0142"],
-    action: { label: "Call Now", href: "tel:+8615376427736" },
+    lines: ["", "(313) 555-0142"],
+    action: { label: "WhatsApp Us", href: "https://wa.me/8615376427736" },
   },
   {
     icon: Mail,

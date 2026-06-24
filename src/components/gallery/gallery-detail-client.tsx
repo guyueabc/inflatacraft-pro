@@ -92,11 +92,11 @@ export function GalleryDetailClient({ item }: { item: GalleryDetail }) {
                   <ArrowRight className="h-4 w-4" />
                 </Link>
                 <a
-                  href="tel:+8615376427736"
+                  href="https://wa.me/8615376427736" target="_blank" rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 rounded-lg border-2 border-white/30 px-6 py-3 text-sm font-semibold backdrop-blur-sm transition-all hover:border-white/60 hover:bg-white/10"
                 >
                   <Phone className="h-4 w-4" />
-                  +86 153****7736
+                  
                 </a>
               </div>
             </div>
