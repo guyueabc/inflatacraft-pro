@@ -104,15 +104,28 @@ function LoginFallback() {
 
 export default function AdminLoginPage() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100 p-4">
-      <div className="w-full max-w-sm">
-        <Suspense fallback={<LoginFallback />}>
-          <LoginForm />
-        </Suspense>
-        <p className="mt-6 text-center text-xs text-gray-400">
-          InflatableModel &bull; 管理后台
-        </p>
+    <>
+      <style dangerouslySetInnerHTML={{ __html: `
+        header, footer, [class*="FloatingCTA"], [class*="floating"] {
+          display: none !important;
+        }
+      ` }} />
+      <div className="flex min-h-screen items-center justify-center bg-gray-100 p-4">
+        <div className="w-full max-w-sm">
+          <div className="mb-6 flex flex-col items-center">
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-navy-700 text-lg font-bold text-white mb-3">
+              IP
+            </div>
+            <span className="text-sm font-semibold text-navy-700">inflatablemodel</span>
+          </div>
+          <Suspense fallback={<LoginFallback />}>
+            <LoginForm />
+          </Suspense>
+          <p className="mt-6 text-center text-xs text-gray-400">
+            InflatableModel &bull; 管理后台
+          </p>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
