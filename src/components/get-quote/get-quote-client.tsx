@@ -129,13 +129,13 @@ export function GetQuoteClient() {
       <div className="mx-auto max-w-2xl">
         <div className="mb-10 text-center">
           <h1 className="font-heading text-3xl font-bold text-navy-900 md:text-4xl">Get a Free Quote</h1>
-          <p className="mt-3 text-gray-600">Just your email and phone —?we&apos;ll handle the rest.</p>
+          <p className="mt-3 text-gray-600">Just your email and phone — we&apos;ll handle the rest.</p>
         </div>
 
         <div className="rounded-xl border border-navy-200 bg-white p-5 shadow-sm sm:p-8">
           {/* -- Required: Email + Phone -- */}
           <div className="mb-8 rounded-lg border-2 border-red-200 bg-red-50/30 p-5">
-            <p className="mb-4 text-sm font-semibold text-red-700">Required —?we need these to contact you</p>
+            <p className="mb-4 text-sm font-semibold text-red-700">Required — we need these to contact you</p>
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
                 <label htmlFor="q-email" className="mb-1 block text-sm font-medium text-navy-700">Email *</label>
@@ -161,7 +161,7 @@ export function GetQuoteClient() {
           </div>
 
           {/* -- Optional fields -- */}
-          <p className="mb-4 text-sm font-medium text-gray-400">Everything below is optional —?fill in as much or as little as you like</p>
+          <p className="mb-4 text-sm font-medium text-gray-400">Everything below is optional — fill in as much or as little as you like</p>
           <div className="space-y-4">
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
