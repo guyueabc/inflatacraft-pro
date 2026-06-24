@@ -37,6 +37,11 @@ interface StatsSummary {
   todayUV: number;
   weekUV: number;
   monthUV: number;
+  todayChinaPV: number;
+  todayNonChinaPV: number;
+  todayChinaUV: number;
+  todayNonChinaUV: number;
+  todayAdsClicks: number;
 }
 
 interface DailyItem {
@@ -319,6 +324,66 @@ export function StatsDashboard() {
               bg="bg-red-50"
               highlight
             />
+          </div>
+
+          {/* 今日数据详情 */}
+          <div className="rounded-xl border border-gray-200 bg-white p-6">
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-navy-900">
+              <TrendingUp className="h-5 w-5 text-navy-600" />
+              今日数据详情
+            </h2>
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {/* 今日总浏览 */}
+              <div className="rounded-lg border border-gray-100 bg-gray-50 p-4">
+                <p className="text-xs text-gray-500">今日总浏览量 (PV)</p>
+                <p className="mt-1 text-2xl font-bold text-navy-900">{stats.summary.todayPV}</p>
+                <p className="mt-1 text-xs text-gray-400">含所有来源</p>
+              </div>
+              {/* 今日广告点击 */}
+              <div className="rounded-lg border border-blue-100 bg-blue-50 p-4">
+                <p className="text-xs text-blue-600">今日广告点击 (Google CPC)</p>
+                <p className="mt-1 text-2xl font-bold text-blue-700">
+                  {stats.summary.todayAdsClicks ?? 0}
+                </p>
+                <p className="mt-1 text-xs text-blue-400">utm_source=google</p>
+              </div>
+              {/* 今日中国IP访问 */}
+              <div className="rounded-lg border border-orange-100 bg-orange-50 p-4">
+                <p className="text-xs text-orange-600">今日中国 IP 访问</p>
+                <p className="mt-1 text-2xl font-bold text-orange-700">
+                  {stats.summary.todayChinaPV ?? 0}
+                  <span className="ml-1 text-sm font-normal text-orange-400">PV</span>
+                </p>
+                <p className="mt-1 text-xs text-orange-400">
+                  {stats.summary.todayChinaUV ?? 0} UV (去重)
+                </p>
+              </div>
+              {/* 今日海外真实访问 */}
+              <div className="rounded-lg border border-green-100 bg-green-50 p-4">
+                <p className="text-xs text-green-600">今日海外访问 (去除中国IP)</p>
+                <p className="mt-1 text-2xl font-bold text-green-700">
+                  {stats.summary.todayNonChinaPV ?? 0}
+                  <span className="ml-1 text-sm font-normal text-green-400">PV</span>
+                </p>
+                <p className="mt-1 text-xs text-green-400">
+                  {stats.summary.todayNonChinaUV ?? 0} UV (去重)
+                </p>
+              </div>
+            </div>
+            {/* 说明 */}
+            <div className="mt-4 flex items-center gap-2 rounded-lg bg-gray-50 p-3 text-xs text-gray-500">
+              <span>💡</span>
+              <span>
+                <strong>海外真实访问</strong> = 总PV - 中国IP的PV。这是你广告投放目标市场（美国/加拿大）的真实流量。
+                {stats.summary.todayPV > 0 && (
+                  <span className="ml-2">
+                    今日海外占比: <strong className="text-green-600">
+                      {((stats.summary.todayNonChinaPV / stats.summary.todayPV) * 100).toFixed(1)}%
+                    </strong>
+                  </span>
+                )}
+              </span>
+            </div>
           </div>
 
           {/* 最近7天趋势 */}
