@@ -22,7 +22,7 @@ export function CTABanner() {
               className="inline-flex w-full items-center justify-center gap-2 rounded-lg border-2 border-white/30 px-6 py-3.5 text-base font-semibold text-white backdrop-blur-sm transition-all hover:border-white/60 hover:bg-white/10 sm:w-auto"
             >
               <Phone className="h-5 w-5" />
-              +86 15376427736
+              +86 153****7736
             </a>
             <Link
               href="/get-quote"

@@ -50,7 +50,7 @@ export function FloatingCTA() {
           href="tel:+861****7736"
           className="flex h-11 w-11 items-center justify-center rounded-full bg-navy-700 text-white shadow-lg transition-all hover:bg-navy-800 hover:shadow-xl"
           aria-label="Call us"
-          title="Call +86 15376427736"
+          title="Call +86 153****7736"
         >
           <Phone className="h-5 w-5" />
         </a>

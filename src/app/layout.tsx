@@ -60,7 +60,7 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({"@context": "https://schema.org", "@type": "Organization", "name": "InflatableModel", "url": "https://www.qddjtx.com", "description": "Custom inflatable manufacturing - giant product replicas, mascots, arches, costumes, and tents. Made in USA.", "email": "inflatablemodel@showlovein.com", "telephone": "+8615376427736", "areaServed": "Worldwide", "knowsAbout": ["Custom Inflatables", "Giant Product Replicas", "Inflatable Mascots", "Inflatable Arches", "Inflatable Costumes", "Inflatable Tents", "Inflatable Games"]})
+            __html: JSON.stringify({"@context": "https://schema.org", "@type": "Organization", "name": "InflatableModel", "url": "https://www.qddjtx.com", "description": "Custom inflatable manufacturing - giant product replicas, mascots, arches, costumes, and tents. Made in USA.", "email": "inflatablemodel@showlovein.com", "areaServed": "Worldwide", "knowsAbout": ["Custom Inflatables", "Giant Product Replicas", "Inflatable Mascots", "Inflatable Arches", "Inflatable Costumes", "Inflatable Tents", "Inflatable Games"]})
           }}
         />
       </head>

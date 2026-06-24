@@ -567,11 +567,11 @@ export function AboutPageClient() {
             </div>
             <div className="flex flex-col items-center gap-4 sm:flex-row">
               <a
-                href="tel:+86 15376427736"
+                href="tel:+8615376427736"
                 className="inline-flex items-center gap-2 rounded-lg border-2 border-white/30 px-6 py-3.5 text-base font-semibold text-white backdrop-blur-sm transition-all hover:border-white/60 hover:bg-white/10"
               >
                 <Phone className="h-5 w-5" />
-                +86 15376427736
+                +86 153****7736
               </a>
               <Link
                 href="/get-quote"

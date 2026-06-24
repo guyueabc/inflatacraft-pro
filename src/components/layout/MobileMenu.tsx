@@ -138,11 +138,11 @@ export function MobileMenu({ isOpen, onClose, navLinks }: MobileMenuProps) {
         <div className="border-t px-4 py-4">
           <div className="flex flex-col gap-2 text-sm text-navy-500">
             <a
-              href="tel:+86 15376427736"
+              href="tel:+8615376427736"
               className="flex items-center gap-2 hover:text-navy-700 transition-colors"
             >
               <Phone className="h-4 w-4" />
-              +86 15376427736
+              +86 153****7736
             </a>
             <a
               href="mailto:inflatablemodel@showlovein.com"

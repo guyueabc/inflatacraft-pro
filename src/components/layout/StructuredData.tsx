@@ -8,7 +8,6 @@ export function OrganizationSchema() {
     description:
       "Custom inflatable manufacturing — giant product replicas, mascots, arches, costumes, tents, and games. 3-6 week turnaround. Free 3D renderings.",
     url: "https://www.qddjtx.com",
-    telephone: "+86 15376427736",
     email: "inflatablemodel@showlovein.com",
     address: {
       "@type": "PostalAddress",
