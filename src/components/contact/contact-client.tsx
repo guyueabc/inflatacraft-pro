@@ -53,15 +53,15 @@ const SUBJECT_OPTIONS = [
 
 const CONTACT_CARDS = [
   {
-    icon: Phone,
-    title: "Phone",
-    lines: ["", "(313) 555-0142"],
-    action: { label: "WhatsApp Us", href: "https://wa.me/8615376427736" },
+    icon: MessageCircle,
+    title: "WhatsApp",
+    lines: ["Chat with our team instantly", "Average response: under 2 min"],
+    action: { label: "Start Chat", href: "https://wa.me/8615376427736" },
   },
   {
     icon: Mail,
     title: "Email",
-    lines: ["inflatablemodel@showlovein.com", "support@inflatacraftpro.com"],
+    lines: ["inflatablemodel@showlovein.com"],
     action: { label: "Send Email", href: "mailto:inflatablemodel@showlovein.com" },
   },
   {
@@ -83,16 +83,6 @@ const CONTACT_CARDS = [
       "Weekend by appointment",
     ],
     action: null,
-  },
-  {
-    icon: MessageCircle,
-    title: "Live Chat",
-    lines: [
-      "Chat with our team in real-time",
-      "Average response: under 2 min",
-      "Available during business hours",
-    ],
-    action: { label: "Start Chat", href: "#" },
   },
 ];
 
