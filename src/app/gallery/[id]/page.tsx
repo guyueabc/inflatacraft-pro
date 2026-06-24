@@ -16,7 +16,7 @@ export async function generateMetadata({
   const item = getGalleryItemBySlug(id);
   if (!item) return { title: 'Case Study Not Found' };
   return {
-    title: `${item.clientName} 鈥?${item.productType} | InflatableModel Gallery`,
+    title: `${item.clientName} —${item.productType} | InflatableModel Gallery`,
     description: item.description,
     openGraph: {
       title: `${item.clientName} Case Study`,
@@ -38,7 +38,7 @@ export default async function GalleryDetailPage({
   const caseStudyLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: `${item.clientName} 鈥?${item.productType} Case Study`,
+    headline: `${item.clientName} —${item.productType} Case Study`,
     description: item.description,
     author: { '@type': 'Organization', name: 'InflatableModel' },
     publisher: { '@type': 'Organization', name: 'InflatableModel' },

@@ -18,14 +18,14 @@ export function GetQuoteClient() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Stash latest form values in a ref so beforeunload can read them
+  // (comment)
   const formRef = useRef<QuoteFormData | null>(null);
   const values = form.watch();
 
-  // Keep ref in sync
+  // (comment)
   useEffect(() => { formRef.current = values; }, [values]);
 
-  // Save partial data to sessionStorage every 3s debounced
+  // (comment)
   useEffect(() => {
     const timer = setTimeout(() => {
       if (values.email) {
@@ -35,7 +35,7 @@ export function GetQuoteClient() {
     return () => clearTimeout(timer);
   }, [values]);
 
-  // Before unload / page leave: send beacon with last-stashed partial
+  // (comment)
   useEffect(() => {
     const sendPartial = () => {
       if (sessionStorage.getItem('partial_sent') === '1') return;
@@ -58,7 +58,7 @@ export function GetQuoteClient() {
 
   const onSubmit = async (data: QuoteFormData) => {
     setIsSubmitting(true);
-    // 璇诲彇鎵€鏈夊箍鍛婂弬鏁?
+    // (comment)
     const adParams = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "gclid", "gbraid", "wbraid", "fbclid"];
     const utm = adParams.reduce((acc, k) => {
       const v = sessionStorage.getItem(k);
@@ -73,16 +73,16 @@ export function GetQuoteClient() {
         body: JSON.stringify({ ...data, ...utm }),
       });
     } catch {
-      // 鍗充娇 fetch 鎶ラ敊锛屾暟鎹彲鑳藉凡鎻愪氦鎴愬姛锛屼粛鐒舵樉绀烘垚鍔熼〉
+      // Even if fetch fails, data may have been submitted, still show success page
     }
 
     setIsSubmitting(false);
     setIsSubmitted(true);
-    // 鏍囪杞寲淇″彿 —?Analytics 缁勪欢浼氭娴嬪苟鎺ㄩ€?Google Ads 杞寲
+    // Conversion tracking — Analytics component pushes Google Ads conversion
     sessionStorage.setItem("quote_submitted", "true");
-    // 鎺ㄩ€?GTM 杞寲浜嬩欢
+    // Push GTM conversion event
     (window as any).dataLayer?.push({ event: "quote_form_submitted" });
-    // Google Ads 杞寲杩借釜 (濡傛灉 gtag 宸插姞杞?
+    // Google Ads conversion tracking (if gtag is loaded)
     if (typeof (window as any).gtag === "function") {
       (window as any).gtag("event", "conversion", { send_to: "AW-18234377845/TYNLCJu0_70cEPWM6vZD" });
     }
@@ -133,7 +133,7 @@ export function GetQuoteClient() {
         </div>
 
         <div className="rounded-xl border border-navy-200 bg-white p-5 shadow-sm sm:p-8">
-          {/* 鈹€鈹€ Required: Email + Phone 鈹€鈹€ */}
+          {/* -- Required: Email + Phone -- */}
           <div className="mb-8 rounded-lg border-2 border-red-200 bg-red-50/30 p-5">
             <p className="mb-4 text-sm font-semibold text-red-700">Required —?we need these to contact you</p>
             <div className="grid gap-4 sm:grid-cols-2">
@@ -160,7 +160,7 @@ export function GetQuoteClient() {
             </div>
           </div>
 
-          {/* 鈹€鈹€ Optional fields 鈹€鈹€ */}
+          {/* -- Optional fields -- */}
           <p className="mb-4 text-sm font-medium text-gray-400">Everything below is optional —?fill in as much or as little as you like</p>
           <div className="space-y-4">
             <div className="grid gap-4 sm:grid-cols-2">

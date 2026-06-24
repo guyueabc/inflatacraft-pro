@@ -182,7 +182,7 @@ export const BLOG_DATA: Record<string, BlogDetail> = {
       {
         heading: "The Numbers Don't Lie",
         content: [
-          "In an era where digital advertising costs continue to climb and consumer attention spans shrink, brands are rediscovering the power of physical presence. Custom inflatables 鈥?once considered novelty items 鈥?have emerged as one of the highest-ROI marketing investments available to brand managers today.",
+          "In an era where digital advertising costs continue to climb and consumer attention spans shrink, brands are rediscovering the power of physical presence. Custom inflatables —once considered novelty items —have emerged as one of the highest-ROI marketing investments available to brand managers today.",
           "According to our internal data tracking over 500 campaigns, the average custom inflatable activation generates a 14:1 return on investment within the first 90 days of deployment. For context, that outperforms display advertising (2:1), social media ads (4:1), and even influencer marketing (6:1) by significant margins.",
           "Why? Because inflatables create what we call the 'triple-threat effect': they stop foot traffic visually, they're inherently shareable on social media, and they create lasting brand memories that influence purchasing decisions weeks after the event.",
         ],
@@ -200,13 +200,13 @@ export const BLOG_DATA: Record<string, BlogDetail> = {
           "Brand recall: Post-event survey showed 78% aided recall among festival attendees vs. 12% for booth-only competitors",
         ],
         blockquote:
-          "The inflatable paid for itself 66 times over in new distribution deals alone 鈥?and that doesn't count the brand equity built from 2.3 million organic impressions.",
+          "The inflatable paid for itself 66 times over in new distribution deals alone —and that doesn't count the brand equity built from 2.3 million organic impressions.",
       },
       {
         heading: "The Social Media Amplification Effect",
         content: [
-          "Perhaps the most powerful 鈥?and most overlooked 鈥?aspect of inflatable marketing is the organic social media amplification. People can't resist taking photos with giant objects. It's a fundamental human behavior that marketers can harness systematically.",
-          "Our data shows that each inflatable generates an average of 50-150 social media posts per day of deployment, with each post reaching 150-400 people on average. Over a multi-city tour, this compounds into millions of impressions 鈥?all without spending a dollar on media.",
+          "Perhaps the most powerful —and most overlooked —aspect of inflatable marketing is the organic social media amplification. People can't resist taking photos with giant objects. It's a fundamental human behavior that marketers can harness systematically.",
+          "Our data shows that each inflatable generates an average of 50-150 social media posts per day of deployment, with each post reaching 150-400 people on average. Over a multi-city tour, this compounds into millions of impressions —all without spending a dollar on media.",
           "SnapChip Snacks experienced this firsthand during their 12-state supermarket tour. Their giant chip bag inflatable generated over 50,000 social media posts organically, reaching an estimated 12 million unique users. The campaign hashtag trended in three local markets.",
         ],
         image: { gradient: "from-yellow-300 via-orange-400 to-red-400", label: "Social Media Impact Infographic" },
@@ -256,34 +256,34 @@ export const BLOG_DATA: Record<string, BlogDetail> = {
           "Ask yourself: Is your primary goal to draw a crowd from across a trade show floor? To create photo opportunities for social sharing? To provide branded shelter at outdoor events? Or to have a walking, interactive brand character?",
         ],
         list: [
-          "Product Replicas: Best for brand awareness and social sharing 鈥?nothing beats a giant version of your product for stopping power",
-          "Mascots: Best for engagement and interaction 鈥?a character creates emotional connection with audiences",
+          "Product Replicas: Best for brand awareness and social sharing —nothing beats a giant version of your product for stopping power",
+          "Mascots: Best for engagement and interaction —a character creates emotional connection with audiences",
           "Arches: Best for defining spaces and creating Instagram-worthy entrance moments",
-          "Costumes: Best for guerrilla marketing and sampling 鈥?wearable inflatables go where fixed installations can't",
-          "Tents: Best for practical branded shelter with high visibility 鈥?combines function with marketing",
+          "Costumes: Best for guerrilla marketing and sampling —wearable inflatables go where fixed installations can't",
+          "Tents: Best for practical branded shelter with high visibility —combines function with marketing",
         ],
       },
       {
         heading: "The Venue Factor",
         content: [
           "Where will your inflatable live? Indoor trade shows have height restrictions and fire-safety requirements. Outdoor festivals require wind-rated tie-downs and UV-resistant materials. Retail environments need compact footprints that don't block aisles.",
-          "For indoor venues, consider smaller-scale replicas (6-10 feet) or mascots that can navigate crowds. For outdoor events, arches and large replicas shine 鈥?they're visible from hundreds of yards away and hold up well in weather.",
+          "For indoor venues, consider smaller-scale replicas (6-10 feet) or mascots that can navigate crowds. For outdoor events, arches and large replicas shine —they're visible from hundreds of yards away and hold up well in weather.",
         ],
       },
       {
         heading: "Budget and Timeline Realities",
         content: [
           "Custom inflatables typically range from $2,000 to $25,000 depending on size, complexity, and material grade. Product replicas with photo-realistic printing are at the higher end; simpler arches and standard tents are more accessible.",
-          "Lead times range from 2-8 weeks. If you have a hard event deadline, communicate it early 鈥?rush production is available for most product types, though it may incur an additional fee.",
+          "Lead times range from 2-8 weeks. If you have a hard event deadline, communicate it early —rush production is available for most product types, though it may incur an additional fee.",
         ],
         blockquote:
-          "The most common mistake we see: choosing based on price alone rather than matching the inflatable type to the activation objective. A $2,000 tent won't create the same buzz as an $8,000 product replica 鈥?but a tent might be exactly what you need.",
+          "The most common mistake we see: choosing based on price alone rather than matching the inflatable type to the activation objective. A $2,000 tent won't create the same buzz as an $8,000 product replica —but a tent might be exactly what you need.",
       },
       {
         heading: "Making the Final Decision",
         content: [
           "Once you've defined your objective, venue, and budget, our team can help refine your choice. We offer free 3D renderings so you can see exactly what each inflatable type would look like in your brand's colors and context.",
-          "The best part: you don't have to choose just one. Many of our most successful clients deploy multiple inflatable types across a single campaign 鈥?a product replica as the anchor, costumes for the street team, and branded tents for the sampling station.",
+          "The best part: you don't have to choose just one. Many of our most successful clients deploy multiple inflatable types across a single campaign —a product replica as the anchor, costumes for the street team, and branded tents for the sampling station.",
         ],
       },
     ],

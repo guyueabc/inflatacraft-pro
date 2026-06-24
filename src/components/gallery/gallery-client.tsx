@@ -15,7 +15,7 @@ import {
   Filter,
 } from "lucide-react";
 
-// 鈹€鈹€ Types 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+// ── Types ────────────────────────────────────────────────────────────────────
 
 type Industry =
   | "All"
@@ -50,7 +50,7 @@ interface GalleryItem {
   features: string[];
 }
 
-// 鈹€鈹€ Constants 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+// ── Constants ────────────────────────────────────────────────────────────────
 
 const INDUSTRIES: Industry[] = [
   "All",
@@ -137,7 +137,7 @@ const GALLERY_ITEMS: GalleryItem[] = [
     id: 7, slug: "inflatable-walking-costume", clientName: "Inflatable Character Costume",
     industry: "Food & Beverage", productType: "Costumes",
     description: "Wearable inflatable costume with built-in battery fan, transforming brand ambassadors into walking attention magnets at parades, store openings, and festivals.",
-    testimonial: "Our street team wore these for 6-hour shifts 鈥?comfortable, eye-catching, and generated hundreds of photos every hour.",
+    testimonial: "Our street team wore these for 6-hour shifts —comfortable, eye-catching, and generated hundreds of photos every hour.",
     testimonialAuthor: "Carlos Herrera", testimonialRole: "Field Marketing Lead",
     gradient: "from-green-400 via-lime-500 to-yellow-300",
     imageSrc: "/images/products/inflatable-character-costume/inflatable-character-costume-1.jpg?v=1",
@@ -156,7 +156,7 @@ const GALLERY_ITEMS: GalleryItem[] = [
   {
     id: 9, slug: "sky-dancer-tube-man", clientName: "Sky Dancer Tube Man",
     industry: "Automotive", productType: "Product Replicas",
-    description: "Classic attention-grabbing sky dancer inflatable 鈥?the flailing arm tube man that's been drawing eyes to car dealerships, retail stores, and events for decades.",
+    description: "Classic attention-grabbing sky dancer inflatable —the flailing arm tube man that's been drawing eyes to car dealerships, retail stores, and events for decades.",
     testimonial: "People literally pull off the highway when they see the tube man. Best advertising investment we've made.",
     testimonialAuthor: "Tony Russo", testimonialRole: "Dealership Owner",
     gradient: "from-orange-500 via-red-500 to-pink-500",
@@ -235,7 +235,7 @@ const GALLERY_ITEMS: GalleryItem[] = [
   },
 ];
 
-// 鈹€鈹€ Page Component 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+// ── Page Component ───────────────────────────────────────────────────────────
 
 export function GalleryPageClient() {
   const [industryFilter, setIndustryFilter] = useState<Industry>("All");
@@ -265,7 +265,7 @@ export function GalleryPageClient() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* 鈹€鈹€ Hero Header 鈹€鈹€ */}
+      {/* ── Hero Header ── */}
       <section className="relative overflow-hidden bg-navy-900 px-4 pb-20 pt-24 text-white">
         <div className="absolute inset-0 opacity-[0.04]"
           style={{ backgroundImage: "radial-gradient(circle at 20px 20px, white 1px, transparent 0)", backgroundSize: "40px 40px" }} />
@@ -280,7 +280,7 @@ export function GalleryPageClient() {
         </div>
       </section>
 
-      {/* 鈹€鈹€ Compact Filter Bar 鈹€鈹€ */}
+      {/* ── Compact Filter Bar ── */}
       <div className="sticky top-[73px] z-30 border-b border-gray-200 bg-white/95 shadow-sm backdrop-blur">
         <div className="container mx-auto max-w-7xl px-4 py-3">
           <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
@@ -334,7 +334,7 @@ export function GalleryPageClient() {
         </div>
       </div>
 
-      {/* 鈹€鈹€ Grid 鈹€鈹€ */}
+      {/* ── Grid ── */}
       <div className="container mx-auto max-w-7xl px-4 py-10">
         {filtered.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-20 text-center">
@@ -431,7 +431,7 @@ export function GalleryPageClient() {
         )}
       </div>
 
-      {/* 鈹€鈹€ Lightbox Modal 鈹€鈹€ */}
+      {/* ── Lightbox Modal ── */}
       <AnimatePresence>
         {selectedItem && (
           <motion.div
@@ -491,7 +491,7 @@ export function GalleryPageClient() {
                   <footer className="mt-3 flex items-center gap-2">
                     <Star className="h-3.5 w-3.5 fill-red-400 text-red-400" />
                     <span className="text-sm font-semibold text-navy-900">{selectedItem.testimonialAuthor}</span>
-                    <span className="text-xs text-gray-400">鈥?{selectedItem.testimonialRole}</span>
+                    <span className="text-xs text-gray-400">—{selectedItem.testimonialRole}</span>
                   </footer>
                 </blockquote>
 
@@ -511,7 +511,7 @@ export function GalleryPageClient() {
         )}
       </AnimatePresence>
 
-      {/* 鈹€鈹€ CTA Section 鈹€鈹€ */}
+      {/* ── CTA Section ── */}
       <section className="bg-navy-900 px-4 py-16 text-white">
         <div className="container mx-auto max-w-3xl text-center">
           <h2 className="font-heading text-3xl font-bold tracking-tight md:text-4xl">

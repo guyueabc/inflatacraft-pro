@@ -22,7 +22,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 
-// 闁冲厜鍋撻柍鍏夊亾 Types 闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾
+// ── Types ──────────────────────────────────
 
 interface BlogPost {
   slug: string;
@@ -39,7 +39,7 @@ interface BlogPost {
 }
 
 
-// 闁冲厜鍋撻柍鍏夊亾 Constants 闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾
+// ─ Constants ────────────────────────────────
 
 
 const CATEGORY_ICONS: Record<Exclude<BlogCategory, "All">, React.ReactNode> = {
@@ -50,7 +50,7 @@ const CATEGORY_ICONS: Record<Exclude<BlogCategory, "All">, React.ReactNode> = {
   Events: <CalendarDays className="h-4 w-4" />,
 };
 
-// 闁冲厜鍋撻柍鍏夊亾 Helpers 闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾
+// ─ Helpers ─────────────────────────────────
 
 function formatDate(dateStr: string) {
   return new Date(dateStr).toLocaleDateString("en-US", {
@@ -60,7 +60,7 @@ function formatDate(dateStr: string) {
   });
 }
 
-// 闁冲厜鍋撻柍鍏夊亾 Page Component 闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋?
+// ─ Page Component ─────────────────────────────
 
 export function BlogListClient() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -92,7 +92,7 @@ export function BlogListClient() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* 闁冲厜鍋撻柍鍏夊亾 Page Header 闁冲厜鍋撻柍鍏夊亾 */}
+      {/* ─ Page Header ─ */}
       <section className="bg-navy-900 px-4 py-16 text-white">
         <div className="container mx-auto max-w-7xl">
           <p className="mb-2 text-sm font-medium uppercase tracking-wider text-red-400">
@@ -109,7 +109,7 @@ export function BlogListClient() {
         </div>
       </section>
 
-      {/* 闁冲厜鍋撻柍鍏夊亾 Search Bar 闁冲厜鍋撻柍鍏夊亾 */}
+      {/* ─ Search Bar ─ */}
       <div className="sticky top-[73px] z-30 border-b border-gray-200 bg-white shadow-sm">
         <div className="container mx-auto max-w-7xl px-4 py-4">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -157,7 +157,7 @@ export function BlogListClient() {
 
       <div className="container mx-auto max-w-7xl px-4 py-10">
         <div className="flex flex-col gap-10 lg:flex-row">
-          {/* 闁冲厜鍋撻柍鍏夊亾 Main Content 闁冲厜鍋撻柍鍏夊亾 */}
+          {/* ─ Main Content ─ */}
           <div className="flex-1 min-w-0">
             {/* Featured Post */}
             {featuredPost && activeCategory === "All" && !searchQuery && (
@@ -330,7 +330,7 @@ export function BlogListClient() {
             )}
           </div>
 
-          {/* 闁冲厜鍋撻柍鍏夊亾 Sidebar 闁冲厜鍋撻柍鍏夊亾 */}
+          {/* ─ Sidebar ─ */}
           <aside className="w-full shrink-0 lg:w-72">
             <div className="sticky top-[130px] space-y-8">
               {/* Categories */}
@@ -415,14 +415,14 @@ export function BlogListClient() {
         </div>
       </div>
 
-      {/* 闁冲厜鍋撻柍鍏夊亾 Bottom CTA 闁冲厜鍋撻柍鍏夊亾 */}
+      {/* ─ Bottom CTA ─ */}
       <section className="bg-navy-900 py-16">
         <div className="container mx-auto max-w-7xl px-4 text-center">
           <h2 className="font-heading text-3xl font-bold tracking-tight text-white md:text-4xl">
             Ready to Scale Your Brand?
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-navy-300">
-            The strategies we cover in our blog 闁?our team can implement for you. Let's talk about your next activation.
+            The strategies we cover in our blog —our team can implement for you. Let's talk about your next activation.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link

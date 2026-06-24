@@ -20,7 +20,7 @@ import {
   Building2,
 } from "lucide-react";
 
-// 鈹€鈹€ Types 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+// ── Types ────────────────────────────────────────────────────────────────────
 
 interface ValueProp {
   icon: React.ComponentType<{ className?: string }>;
@@ -41,14 +41,14 @@ interface Milestone {
   description: string;
 }
 
-// 鈹€鈹€ Data 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+// ── Data ─────────────────────────────────────────────────────────────────────
 
 const VALUES: ValueProp[] = [
   {
     icon: Shield,
     title: "Quality First",
     description:
-      "Every product undergoes a mandatory 24-hour continuous inflation test before it leaves our facility. We use premium 210D鈥?00D fabrics, reinforced double-stitched seams, and dye-sublimation printing for vibrant, long-lasting results. Zero defects is our standard.",
+      "Every product undergoes a mandatory 24-hour continuous inflation test before it leaves our facility. We use premium 210D—00D fabrics, reinforced double-stitched seams, and dye-sublimation printing for vibrant, long-lasting results. Zero defects is our standard.",
   },
   {
     icon: MapPin,
@@ -66,7 +66,7 @@ const VALUES: ValueProp[] = [
     icon: Heart,
     title: "Customer Obsessed",
     description:
-      "Every project gets a dedicated project manager 鈥?a single point of contact from first sketch to final delivery. Unlimited design revisions, 24-hour response times, and installation support are standard. Your success is our reputation.",
+      "Every project gets a dedicated project manager — a single point of contact from first sketch to final delivery. Unlimited design revisions, 24-hour response times, and installation support are standard. Your success is our reputation.",
   },
 ];
 
@@ -86,7 +86,7 @@ const TEAM_MEMBERS: TeamMember[] = [
   {
     name: "David Okonkwo",
     role: "Director of Manufacturing",
-    bio: "Oversees our 50,000 sq ft facility. 18 years in textile manufacturing. Certified in Six Sigma Black Belt 鈥?drives our quality metrics.",
+    bio: "Oversees our 50,000 sq ft facility. 18 years in textile manufacturing. Certified in Six Sigma Black Belt —drives our quality metrics.",
     initials: "DO",
   },
   {
@@ -120,7 +120,7 @@ const MILESTONES: Milestone[] = [
     year: "2006",
     title: "First Fortune 500 Client",
     description:
-      "Lands first major brand partnership with a national food & beverage company. The project 鈥?a 15-foot product replica 鈥?becomes a trade show sensation.",
+      "Lands first major brand partnership with a national food & beverage company. The project — a 15-foot product replica —becomes a trade show sensation.",
   },
   {
     year: "2010",
@@ -167,7 +167,7 @@ const TRUST_BADGES = [
   { label: "Brand Partners", value: "200+", icon: Users },
 ];
 
-// 鈹€鈹€ Animation Variants 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+// ── Animation Variants ───────────────────────────────────────────────────────
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
@@ -183,7 +183,7 @@ const fadeIn = {
   visible: { opacity: 1, transition: { duration: 0.8 } },
 };
 
-// 鈹€鈹€ Main Page 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+// ── Main Page ────────────────────────────────────────────────────────────────
 
 export function AboutPageClient() {
   return (
@@ -306,7 +306,7 @@ export function AboutPageClient() {
               <p className="mt-4 text-gray-600 leading-relaxed">
                 He set out to build something different: a US-based
                 manufacturing operation that combined old-world craftsmanship
-                with cutting-edge design technology. The goal was simple 鈥?
+                with cutting-edge design technology. The goal was simple —
                 deliver better inflatables, faster, with a level of service that
                 made clients feel like partners, not order numbers.
               </p>

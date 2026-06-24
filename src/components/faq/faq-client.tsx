@@ -19,7 +19,7 @@ import {
   MessageCircle,
 } from "lucide-react";
 
-// 鈹€鈹€ Types 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+// ── Types ────────────────────────────────────────────────────────────────────
 
 interface FAQItem {
   id: string;
@@ -33,7 +33,7 @@ interface FAQCategory {
   items: FAQItem[];
 }
 
-// 鈹€鈹€ Mock FAQ Data 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+// ── Mock FAQ Data ────────────────────────────────────────────────────────────
 
 const FAQ_DATA: FAQCategory[] = [
   {
@@ -50,7 +50,7 @@ const FAQ_DATA: FAQCategory[] = [
         id: "gen-2",
         question: "What industries do you serve?",
         answer:
-          "We serve a wide range of industries including Food & Beverage, Automotive, Consumer Packaged Goods (CPG), Sports & Entertainment, Retail, Medical & Healthcare, Technology, and more. Our team has deep experience tailoring inflatable solutions to each industry's unique requirements 鈥?from food-grade materials for CPG sampling to medical-grade fabrics for healthcare campaigns.",
+          "We serve a wide range of industries including Food & Beverage, Automotive, Consumer Packaged Goods (CPG), Sports & Entertainment, Retail, Medical & Healthcare, Technology, and more. Our team has deep experience tailoring inflatable solutions to each industry's unique requirements —from food-grade materials for CPG sampling to medical-grade fabrics for healthcare campaigns.",
       },
       {
         id: "gen-3",
@@ -122,7 +122,7 @@ const FAQ_DATA: FAQCategory[] = [
         id: "design-1",
         question: "What information do you need to start a design?",
         answer:
-          "To begin, we need: your brand logo files (vector format preferred 鈥?AI, EPS, SVG), any reference images or sketches of what you envision, desired dimensions, and your event or deployment context. If you don't have design files, our team can work from photos, hand sketches, or even verbal descriptions to create a design concept.",
+          "To begin, we need: your brand logo files (vector format preferred —AI, EPS, SVG), any reference images or sketches of what you envision, desired dimensions, and your event or deployment context. If you don't have design files, our team can work from photos, hand sketches, or even verbal descriptions to create a design concept.",
       },
       {
         id: "design-2",
@@ -146,7 +146,7 @@ const FAQ_DATA: FAQCategory[] = [
         id: "design-5",
         question: "Can you integrate lighting, electronics, or mechanical features?",
         answer:
-          "Yes. We offer internal and external LED lighting systems (RGB programmable options available), sound modules, motorized components, and interactive elements. Our engineering team can integrate nearly any feature you can imagine 鈥?inflatable products with blinking eyes, moving parts, synchronized music-reactive lighting, and more.",
+          "Yes. We offer internal and external LED lighting systems (RGB programmable options available), sound modules, motorized components, and interactive elements. Our engineering team can integrate nearly any feature you can imagine —inflatable products with blinking eyes, moving parts, synchronized music-reactive lighting, and more.",
       },
     ],
   },
@@ -206,7 +206,7 @@ const FAQ_DATA: FAQCategory[] = [
         id: "maint-3",
         question: "Can inflatables be repaired if they get damaged?",
         answer:
-          "Yes. Every order includes a repair kit with adhesive patches, thread, and instructions for common field repairs. For more significant damage, we offer factory repair services 鈥?ship the item back to us and we'll restore it to like-new condition. Most repairs are completed within 5-7 business days.",
+          "Yes. Every order includes a repair kit with adhesive patches, thread, and instructions for common field repairs. For more significant damage, we offer factory repair services —ship the item back to us and we'll restore it to like-new condition. Most repairs are completed within 5-7 business days.",
       },
       {
         id: "maint-4",
@@ -218,7 +218,7 @@ const FAQ_DATA: FAQCategory[] = [
         id: "maint-5",
         question: "Do you offer maintenance or refurbishment services?",
         answer:
-          "Yes. We offer cleaning, inspection, and refurbishment services for existing inflatables 鈥?even those not originally manufactured by us. Our team can assess condition, perform necessary repairs, refresh faded printing, and replace worn components. Many clients send their inflatables for annual maintenance to keep them in peak condition.",
+          "Yes. We offer cleaning, inspection, and refurbishment services for existing inflatables —even those not originally manufactured by us. Our team can assess condition, perform necessary repairs, refresh faded printing, and replace worn components. Many clients send their inflatables for annual maintenance to keep them in peak condition.",
       },
       {
         id: "maint-6",
@@ -230,7 +230,7 @@ const FAQ_DATA: FAQCategory[] = [
   },
 ];
 
-// 鈹€鈹€ Page Component 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+// ── Page Component ───────────────────────────────────────────────────────────
 
 export function FAQPageClient() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -271,7 +271,7 @@ export function FAQPageClient() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* 鈹€鈹€ Page Header 鈹€鈹€ */}
+      {/* ── Page Header ── */}
       <section className="bg-navy-900 px-4 py-16 text-white">
         <div className="container mx-auto max-w-7xl">
           <p className="mb-2 text-sm font-medium uppercase tracking-wider text-red-400">
@@ -288,14 +288,14 @@ export function FAQPageClient() {
         </div>
       </section>
 
-      {/* 鈹€鈹€ Search Bar 鈹€鈹€ */}
+      {/* ── Search Bar ── */}
       <div className="sticky top-[73px] z-30 border-b border-gray-200 bg-white shadow-sm">
         <div className="container mx-auto max-w-3xl px-4 py-4">
           <div className="relative">
             <Search className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
             <input
               type="text"
-              placeholder="Search FAQ 鈥?e.g., 'shipping cost', 'warranty', 'design process'..."
+              placeholder="Search FAQ —e.g., 'shipping cost', 'warranty', 'design process'..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full rounded-xl border border-gray-300 bg-gray-50 py-3 pl-12 pr-10 text-sm text-navy-900 placeholder-gray-400 transition-colors focus:border-navy-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-navy-500/20"
@@ -312,17 +312,17 @@ export function FAQPageClient() {
         </div>
       </div>
 
-      {/* 鈹€鈹€ Main Content 鈹€鈹€ */}
+      {/* ── Main Content ── */}
       <div className="container mx-auto max-w-7xl px-4 py-10">
         {isSearching ? (
-          /* 鈹€鈹€ Search Results View 鈹€鈹€ */
+          /* ── Search Results View ── */
           <div className="mx-auto max-w-3xl">
             <p className="mb-8 text-sm text-gray-500">
               Search results for{" "}
               <span className="font-semibold text-navy-900">
                 &ldquo;{searchQuery}&rdquo;
               </span>
-              {" 鈥?"}
+              {" —"}
               {filteredData.reduce((sum, cat) => sum + cat.items.length, 0)} result
               {filteredData.reduce((sum, cat) => sum + cat.items.length, 0) !== 1
                 ? "s"
@@ -370,7 +370,7 @@ export function FAQPageClient() {
             )}
           </div>
         ) : (
-          /* 鈹€鈹€ Categorized View with Tabs 鈹€鈹€ */
+          /* ── Categorized View with Tabs ── */
           <div>
             {/* Category Tabs */}
             <div className="mb-10 flex flex-wrap justify-center gap-2">
@@ -447,7 +447,7 @@ export function FAQPageClient() {
         )}
       </div>
 
-      {/* 鈹€鈹€ Contact CTA 鈹€鈹€ */}
+      {/* ── Contact CTA ── */}
       <section className="border-t border-gray-200 bg-white py-20">
         <div className="container mx-auto max-w-4xl px-4 text-center">
           <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-red-100">
@@ -458,7 +458,7 @@ export function FAQPageClient() {
           </h2>
           <p className="mx-auto mb-10 max-w-2xl text-lg text-gray-600">
             Our team is ready to help. Reach out by phone, email, or request a
-            callback 鈥?we typically respond within a few hours during business
+            callback —we typically respond within a few hours during business
             hours.
           </p>
 
@@ -487,7 +487,7 @@ export function FAQPageClient() {
           </div>
 
           <p className="mt-6 text-sm text-gray-400">
-            Monday鈥揊riday, 8am鈥?pm EST 鈥?Response within 4 hours guaranteed
+            Monday–Friday, 8am-5pm EST — Response within 4 hours guaranteed
           </p>
         </div>
       </section>
@@ -495,7 +495,7 @@ export function FAQPageClient() {
   );
 }
 
-// 鈹€鈹€ Accordion Item Component 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+// ── Accordion Item Component ─────────────────────────────────────────────────
 
 function AccordionItem({
   item,
