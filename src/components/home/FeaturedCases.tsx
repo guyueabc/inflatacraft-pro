@@ -14,6 +14,7 @@ interface CaseStudy {
   description: string;
   placeholderLabel: string;
   imageSrc: string;
+  slug: string;
 }
 
 const INDUSTRIES = [
@@ -37,6 +38,7 @@ const CASE_STUDIES: CaseStudy[] = [
     description: "20-foot tall beer can for nationwide summer festival tour.",
     placeholderLabel: "FrostBite Can",
     imageSrc: "/images/products/giant-soda-can-replica/giant-soda-can-replica-2.jpg",
+    slug: "frostbite-brewing-giant-can",
   },
   {
     id: 2,
@@ -46,6 +48,7 @@ const CASE_STUDIES: CaseStudy[] = [
     description: "Branded finish-line arch for championship racing series.",
     placeholderLabel: "Apex Arch",
     imageSrc: "/images/products/finish-line-arch/finish-line-arch-1.jpg",
+    slug: "apex-motors-finish-arch",
   },
   {
     id: 3,
@@ -55,6 +58,7 @@ const CASE_STUDIES: CaseStudy[] = [
     description: "Giant chip bag for supermarket grand openings across 12 states.",
     placeholderLabel: "SnapChip Bag",
     imageSrc: "/images/products/giant-soda-can-replica/giant-soda-can-replica-2.jpg",
+    slug: "snapchip-giant-bag",
   },
   {
     id: 4,
@@ -64,6 +68,7 @@ const CASE_STUDIES: CaseStudy[] = [
     description: "7-foot team mascot for stadium giveaways and halftime entertainment.",
     placeholderLabel: "Velocity Mascot",
     imageSrc: "/images/products/custom-brand-mascot/custom-brand-mascot-2.jpg",
+    slug: "",
   },
   {
     id: 5,
@@ -73,6 +78,7 @@ const CASE_STUDIES: CaseStudy[] = [
     description: "Custom-printed canopy system for 200-store sidewalk sale event.",
     placeholderLabel: "LuxeMart Tent",
     imageSrc: "/images/products/custom-inflatable-event-tent/custom-inflatable-event-tent-1.jpg",
+    slug: "",
   },
   {
     id: 6,
@@ -82,6 +88,7 @@ const CASE_STUDIES: CaseStudy[] = [
     description: "Oversized pill bottle for health awareness campaign at 50 clinics.",
     placeholderLabel: "MediCare Pill",
     imageSrc: "/images/products/pharma-pill-bottle-inflatable/pharma-pill-bottle-inflatable-1.jpg",
+    slug: "",
   },
   {
     id: 7,
@@ -91,6 +98,7 @@ const CASE_STUDIES: CaseStudy[] = [
     description: "Wearable avocado costumes for in-store sampling teams.",
     placeholderLabel: "Avocado Costume",
     imageSrc: "/images/products/inflatable-character-costume/inflatable-character-costume-1.jpg",
+    slug: "",
   },
   {
     id: 8,
@@ -100,6 +108,7 @@ const CASE_STUDIES: CaseStudy[] = [
     description: "15-foot energy drink can for extreme sports sponsorship activation.",
     placeholderLabel: "TurboCharge Can",
     imageSrc: "/images/products/giant-soda-can-replica/giant-soda-can-replica-2.jpg",
+    slug: "",
   },
 ];
 
@@ -186,10 +195,10 @@ export function FeaturedCases() {
                     {study.description}
                   </p>
                   <Link
-                    href={`/case-studies/${study.id}`}
+                    href={study.slug ? `/gallery/${study.slug}` : "/gallery"}
                     className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-red-600 hover:text-red-500"
                   >
-                    Read Case Study
+                    View Case Study
                     <ArrowUpRight className="h-3.5 w-3.5" />
                   </Link>
                 </div>

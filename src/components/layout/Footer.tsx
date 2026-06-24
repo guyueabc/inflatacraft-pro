@@ -18,12 +18,12 @@ const FOOTER_COLUMNS = [
   {
     title: "Products",
     links: [
-      { label: "Custom Inflatables", href: "/products/custom" },
-      { label: "Inflatable Arches", href: "/products/arches" },
-      { label: "Inflatable Tents", href: "/products/tents" },
-      { label: "Inflatable Costumes", href: "/products/costumes" },
-      { label: "Giant Replicas", href: "/products/replicas" },
-      { label: "Inflatable Games", href: "/products/games" },
+      { label: "Custom Inflatables", href: "/products?category=custom" },
+      { label: "Inflatable Arches", href: "/products?category=arch" },
+      { label: "Inflatable Tents", href: "/products?category=tent" },
+      { label: "Inflatable Costumes", href: "/products?category=costume" },
+      { label: "Giant Replicas", href: "/products?category=replica" },
+      { label: "Inflatable Games", href: "/products?category=game" },
       { label: "All Products", href: "/products" },
     ],
   },
