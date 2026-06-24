@@ -50,7 +50,7 @@ const FAQ_DATA: FAQCategory[] = [
         id: "gen-2",
         question: "What industries do you serve?",
         answer:
-          "We serve a wide range of industries including Food & Beverage, Automotive, Consumer Packaged Goods (CPG), Sports & Entertainment, Retail, Medical & Healthcare, Technology, and more. Our team has deep experience tailoring inflatable solutions to each industry's unique requirements —from food-grade materials for CPG sampling to medical-grade fabrics for healthcare campaigns.",
+          "We serve a wide range of industries including Food & Beverage, Automotive, Consumer Packaged Goods (CPG), Sports & Entertainment, Retail, Medical & Healthcare, Technology, and more. Our team has deep experience tailoring inflatable solutions to each industry's unique requirements — from food-grade materials for CPG sampling to medical-grade fabrics for healthcare campaigns.",
       },
       {
         id: "gen-3",
@@ -122,7 +122,7 @@ const FAQ_DATA: FAQCategory[] = [
         id: "design-1",
         question: "What information do you need to start a design?",
         answer:
-          "To begin, we need: your brand logo files (vector format preferred —AI, EPS, SVG), any reference images or sketches of what you envision, desired dimensions, and your event or deployment context. If you don't have design files, our team can work from photos, hand sketches, or even verbal descriptions to create a design concept.",
+          "To begin, we need: your brand logo files (vector format preferred — AI, EPS, SVG), any reference images or sketches of what you envision, desired dimensions, and your event or deployment context. If you don't have design files, our team can work from photos, hand sketches, or even verbal descriptions to create a design concept.",
       },
       {
         id: "design-2",
@@ -146,7 +146,7 @@ const FAQ_DATA: FAQCategory[] = [
         id: "design-5",
         question: "Can you integrate lighting, electronics, or mechanical features?",
         answer:
-          "Yes. We offer internal and external LED lighting systems (RGB programmable options available), sound modules, motorized components, and interactive elements. Our engineering team can integrate nearly any feature you can imagine —inflatable products with blinking eyes, moving parts, synchronized music-reactive lighting, and more.",
+          "Yes. We offer internal and external LED lighting systems (RGB programmable options available), sound modules, motorized components, and interactive elements. Our engineering team can integrate nearly any feature you can imagine — inflatable products with blinking eyes, moving parts, synchronized music-reactive lighting, and more.",
       },
     ],
   },
@@ -206,7 +206,7 @@ const FAQ_DATA: FAQCategory[] = [
         id: "maint-3",
         question: "Can inflatables be repaired if they get damaged?",
         answer:
-          "Yes. Every order includes a repair kit with adhesive patches, thread, and instructions for common field repairs. For more significant damage, we offer factory repair services —ship the item back to us and we'll restore it to like-new condition. Most repairs are completed within 5-7 business days.",
+          "Yes. Every order includes a repair kit with adhesive patches, thread, and instructions for common field repairs. For more significant damage, we offer factory repair services — ship the item back to us and we'll restore it to like-new condition. Most repairs are completed within 5-7 business days.",
       },
       {
         id: "maint-4",
@@ -218,7 +218,7 @@ const FAQ_DATA: FAQCategory[] = [
         id: "maint-5",
         question: "Do you offer maintenance or refurbishment services?",
         answer:
-          "Yes. We offer cleaning, inspection, and refurbishment services for existing inflatables —even those not originally manufactured by us. Our team can assess condition, perform necessary repairs, refresh faded printing, and replace worn components. Many clients send their inflatables for annual maintenance to keep them in peak condition.",
+          "Yes. We offer cleaning, inspection, and refurbishment services for existing inflatables — even those not originally manufactured by us. Our team can assess condition, perform necessary repairs, refresh faded printing, and replace worn components. Many clients send their inflatables for annual maintenance to keep them in peak condition.",
       },
       {
         id: "maint-6",
@@ -295,7 +295,7 @@ export function FAQPageClient() {
             <Search className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
             <input
               type="text"
-              placeholder="Search FAQ —e.g., 'shipping cost', 'warranty', 'design process'..."
+              placeholder="Search FAQ — e.g., 'shipping cost', 'warranty', 'design process'..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full rounded-xl border border-gray-300 bg-gray-50 py-3 pl-12 pr-10 text-sm text-navy-900 placeholder-gray-400 transition-colors focus:border-navy-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-navy-500/20"
@@ -458,7 +458,7 @@ export function FAQPageClient() {
           </h2>
           <p className="mx-auto mb-10 max-w-2xl text-lg text-gray-600">
             Our team is ready to help. Reach out by phone, email, or request a
-            callback —we typically respond within a few hours during business
+            callback — we typically respond within a few hours during business
             hours.
           </p>
 

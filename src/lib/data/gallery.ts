@@ -27,7 +27,7 @@ export const GALLERY_DATA: Record<string, GalleryDetail> = {
     description:
       "20-foot tall realistic beer can replica for nationwide summer festival tour.",
     fullDescription:
-      "FrostBite Brewing approached inflatablemodel with an ambitious vision: a 20-foot tall, photo-realistic replica of their flagship FrostBite Lager can that would tour 18 major summer festivals across the United States. The challenge was creating an inflatable that could withstand the rigors of constant setup, teardown, and transport while maintaining showroom-quality appearance under intense festival lighting conditions —both day and night.",
+      "FrostBite Brewing approached inflatablemodel with an ambitious vision: a 20-foot tall, photo-realistic replica of their flagship FrostBite Lager can that would tour 18 major summer festivals across the United States. The challenge was creating an inflatable that could withstand the rigors of constant setup, teardown, and transport while maintaining showroom-quality appearance under intense festival lighting conditions — both day and night.",
     gradient: "from-amber-400 via-orange-500 to-red-500",
     gradientLight: "from-amber-100 via-orange-100 to-red-100",
     features: [
@@ -49,7 +49,7 @@ export const GALLERY_DATA: Record<string, GalleryDetail> = {
       { label: "Warranty", value: "2 years" },
     ],
     testimonial:
-      "inflatablemodel turned our product into a 30-foot spectacle. The trade show booth traffic tripled, and we landed our biggest retail partner within two weeks of the event. The attention to detail on the can's labeling was extraordinary —it looked like a real can blown up to impossible proportions.",
+      "inflatablemodel turned our product into a 30-foot spectacle. The trade show booth traffic tripled, and we landed our biggest retail partner within two weeks of the event. The attention to detail on the can's labeling was extraordinary — it looked like a real can blown up to impossible proportions.",
     testimonialAuthor: "Marcus Chen",
     testimonialRole: "VP Marketing",
     testimonialCompany: "FrostBite Brewing",
@@ -115,7 +115,7 @@ export const GALLERY_DATA: Record<string, GalleryDetail> = {
       { label: "Warranty", value: "3 years" },
     ],
     testimonial:
-      "The arch withstood 40mph gusts during our final race weekend. Engineers really know what they're doing over there. The twin-tunnel design was a game-changer —cars could race through while fans took photos on both sides.",
+      "The arch withstood 40mph gusts during our final race weekend. Engineers really know what they're doing over there. The twin-tunnel design was a game-changer — cars could race through while fans took photos on both sides.",
     testimonialAuthor: "Derek Lawson",
     testimonialRole: "Events Director",
     testimonialCompany: "Apex Motors",
@@ -181,7 +181,7 @@ export const GALLERY_DATA: Record<string, GalleryDetail> = {
       { label: "Quantity", value: "200 units" },
     ],
     testimonial:
-      "The giant chip bag was the talk of our grand opening tour. Kids lined up for photos, parents posted on social media —organic reach went through the roof. Worth every penny. We're already planning the next flavor launch.",
+      "The giant chip bag was the talk of our grand opening tour. Kids lined up for photos, parents posted on social media — organic reach went through the roof. Worth every penny. We're already planning the next flavor launch.",
     testimonialAuthor: "Emily Takahashi",
     testimonialRole: "Trade Marketing Lead",
     testimonialCompany: "SnapChip Snacks",

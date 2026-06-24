@@ -422,7 +422,7 @@ export function BlogListClient() {
             Ready to Scale Your Brand?
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-navy-300">
-            The strategies we cover in our blog —our team can implement for you. Let's talk about your next activation.
+            The strategies we cover in our blog — our team can implement for you. Let's talk about your next activation.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link

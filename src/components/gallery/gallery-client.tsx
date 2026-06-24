@@ -137,7 +137,7 @@ const GALLERY_ITEMS: GalleryItem[] = [
     id: 7, slug: "inflatable-walking-costume", clientName: "Inflatable Character Costume",
     industry: "Food & Beverage", productType: "Costumes",
     description: "Wearable inflatable costume with built-in battery fan, transforming brand ambassadors into walking attention magnets at parades, store openings, and festivals.",
-    testimonial: "Our street team wore these for 6-hour shifts —comfortable, eye-catching, and generated hundreds of photos every hour.",
+    testimonial: "Our street team wore these for 6-hour shifts — comfortable, eye-catching, and generated hundreds of photos every hour.",
     testimonialAuthor: "Carlos Herrera", testimonialRole: "Field Marketing Lead",
     gradient: "from-green-400 via-lime-500 to-yellow-300",
     imageSrc: "/images/products/inflatable-character-costume/inflatable-character-costume-1.jpg?v=1",
@@ -156,7 +156,7 @@ const GALLERY_ITEMS: GalleryItem[] = [
   {
     id: 9, slug: "sky-dancer-tube-man", clientName: "Sky Dancer Tube Man",
     industry: "Automotive", productType: "Product Replicas",
-    description: "Classic attention-grabbing sky dancer inflatable —the flailing arm tube man that's been drawing eyes to car dealerships, retail stores, and events for decades.",
+    description: "Classic attention-grabbing sky dancer inflatable — the flailing arm tube man that's been drawing eyes to car dealerships, retail stores, and events for decades.",
     testimonial: "People literally pull off the highway when they see the tube man. Best advertising investment we've made.",
     testimonialAuthor: "Tony Russo", testimonialRole: "Dealership Owner",
     gradient: "from-orange-500 via-red-500 to-pink-500",

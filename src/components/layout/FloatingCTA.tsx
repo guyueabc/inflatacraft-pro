@@ -49,8 +49,8 @@ export function FloatingCTA() {
         <a
           href="https://wa.me/8615376427736"
           className="flex h-11 w-11 items-center justify-center rounded-full bg-navy-700 text-white shadow-lg transition-all hover:bg-navy-800 hover:shadow-xl"
-          aria-label="Call us"
-          title="Call "
+          aria-label="Chat on WhatsApp"
+          title="Chat on WhatsApp"
         >
           <Phone className="h-5 w-5" />
         </a>

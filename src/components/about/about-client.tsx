@@ -86,7 +86,7 @@ const TEAM_MEMBERS: TeamMember[] = [
   {
     name: "David Okonkwo",
     role: "Director of Manufacturing",
-    bio: "Oversees our 50,000 sq ft facility. 18 years in textile manufacturing. Certified in Six Sigma Black Belt —drives our quality metrics.",
+    bio: "Oversees our 50,000 sq ft facility. 18 years in textile manufacturing. Certified in Six Sigma Black Belt — drives our quality metrics.",
     initials: "DO",
   },
   {
@@ -120,7 +120,7 @@ const MILESTONES: Milestone[] = [
     year: "2006",
     title: "First Fortune 500 Client",
     description:
-      "Lands first major brand partnership with a national food & beverage company. The project — a 15-foot product replica —becomes a trade show sensation.",
+      "Lands first major brand partnership with a national food & beverage company. The project — a 15-foot product replica — becomes a trade show sensation.",
   },
   {
     year: "2010",
