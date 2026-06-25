@@ -6,10 +6,12 @@ export const metadata: Metadata = {
   title: "Inflatable Materials Explained: 210D vs 420D vs 500D | InflatableModel",
   description:
     "Complete guide to inflatable materials. Compare 210D, 420D, 500D Oxford nylon, PVC, and Cordura. Understand denier ratings, UV resistance, fire retardancy, and lifespan.",
+  alternates: { canonical: "https://www.qddjtx.com/materials" },
   keywords: "inflatable material, 210D Oxford nylon, 500D PVC, inflatable durability, denier rating, inflatable fabric, NFPA 701",
   openGraph: {
     title: "Inflatable Materials Guide | InflatableModel",
     description: "210D vs 420D vs 500D — which material is right for your inflatable?",
+    url: "https://www.qddjtx.com/materials",
     type: "article",
   },
 };
@@ -114,8 +116,16 @@ const faqJsonLd = {
 };
 
 export default function MaterialsPage() {
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org", "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.qddjtx.com" },
+      { "@type": "ListItem", position: 2, name: "Materials", item: "https://www.qddjtx.com/materials" },
+    ],
+  };
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       <div className="min-h-screen bg-white">
         <section className="bg-navy-900 px-4 py-16 text-white">

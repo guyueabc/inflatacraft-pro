@@ -6,10 +6,12 @@ export const metadata: Metadata = {
   title: "Inflatable Setup & Installation Guide | InflatableModel",
   description:
     "Complete setup guide for custom inflatables. Step-by-step instructions for product replicas, arches, tents, and mascots. Anchoring, blower setup, teardown, and safety tips.",
+  alternates: { canonical: "https://www.qddjtx.com/setup-guide" },
   keywords: "inflatable setup, inflatable installation, how to set up inflatable, inflatable blower, inflatable anchoring, inflatable takedown",
   openGraph: {
     title: "Inflatable Setup & Installation Guide | InflatableModel",
     description: "Step-by-step guide to setting up your custom inflatable.",
+    url: "https://www.qddjtx.com/setup-guide",
     type: "article",
   },
 };
@@ -85,8 +87,16 @@ const faqJsonLd = {
 };
 
 export default function SetupGuidePage() {
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org", "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.qddjtx.com" },
+      { "@type": "ListItem", position: 2, name: "Setup Guide", item: "https://www.qddjtx.com/setup-guide" },
+    ],
+  };
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       <div className="min-h-screen bg-white">
         <section className="bg-navy-900 px-4 py-16 text-white">

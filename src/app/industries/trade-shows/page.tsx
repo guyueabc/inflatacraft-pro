@@ -6,10 +6,12 @@ export const metadata: Metadata = {
   title: "Custom Inflatables for Trade Shows | Maximize Booth Traffic | InflatableModel",
   description:
     "Trade show inflatables that stop attendees in their tracks. Giant product replicas, arches, mascots, and tents designed for CES, NAB, SEMA, and industry expos. 3–6 week turnaround. Free 3D renderings.",
+  alternates: { canonical: "https://www.qddjtx.com/industries/trade-shows" },
   keywords: "trade show inflatable, booth inflatable, expo inflatable, CES inflatable, trade show booth ideas, inflatable display, convention center inflatable",
   openGraph: {
     title: "Trade Show Inflatables | InflatableModel",
     description: "Stand out at CES, NAB, SEMA, and industry expos with custom inflatables.",
+    url: "https://www.qddjtx.com/industries/trade-shows",
     type: "article",
   },
 };
@@ -137,8 +139,19 @@ const faqJsonLd = {
 };
 
 export default function TradeShowsPage() {
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.qddjtx.com" },
+      { "@type": "ListItem", position: 2, name: "Industries", item: "https://www.qddjtx.com/industries/trade-shows" },
+      { "@type": "ListItem", position: 3, name: "Trade Shows", item: "https://www.qddjtx.com/industries/trade-shows" },
+    ],
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}

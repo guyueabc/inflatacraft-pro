@@ -7,10 +7,12 @@ export const metadata: Metadata = {
   title: "Custom Inflatable Case Studies by Industry | InflatableModel",
   description:
     "Real results from custom inflatable campaigns. Giant product replicas, mascots, arches, and tents that drove measurable ROI for food, sports, retail, and trade show brands.",
+  alternates: { canonical: "https://www.qddjtx.com/case-studies" },
   keywords: "inflatable case study, inflatable success story, custom inflatable results, inflatable ROI, inflatable marketing results",
   openGraph: {
     title: "Case Studies | InflatableModel",
     description: "Real campaigns, real results — custom inflatable success stories.",
+    url: "https://www.qddjtx.com/case-studies",
     type: "website",
   },
 };
@@ -68,8 +70,17 @@ const metrics = [
 ];
 
 export default function CaseStudiesPage() {
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org", "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.qddjtx.com" },
+      { "@type": "ListItem", position: 2, name: "Case Studies", item: "https://www.qddjtx.com/case-studies" },
+    ],
+  };
   return (
-    <div className="min-h-screen bg-white">
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
+      <div className="min-h-screen bg-white">
       {/* Hero */}
       <section className="bg-navy-900 px-4 py-16 text-white">
         <div className="container mx-auto max-w-4xl">
@@ -188,6 +199,7 @@ export default function CaseStudiesPage() {
           </div>
         </div>
       </section>
-    </div>
+      </div>
+    </>
   );
 }

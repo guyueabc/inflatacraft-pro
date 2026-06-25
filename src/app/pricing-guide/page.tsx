@@ -6,10 +6,14 @@ export const metadata: Metadata = {
   title: "Custom Inflatable Pricing Guide 2026 | Cost Breakdown & Quotes | InflatableModel",
   description:
     "Complete pricing guide for custom inflatables in 2026. Compare costs for product replicas, mascots, arches, tents, and games. Get instant quote for your project.",
+  alternates: {
+    canonical: "https://www.qddjtx.com/pricing-guide",
+  },
   openGraph: {
     title: "Custom Inflatable Pricing Guide 2026 | InflatableModel",
     description:
       "How much does a custom inflatable cost? Full pricing breakdown by type, size, and material.",
+    url: "https://www.qddjtx.com/pricing-guide",
     type: "article",
   },
 };
@@ -138,8 +142,19 @@ const faqJsonLd = {
 };
 
 export default function PricingGuidePage() {
+  // BreadcrumbList JSON-LD
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.qddjtx.com" },
+      { "@type": "ListItem", position: 2, name: "Pricing Guide", item: "https://www.qddjtx.com/pricing-guide" },
+    ],
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}

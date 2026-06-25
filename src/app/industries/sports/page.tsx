@@ -6,10 +6,12 @@ export const metadata: Metadata = {
   title: "Sports Event Inflatables | Stadium Activation & Fan Engagement | InflatableModel",
   description:
     "Custom inflatables for sports events, stadiums, and fan zones. Finish line arches, helmet tunnels, team mascots, and player run-throughs. NFPA 701 certified. Free 3D renderings.",
+  alternates: { canonical: "https://www.qddjtx.com/industries/sports" },
   keywords: "sports inflatable, stadium inflatable, finish line arch, helmet tunnel, team mascot inflatable, fan engagement, race inflatable",
   openGraph: {
     title: "Sports Event Inflatables | InflatableModel",
     description: "Stadium and sports event inflatables for fan engagement.",
+    url: "https://www.qddjtx.com/industries/sports",
     type: "article",
   },
 };
@@ -75,8 +77,16 @@ const faqJsonLd = {
 };
 
 export default function SportsPage() {
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org", "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.qddjtx.com" },
+      { "@type": "ListItem", position: 2, name: "Sports Events", item: "https://www.qddjtx.com/industries/sports" },
+    ],
+  };
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       <div className="min-h-screen bg-white">
         <section className="bg-navy-900 px-4 py-16 text-white">
