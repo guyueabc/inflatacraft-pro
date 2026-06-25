@@ -38,13 +38,24 @@ const FOOTER_COLUMNS = [
     ],
   },
   {
+    title: "Industries",
+    links: [
+      { label: "Trade Shows", href: "/industries/trade-shows" },
+      { label: "Retail", href: "/industries/retail" },
+      { label: "Sports Events", href: "/industries/sports" },
+      { label: "Food & Beverage", href: "/industries/food-beverage" },
+      { label: "Case Studies", href: "/case-studies" },
+    ],
+  },
+  {
     title: "Resources",
     links: [
-      { label: "FAQ", href: "/faq" },
       { label: "Buying Guide", href: "/buying-guide" },
-      { label: "Material Specs", href: "/products" },
-      { label: "Shipping Info", href: "/how-it-works" },
-      { label: "Warranty", href: "/faq" },
+      { label: "Pricing Guide", href: "/pricing-guide" },
+      { label: "Material Specs", href: "/materials" },
+      { label: "Shipping Info", href: "/shipping" },
+      { label: "Setup Guide", href: "/setup-guide" },
+      { label: "FAQ", href: "/faq" },
       { label: "Privacy Policy", href: "/privacy" },
       { label: "Terms of Service", href: "/terms" },
     ],
@@ -102,7 +113,9 @@ export function Footer() {
                 Get tips, case studies, and exclusive offers.
               </p>
               <form
-                onSubmit={(e) => e.preventDefault()}
+                onSubmit={(e) => {
+                e.preventDefault()
+                }}
                 className="flex flex-col gap-2 sm:flex-row"
               >
                 <label htmlFor="footer-email" className="sr-only">

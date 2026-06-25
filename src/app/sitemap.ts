@@ -18,6 +18,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: base + '/contact', lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
     { url: base + '/faq', lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
     { url: base + '/buying-guide', lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    // New SEO/GEO pages
+    { url: base + '/pricing-guide', lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
+    { url: base + '/materials', lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    { url: base + '/shipping', lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
+    { url: base + '/setup-guide', lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
+    { url: base + '/case-studies', lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    // Industry pages
+    { url: base + '/industries/trade-shows', lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
+    { url: base + '/industries/retail', lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    { url: base + '/industries/sports', lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    { url: base + '/industries/food-beverage', lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
   ]
 
   const productPages: MetadataRoute.Sitemap = products.map((p) => ({
