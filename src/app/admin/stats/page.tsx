@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { StatsDashboard } from "./stats-dashboard";
+import { TrafficAnalysis } from "./traffic-analysis";
 
 export const metadata: Metadata = {
   title: "数据分析看板 | InflatableModel",
@@ -48,6 +49,9 @@ export default function AdminStatsPage() {
         </div>
         <div className="container mx-auto max-w-7xl px-4 py-6">
           <StatsDashboard />
+          <div className="mt-8">
+            <TrafficAnalysis />
+          </div>
         </div>
       </div>
     </>
