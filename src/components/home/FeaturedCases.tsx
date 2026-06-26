@@ -133,15 +133,15 @@ export function FeaturedCases() {
           </p>
         </div>
 
-        {/* Filter Tabs */}
-        <div className="mt-10 flex flex-wrap justify-center gap-2">
+        {/* Filter Tabs - mobile scrollable */}
+        <div className="mt-8 flex gap-2 overflow-x-auto pb-2 sm:mt-10 sm:flex-wrap sm:justify-center sm:overflow-visible sm:pb-0 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {INDUSTRIES.map((industry) => (
             <button
               key={industry}
               type="button"
               onClick={() => setActiveFilter(industry)}
               className={cn(
-                "rounded-full px-4 py-2 text-sm font-medium transition-all",
+                "whitespace-nowrap rounded-full px-3 py-1.5 text-xs font-medium transition-all sm:px-4 sm:py-2 sm:text-sm",
                 activeFilter === industry
                   ? "bg-navy-700 text-white shadow-md"
                   : "bg-gray-100 text-gray-600 hover:bg-gray-200 hover:text-navy-700"

@@ -110,11 +110,11 @@ export function StatsSection() {
           </p>
         </div>
 
-        <div className="mt-16 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-10 grid grid-cols-2 gap-6 sm:gap-10 lg:grid-cols-4">
           {STATS.map((stat) => (
             <div key={stat.label} className="flex flex-col items-center">
-              <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-navy-700 text-red-400">
-                <stat.icon className="h-7 w-7" />
+              <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-navy-700 text-red-400 sm:h-14 sm:w-14">
+                <stat.icon className="h-6 w-6 sm:h-7 sm:w-7" />
               </div>
               <AnimatedCounter
                 value={stat.value}
