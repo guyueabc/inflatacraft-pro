@@ -45,9 +45,9 @@ export function MobileMenu({ isOpen, onClose, navLinks }: MobileMenuProps) {
 
   return (
     <div className="fixed inset-0 z-50 lg:hidden">
-      {/* Backdrop */}
+      {/* Backdrop - solid dark overlay for mobile compatibility */}
       <div
-        className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+        className="absolute inset-0 bg-black/70"
         onClick={onClose}
         aria-hidden="true"
       />
