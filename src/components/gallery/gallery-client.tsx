@@ -438,7 +438,7 @@ export function GalleryPageClient() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4"
             onClick={() => setSelectedItem(null)}
           >
             <motion.div
@@ -451,7 +451,7 @@ export function GalleryPageClient() {
               {/* Close button */}
               <button
                 onClick={() => setSelectedItem(null)}
-                className="absolute right-4 top-4 z-10 rounded-full bg-black/50 p-2 text-white backdrop-blur transition-colors hover:bg-black/70"
+                className="absolute right-4 top-4 z-10 rounded-full bg-black/60 p-2 text-white transition-colors hover:bg-black/80"
               >
                 <X className="h-5 w-5" />
               </button>
