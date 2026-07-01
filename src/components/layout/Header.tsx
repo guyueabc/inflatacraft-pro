@@ -124,8 +124,8 @@ export function Header() {
 
         {/* Desktop Actions */}
         <div className="hidden lg:flex items-center gap-3">
-          <button
-            type="button"
+          <Link
+            href="/cart"
             className="relative rounded-md p-2 text-navy-700 transition-colors hover:bg-navy-50"
             aria-label="Shopping cart"
           >
@@ -133,7 +133,7 @@ export function Header() {
             <span className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-red-600 text-[10px] font-bold text-white">
               0
             </span>
-          </button>
+          </Link>
           <Link
             href="/get-quote"
             className="rounded-md border border-navy-300 px-4 py-2 text-sm font-medium text-navy-700 transition-colors hover:border-navy-700 hover:bg-navy-50"

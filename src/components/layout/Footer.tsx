@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import {
@@ -71,14 +72,38 @@ const FOOTER_COLUMNS = [
 ] as const;
 
 const SOCIAL_LINKS = [
-  { label: "Facebook", href: "#", icon: Globe },
-  { label: "Twitter", href: "#", icon: AtSign },
-  { label: "Instagram", href: "#", icon: Camera },
-  { label: "LinkedIn", href: "#", icon: Building2 },
-  { label: "YouTube", href: "#", icon: Play },
+  { label: "Facebook", href: "", icon: Globe },
+  { label: "Twitter", href: "", icon: AtSign },
+  { label: "Instagram", href: "", icon: Camera },
+  { label: "LinkedIn", href: "", icon: Building2 },
+  { label: "YouTube", href: "", icon: Play },
 ] as const;
 
 export function Footer() {
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [newsletterStatus, setNewsletterStatus] = useState<"idle" | "success" | "error">("idle");
+  const [newsletterMessage, setNewsletterMessage] = useState("");
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setNewsletterStatus("idle");
+    setNewsletterMessage("");
+    try {
+      const res = await fetch("/api/submit-quote", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: newsletterEmail, formType: "newsletter" }),
+      });
+      if (!res.ok) throw new Error("Failed to subscribe");
+      setNewsletterStatus("success");
+      setNewsletterMessage("Thank you for subscribing!");
+      setNewsletterEmail("");
+    } catch {
+      setNewsletterStatus("error");
+      setNewsletterMessage("Something went wrong. Please try again.");
+    }
+  };
+
   return (
     <footer className="bg-navy-900 text-white">
       {/* Main Footer */}
@@ -113,9 +138,7 @@ export function Footer() {
                 Get tips, case studies, and exclusive offers.
               </p>
               <form
-                onSubmit={(e) => {
-                e.preventDefault()
-                }}
+                onSubmit={handleNewsletterSubmit}
                 className="flex flex-col gap-2 sm:flex-row"
               >
                 <label htmlFor="footer-email" className="sr-only">
@@ -123,8 +146,11 @@ export function Footer() {
                 </label>
                 <input
                   id="footer-email"
+                  name="email"
                   type="email"
                   placeholder="your@email.com"
+                  value={newsletterEmail}
+                  onChange={(e) => setNewsletterEmail(e.target.value)}
                   className="flex-1 rounded-md border border-white/20 bg-white/10 px-3 py-2 text-sm text-white placeholder:text-white/40 focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500"
                 />
                 <button
@@ -134,21 +160,42 @@ export function Footer() {
                   Subscribe
                   <ArrowRight className="h-3.5 w-3.5" />
                 </button>
+                {newsletterMessage && (
+                  <p
+                    className={
+                      newsletterStatus === "success"
+                        ? "mt-2 text-sm text-green-400"
+                        : "mt-2 text-sm text-red-400"
+                    }
+                  >
+                    {newsletterMessage}
+                  </p>
+                )}
               </form>
             </div>
 
             {/* Social Links */}
             <div className="flex items-center justify-center gap-3 sm:justify-start">
-              {SOCIAL_LINKS.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  aria-label={social.label}
-                  className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-white/60 transition-colors hover:border-red-500 hover:bg-red-600 hover:text-white"
-                >
-                  <social.icon className="h-4 w-4" />
-                </a>
-              ))}
+              {SOCIAL_LINKS.map((social) =>
+                social.href ? (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    aria-label={social.label}
+                    className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-white/60 transition-colors hover:border-red-500 hover:bg-red-600 hover:text-white"
+                  >
+                    <social.icon className="h-4 w-4" />
+                  </a>
+                ) : (
+                  <span
+                    key={social.label}
+                    aria-label={social.label}
+                    className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-white/60"
+                  >
+                    <social.icon className="h-4 w-4" />
+                  </span>
+                )
+              )}
             </div>
           </div>
 

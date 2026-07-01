@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getProductBySlug, getRelatedProducts } from "@/lib/data/products";
 import { ProductGallery } from "@/components/products/product-gallery";
 import { ShareButton } from "@/components/products/share-button";
+import { ProductSchema } from "@/components/layout/ProductSchema";
 import {
   Clock,
   Truck,
@@ -69,37 +70,6 @@ export default async function ProductDetailPage({
 
   const related = getRelatedProducts(product, 4);
 
-  // Product JSON-LD structured data — enhanced for GEO
-  const productJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    name: product.name,
-    description: product.geoSummary || product.description,
-    image: product.images.slice(0, 10),
-    category: product.category,
-    brand: {
-      "@type": "Brand",
-      name: "InflatableModel",
-    },
-    manufacturer: {
-      "@type": "Organization",
-      name: "InflatableModel",
-      url: "https://www.qddjtx.com",
-    },
-    productionDate: "2024",
-    isSimilarTo: [],
-    ...(product.price && {
-      offers: {
-        "@type": "Offer",
-        price: product.price,
-        priceCurrency: "USD",
-        availability: product.inStock
-          ? "https://schema.org/InStock"
-          : "https://schema.org/OutOfStock",
-      },
-    }),
-  };
-
   // FAQPage JSON-LD — critical for AI engine citation
   const faqJsonLd =
     product.faqs && product.faqs.length > 0
@@ -150,10 +120,7 @@ export default async function ProductDetailPage({
         }}
       />
       {/* Product */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
-      />
+      <ProductSchema product={product} />
       {/* FAQPage — critical for AI citation */}
       {faqJsonLd && (
         <script

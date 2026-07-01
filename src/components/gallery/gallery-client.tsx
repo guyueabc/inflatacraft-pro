@@ -4,6 +4,7 @@ import { useState, useMemo } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { SmartImage } from "@/components/ui/SmartImage";
 import {
   Search,
   X,
@@ -363,6 +364,7 @@ export function GalleryPageClient() {
                     exit={{ opacity: 0, scale: 0.95 }}
                     transition={{ duration: 0.25 }}
                     className="group relative flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all hover:shadow-xl hover:-translate-y-1 w-full"
+                    data-testid="gallery-card"
                   >
                     {/* Image */}
                     <button
@@ -372,16 +374,16 @@ export function GalleryPageClient() {
                     >
                       {/* Skeleton placeholder */}
                       {!imageLoaded[item.id] && (
-                        <div className="absolute inset-0 animate-pulse bg-gradient-to-br from-navy-100 via-navy-50 to-navy-100" />
+                        <div className="absolute inset-0 z-10 animate-pulse bg-gradient-to-br from-navy-100 via-navy-50 to-navy-100" />
                       )}
-                      <img
+                      <SmartImage
                         src={item.imageSrc}
                         alt={item.clientName}
+                        fallbackLabel={item.clientName}
+                        fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                         onLoad={() => setImageLoaded((prev) => ({ ...prev, [item.id]: true }))}
-                        className={cn(
-                          "h-full w-full object-cover transition-all duration-500 group-hover:scale-110",
-                          imageLoaded[item.id] ? "opacity-100" : "opacity-0"
-                        )}
+                        className="h-full w-full object-cover transition-all duration-500 group-hover:scale-110"
                       />
                       {/* Hover overlay */}
                       <div className="absolute inset-0 flex items-center justify-center bg-navy-900/0 transition-all group-hover:bg-navy-900/30">
@@ -458,8 +460,14 @@ export function GalleryPageClient() {
 
               {/* Image */}
               <div className="relative aspect-video w-full bg-gradient-to-br from-navy-100 to-navy-200">
-                <img src={selectedItem.imageSrc} alt={selectedItem.clientName}
-                  className="h-full w-full object-cover" />
+                <SmartImage
+                  src={selectedItem.imageSrc}
+                  alt={selectedItem.clientName}
+                  fallbackLabel={selectedItem.clientName}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="h-full w-full object-cover"
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                 <div className="absolute bottom-6 left-6 right-6">
                   <span className="inline-block rounded-full bg-white/20 px-3 py-1 text-xs font-semibold text-white backdrop-blur">

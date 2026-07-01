@@ -173,6 +173,8 @@ export function FeaturedCases() {
                   <img
                     src={study.imageSrc}
                     alt={study.clientName}
+                    loading="lazy"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                     className="absolute inset-0 h-full w-full object-cover"
                   />
                   <span className="relative z-10 text-sm font-medium text-gray-400">

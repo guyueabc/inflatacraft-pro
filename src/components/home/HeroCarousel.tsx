@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight, ShieldCheck, Flag, Star } from "lucide-react";
@@ -97,9 +98,12 @@ export function HeroCarousel() {
           className="absolute inset-0"
           aria-hidden="true"
         >
-          <img
+          <Image
             src={slide.imageSrc}
             alt={slide.placeholderLabel}
+            fill
+            sizes="100vw"
+            priority={current === 0}
             className="absolute inset-0 h-full w-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-navy-900/90 via-navy-900/70 to-navy-900/40" />

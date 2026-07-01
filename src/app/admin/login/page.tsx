@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Lock, Loader2 } from "lucide-react";
 
 function LoginForm() {
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -21,18 +22,20 @@ function LoginForm() {
       const res = await fetch("/api/admin/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ password }),
+        body: JSON.stringify({ username, password }),
       });
 
+      const data = await res.json();
+
       if (!res.ok) {
-        setError("密码错误，请重试");
+        setError(data.error || "Invalid credentials. Please try again.");
         setLoading(false);
         return;
       }
 
       router.push(from);
     } catch {
-      setError("网络错误，请重试");
+      setError("Network error. Please try again.");
       setLoading(false);
     }
   };
@@ -44,24 +47,40 @@ function LoginForm() {
       </div>
 
       <h1 className="mb-2 text-center text-xl font-bold text-navy-900">
-        管理员登录
+        Admin Login
       </h1>
       <p className="mb-6 text-center text-sm text-gray-500">
-        请输入密码以访问管理后台
+        Enter your credentials to access the admin panel
       </p>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
+          <label htmlFor="username" className="mb-1 block text-sm font-medium text-navy-700">
+            Username
+          </label>
+          <input
+            id="username"
+            name="username"
+            type="text"
+            value={username}
+            onChange={(e) => { setUsername(e.target.value); setError(""); }}
+            placeholder="Enter admin username"
+            autoFocus
+            autoComplete="username"
+            className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm text-navy-900 placeholder-gray-400 transition-colors focus:border-navy-500 focus:outline-none focus:ring-2 focus:ring-navy-500/20"
+          />
+        </div>
+
+        <div>
           <label htmlFor="password" className="mb-1 block text-sm font-medium text-navy-700">
-            密码
+            Password
           </label>
           <input
             id="password"
             type="password"
             value={password}
             onChange={(e) => { setPassword(e.target.value); setError(""); }}
-            placeholder="请输入管理密码"
-            autoFocus
+            placeholder="Enter admin password"
             autoComplete="current-password"
             className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm text-navy-900 placeholder-gray-400 transition-colors focus:border-navy-500 focus:outline-none focus:ring-2 focus:ring-navy-500/20"
           />
@@ -75,11 +94,11 @@ function LoginForm() {
 
         <button
           type="submit"
-          disabled={loading || !password.trim()}
+          disabled={loading || !username.trim() || !password.trim()}
           className="flex w-full items-center justify-center gap-2 rounded-lg bg-navy-800 px-4 py-3 text-sm font-semibold text-white transition-all hover:bg-navy-900 disabled:opacity-50"
         >
           {loading && <Loader2 className="h-4 w-4 animate-spin" />}
-          {loading ? "验证中..." : "登录"}
+          {loading ? "Authenticating..." : "Login"}
         </button>
       </form>
     </div>
@@ -93,7 +112,7 @@ function LoginFallback() {
         <Lock className="h-7 w-7 text-navy-700" />
       </div>
       <h1 className="mb-2 text-center text-xl font-bold text-navy-900">
-        管理员登录
+        Admin Login
       </h1>
       <div className="flex justify-center py-4">
         <Loader2 className="h-6 w-6 animate-spin text-navy-400" />
