@@ -342,19 +342,32 @@ export default async function ProductDetailPage({
             <div className="overflow-hidden rounded-xl border border-gray-200 bg-white">
               <div className="overflow-x-auto -mx-4 sm:mx-0"><table className="w-full min-w-[320px] text-left">
                 <tbody className="divide-y divide-gray-100">
-                  {Object.entries(product.specs).map(([key, value], idx) => (
+                  {Object.entries(product.specs).map(([key, value], idx) => {
+                    // 改进 camelCase 转显示文本
+                    const displayKey = key
+                      .replace(/([A-Z])/g, " $1")
+                      .replace(/^./, str => str.toUpperCase())
+                      .trim();
+                    
+                    // 处理数组值显示
+                    const displayValue = Array.isArray(value) 
+                      ? value.join(", ")
+                      : value;
+                    
+                    return (
                     <tr
                       key={key}
                       className={idx % 2 === 0 ? "bg-white" : "bg-gray-50/50"}
                     >
-                      <td className="w-32 sm:w-64 px-3 sm:px-6 py-4 text-sm font-semibold text-navy-900 capitalize">
-                        {key.replace(/([A-Z])/g, " ").trim()}
+                      <td className="w-32 sm:w-64 px-3 sm:px-6 py-4 text-sm font-semibold text-navy-900">
+                        {displayKey}
                       </td>
                       <td className="px-3 sm:px-6 py-4 text-sm text-gray-700">
-                        {value}
+                        {displayValue}
                       </td>
                     </tr>
-                  ))}
+                    );
+                  })}
                 </tbody>
               </table></div>
             </div>
