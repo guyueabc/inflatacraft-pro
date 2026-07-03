@@ -4,6 +4,7 @@ import { ValueProps } from "@/components/home/ValueProps";
 import { ProductCategories } from "@/components/home/ProductCategories";
 import { FeaturedCases } from "@/components/home/FeaturedCases";
 import { HowItWorks } from "@/components/home/HowItWorks";
+import { TrustSignals } from "@/components/home/TrustSignals";
 import { ClientLogos } from "@/components/home/ClientLogos";
 import { Testimonials } from "@/components/home/Testimonials";
 import { QuickQuote } from "@/components/home/QuickQuote";
@@ -49,6 +50,9 @@ export default function HomePage() {
 
       {/* 5. How It Works Timeline */}
       <HowItWorks />
+
+      {/* 5b. Trust Signals — Safety, Quality, Materials, Downloads */}
+      <TrustSignals />
 
       {/* 6. Featured Case Studies */}
       <FeaturedCases />

@@ -23,6 +23,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: base + '/materials', lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
     { url: base + '/shipping', lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
     { url: base + '/setup-guide', lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
+    // Trust pages
+    { url: base + '/safety-compliance', lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    { url: base + '/quality-process', lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    { url: base + '/downloads', lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
     { url: base + '/case-studies', lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
     // Industry pages
     { url: base + '/industries/trade-shows', lastModified: now, changeFrequency: 'monthly', priority: 0.9 },

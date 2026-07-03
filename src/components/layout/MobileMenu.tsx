@@ -106,6 +106,30 @@ export function MobileMenu({ isOpen, onClose, navLinks }: MobileMenuProps) {
           ))}
         </nav>
 
+        {/* Resources — trust pages */}
+        <div className="border-t" />
+        <div className="px-4 pt-3 pb-1 text-xs font-semibold uppercase tracking-wider text-navy-400">
+          Resources
+        </div>
+        <nav className="flex flex-col pb-2">
+          {[
+            { label: "Safety & Compliance", href: "/safety-compliance" },
+            { label: "Quality Process", href: "/quality-process" },
+            { label: "Materials & Printing", href: "/materials" },
+            { label: "Downloads", href: "/downloads" },
+          ].map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              onClick={onClose}
+              className="flex items-center justify-between px-4 py-3 text-base font-medium text-navy-700 transition-colors hover:bg-navy-50 hover:text-navy-900"
+            >
+              {link.label}
+              <ChevronRight className="h-4 w-4 text-navy-400" />
+            </Link>
+          ))}
+        </nav>
+
         <div className="border-t" />
 
         {/* Actions */}

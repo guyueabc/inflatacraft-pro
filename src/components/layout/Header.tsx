@@ -20,6 +20,7 @@ const NAV_LINKS = [
   { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
   { label: "FAQ", href: "/faq" },
+  { label: "Resources", href: "/downloads" },
 ] as const;
 
 export function Header() {
