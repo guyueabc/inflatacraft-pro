@@ -85,4 +85,69 @@ test.describe("InflatableModel E2E Tests", () => {
     const dotCount = await dots.count();
     expect(dotCount).toBeGreaterThan(0);
   });
+
+  // ────────────────────────────────────────────────────────────
+  // 5. Safety-compliance page loads with H1
+  // ────────────────────────────────────────────────────────────
+  test("safety-compliance page loads with H1", async ({ page }) => {
+    await page.goto("/safety-compliance");
+    await expect(
+      page.getByRole("heading", { level: 1 })
+    ).toBeVisible({ timeout: 15000 });
+  });
+
+  // ────────────────────────────────────────────────────────────
+  // 6. Downloads page loads with H1
+  // ────────────────────────────────────────────────────────────
+  test("downloads page loads with H1", async ({ page }) => {
+    await page.goto("/downloads");
+    await expect(
+      page.getByRole("heading", { level: 1 })
+    ).toBeVisible({ timeout: 15000 });
+  });
+
+  // ────────────────────────────────────────────────────────────
+  // 7. Materials page loads with H1
+  // ────────────────────────────────────────────────────────────
+  test("materials page loads with H1", async ({ page }) => {
+    await page.goto("/materials");
+    await expect(
+      page.getByRole("heading", { level: 1 })
+    ).toBeVisible({ timeout: 15000 });
+  });
+
+  // ────────────────────────────────────────────────────────────
+  // 8. AI builder page loads with H1
+  // ────────────────────────────────────────────────────────────
+  test("ai-builder page loads with H1", async ({ page }) => {
+    await page.goto("/ai-builder");
+    await expect(
+      page.getByRole("heading", { level: 1 })
+    ).toBeVisible({ timeout: 15000 });
+  });
+
+  // ────────────────────────────────────────────────────────────
+  // 9. Quote pending page loads
+  // ────────────────────────────────────────────────────────────
+  test("quote pending page loads", async ({ page }) => {
+    await page.goto("/quote/pending", { waitUntil: "domcontentloaded" });
+    // Should not throw a 500 error; page renders some content
+    const body = page.locator("body");
+    await expect(body).toBeVisible({ timeout: 15000 });
+    // H1 may or may not be present; just ensure body content exists
+    const textContent = await body.textContent();
+    expect(textContent!.length).toBeGreaterThan(0);
+  });
+
+  // ────────────────────────────────────────────────────────────
+  // 10. Admin/login redirects to login page when accessing /admin/stats
+  // ────────────────────────────────────────────────────────────
+  test("admin/stats redirects to login when unauthenticated", async ({
+    page,
+  }) => {
+    await page.goto("/admin/stats", { waitUntil: "domcontentloaded" });
+    // Should redirect away from /admin/stats (to /admin/login or /login)
+    await page.waitForURL(/\/(admin\/)?login/, { timeout: 15000 });
+    await expect(page).toHaveURL(/\/(admin\/)?login/);
+  });
 });

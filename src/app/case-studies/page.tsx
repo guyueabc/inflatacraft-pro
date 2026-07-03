@@ -196,6 +196,9 @@ export default function CaseStudiesPage() {
             <Link href="/get-quote" className="inline-flex items-center gap-2 rounded-xl bg-red-600 px-8 py-4 text-base font-semibold text-white shadow-lg shadow-red-600/30 transition-all hover:bg-red-500">
               Get Free Quote <ArrowRight className="h-5 w-5" />
             </Link>
+            <Link href="/get-quote" className="inline-flex items-center gap-2 rounded-xl border border-navy-300 bg-white px-8 py-4 text-base font-semibold text-navy-900 transition-all hover:border-navy-500 hover:bg-gray-50">
+              Get Similar Project Quote <ArrowRight className="h-5 w-5" />
+            </Link>
           </div>
         </div>
       </section>
