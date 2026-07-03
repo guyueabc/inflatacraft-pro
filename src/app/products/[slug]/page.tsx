@@ -14,6 +14,13 @@ import {
   Printer,
   CheckCircle2,
   HelpCircle,
+  Package,
+  Ruler,
+  Palette,
+  AlertTriangle,
+  ClipboardList,
+  CalendarClock,
+  Box,
 } from "lucide-react";
 import type { Metadata } from "next";
 

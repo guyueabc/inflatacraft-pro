@@ -2,65 +2,63 @@
 
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { ArrowRight, Box, Sparkles, TowerControl, Shirt, Tent, Gamepad2 } from "lucide-react";
+import { ArrowRight, Megaphone, Store, Gamepad2, Shirt, Lightbulb } from "lucide-react";
 
 interface Category {
   title: string;
   description: string;
-  icon: typeof Box;
+  icon: typeof Megaphone;
   href: string;
   imageSrc: string;
   placeholderLabel: string;
+  buyerConcerns: string;
 }
 
 const CATEGORIES: Category[] = [
   {
-    title: "Giant Product Replicas",
-    description: "Turn your product into a skyscraper-sized attraction that dominates trade shows and retail launches.",
-    icon: Box,
+    title: "Cold-Air Advertising Inflatables",
+    description: "Giant product replicas, outdoor brand displays",
+    icon: Megaphone,
     href: "/products?category=replica",
     imageSrc: "/images/products/giant-soda-can-replica/giant-soda-can-replica-1.jpg",
-    placeholderLabel: "Product Replica",
+    placeholderLabel: "Advertising",
+    buyerConcerns: "Shape accuracy, blower sizing, anchoring",
   },
   {
-    title: "Inflatable Mascots",
-    description: "Custom character mascots that bring your brand personality to life at events and stadiums.",
-    icon: Sparkles,
-    href: "/products?category=mascot",
-    imageSrc: "/images/products/custom-brand-mascot/custom-brand-mascot-1.jpg",
-    placeholderLabel: "Mascot",
-  },
-  {
-    title: "Inflatable Arches",
-    description: "Race-ready arches for finish lines, start gates, and branded entrances that command attention.",
-    icon: TowerControl,
+    title: "Commercial Advertising Inflatables",
+    description: "Arches, tents, retail promotion",
+    icon: Store,
     href: "/products?category=arch",
     imageSrc: "/images/products/finish-line-arch/finish-line-arch-1.jpg",
-    placeholderLabel: "Arch",
+    placeholderLabel: "Commercial",
+    buyerConcerns: "Fast setup, brand printing, public event safety",
   },
   {
-    title: "Inflatable Costumes",
-    description: "Wearable inflatable suits for street teams, halftime shows, and viral marketing stunts.",
+    title: "Amusement & Rental Inflatables",
+    description: "Bounce houses, slides, obstacle courses",
+    icon: Gamepad2,
+    href: "/products?category=game",
+    imageSrc: "/images/products/inflatable-obstacle-course/inflatable-obstacle-course-1.jpg",
+    placeholderLabel: "Amusement",
+    buyerConcerns: "Children safety, inspection, ASTM/EN documentation",
+  },
+  {
+    title: "Wearable Inflatable Costumes",
+    description: "Mascot costumes, brand characters",
     icon: Shirt,
     href: "/products?category=costume",
     imageSrc: "/images/products/inflatable-character-costume/inflatable-character-costume-1.jpg",
     placeholderLabel: "Costume",
+    buyerConcerns: "Visibility, ventilation, battery",
   },
   {
-    title: "Inflatable Tents",
-    description: "Custom-printed canopies and inflatable shelters for outdoor activations and sampling tours.",
-    icon: Tent,
-    href: "/products?category=tent",
-    imageSrc: "/images/products/custom-inflatable-event-tent/custom-inflatable-event-tent-1.jpg",
-    placeholderLabel: "Tent",
-  },
-  {
-    title: "Inflatable Games",
-    description: "Interactive inflatables — obstacle courses, slides, and bounce houses for corporate events.",
-    icon: Gamepad2,
-    href: "/products?category=game",
-    imageSrc: "/images/products/inflatable-obstacle-course/inflatable-obstacle-course-1.jpg",
-    placeholderLabel: "Game",
+    title: "Custom Inflatables",
+    description: "Mascots, custom shapes",
+    icon: Lightbulb,
+    href: "/products?category=mascot",
+    imageSrc: "/images/products/custom-brand-mascot/custom-brand-mascot-1.jpg",
+    placeholderLabel: "Custom",
+    buyerConcerns: "Custom design, 3D preview, material options",
   },
 ];
 
@@ -78,7 +76,7 @@ export function ProductCategories() {
           </p>
         </div>
 
-        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-16 grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {CATEGORIES.map((category) => (
             <Link
               key={category.title}
@@ -109,6 +107,9 @@ export function ProductCategories() {
                 </h3>
                 <p className="mt-2 flex-1 text-sm leading-relaxed text-gray-600">
                   {category.description}
+                </p>
+                <p className="mt-1 text-xs text-gray-400">
+                  {category.buyerConcerns}
                 </p>
                 <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-red-600 transition-colors group-hover:text-red-500">
                   Learn More

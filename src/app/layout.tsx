@@ -22,7 +22,7 @@ const BASE_URL = "https://www.qddjtx.com";
 export const metadata: Metadata = {
   title: "inflatablemodel — Custom Inflatable Manufacturing",
   description:
-    "Giant product replicas, mascots, arches, costumes, and tents. 3-6 week turnaround. Made in USA. Free 3D renderings. Scale your brand 100x.",
+    "Custom inflatable manufacturing with documented materials, safety compliance, and project-ready files. Giant replicas, mascots, arches, tents, costumes and games.",
   keywords: [
     "custom inflatables",
     "giant inflatables",

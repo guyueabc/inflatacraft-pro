@@ -14,12 +14,12 @@ import { StatsSection } from "@/components/home/StatsSection";
 export const metadata: Metadata = {
   title: "Custom Inflatables Manufacturer | Giant Replicas, Mascots & More | InflatableModel",
   description:
-    "USA-made custom inflatables for advertising and events. Giant product replicas, mascots, arches, costumes, tents and games. 3-6 week turnaround. Free 3D renderings. Get a quote today.",
+    "Custom inflatables with documented materials, safety specs, and project-ready production files. Giant replicas, mascots, arches, tents and games. Get a budgetary quote in 2 minutes.",
   canonical: "https://www.qddjtx.com/",
   openGraph: {
     title: "Custom Inflatables Manufacturer | InflatableModel",
     description:
-      "USA-made custom inflatables for advertising and events. Free 3D renderings. Get a quote today.",
+      "Custom inflatables with documented materials, safety specs, and project-ready production files. Get a budgetary quote in 2 minutes.",
     type: "website",
     siteName: "InflatableModel",
     locale: "en_US",
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Custom Inflatables Manufacturer | InflatableModel",
     description:
-      "USA-made custom inflatables. Free 3D renderings. Get a quote today.",
+      "Custom inflatables with documented materials, safety specs, and project-ready production files. Get a budgetary quote in 2 minutes.",
   },
 };
 
