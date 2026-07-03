@@ -5,7 +5,7 @@ import { useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { cn } from "@/lib/utils";
-import { quoteSchema, PRODUCT_TYPES, BUDGET_RANGES, DEADLINES, type QuoteFormData } from "@/lib/validations/quote";
+import { quoteSchema, PRODUCT_TYPES, BUDGET_RANGES, DEADLINES, INTENDED_USES, INDOOR_OUTDOOR, PEOPLE_INTERACT, COUNTRIES, VOLTAGE_PLUGS, ARTWORK_STATUS, INSTALLATION_SURFACES, type QuoteFormData } from "@/lib/validations/quote";
 import { Send, CheckCircle2, Phone, Mail } from "lucide-react";
 
 export function GetQuoteClient() {
@@ -13,7 +13,7 @@ export function GetQuoteClient() {
 
   const form = useForm<QuoteFormData>({
     resolver: zodResolver(quoteSchema),
-    defaultValues: { email: "", phone: "", name: "", company: "", productType: "", description: "", size: "", quantity: "", budgetRange: "", deadline: "" },
+    defaultValues: { email: "", phone: "", name: "", company: "", country: "", productType: "", description: "", size: "", quantity: "", budgetRange: "", deadline: "", intendedUse: "", indoorOutdoor: "", peopleInteract: "", userAgeRange: "", installationSurface: "", voltagePlug: "", artworkReady: "" },
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -67,17 +67,26 @@ export function GetQuoteClient() {
     }, {} as Record<string, string>);
 
     try {
-      await fetch("/api/submit-quote", {
+      const res = await fetch("/api/quote", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...data, ...utm }),
       });
+      const result = await res.json().catch(() => ({}));
+      // Store estimate in sessionStorage for the quote page
+      if (result.estimate) {
+        sessionStorage.setItem("quote_estimate", JSON.stringify({ data: { estimate: result.estimate, leadScore: result.leadScore } }));
+      }
     } catch {
       // Even if fetch fails, data may have been submitted, still show success page
     }
 
     setIsSubmitting(false);
     setIsSubmitted(true);
+    // Auto-navigate to quote page after short delay
+    setTimeout(() => {
+      try { window.location.href = "/quote/pending"; } catch {}
+    }, 1500);
     // Conversion tracking — Analytics component pushes Google Ads conversion
     sessionStorage.setItem("quote_submitted", "true");
     // Push GTM conversion event
@@ -219,6 +228,69 @@ export function GetQuoteClient() {
                 <option value="">Select...</option>
                 {BUDGET_RANGES.map((b) => <option key={b} value={b}>{b}</option>)}
               </select>
+            </div>
+          </div>
+
+          {/* -- Project Scenario -- */}
+          <div className="mt-6 border-t border-gray-100 pt-6">
+            <p className="mb-4 text-sm font-semibold text-navy-800">Project Scenario <span className="font-normal text-gray-400">(helps us recommend the right product)</span></p>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div>
+                <label htmlFor="q-country" className="mb-1 block text-sm text-navy-700">Country / Region</label>
+                <select id="q-country" {...form.register("country")}
+                  className="w-full rounded-lg border border-navy-300 bg-white px-4 py-3 text-sm text-gray-900 transition-all focus:border-navy-700 focus:outline-none focus:ring-2 focus:ring-navy-500/20">
+                  <option value="">Select...</option>
+                  {COUNTRIES.map((c) => <option key={c} value={c}>{c}</option>)}
+                </select>
+              </div>
+              <div>
+                <label htmlFor="q-use" className="mb-1 block text-sm text-navy-700">Intended Use</label>
+                <select id="q-use" {...form.register("intendedUse")}
+                  className="w-full rounded-lg border border-navy-300 bg-white px-4 py-3 text-sm text-gray-900 transition-all focus:border-navy-700 focus:outline-none focus:ring-2 focus:ring-navy-500/20">
+                  <option value="">Select...</option>
+                  {INTENDED_USES.map((u) => <option key={u} value={u}>{u}</option>)}
+                </select>
+              </div>
+              <div>
+                <label htmlFor="q-inout" className="mb-1 block text-sm text-navy-700">Indoor or Outdoor?</label>
+                <select id="q-inout" {...form.register("indoorOutdoor")}
+                  className="w-full rounded-lg border border-navy-300 bg-white px-4 py-3 text-sm text-gray-900 transition-all focus:border-navy-700 focus:outline-none focus:ring-2 focus:ring-navy-500/20">
+                  <option value="">Select...</option>
+                  {INDOOR_OUTDOOR.map((o) => <option key={o} value={o}>{o}</option>)}
+                </select>
+              </div>
+              <div>
+                <label htmlFor="q-interact" className="mb-1 block text-sm text-navy-700">Will people interact?</label>
+                <select id="q-interact" {...form.register("peopleInteract")}
+                  className="w-full rounded-lg border border-navy-300 bg-white px-4 py-3 text-sm text-gray-900 transition-all focus:border-navy-700 focus:outline-none focus:ring-2 focus:ring-navy-500/20">
+                  <option value="">Select...</option>
+                  {PEOPLE_INTERACT.map((p) => <option key={p} value={p}>{p}</option>)}
+                </select>
+              </div>
+              <div>
+                <label htmlFor="q-surface" className="mb-1 block text-sm text-navy-700">Installation Surface</label>
+                <select id="q-surface" {...form.register("installationSurface")}
+                  className="w-full rounded-lg border border-navy-300 bg-white px-4 py-3 text-sm text-gray-900 transition-all focus:border-navy-700 focus:outline-none focus:ring-2 focus:ring-navy-500/20">
+                  <option value="">Select...</option>
+                  {INSTALLATION_SURFACES.map((s) => <option key={s} value={s}>{s}</option>)}
+                </select>
+              </div>
+              <div>
+                <label htmlFor="q-voltage" className="mb-1 block text-sm text-navy-700">Voltage / Plug Type</label>
+                <select id="q-voltage" {...form.register("voltagePlug")}
+                  className="w-full rounded-lg border border-navy-300 bg-white px-4 py-3 text-sm text-gray-900 transition-all focus:border-navy-700 focus:outline-none focus:ring-2 focus:ring-navy-500/20">
+                  <option value="">Select...</option>
+                  {VOLTAGE_PLUGS.map((v) => <option key={v} value={v}>{v}</option>)}
+                </select>
+              </div>
+              <div>
+                <label htmlFor="q-artwork" className="mb-1 block text-sm text-navy-700">Artwork Ready?</label>
+                <select id="q-artwork" {...form.register("artworkReady")}
+                  className="w-full rounded-lg border border-navy-300 bg-white px-4 py-3 text-sm text-gray-900 transition-all focus:border-navy-700 focus:outline-none focus:ring-2 focus:ring-navy-500/20">
+                  <option value="">Select...</option>
+                  {ARTWORK_STATUS.map((a) => <option key={a} value={a}>{a}</option>)}
+                </select>
+              </div>
             </div>
           </div>
 
