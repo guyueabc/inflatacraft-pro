@@ -61,7 +61,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "2026-06-01",
     readTime: "8 min read",
     gradient: "from-navy-700 via-navy-600 to-navy-500",
-    imageSrc: "/images/products/giant-soda-can-replica/giant-soda-can-replica-1.jpg",
+    imageSrc: "/images/products/inflatable-arch/1.png",
     featured: true,
   },
   {
@@ -75,7 +75,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "2026-05-28",
     readTime: "6 min read",
     gradient: "from-red-500 via-red-600 to-red-700",
-    imageSrc: "/images/products/pharma-pill-bottle-inflatable/pharma-pill-bottle-inflatable-1.jpg?v=1",
+    imageSrc: "/images/products/inflatable-mascot/1.jpg",
     featured: false,
   },
   {
@@ -89,7 +89,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "2026-05-20",
     readTime: "10 min read",
     gradient: "from-amber-400 via-orange-500 to-red-400",
-    imageSrc: "/images/products/custom-brand-mascot/custom-brand-mascot-1.jpg",
+    imageSrc: "/images/products/inflatable-bottle/10.jpg",
     featured: false,
   },
   {
@@ -103,7 +103,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "2026-05-15",
     readTime: "7 min read",
     gradient: "from-green-500 via-emerald-500 to-teal-500",
-    imageSrc: "/images/products/pop-up-dome-canopy/pop-up-dome-canopy-1.jpg",
+    imageSrc: "/images/products/inflatable-bounce-house/1.jpg",
     featured: false,
   },
   {
@@ -117,7 +117,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "2026-05-08",
     readTime: "9 min read",
     gradient: "from-purple-500 via-violet-500 to-indigo-500",
-    imageSrc: "/images/products/custom-inflatable-event-tent/custom-inflatable-event-tent-1.jpg",
+    imageSrc: "/images/products/inflatable-dome-tent/1.jpg",
     featured: false,
   },
   {
@@ -131,7 +131,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "2026-05-01",
     readTime: "12 min read",
     gradient: "from-pink-400 via-rose-500 to-red-500",
-    imageSrc: "/images/products/helmet-tunnel-arch/helmet-tunnel-arch-1.jpg",
+    imageSrc: "/images/products/inflatable-animals/充气大象_主图.jpg",
     featured: false,
   },
   {
@@ -145,7 +145,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "2026-04-22",
     readTime: "8 min read",
     gradient: "from-blue-600 via-blue-700 to-indigo-800",
-    imageSrc: "/images/products/finish-line-arch/finish-line-arch-1.jpg",
+    imageSrc: "/images/products/inflatable-tunnel/10.jpg",
     featured: false,
   },
   {
@@ -159,7 +159,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "2026-04-15",
     readTime: "6 min read",
     gradient: "from-sky-400 via-blue-500 to-cyan-500",
-    imageSrc: "/images/products/inflatable-obstacle-course/inflatable-obstacle-course-1.jpg",
+    imageSrc: "/images/products/inflatable-water-slide/1.png",
     featured: false,
   },
 ];

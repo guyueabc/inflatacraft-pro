@@ -48,6 +48,9 @@ export async function generateMetadata({
   return {
     title: product.name + " | Custom Inflatable Manufacturer | InflatableModel",
     description: geoDescription,
+    alternates: {
+      canonical: `https://www.qddjtx.com/products/${product.slug}`,
+    },
     openGraph: {
       title: product.name,
       description: geoDescription,
