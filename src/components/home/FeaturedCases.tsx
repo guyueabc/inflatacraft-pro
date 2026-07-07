@@ -32,83 +32,83 @@ type Industry = (typeof INDUSTRIES)[number];
 const CASE_STUDIES: CaseStudy[] = [
   {
     id: 1,
-    clientName: "FrostBite Brewing",
-    industry: "Food & Bev",
-    productType: "Inflatable Bottle",
-    description: "Giant inflatable bottle replica for nationwide summer festival tour and brand activations.",
-    placeholderLabel: "FrostBite Bottle",
-    imageSrc: "/images/products/inflatable-bottle/10.jpg",
-    slug: "giant-arch-event",
+    clientName: "Wildlife Theme Park",
+    industry: "Sports",
+    productType: "Inflatable Animals",
+    description: "Giant inflatable animal sculptures for theme park entrance and safari zone displays.",
+    placeholderLabel: "Dinosaur Display",
+    imageSrc: "/images/products/inflatable-animals/充气恐龙_1.jpg",
+    slug: "dinosaur-theme-park",
   },
   {
     id: 2,
-    clientName: "Apex Motors",
-    industry: "Sports",
-    productType: "Inflatable Arch",
-    description: "Branded sports tunnel arch entrance for championship racing series and stadium events.",
-    placeholderLabel: "Apex Arch",
-    imageSrc: "/images/products/inflatable-arch/1.png",
-    slug: "sports-tunnel-entrance",
+    clientName: "NightSky Cinema",
+    industry: "Retail",
+    productType: "Movie Screen",
+    description: "Inflatable movie screen for outdoor community cinema nights and corporate events.",
+    placeholderLabel: "Outdoor Cinema",
+    imageSrc: "/images/products/inflatable-movie-screen/1.jpg",
+    slug: "outdoor-cinema-night",
   },
   {
     id: 3,
-    clientName: "SnapChip Snacks",
-    industry: "Food & Bev",
-    productType: "Food Replica",
-    description: "Giant inflatable food replica display for supermarket grand openings across 12 states.",
-    placeholderLabel: "SnapChip Food",
-    imageSrc: "/images/products/inflatable-food-replica/充气蛋糕_1.jpg",
-    slug: "food-replica-display",
+    clientName: "Disco Nights Co.",
+    industry: "CPG",
+    productType: "Mirror Ball",
+    description: "Inflatable mirror ball decoration for concert tours and nightclub brand activations.",
+    placeholderLabel: "Mirror Ball",
+    imageSrc: "/images/products/inflatable-mirror-ball/10.jpg",
+    slug: "mirror-ball-concert",
   },
   {
     id: 4,
-    clientName: "Velocity Sports",
-    industry: "Sports",
-    productType: "Brand Mascot",
-    description: "Custom inflatable brand mascot launch for stadium giveaways and halftime entertainment.",
-    placeholderLabel: "Velocity Mascot",
-    imageSrc: "/images/products/inflatable-mascot/1.jpg",
-    slug: "brand-mascot-launch",
+    clientName: "Halloween Horror Fest",
+    industry: "Retail",
+    productType: "Halloween Inflatable",
+    description: "Seasonal Halloween inflatable display for retail storefront and haunted house events.",
+    placeholderLabel: "Halloween Display",
+    imageSrc: "/images/products/halloween-inflatable/1.png",
+    slug: "halloween-pop-up",
   },
   {
     id: 5,
-    clientName: "LuxeMart",
+    clientName: "Holiday Santa Village",
     industry: "Retail",
-    productType: "Camping Tent",
-    description: "Custom-printed inflatable camping tent for 200-store sidewalk sale festival events.",
-    placeholderLabel: "LuxeMart Tent",
-    imageSrc: "/images/products/inflatable-camping-tent/1.jpg",
-    slug: "camping-tent-festival",
+    productType: "Santa Claus",
+    description: "Giant inflatable Santa Claus for shopping mall holiday displays and winter festivals.",
+    placeholderLabel: "Santa Display",
+    imageSrc: "/images/products/inflatable-santa-claus/1.png",
+    slug: "santa-holiday-display",
   },
   {
     id: 6,
-    clientName: "MediCare Plus",
-    industry: "Sports",
-    productType: "Bounce House",
-    description: "Inflatable bounce house party setup for community health awareness events at 50 clinics.",
-    placeholderLabel: "MediCare Bounce",
-    imageSrc: "/images/products/inflatable-bounce-house/1.jpg",
-    slug: "bounce-house-party",
+    clientName: "Crystal Dome Events",
+    industry: "CPG",
+    productType: "Bubble House",
+    description: "Transparent inflatable bubble house for VIP lounge and product launch events.",
+    placeholderLabel: "Bubble House",
+    imageSrc: "/images/products/inflatable-bubble-house/1.jpg",
+    slug: "bubble-house-vip",
   },
   {
     id: 7,
-    clientName: "GreenField Organics",
-    industry: "Retail",
-    productType: "Inflatable Costume",
-    description: "Wearable inflatable costume for in-store sampling teams and promotional events.",
-    placeholderLabel: "GreenField Costume",
-    imageSrc: "/images/products/inflatable-costume/1.jpg",
-    slug: "costume-promotion",
+    clientName: "Garden Light Festival",
+    industry: "Food & Bev",
+    productType: "Light Column",
+    description: "Inflatable light columns for outdoor garden festival and nighttime brand illumination.",
+    placeholderLabel: "Light Columns",
+    imageSrc: "/images/products/inflatable-light-column/1.png",
+    slug: "light-column-installation",
   },
   {
     id: 8,
     clientName: "TurboCharge Energy",
-    industry: "Sports",
-    productType: "Water Slide",
-    description: "Inflatable water slide for summer extreme sports sponsorship activation events.",
-    placeholderLabel: "TurboCharge Slide",
-    imageSrc: "/images/products/inflatable-water-slide/1.png",
-    slug: "water-slide-summer",
+    industry: "Food & Bev",
+    productType: "Food Replica",
+    description: "Giant inflatable food replicas for trade show booth and retail grand opening displays.",
+    placeholderLabel: "Food Replicas",
+    imageSrc: "/images/products/inflatable-food-replica/充气冰淇淋_1.jpg",
+    slug: "food-replica-display",
   },
 ];
 
@@ -169,17 +169,14 @@ export function FeaturedCases() {
                 className="mb-6 break-inside-avoid overflow-hidden rounded-xl border border-gray-200 bg-white transition-all hover:border-navy-300 hover:shadow-lg"
               >
                 {/* Image */}
-                <div className="relative flex h-44 items-center justify-center overflow-hidden bg-gray-200">
+                <div className="relative aspect-[4/3] w-full overflow-hidden bg-gray-100">
                   <img
                     src={study.imageSrc}
                     alt={study.clientName}
                     loading="lazy"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                    className="absolute inset-0 h-full w-full object-cover"
+                    className="h-full w-full object-contain"
                   />
-                  <span className="relative z-10 text-sm font-medium text-gray-400">
-                    {study.placeholderLabel}
-                  </span>
                 </div>
                 <div className="p-5">
                   <div className="flex items-center gap-2">

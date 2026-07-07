@@ -92,22 +92,14 @@ export function ProductCategories() {
               href={category.href}
               className="group flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white transition-all hover:border-navy-300 hover:shadow-lg"
             >
-              {/* Product image with icon+label fallback */}
-              <div className="relative h-48 overflow-hidden bg-gray-200">
+              {/* Product image */}
+              <div className="relative aspect-[4/3] w-full overflow-hidden bg-gray-100">
                 <img
                   src={category.imageSrc}
                   alt={category.title}
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
                   loading="lazy"
-                  onError={(e) => {
-                    const el = e.target as HTMLImageElement;
-                    el.style.display = 'none';
-                  }}
                 />
-                <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 text-gray-400 transition-colors group-hover:text-navy-600">
-                  <category.icon className="h-10 w-10" />
-                  <span className="text-sm font-medium">{category.placeholderLabel}</span>
-                </div>
               </div>
               {/* Card body */}
               <div className="flex flex-1 flex-col p-6">

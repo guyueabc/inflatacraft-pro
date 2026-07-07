@@ -383,7 +383,7 @@ export function GalleryPageClient() {
                         fill
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                         onLoad={() => setImageLoaded((prev) => ({ ...prev, [item.id]: true }))}
-                        className="h-full w-full object-cover transition-all duration-500 group-hover:scale-110"
+                        className="h-full w-full object-contain transition-all duration-500 group-hover:scale-110"
                       />
                       {/* Hover overlay */}
                       <div className="absolute inset-0 flex items-center justify-center bg-navy-900/0 transition-all group-hover:bg-navy-900/30">
