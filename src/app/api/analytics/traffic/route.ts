@@ -81,7 +81,7 @@ async function getDayStats(date: Date, compare: boolean) {
     prisma.$queryRawUnsafe<Array<{ traffic_type: string; count: bigint }>>(
       `SELECT traffic_type, COUNT(*)::int as count 
        FROM page_views 
-       WHERE created_at >= $1 AND created_at < $2 AND is_owner = FALSE AND is_test = FALSE
+       WHERE created_at >= $1 AND created_at < $2 AND is_owner = FALSE AND is_test = FALSE AND (country IS NULL OR country != 'CN')
        GROUP BY traffic_type`,
       dayStart, dayEnd
     ),
@@ -89,14 +89,14 @@ async function getDayStats(date: Date, compare: boolean) {
     prisma.$queryRawUnsafe<Array<{ count: bigint }>>(
       `SELECT COUNT(DISTINCT session_id)::int as count 
        FROM page_views 
-       WHERE created_at >= $1 AND created_at < $2 AND is_owner = FALSE AND is_test = FALSE`,
+       WHERE created_at >= $1 AND created_at < $2 AND is_owner = FALSE AND is_test = FALSE AND (country IS NULL OR country != 'CN')`,
       dayStart, dayEnd
     ),
     // 按小时分布
     prisma.$queryRawUnsafe<Array<{ hour: number; pv: number }>>(
       `SELECT EXTRACT(HOUR FROM created_at)::int as hour, COUNT(*)::int as pv
        FROM page_views 
-       WHERE created_at >= $1 AND created_at < $2 AND is_owner = FALSE AND is_test = FALSE
+       WHERE created_at >= $1 AND created_at < $2 AND is_owner = FALSE AND is_test = FALSE AND (country IS NULL OR country != 'CN')
        GROUP BY hour ORDER BY hour`,
       dayStart, dayEnd
     ),
@@ -123,12 +123,12 @@ async function getDayStats(date: Date, compare: boolean) {
     const [prevPV, prevUV] = await Promise.all([
       prisma.$queryRawUnsafe<Array<{ count: bigint }>>(
         `SELECT COUNT(*)::int as count FROM page_views 
-         WHERE created_at >= $1 AND created_at < $2 AND is_owner = FALSE AND is_test = FALSE`,
+         WHERE created_at >= $1 AND created_at < $2 AND is_owner = FALSE AND is_test = FALSE AND (country IS NULL OR country != 'CN')`,
         prevDayStart, prevDayEnd
       ),
       prisma.$queryRawUnsafe<Array<{ count: bigint }>>(
         `SELECT COUNT(DISTINCT session_id)::int as count FROM page_views 
-         WHERE created_at >= $1 AND created_at < $2 AND is_owner = FALSE AND is_test = FALSE`,
+         WHERE created_at >= $1 AND created_at < $2 AND is_owner = FALSE AND is_test = FALSE AND (country IS NULL OR country != 'CN')`,
         prevDayStart, prevDayEnd
       ),
     ]);
@@ -181,17 +181,17 @@ async function getWeekStats(date: Date, compare: boolean) {
     const [pv, uv, typeRows] = await Promise.all([
       prisma.$queryRawUnsafe<Array<{ count: bigint }>>(
         `SELECT COUNT(*)::int as count FROM page_views 
-         WHERE created_at >= $1 AND created_at < $2 AND is_owner = FALSE AND is_test = FALSE`,
+         WHERE created_at >= $1 AND created_at < $2 AND is_owner = FALSE AND is_test = FALSE AND (country IS NULL OR country != 'CN')`,
         d, dEnd
       ),
       prisma.$queryRawUnsafe<Array<{ count: bigint }>>(
         `SELECT COUNT(DISTINCT session_id)::int as count FROM page_views 
-         WHERE created_at >= $1 AND created_at < $2 AND is_owner = FALSE AND is_test = FALSE`,
+         WHERE created_at >= $1 AND created_at < $2 AND is_owner = FALSE AND is_test = FALSE AND (country IS NULL OR country != 'CN')`,
         d, dEnd
       ),
       prisma.$queryRawUnsafe<Array<{ traffic_type: string; count: bigint }>>(
         `SELECT traffic_type, COUNT(*)::int as count FROM page_views 
-         WHERE created_at >= $1 AND created_at < $2 AND is_owner = FALSE AND is_test = FALSE
+         WHERE created_at >= $1 AND created_at < $2 AND is_owner = FALSE AND is_test = FALSE AND (country IS NULL OR country != 'CN')
          GROUP BY traffic_type`,
         d, dEnd
       ),
@@ -237,12 +237,12 @@ async function getWeekStats(date: Date, compare: boolean) {
       const [pv, uv] = await Promise.all([
         prisma.$queryRawUnsafe<Array<{ count: bigint }>>(
           `SELECT COUNT(*)::int as count FROM page_views 
-           WHERE created_at >= $1 AND created_at < $2 AND is_owner = FALSE AND is_test = FALSE`,
+           WHERE created_at >= $1 AND created_at < $2 AND is_owner = FALSE AND is_test = FALSE AND (country IS NULL OR country != 'CN')`,
           d, dEnd
         ),
         prisma.$queryRawUnsafe<Array<{ count: bigint }>>(
           `SELECT COUNT(DISTINCT session_id)::int as count FROM page_views 
-           WHERE created_at >= $1 AND created_at < $2 AND is_owner = FALSE AND is_test = FALSE`,
+           WHERE created_at >= $1 AND created_at < $2 AND is_owner = FALSE AND is_test = FALSE AND (country IS NULL OR country != 'CN')`,
           d, dEnd
         ),
       ]);
@@ -299,12 +299,12 @@ async function getMonthStats(date: Date, compare: boolean) {
     const [pv, uv] = await Promise.all([
       prisma.$queryRawUnsafe<Array<{ count: bigint }>>(
         `SELECT COUNT(*)::int as count FROM page_views 
-         WHERE created_at >= $1 AND created_at < $2 AND is_owner = FALSE AND is_test = FALSE`,
+         WHERE created_at >= $1 AND created_at < $2 AND is_owner = FALSE AND is_test = FALSE AND (country IS NULL OR country != 'CN')`,
         d, dEnd
       ),
       prisma.$queryRawUnsafe<Array<{ count: bigint }>>(
         `SELECT COUNT(DISTINCT session_id)::int as count FROM page_views 
-         WHERE created_at >= $1 AND created_at < $2 AND is_owner = FALSE AND is_test = FALSE`,
+         WHERE created_at >= $1 AND created_at < $2 AND is_owner = FALSE AND is_test = FALSE AND (country IS NULL OR country != 'CN')`,
         d, dEnd
       ),
     ]);
@@ -347,12 +347,12 @@ async function getMonthStats(date: Date, compare: boolean) {
     const [prevPV, prevUV] = await Promise.all([
       prisma.$queryRawUnsafe<Array<{ count: bigint }>>(
         `SELECT COUNT(*)::int as count FROM page_views 
-         WHERE created_at >= $1 AND created_at < $2 AND is_owner = FALSE AND is_test = FALSE`,
+         WHERE created_at >= $1 AND created_at < $2 AND is_owner = FALSE AND is_test = FALSE AND (country IS NULL OR country != 'CN')`,
         prevMonthStart, prevMonthEnd
       ),
       prisma.$queryRawUnsafe<Array<{ count: bigint }>>(
         `SELECT COUNT(DISTINCT session_id)::int as count FROM page_views 
-         WHERE created_at >= $1 AND created_at < $2 AND is_owner = FALSE AND is_test = FALSE`,
+         WHERE created_at >= $1 AND created_at < $2 AND is_owner = FALSE AND is_test = FALSE AND (country IS NULL OR country != 'CN')`,
         prevMonthStart, prevMonthEnd
       ),
     ]);
@@ -400,12 +400,12 @@ async function getRangeStats(startDate: Date, endDate: Date) {
     const [pv, uv] = await Promise.all([
       prisma.$queryRawUnsafe<Array<{ count: bigint }>>(
         `SELECT COUNT(*)::int as count FROM page_views 
-         WHERE created_at >= $1 AND created_at < $2 AND is_owner = FALSE AND is_test = FALSE`,
+         WHERE created_at >= $1 AND created_at < $2 AND is_owner = FALSE AND is_test = FALSE AND (country IS NULL OR country != 'CN')`,
         d, dEnd
       ),
       prisma.$queryRawUnsafe<Array<{ count: bigint }>>(
         `SELECT COUNT(DISTINCT session_id)::int as count FROM page_views 
-         WHERE created_at >= $1 AND created_at < $2 AND is_owner = FALSE AND is_test = FALSE`,
+         WHERE created_at >= $1 AND created_at < $2 AND is_owner = FALSE AND is_test = FALSE AND (country IS NULL OR country != 'CN')`,
         d, dEnd
       ),
     ]);

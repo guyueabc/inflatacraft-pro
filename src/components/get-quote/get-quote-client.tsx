@@ -83,10 +83,6 @@ export function GetQuoteClient() {
 
     setIsSubmitting(false);
     setIsSubmitted(true);
-    // Auto-navigate to quote page after short delay
-    setTimeout(() => {
-      try { window.location.href = "/quote/pending"; } catch {}
-    }, 1500);
     // Conversion tracking — Analytics component pushes Google Ads conversion
     sessionStorage.setItem("quote_submitted", "true");
     // Push GTM conversion event
@@ -105,7 +101,7 @@ export function GetQuoteClient() {
           <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-green-100 sm:h-20 sm:w-20">
             <CheckCircle2 className="h-8 w-8 text-green-600 sm:h-10 sm:w-10" />
           </div>
-          <h1 className="mt-6 font-heading text-3xl font-bold text-navy-900">Quote Request Received!</h1>
+          <h1 className="mt-6 font-heading text-3xl font-bold text-navy-900">需求提交成功，我们将尽快联系你</h1>
           <p className="mt-3 leading-relaxed text-gray-600">
             Thank you! Our team will review your requirements and get back to you within <strong>24 hours</strong>.
           </p>

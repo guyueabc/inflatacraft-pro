@@ -193,80 +193,80 @@ async function getTrafficStats(todayStart: Date, weekStart: Date, monthStart: Da
     // PV by traffic type (excluding owner and test)
     prisma.$queryRawUnsafe<Array<{ count: bigint }>>(
       `SELECT COUNT(*)::int as count FROM page_views 
-       WHERE created_at >= $1 AND is_owner = FALSE AND is_test = FALSE AND traffic_type = 'ads'`,
+       WHERE created_at >= $1 AND is_owner = FALSE AND is_test = FALSE AND (country IS NULL OR country != 'CN') AND traffic_type = 'ads'`,
       todayStart
     ),
     prisma.$queryRawUnsafe<Array<{ count: bigint }>>(
       `SELECT COUNT(*)::int as count FROM page_views 
-       WHERE created_at >= $1 AND is_owner = FALSE AND is_test = FALSE AND traffic_type = 'organic'`,
+       WHERE created_at >= $1 AND is_owner = FALSE AND is_test = FALSE AND (country IS NULL OR country != 'CN') AND traffic_type = 'organic'`,
       todayStart
     ),
     prisma.$queryRawUnsafe<Array<{ count: bigint }>>(
       `SELECT COUNT(*)::int as count FROM page_views 
-       WHERE created_at >= $1 AND is_owner = FALSE AND is_test = FALSE AND traffic_type = 'social'`,
+       WHERE created_at >= $1 AND is_owner = FALSE AND is_test = FALSE AND (country IS NULL OR country != 'CN') AND traffic_type = 'social'`,
       todayStart
     ),
     prisma.$queryRawUnsafe<Array<{ count: bigint }>>(
       `SELECT COUNT(*)::int as count FROM page_views 
-       WHERE created_at >= $1 AND is_owner = FALSE AND is_test = FALSE AND traffic_type = 'referral'`,
+       WHERE created_at >= $1 AND is_owner = FALSE AND is_test = FALSE AND (country IS NULL OR country != 'CN') AND traffic_type = 'referral'`,
       todayStart
     ),
     prisma.$queryRawUnsafe<Array<{ count: bigint }>>(
       `SELECT COUNT(*)::int as count FROM page_views 
-       WHERE created_at >= $1 AND is_owner = FALSE AND is_test = FALSE AND traffic_type = 'direct'`,
+       WHERE created_at >= $1 AND is_owner = FALSE AND is_test = FALSE AND (country IS NULL OR country != 'CN') AND traffic_type = 'direct'`,
       todayStart
     ),
     // UV by traffic type
     prisma.$queryRawUnsafe<Array<{ count: bigint }>>(
       `SELECT COUNT(DISTINCT session_id)::int as count FROM page_views 
-       WHERE created_at >= $1 AND is_owner = FALSE AND is_test = FALSE AND traffic_type = 'ads' AND session_id IS NOT NULL`,
+       WHERE created_at >= $1 AND is_owner = FALSE AND is_test = FALSE AND (country IS NULL OR country != 'CN') AND traffic_type = 'ads' AND session_id IS NOT NULL`,
       todayStart
     ),
     prisma.$queryRawUnsafe<Array<{ count: bigint }>>(
       `SELECT COUNT(DISTINCT session_id)::int as count FROM page_views 
-       WHERE created_at >= $1 AND is_owner = FALSE AND is_test = FALSE AND traffic_type = 'organic' AND session_id IS NOT NULL`,
+       WHERE created_at >= $1 AND is_owner = FALSE AND is_test = FALSE AND (country IS NULL OR country != 'CN') AND traffic_type = 'organic' AND session_id IS NOT NULL`,
       todayStart
     ),
     prisma.$queryRawUnsafe<Array<{ count: bigint }>>(
       `SELECT COUNT(DISTINCT session_id)::int as count FROM page_views 
-       WHERE created_at >= $1 AND is_owner = FALSE AND is_test = FALSE AND traffic_type = 'social' AND session_id IS NOT NULL`,
+       WHERE created_at >= $1 AND is_owner = FALSE AND is_test = FALSE AND (country IS NULL OR country != 'CN') AND traffic_type = 'social' AND session_id IS NOT NULL`,
       todayStart
     ),
     prisma.$queryRawUnsafe<Array<{ count: bigint }>>(
       `SELECT COUNT(DISTINCT session_id)::int as count FROM page_views 
-       WHERE created_at >= $1 AND is_owner = FALSE AND is_test = FALSE AND traffic_type = 'referral' AND session_id IS NOT NULL`,
+       WHERE created_at >= $1 AND is_owner = FALSE AND is_test = FALSE AND (country IS NULL OR country != 'CN') AND traffic_type = 'referral' AND session_id IS NOT NULL`,
       todayStart
     ),
     prisma.$queryRawUnsafe<Array<{ count: bigint }>>(
       `SELECT COUNT(DISTINCT session_id)::int as count FROM page_views 
-       WHERE created_at >= $1 AND is_owner = FALSE AND is_test = FALSE AND traffic_type = 'direct' AND session_id IS NOT NULL`,
+       WHERE created_at >= $1 AND is_owner = FALSE AND is_test = FALSE AND (country IS NULL OR country != 'CN') AND traffic_type = 'direct' AND session_id IS NOT NULL`,
       todayStart
     ),
     // Total
     prisma.$queryRawUnsafe<Array<{ count: bigint }>>(
       `SELECT COUNT(*)::int as count FROM page_views 
-       WHERE created_at >= $1 AND is_owner = FALSE AND is_test = FALSE`,
+       WHERE created_at >= $1 AND is_owner = FALSE AND is_test = FALSE AND (country IS NULL OR country != 'CN')`,
       todayStart
     ),
     prisma.$queryRawUnsafe<Array<{ count: bigint }>>(
       `SELECT COUNT(DISTINCT session_id)::int as count FROM page_views 
-       WHERE created_at >= $1 AND is_owner = FALSE AND is_test = FALSE AND session_id IS NOT NULL`,
+       WHERE created_at >= $1 AND is_owner = FALSE AND is_test = FALSE AND (country IS NULL OR country != 'CN') AND session_id IS NOT NULL`,
       todayStart
     ),
     // Sessions (for accurate visitor count)
     prisma.$queryRawUnsafe<Array<{ count: bigint }>>(
       `SELECT COUNT(DISTINCT session_id)::int as count FROM page_views 
-       WHERE created_at >= $1 AND is_owner = FALSE AND is_test = FALSE AND traffic_type = 'ads'`,
+       WHERE created_at >= $1 AND is_owner = FALSE AND is_test = FALSE AND (country IS NULL OR country != 'CN') AND traffic_type = 'ads'`,
       todayStart
     ),
     prisma.$queryRawUnsafe<Array<{ count: bigint }>>(
       `SELECT COUNT(DISTINCT session_id)::int as count FROM page_views 
-       WHERE created_at >= $1 AND is_owner = FALSE AND is_test = FALSE AND traffic_type IN ('organic', 'social', 'referral', 'direct')`,
+       WHERE created_at >= $1 AND is_owner = FALSE AND is_test = FALSE AND (country IS NULL OR country != 'CN') AND traffic_type IN ('organic', 'social', 'referral', 'direct')`,
       todayStart
     ),
     prisma.$queryRawUnsafe<Array<{ count: bigint }>>(
       `SELECT COUNT(DISTINCT session_id)::int as count FROM page_views 
-       WHERE created_at >= $1 AND is_owner = FALSE AND is_test = FALSE`,
+       WHERE created_at >= $1 AND is_owner = FALSE AND is_test = FALSE AND (country IS NULL OR country != 'CN')`,
       todayStart
     ),
   ]);
@@ -312,32 +312,32 @@ async function getDailyBreakdown(todayStart: Date) {
     const [totalPV, totalUV, adsPV, adsUV, organicPV, organicUV] = await Promise.all([
       prisma.$queryRawUnsafe<Array<{ count: bigint }>>(
         `SELECT COUNT(*)::int as count FROM page_views 
-         WHERE created_at >= $1 AND created_at < $2 AND is_owner = FALSE AND is_test = FALSE`,
+         WHERE created_at >= $1 AND created_at < $2 AND is_owner = FALSE AND is_test = FALSE AND (country IS NULL OR country != 'CN')`,
         d, dEnd
       ),
       prisma.$queryRawUnsafe<Array<{ count: bigint }>>(
         `SELECT COUNT(DISTINCT session_id)::int as count FROM page_views 
-         WHERE created_at >= $1 AND created_at < $2 AND is_owner = FALSE AND is_test = FALSE`,
+         WHERE created_at >= $1 AND created_at < $2 AND is_owner = FALSE AND is_test = FALSE AND (country IS NULL OR country != 'CN')`,
         d, dEnd
       ),
       prisma.$queryRawUnsafe<Array<{ count: bigint }>>(
         `SELECT COUNT(*)::int as count FROM page_views 
-         WHERE created_at >= $1 AND created_at < $2 AND is_owner = FALSE AND is_test = FALSE AND traffic_type = 'ads'`,
+         WHERE created_at >= $1 AND created_at < $2 AND is_owner = FALSE AND is_test = FALSE AND (country IS NULL OR country != 'CN') AND traffic_type = 'ads'`,
         d, dEnd
       ),
       prisma.$queryRawUnsafe<Array<{ count: bigint }>>(
         `SELECT COUNT(DISTINCT session_id)::int as count FROM page_views 
-         WHERE created_at >= $1 AND created_at < $2 AND is_owner = FALSE AND is_test = FALSE AND traffic_type = 'ads'`,
+         WHERE created_at >= $1 AND created_at < $2 AND is_owner = FALSE AND is_test = FALSE AND (country IS NULL OR country != 'CN') AND traffic_type = 'ads'`,
         d, dEnd
       ),
       prisma.$queryRawUnsafe<Array<{ count: bigint }>>(
         `SELECT COUNT(*)::int as count FROM page_views 
-         WHERE created_at >= $1 AND created_at < $2 AND is_owner = FALSE AND is_test = FALSE AND traffic_type IN ('organic', 'social', 'referral', 'direct')`,
+         WHERE created_at >= $1 AND created_at < $2 AND is_owner = FALSE AND is_test = FALSE AND (country IS NULL OR country != 'CN') AND traffic_type IN ('organic', 'social', 'referral', 'direct')`,
         d, dEnd
       ),
       prisma.$queryRawUnsafe<Array<{ count: bigint }>>(
         `SELECT COUNT(DISTINCT session_id)::int as count FROM page_views 
-         WHERE created_at >= $1 AND created_at < $2 AND is_owner = FALSE AND is_test = FALSE AND traffic_type IN ('organic', 'social', 'referral', 'direct')`,
+         WHERE created_at >= $1 AND created_at < $2 AND is_owner = FALSE AND is_test = FALSE AND (country IS NULL OR country != 'CN') AND traffic_type IN ('organic', 'social', 'referral', 'direct')`,
         d, dEnd
       ),
     ]);
@@ -382,7 +382,7 @@ export async function GET(request: NextRequest) {
       // 获取热门页面（排除owner/test）
       const topPages = await prisma.$queryRawUnsafe<Array<{ page: string; views: bigint }>>(
         `SELECT page, COUNT(*)::int as views FROM page_views 
-         WHERE created_at >= $1 AND is_owner = FALSE AND is_test = FALSE
+         WHERE created_at >= $1 AND is_owner = FALSE AND is_test = FALSE AND (country IS NULL OR country != 'CN')
          GROUP BY page ORDER BY views DESC LIMIT 10`,
         todayStart
       );
@@ -396,7 +396,7 @@ export async function GET(request: NextRequest) {
            traffic_type,
            COUNT(*)::int as count 
          FROM page_views 
-         WHERE created_at >= $1 AND is_owner = FALSE AND is_test = FALSE
+         WHERE created_at >= $1 AND is_owner = FALSE AND is_test = FALSE AND (country IS NULL OR country != 'CN')
          GROUP BY source, traffic_type 
          ORDER BY count DESC 
          LIMIT 20`,
@@ -431,8 +431,9 @@ export async function GET(request: NextRequest) {
     await ensureAdvancedColumns();
 
     // 判断流量属性
+    // Mark Chinese IPs, localhost, and unknown IPs as test traffic to exclude from stats
     const isOwner = isOwnerIp(ip);
-    const isTest = isTestIp(ip);
+    const isTest = isTestIp(ip) || isChinaIp(ip) || ip === "0.0.0.0";
     const gclid = searchParams.get("gclid") || searchParams.get("gbraid") || searchParams.get("wbraid") || "";
     const utmSource = searchParams.get("utm_source");
     const utmMedium = searchParams.get("utm_medium");
