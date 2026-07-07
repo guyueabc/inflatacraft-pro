@@ -67,15 +67,17 @@ export function GetQuoteClient() {
     }, {} as Record<string, string>);
 
     try {
-      const res = await fetch("/api/quote", {
+      // Use /api/submit-quote (proven working with DingTalk + Supabase)
+      // Then try /api/quote for estimate (optional, won't fail the submission)
+      const res = await fetch("/api/submit-quote", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...data, ...utm }),
       });
       const result = await res.json().catch(() => ({}));
-      // Store estimate in sessionStorage for the quote page
-      if (result.estimate) {
-        sessionStorage.setItem("quote_estimate", JSON.stringify({ data: { estimate: result.estimate, leadScore: result.leadScore } }));
+      // Store result for quote page
+      if (result.success) {
+        sessionStorage.setItem("quote_submitted", "true");
       }
     } catch {
       // Even if fetch fails, data may have been submitted, still show success page
