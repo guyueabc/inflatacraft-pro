@@ -152,7 +152,7 @@ export function StatsDashboard() {
               icon={Users}
               label="今日访客"
               value={t.totalVisitors}
-              change="+12%"
+              change={t.totalVisitors > 0 ? "实时" : "暂无"}
               changeType="up"
               color="blue"
             />
@@ -160,7 +160,7 @@ export function StatsDashboard() {
               icon={Send}
               label="询盘数"
               value={submissions.length}
-              change="+8%"
+              change={submissions.length > 0 ? "实时" : "暂无"}
               changeType="up"
               color="green"
             />
@@ -168,7 +168,7 @@ export function StatsDashboard() {
               icon={Target}
               label="转化率"
               value={`${conversionRate}%`}
-              change="+0.5%"
+              change={parseFloat(conversionRate) > 0 ? "实时" : "暂无"}
               changeType="up"
               color="purple"
             />
@@ -176,7 +176,7 @@ export function StatsDashboard() {
               icon={Eye}
               label="页面浏览"
               value={t.totalPV}
-              change="+15%"
+              change={t.totalPV > 0 ? "实时" : "暂无"}
               changeType="up"
               color="orange"
             />
@@ -190,9 +190,9 @@ export function StatsDashboard() {
             </h2>
             <div className="space-y-3">
               <FunnelStep label="网站访问" value={t.totalVisitors} percentage={100} color="bg-blue-500" />
-              <FunnelStep label="浏览产品页" value={Math.round(t.totalVisitors * 0.45)} percentage={45} color="bg-indigo-500" />
+              <FunnelStep label="浏览产品页" value={trafficStats.topPages.filter(p => p.page.includes("/products/")).reduce((sum, p) => sum + p.views, 0)} percentage={t.totalPV > 0 ? (trafficStats.topPages.filter(p => p.page.includes("/products/")).reduce((sum, p) => sum + p.views, 0) / t.totalPV) * 100 : 0} color="bg-indigo-500" />
               <FunnelStep label="提交询盘" value={submissions.length} percentage={parseFloat(conversionRate)} color="bg-green-500" />
-              <FunnelStep label="成交转化" value={Math.round(submissions.length * 0.3)} percentage={parseFloat(conversionRate) * 0.3} color="bg-emerald-500" />
+              <FunnelStep label="未完成线索" value={partialLeads.length} percentage={t.totalVisitors > 0 ? (partialLeads.length / t.totalVisitors) * 100 : 0} color="bg-orange-500" />
             </div>
           </div>
 
@@ -205,20 +205,20 @@ export function StatsDashboard() {
               </h2>
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-600">当前在线</span>
-                  <span className="text-2xl font-bold text-navy-900">23</span>
+                  <span className="text-sm text-gray-600">今日访客</span>
+                  <span className="text-2xl font-bold text-navy-900">{t.totalVisitors}</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-600">今日峰值</span>
-                  <span className="text-2xl font-bold text-navy-900">156</span>
+                  <span className="text-sm text-gray-600">今日浏览量</span>
+                  <span className="text-2xl font-bold text-navy-900">{t.totalPV}</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-600">平均停留</span>
-                  <span className="text-2xl font-bold text-navy-900">2m34s</span>
+                  <span className="text-sm text-gray-600">广告访客</span>
+                  <span className="text-2xl font-bold text-blue-600">{t.adsVisitors}</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-600">跳出率</span>
-                  <span className="text-2xl font-bold text-red-500">42%</span>
+                  <span className="text-sm text-gray-600">自然访客</span>
+                  <span className="text-2xl font-bold text-green-600">{t.organicVisitors}</span>
                 </div>
               </div>
             </div>
@@ -228,80 +228,62 @@ export function StatsDashboard() {
                 <Globe className="h-5 w-5 text-navy-600" />
                 客户画像
               </h2>
-              <div className="space-y-4">
-                <div>
-                  <div className="mb-2 flex items-center justify-between">
-                    <span className="text-sm text-gray-600">美国</span>
-                    <span className="text-sm font-semibold text-navy-900">45%</span>
-                  </div>
-                  <div className="h-2 w-full rounded-full bg-gray-100">
-                    <div className="h-full w-[45%] rounded-full bg-blue-500" />
-                  </div>
+              {trafficStats.sources.length === 0 ? (
+                <p className="text-sm text-gray-400">暂无数据</p>
+              ) : (
+                <div className="space-y-4">
+                  {trafficStats.sources.slice(0, 6).map((s, i) => {
+                    const pct = t.totalPV > 0 ? (s.count / t.totalPV) * 100 : 0;
+                    const colors = ["bg-blue-500", "bg-green-500", "bg-purple-500", "bg-orange-500", "bg-gray-400", "bg-pink-500"];
+                    return (
+                      <div key={i}>
+                        <div className="mb-2 flex items-center justify-between">
+                          <span className="text-sm text-gray-600">{s.source || "直接访问"} ({s.type})</span>
+                          <span className="text-sm font-semibold text-navy-900">{pct.toFixed(1)}%</span>
+                        </div>
+                        <div className="h-2 w-full rounded-full bg-gray-100">
+                          <div className={`h-full rounded-full ${colors[i % colors.length]}`} style={{ width: `${pct}%` }} />
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
-                <div>
-                  <div className="mb-2 flex items-center justify-between">
-                    <span className="text-sm text-gray-600">加拿大</span>
-                    <span className="text-sm font-semibold text-navy-900">22%</span>
-                  </div>
-                  <div className="h-2 w-full rounded-full bg-gray-100">
-                    <div className="h-full w-[22%] rounded-full bg-green-500" />
-                  </div>
-                </div>
-                <div>
-                  <div className="mb-2 flex items-center justify-between">
-                    <span className="text-sm text-gray-600">英国</span>
-                    <span className="text-sm font-semibold text-navy-900">18%</span>
-                  </div>
-                  <div className="h-2 w-full rounded-full bg-gray-100">
-                    <div className="h-full w-[18%] rounded-full bg-purple-500" />
-                  </div>
-                </div>
-                <div>
-                  <div className="mb-2 flex items-center justify-between">
-                    <span className="text-sm text-gray-600">其他</span>
-                    <span className="text-sm font-semibold text-navy-900">15%</span>
-                  </div>
-                  <div className="h-2 w-full rounded-full bg-gray-100">
-                    <div className="h-full w-[15%] rounded-full bg-orange-500" />
-                  </div>
-                </div>
-              </div>
+              )}
             </div>
           </div>
 
-          {/* 商品销量排行 */}
+          {/* 商品销量排行 — 基于真实询盘数据 */}
           <div className="rounded-xl border border-gray-200 bg-white p-6">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-navy-900">
               <ShoppingCart className="h-5 w-5 text-navy-600" />
-              商品销量排行 TOP 10
+              询盘产品排行
             </h2>
-            <div className="space-y-3">
-              {[
-                { name: "充气拱门", sales: 23, revenue: "¥46,000" },
-                { name: "充气蹦床", sales: 18, revenue: "¥54,000" },
-                { name: "充气水滑梯", sales: 15, revenue: "¥60,000" },
-                { name: "充气吉祥物", sales: 12, revenue: "¥24,000" },
-                { name: "充气帐篷", sales: 10, revenue: "¥30,000" },
-                { name: "充气瓶子", sales: 8, revenue: "¥16,000" },
-                { name: "充气动物", sales: 7, revenue: "¥21,000" },
-                { name: "充气镜面球", sales: 6, revenue: "¥12,000" },
-                { name: "充气服装", sales: 5, revenue: "¥10,000" },
-                { name: "充气舞台", sales: 4, revenue: "¥16,000" },
-              ].map((item, i) => (
-                <div key={i} className="flex items-center justify-between rounded-lg bg-gray-50 p-3">
-                  <div className="flex items-center gap-3">
-                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-navy-100 text-sm font-bold text-navy-700">
-                      {i + 1}
-                    </span>
-                    <span className="text-sm font-medium text-navy-900">{item.name}</span>
-                  </div>
-                  <div className="flex items-center gap-4">
-                    <span className="text-sm text-gray-600">{item.sales}件</span>
-                    <span className="text-sm font-semibold text-green-600">{item.revenue}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
+            {submissions.length === 0 ? (
+              <p className="text-sm text-gray-400">暂无询盘数据</p>
+            ) : (
+              <div className="space-y-3">
+                {(() => {
+                  const productCounts: Record<string, number> = {};
+                  submissions.forEach((s) => {
+                    const pt = s.data?.productType || "未指定";
+                    productCounts[pt] = (productCounts[pt] || 0) + 1;
+                  });
+                  return Object.entries(productCounts)
+                    .sort(([, a], [, b]) => b - a)
+                    .map(([name, count], i) => (
+                      <div key={i} className="flex items-center justify-between rounded-lg bg-gray-50 p-3">
+                        <div className="flex items-center gap-3">
+                          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-navy-100 text-sm font-bold text-navy-700">
+                            {i + 1}
+                          </span>
+                          <span className="text-sm font-medium text-navy-900">{name}</span>
+                        </div>
+                        <span className="text-sm text-gray-600">{count} 次询盘</span>
+                      </div>
+                    ));
+                })()}
+              </div>
+            )}
           </div>
         </div>
       )}
@@ -566,12 +548,12 @@ export function StatsDashboard() {
               <div className="rounded-lg bg-indigo-50 p-4">
                 <div className="mb-2 flex items-center justify-between">
                   <span className="font-medium text-indigo-900">浏览产品页</span>
-                  <span className="text-2xl font-bold text-indigo-700">{Math.round(t.totalVisitors * 0.45)}</span>
+                  <span className="text-2xl font-bold text-indigo-700">{trafficStats.topPages.filter(p => p.page.includes("/products/")).reduce((sum, p) => sum + p.views, 0)}</span>
                 </div>
                 <div className="h-3 w-full rounded-full bg-indigo-100">
-                  <div className="h-full w-[45%] rounded-full bg-indigo-500" />
+                  <div className="h-full rounded-full bg-indigo-500" style={{ width: `${t.totalPV > 0 ? (trafficStats.topPages.filter(p => p.page.includes("/products/")).reduce((sum, p) => sum + p.views, 0) / t.totalPV) * 100 : 0}%` }} />
                 </div>
-                <p className="mt-2 text-xs text-indigo-600">45% 转化率</p>
+                <p className="mt-2 text-xs text-indigo-600">{t.totalPV > 0 ? ((trafficStats.topPages.filter(p => p.page.includes("/products/")).reduce((sum, p) => sum + p.views, 0) / t.totalPV) * 100).toFixed(1) : 0}% 转化率</p>
               </div>
               <div className="rounded-lg bg-green-50 p-4">
                 <div className="mb-2 flex items-center justify-between">
@@ -585,13 +567,13 @@ export function StatsDashboard() {
               </div>
               <div className="rounded-lg bg-emerald-50 p-4">
                 <div className="mb-2 flex items-center justify-between">
-                  <span className="font-medium text-emerald-900">成交转化</span>
-                  <span className="text-2xl font-bold text-emerald-700">{Math.round(submissions.length * 0.3)}</span>
+                  <span className="font-medium text-emerald-900">未完成线索</span>
+                  <span className="text-2xl font-bold text-emerald-700">{partialLeads.length}</span>
                 </div>
                 <div className="h-3 w-full rounded-full bg-emerald-100">
-                  <div className="h-full rounded-full bg-emerald-500" style={{ width: `${parseFloat(conversionRate) * 0.3}%` }} />
+                  <div className="h-full rounded-full bg-emerald-500" style={{ width: `${t.totalVisitors > 0 ? (partialLeads.length / t.totalVisitors) * 100 : 0}%` }} />
                 </div>
-                <p className="mt-2 text-xs text-emerald-600">{(parseFloat(conversionRate) * 0.3).toFixed(2)}% 转化率</p>
+                <p className="mt-2 text-xs text-emerald-600">{t.totalVisitors > 0 ? ((partialLeads.length / t.totalVisitors) * 100).toFixed(2) : 0}% 转化率</p>
               </div>
             </div>
           </div>
@@ -602,25 +584,28 @@ export function StatsDashboard() {
                 <MousePointerClick className="h-5 w-5 text-navy-600" />
                 页面转化率
               </h2>
-              <div className="space-y-3">
-                {[
-                  { page: "/products/inflatable-arch", views: 234, conversions: 12, rate: "5.1%" },
-                  { page: "/products/inflatable-bounce-house", views: 189, conversions: 8, rate: "4.2%" },
-                  { page: "/products/inflatable-water-slide", views: 156, conversions: 7, rate: "4.5%" },
-                  { page: "/get-quote", views: 89, conversions: 45, rate: "50.6%" },
-                ].map((item, i) => (
-                  <div key={i} className="rounded-lg bg-gray-50 p-3">
-                    <div className="mb-2 flex items-center justify-between">
-                      <span className="text-xs font-mono text-navy-700">{item.page}</span>
-                      <span className="text-sm font-semibold text-green-600">{item.rate}</span>
-                    </div>
-                    <div className="flex items-center gap-4 text-xs text-gray-500">
-                      <span>浏览: {item.views}</span>
-                      <span>转化: {item.conversions}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              {trafficStats.topPages.length === 0 ? (
+                <p className="text-sm text-gray-400">暂无数据</p>
+              ) : (
+                <div className="space-y-3">
+                  {trafficStats.topPages.slice(0, 6).map((p, i) => {
+                    const convCount = submissions.filter(s => s.data?.productType && p.page.includes(s.data.productType.toLowerCase().replace(/\s+/g, "-"))).length;
+                    const rate = p.views > 0 ? ((convCount / p.views) * 100).toFixed(1) : "0";
+                    return (
+                      <div key={i} className="rounded-lg bg-gray-50 p-3">
+                        <div className="mb-2 flex items-center justify-between">
+                          <span className="text-xs font-mono text-navy-700">{p.page}</span>
+                          <span className="text-sm font-semibold text-green-600">{rate}%</span>
+                        </div>
+                        <div className="flex items-center gap-4 text-xs text-gray-500">
+                          <span>浏览: {p.views}</span>
+                          <span>询盘: {convCount}</span>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
             </div>
 
             <div className="rounded-xl border border-gray-200 bg-white p-6">
@@ -628,35 +613,54 @@ export function StatsDashboard() {
                 <Activity className="h-5 w-5 text-navy-600" />
                 表单提交率
               </h2>
-              <div className="space-y-4">
-                <div>
-                  <div className="mb-2 flex items-center justify-between">
-                    <span className="text-sm text-gray-600">表单开始率</span>
-                    <span className="text-sm font-semibold text-navy-900">68%</span>
-                  </div>
-                  <div className="h-2 w-full rounded-full bg-gray-100">
-                    <div className="h-full w-[68%] rounded-full bg-blue-500" />
-                  </div>
+              {t.totalVisitors === 0 && submissions.length === 0 && partialLeads.length === 0 ? (
+                <p className="text-sm text-gray-400">暂无数据</p>
+              ) : (
+                <div className="space-y-4">
+                  {(() => {
+                    const started = partialLeads.length + submissions.length;
+                    const completed = submissions.length;
+                    const abandoned = partialLeads.length;
+                    const startRate = t.totalVisitors > 0 ? ((started / t.totalVisitors) * 100).toFixed(1) : "0";
+                    const completeRate = started > 0 ? ((completed / started) * 100).toFixed(1) : "0";
+                    const abandonRate = started > 0 ? ((abandoned / started) * 100).toFixed(1) : "0";
+                    return (
+                      <>
+                        <div>
+                          <div className="mb-2 flex items-center justify-between">
+                            <span className="text-sm text-gray-600">表单开始率</span>
+                            <span className="text-sm font-semibold text-navy-900">{startRate}%</span>
+                          </div>
+                          <div className="h-2 w-full rounded-full bg-gray-100">
+                            <div className="h-full rounded-full bg-blue-500" style={{ width: `${startRate}%` }} />
+                          </div>
+                          <p className="mt-1 text-xs text-gray-400">{started} 人开始填写</p>
+                        </div>
+                        <div>
+                          <div className="mb-2 flex items-center justify-between">
+                            <span className="text-sm text-gray-600">表单完成率</span>
+                            <span className="text-sm font-semibold text-navy-900">{completeRate}%</span>
+                          </div>
+                          <div className="h-2 w-full rounded-full bg-gray-100">
+                            <div className="h-full rounded-full bg-green-500" style={{ width: `${completeRate}%` }} />
+                          </div>
+                          <p className="mt-1 text-xs text-gray-400">{completed} 人完成提交</p>
+                        </div>
+                        <div>
+                          <div className="mb-2 flex items-center justify-between">
+                            <span className="text-sm text-gray-600">表单放弃率</span>
+                            <span className="text-sm font-semibold text-red-500">{abandonRate}%</span>
+                          </div>
+                          <div className="h-2 w-full rounded-full bg-gray-100">
+                            <div className="h-full rounded-full bg-red-500" style={{ width: `${abandonRate}%` }} />
+                          </div>
+                          <p className="mt-1 text-xs text-gray-400">{abandoned} 人未完成提交</p>
+                        </div>
+                      </>
+                    );
+                  })()}
                 </div>
-                <div>
-                  <div className="mb-2 flex items-center justify-between">
-                    <span className="text-sm text-gray-600">表单完成率</span>
-                    <span className="text-sm font-semibold text-navy-900">42%</span>
-                  </div>
-                  <div className="h-2 w-full rounded-full bg-gray-100">
-                    <div className="h-full w-[42%] rounded-full bg-green-500" />
-                  </div>
-                </div>
-                <div>
-                  <div className="mb-2 flex items-center justify-between">
-                    <span className="text-sm text-gray-600">表单放弃率</span>
-                    <span className="text-sm font-semibold text-red-500">26%</span>
-                  </div>
-                  <div className="h-2 w-full rounded-full bg-gray-100">
-                    <div className="h-full w-[26%] rounded-full bg-red-500" />
-                  </div>
-                </div>
-              </div>
+              )}
             </div>
           </div>
         </div>
@@ -668,44 +672,46 @@ export function StatsDashboard() {
           <div className="rounded-xl border border-gray-200 bg-white p-6">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-navy-900">
               <ShoppingCart className="h-5 w-5 text-navy-600" />
-              商品销量排行
+              询盘产品排行
             </h2>
-            <div className="space-y-3">
-              {[
-                { name: "充气拱门", sales: 23, revenue: "¥46,000", conversion: "5.1%" },
-                { name: "充气蹦床", sales: 18, revenue: "¥54,000", conversion: "4.2%" },
-                { name: "充气水滑梯", sales: 15, revenue: "¥60,000", conversion: "4.5%" },
-                { name: "充气吉祥物", sales: 12, revenue: "¥24,000", conversion: "3.8%" },
-                { name: "充气帐篷", sales: 10, revenue: "¥30,000", conversion: "3.2%" },
-                { name: "充气瓶子", sales: 8, revenue: "¥16,000", conversion: "2.9%" },
-                { name: "充气动物", sales: 7, revenue: "¥21,000", conversion: "2.5%" },
-                { name: "充气镜面球", sales: 6, revenue: "¥12,000", conversion: "2.1%" },
-                { name: "充气服装", sales: 5, revenue: "¥10,000", conversion: "1.8%" },
-                { name: "充气舞台", sales: 4, revenue: "¥16,000", conversion: "1.5%" },
-              ].map((item, i) => (
-                <div key={i} className="flex items-center justify-between rounded-lg bg-gray-50 p-4">
-                  <div className="flex items-center gap-4">
-                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-navy-100 text-lg font-bold text-navy-700">
-                      {i + 1}
-                    </span>
-                    <div>
-                      <p className="font-medium text-navy-900">{item.name}</p>
-                      <p className="text-xs text-gray-500">转化率: {item.conversion}</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-6">
-                    <div className="text-right">
-                      <p className="text-sm font-semibold text-navy-900">{item.sales}件</p>
-                      <p className="text-xs text-gray-500">销量</p>
-                    </div>
-                    <div className="text-right">
-                      <p className="text-sm font-semibold text-green-600">{item.revenue}</p>
-                      <p className="text-xs text-gray-500">收入</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+            {submissions.length === 0 ? (
+              <p className="text-sm text-gray-400">暂无询盘数据</p>
+            ) : (
+              <div className="space-y-3">
+                {(() => {
+                  const productCounts: Record<string, number> = {};
+                  submissions.forEach((s) => {
+                    const pt = s.data?.productType || "未指定";
+                    productCounts[pt] = (productCounts[pt] || 0) + 1;
+                  });
+                  const total = submissions.length;
+                  return Object.entries(productCounts)
+                    .sort(([, a], [, b]) => b - a)
+                    .map(([name, count], i) => {
+                      const pct = total > 0 ? (count / total) * 100 : 0;
+                      return (
+                        <div key={i} className="flex items-center justify-between rounded-lg bg-gray-50 p-4">
+                          <div className="flex items-center gap-4">
+                            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-navy-100 text-lg font-bold text-navy-700">
+                              {i + 1}
+                            </span>
+                            <div>
+                              <p className="font-medium text-navy-900">{name}</p>
+                              <p className="text-xs text-gray-500">占比: {pct.toFixed(1)}%</p>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-6">
+                            <div className="text-right">
+                              <p className="text-sm font-semibold text-navy-900">{count}</p>
+                              <p className="text-xs text-gray-500">询盘数</p>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    });
+                })()}
+              </div>
+            )}
           </div>
 
           <div className="grid gap-6 lg:grid-cols-2">
@@ -714,48 +720,56 @@ export function StatsDashboard() {
                 <TrendingUp className="h-5 w-5 text-navy-600" />
                 热门产品页面
               </h2>
-              <div className="space-y-3">
-                {[
-                  { page: "/products/inflatable-arch", views: 234, avgTime: "2m45s" },
-                  { page: "/products/inflatable-bounce-house", views: 189, avgTime: "3m12s" },
-                  { page: "/products/inflatable-water-slide", views: 156, avgTime: "2m58s" },
-                  { page: "/products/inflatable-mascot", views: 134, avgTime: "2m34s" },
-                  { page: "/products/inflatable-tent", views: 112, avgTime: "2m21s" },
-                ].map((item, i) => (
-                  <div key={i} className="flex items-center justify-between rounded-lg bg-gray-50 p-3">
-                    <span className="text-xs font-mono text-navy-700">{item.page}</span>
-                    <div className="flex items-center gap-4 text-xs text-gray-500">
-                      <span>浏览: {item.views}</span>
-                      <span>停留: {item.avgTime}</span>
+              {trafficStats.topPages.length === 0 ? (
+                <p className="text-sm text-gray-400">暂无数据</p>
+              ) : (
+                <div className="space-y-3">
+                  {trafficStats.topPages.filter(p => p.page.includes("/products/")).slice(0, 8).map((p, i) => (
+                    <div key={i} className="flex items-center justify-between rounded-lg bg-gray-50 p-3">
+                      <a href={p.page} target="_blank" rel="noopener noreferrer" className="text-xs font-mono text-navy-700 hover:text-red-600">{p.page}</a>
+                      <span className="text-xs text-gray-500">浏览: {p.views}</span>
                     </div>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+              )}
             </div>
 
             <div className="rounded-xl border border-gray-200 bg-white p-6">
               <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-navy-900">
                 <BarChart3 className="h-5 w-5 text-navy-600" />
-                商品类别分布
+                询盘来源分布
               </h2>
-              <div className="space-y-4">
-                {[
-                  { category: "广告类", count: 45, percentage: 35 },
-                  { category: "娱乐类", count: 38, percentage: 30 },
-                  { category: "装饰类", count: 25, percentage: 20 },
-                  { category: "其他", count: 20, percentage: 15 },
-                ].map((item, i) => (
-                  <div key={i}>
-                    <div className="mb-2 flex items-center justify-between">
-                      <span className="text-sm text-gray-600">{item.category}</span>
-                      <span className="text-sm font-semibold text-navy-900">{item.count}件 ({item.percentage}%)</span>
-                    </div>
-                    <div className="h-2 w-full rounded-full bg-gray-100">
-                      <div className="h-full rounded-full bg-navy-500" style={{ width: `${item.percentage}%` }} />
-                    </div>
-                  </div>
-                ))}
-              </div>
+              {submissions.length === 0 ? (
+                <p className="text-sm text-gray-400">暂无数据</p>
+              ) : (
+                <div className="space-y-4">
+                  {(() => {
+                    const sourceCounts: Record<string, number> = {};
+                    submissions.forEach((s) => {
+                      const src = s.utmSource || "直接访问";
+                      sourceCounts[src] = (sourceCounts[src] || 0) + 1;
+                    });
+                    const total = submissions.length;
+                    const colors = ["bg-navy-500", "bg-blue-500", "bg-green-500", "bg-purple-500", "bg-orange-500"];
+                    return Object.entries(sourceCounts)
+                      .sort(([, a], [, b]) => b - a)
+                      .map(([name, count], i) => {
+                        const pct = total > 0 ? (count / total) * 100 : 0;
+                        return (
+                          <div key={i}>
+                            <div className="mb-2 flex items-center justify-between">
+                              <span className="text-sm text-gray-600">{name}</span>
+                              <span className="text-sm font-semibold text-navy-900">{count} 次 ({pct.toFixed(1)}%)</span>
+                            </div>
+                            <div className="h-2 w-full rounded-full bg-gray-100">
+                              <div className={`h-full rounded-full ${colors[i % colors.length]}`} style={{ width: `${pct}%` }} />
+                            </div>
+                          </div>
+                        );
+                      });
+                  })()}
+                </div>
+              )}
             </div>
           </div>
         </div>
