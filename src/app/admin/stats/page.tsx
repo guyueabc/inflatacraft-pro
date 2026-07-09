@@ -49,9 +49,6 @@ export default function AdminStatsPage() {
         </div>
         <div className="container mx-auto max-w-7xl px-4 py-6">
           <StatsDashboard />
-          <div className="mt-8">
-            <TrafficAnalysis />
-          </div>
         </div>
       </div>
     </>
