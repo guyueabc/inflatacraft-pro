@@ -23,7 +23,7 @@ import {
   List,
 } from "lucide-react";
 
-// 閳光偓閳光偓 Types 閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓
+// Types
 
 interface BlogDetail {
   slug: string;
@@ -48,11 +48,11 @@ interface BlogSection {
   blockquote?: string;
 }
 
-// 閳光偓閳光偓 Mock Data 閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓
+// Content data is provided by the route
 
 
 
-// 閳光偓閳光偓 Helpers 閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓
+// Helpers
 
 function formatDate(dateStr: string) {
   return new Date(dateStr).toLocaleDateString("en-US", {
@@ -62,7 +62,7 @@ function formatDate(dateStr: string) {
   });
 }
 
-// 閳光偓閳光偓 Page Component 閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓閳光偓
+// Page Component
 
 export function BlogDetailClient({ post }: { post: any }) {
   const [mobileTocOpen, setMobileTocOpen] = useState(false);
@@ -94,7 +94,7 @@ export function BlogDetailClient({ post }: { post: any }) {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* 閳光偓閳光偓 Breadcrumb 閳光偓閳光偓 */}
+      {/*  Breadcrumb  */}
       <div className="border-b border-gray-200 bg-white">
         <div className="container mx-auto max-w-7xl px-4 py-3">
           <nav className="flex items-center gap-2 text-sm text-gray-500">
@@ -111,7 +111,7 @@ export function BlogDetailClient({ post }: { post: any }) {
         </div>
       </div>
 
-      {/* 閳光偓閳光偓 Hero 閳光偓閳光偓 */}
+      {/*  Hero  */}
       <section className="bg-navy-900 py-16">
         <div className="container mx-auto max-w-4xl px-4">
           {/* Category Badge */}
@@ -149,10 +149,10 @@ export function BlogDetailClient({ post }: { post: any }) {
         </div>
       </section>
 
-      {/* 閳光偓閳光偓 Content Area 閳光偓閳光偓 */}
+      {/*  Content Area  */}
       <div className="container mx-auto max-w-7xl px-4 py-12">
         <div className="grid gap-12 lg:grid-cols-[1fr_280px]">
-          {/* 閳光偓閳光偓 Article Body 閳光偓閳光偓 */}
+          {/*  Article Body  */}
           <article className="min-w-0">
             {/* Mobile TOC (collapsible) */}
             <div className="mb-8 lg:hidden">
@@ -246,7 +246,7 @@ export function BlogDetailClient({ post }: { post: any }) {
               ))}
             </div>
 
-            {/* 閳光偓閳光偓 Author Bio 閳光偓閳光偓 */}
+            {/*  Author Bio  */}
             <div className="mt-12 rounded-2xl border border-gray-200 bg-white p-6 sm:p-8">
               <div className="flex items-start gap-4">
                 <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-navy-700 text-lg font-bold text-white">
@@ -263,7 +263,7 @@ export function BlogDetailClient({ post }: { post: any }) {
               </div>
             </div>
 
-            {/* 閳光偓閳光偓 Share Section 閳光偓閳光偓 */}
+            {/*  Share Section  */}
             <div className="mt-8 flex flex-wrap items-center gap-4 rounded-2xl border border-gray-200 bg-white p-5">
               <span className="text-sm font-semibold text-gray-500">
                 Share this article:
@@ -289,7 +289,7 @@ export function BlogDetailClient({ post }: { post: any }) {
             </div>
           </article>
 
-          {/* 閳光偓閳光偓 Sidebar: Table of Contents 閳光偓閳光偓 */}
+          {/*  Sidebar: Table of Contents  */}
           <aside className="hidden lg:block">
             <div className="sticky top-[130px] space-y-8">
               {/* TOC */}
@@ -332,7 +332,7 @@ export function BlogDetailClient({ post }: { post: any }) {
         </div>
       </div>
 
-      {/* 閳光偓閳光偓 Related Posts 閳光偓閳光偓 */}
+      {/*  Related Posts  */}
       <section className="border-t border-gray-200 bg-white py-16">
         <div className="container mx-auto max-w-7xl px-4">
           <h2 className="mb-8 font-heading text-2xl font-bold text-navy-900">
@@ -370,7 +370,7 @@ export function BlogDetailClient({ post }: { post: any }) {
         </div>
       </section>
 
-      {/* 閳光偓閳光偓 Back Link 閳光偓閳光偓 */}
+      {/*  Back Link  */}
       <div className="border-t border-gray-200 bg-white py-8">
         <div className="container mx-auto max-w-7xl px-4">
           <Link

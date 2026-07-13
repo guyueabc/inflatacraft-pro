@@ -452,7 +452,8 @@ export default function CheckoutPage() {
                     <FormField
                       label="Phone"
                       required
-                      type="tel"
+                      type="text"
+                      inputMode="tel"
                       value={shippingForm.phone}
                       onChange={(v) => updateShippingField("phone", v)}
                       error={shippingErrors.phone}

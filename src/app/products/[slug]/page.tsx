@@ -49,7 +49,7 @@ export async function generateMetadata({
     title: product.name + " | Custom Inflatable Manufacturer | InflatableModel",
     description: geoDescription,
     alternates: {
-      canonical: `https://www.qddjtx.com/products/${product.slug}`,
+      canonical: `https://qddjtx.com/products/${product.slug}`,
     },
     openGraph: {
       title: product.name,
@@ -112,13 +112,13 @@ export default async function ProductDetailPage({
                 "@type": "ListItem",
                 position: 1,
                 name: "Home",
-                item: "https://www.qddjtx.com",
+                item: "https://qddjtx.com",
               },
               {
                 "@type": "ListItem",
                 position: 2,
                 name: "Products",
-                item: "https://www.qddjtx.com/products",
+                item: "https://qddjtx.com/products",
               },
               {
                 "@type": "ListItem",

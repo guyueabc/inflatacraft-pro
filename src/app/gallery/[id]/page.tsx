@@ -18,10 +18,14 @@ export async function generateMetadata({
   return {
     title: `${item.clientName} —${item.productType} | InflatableModel Gallery`,
     description: item.description,
+    alternates: {
+      canonical: `https://qddjtx.com/gallery/${id}`,
+    },
     openGraph: {
       title: `${item.clientName} Case Study`,
       description: item.description,
       type: 'article',
+      url: `https://qddjtx.com/gallery/${id}`,
     },
   };
 }
@@ -56,8 +60,8 @@ export default async function GalleryDetailPage({
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: "https://www.qddjtx.com" },
-              { "@type": "ListItem", position: 2, name: "Gallery", item: "https://www.qddjtx.com/gallery" },
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://qddjtx.com" },
+              { "@type": "ListItem", position: 2, name: "Gallery", item: "https://qddjtx.com/gallery" },
               { "@type": "ListItem", position: 3, name: item.clientName },
             ],
           }),

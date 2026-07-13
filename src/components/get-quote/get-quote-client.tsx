@@ -140,9 +140,9 @@ export function GetQuoteClient() {
         </div>
 
         <div className="rounded-xl border border-navy-200 bg-white p-5 shadow-sm sm:p-8">
-          {/* -- Required: Email + Phone -- */}
+          {/* -- Required email and optional WhatsApp -- */}
           <div className="mb-8 rounded-lg border-2 border-red-200 bg-red-50/30 p-5">
-            <p className="mb-4 text-sm font-semibold text-red-700">Required — we need these to contact you</p>
+            <p className="mb-4 text-sm font-semibold text-red-700">Email is required so we can respond to your request</p>
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
                 <label htmlFor="q-email" className="mb-1 block text-sm font-medium text-navy-700">Email *</label>
@@ -155,10 +155,10 @@ export function GetQuoteClient() {
                 {form.formState.errors.email && <p className="mt-1 text-xs text-red-600">{form.formState.errors.email.message}</p>}
               </div>
               <div>
-                <label htmlFor="q-phone" className="mb-1 block text-sm font-medium text-navy-700">Phone</label>
+                <label htmlFor="q-phone" className="mb-1 block text-sm font-medium text-navy-700">WhatsApp number (optional)</label>
                 <div className="relative">
                   <Phone className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
-                  <input id="q-phone" type="tel" placeholder="+1 (555) 000-0000" {...form.register("phone")}
+                  <input id="q-phone" type="text" inputMode="tel" placeholder="Include country code" {...form.register("phone")}
                     className={cn("w-full rounded-lg border bg-white py-3 pl-10 pr-4 text-sm placeholder-gray-400 transition-all focus:outline-none focus:ring-2",
                       form.formState.errors.phone ? "border-red-300 focus:ring-red-500/20" : "border-navy-300 focus:border-navy-700 focus:ring-navy-500/20")} />
                 </div>

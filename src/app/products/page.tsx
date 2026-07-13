@@ -6,7 +6,7 @@ export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Products Catalog | InflatableModel",
-  description: "Browse our complete range of custom inflatables - giant product replicas, mascots, arches, costumes, tents, and interactive games. Made in USA.",
+  description: "Browse our complete range of custom inflatables - giant product replicas, mascots, arches, costumes, tents, and interactive games.",
   openGraph: {
     title: "Products | InflatableModel",
     description: "Browse our complete range of custom inflatables.",
@@ -28,7 +28,7 @@ export default function ProductsPage() {
           </h1>
           <p className="max-w-2xl text-lg text-gray-300">
             Browse our complete catalog of custom inflatables - from giant product replicas
-            to interactive games. Every product is made in the USA with premium materials.
+            to interactive games. Explore product types, common applications, and customization options.
           </p>
         </div>
       </section>

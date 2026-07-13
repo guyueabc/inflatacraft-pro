@@ -7,7 +7,7 @@ export function OrganizationSchema() {
     name: "inflatablemodel",
     description:
       "Custom inflatable manufacturing — giant product replicas, mascots, arches, costumes, tents, and games. 3-6 week turnaround. Free 3D renderings.",
-    url: "https://www.qddjtx.com",
+    url: "https://qddjtx.com",
     email: "inflatablemodel@showlovein.com",
     address: {
       "@type": "PostalAddress",
@@ -34,14 +34,14 @@ export function WebSiteSchema() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: "inflatablemodel",
-    url: "https://www.qddjtx.com",
+    url: "https://qddjtx.com",
     description:
       "B2B custom inflatable manufacturer: giant product replicas, mascots, arches, costumes, tents, and games. 3-6 week turnaround, free 3D renderings.",
     potentialAction: {
       "@type": "SearchAction",
       target: {
         "@type": "EntryPoint",
-        urlTemplate: "https://www.qddjtx.com/search?q={search_term_string}",
+        urlTemplate: "https://qddjtx.com/search?q={search_term_string}",
       },
       "query-input": "required name=search_term_string",
     },

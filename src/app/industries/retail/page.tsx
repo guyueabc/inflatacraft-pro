@@ -6,12 +6,12 @@ export const metadata: Metadata = {
   title: "Retail Inflatables | Drive Foot Traffic & Sales Lift | InflatableModel",
   description:
     "Inflatables for retail grand openings, store promotions, and shopping centers. Giant product replicas, mascots, and arches that increase foot traffic 25%+. Free 3D renderings.",
-  alternates: { canonical: "https://www.qddjtx.com/industries/retail" },
+  alternates: { canonical: "https://qddjtx.com/industries/retail" },
   keywords: "retail inflatable, store opening inflatable, grand opening inflatable, shopping center inflatable, retail promotion, inflatable product replica",
   openGraph: {
     title: "Retail Inflatables | InflatableModel",
     description: "Drive foot traffic and sales with custom inflatables for retail.",
-    url: "https://www.qddjtx.com/industries/retail",
+    url: "https://qddjtx.com/industries/retail",
     type: "article",
   },
 };
@@ -77,8 +77,8 @@ export default function RetailPage() {
   const breadcrumbJsonLd = {
     "@context": "https://schema.org", "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.qddjtx.com" },
-      { "@type": "ListItem", position: 2, name: "Retail", item: "https://www.qddjtx.com/industries/retail" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://qddjtx.com" },
+      { "@type": "ListItem", position: 2, name: "Retail", item: "https://qddjtx.com/industries/retail" },
     ],
   };
   return (

@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { Box, Clock, Flag } from "lucide-react";
+import { Box, Clock, ClipboardCheck } from "lucide-react";
 
 interface ValueProp {
   icon: typeof Box;
@@ -21,10 +21,10 @@ const VALUE_PROPS: ValueProp[] = [
       "From concept to completion in as little as three weeks. Our streamlined design-to-production pipeline keeps your campaign on schedule without sacrificing quality.",
   },
   {
-    icon: Flag,
-    title: "Made in USA",
+    icon: ClipboardCheck,
+    title: "Documented Production",
     description:
-      "Every inflatable is designed, cut, sewn, and finished domestically using commercial grade materials. You get faster shipping, higher quality control, and U.S. labor standards.",
+      "Review materials, dimensions, artwork, anchoring, power requirements, and setup needs before production so your team can approve the project with fewer surprises.",
   },
 ];
 
@@ -37,8 +37,8 @@ export function ValueProps() {
             Why Choose inflatablemodel?
           </h2>
           <p className="mt-4 text-lg text-gray-600">
-            Three reasons the world's biggest brands trust us with their
-            giant inflatables and custom advertising campaigns.
+            Practical support for planning custom inflatables, from initial
+            concept and artwork review through production documentation.
           </p>
         </div>
 

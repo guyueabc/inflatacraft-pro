@@ -15,6 +15,7 @@ interface CaseStudy {
   placeholderLabel: string;
   imageSrc: string;
   slug: string;
+  href?: string;
 }
 
 const INDUSTRIES = [
@@ -88,7 +89,8 @@ const CASE_STUDIES: CaseStudy[] = [
     description: "Transparent inflatable bubble house for VIP lounge and product launch events.",
     placeholderLabel: "Bubble House",
     imageSrc: "/images/products/inflatable-bubble-house/1.jpg",
-    slug: "bubble-house-vip",
+    slug: "inflatable-bubble-house",
+    href: "/products/inflatable-bubble-house",
   },
   {
     id: 7,
@@ -194,7 +196,7 @@ export function FeaturedCases() {
                     {study.description}
                   </p>
                   <Link
-                    href={study.slug ? `/gallery/${study.slug}` : "/gallery"}
+                    href={study.href ?? (study.slug ? `/gallery/${study.slug}` : "/gallery")}
                     className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-red-600 hover:text-red-500"
                   >
                     View Case Study

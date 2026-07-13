@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { requireAdmin } from "@/lib/admin-auth";
 import { QuoteStatus, Prisma } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
@@ -16,9 +17,12 @@ const createQuoteSchema = z.object({
   deadline: z.string().datetime().optional(),
 });
 
-// ─── POST /api/quotes — Create a new quote ──────────────────────────────────
+// ─── POST /api/quotes — Create a new quote (admin only) ──────────────────────
 
 export async function POST(request: NextRequest) {
+  const unauthorized = await requireAdmin();
+  if (unauthorized) return unauthorized;
+
   try {
     
 
@@ -49,9 +53,12 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// ─── GET /api/quotes — List the current user's quotes ───────────────────────
+// ─── GET /api/quotes — List quotes (admin only) ──────────────────────────────
 
 export async function GET(request: NextRequest) {
+  const unauthorized = await requireAdmin();
+  if (unauthorized) return unauthorized;
+
   try {
     
 

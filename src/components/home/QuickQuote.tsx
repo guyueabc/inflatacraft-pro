@@ -159,12 +159,13 @@ export function QuickQuote() {
             </div>
 
             <div>
-              <span className="mb-1 block text-xs font-medium text-red-200">Phone</span>
+              <span className="mb-1 block text-xs font-medium text-red-200">WhatsApp number</span>
               <input
                 id="qq-phone"
                 name="phone"
-                type="tel"
-                placeholder="+1 (555) 000-0000"
+                type="text"
+                inputMode="tel"
+                placeholder="Include country code"
                 value={form.phone}
                 onChange={handleChange}
                 className="w-full rounded-lg border-2 border-red-500 bg-white px-3 py-2.5 text-sm text-gray-900 placeholder-gray-400 transition-all focus:border-white focus:outline-none focus:ring-2 focus:ring-white/50"

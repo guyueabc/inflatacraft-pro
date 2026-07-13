@@ -443,7 +443,7 @@ export default function AIBuilderPage() {
                   <label className="mb-1.5 block text-sm font-medium text-gray-700">
                     Phone / WhatsApp
                   </label>
-                  {renderInput("phone", "tel", "+1 234 567 8900")}
+                  {renderInput("phone", "text", "Include country code")}
                 </div>
 
                 <div>

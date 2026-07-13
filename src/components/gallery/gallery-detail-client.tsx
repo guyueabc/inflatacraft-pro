@@ -32,7 +32,7 @@ export function GalleryDetailClient({ item }: { item: GalleryDetail }) {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* 閳光偓閳光偓 Breadcrumb 閳光偓閳光偓 */}
+      {/*  Breadcrumb  */}
       <div className="border-b border-gray-200 bg-white">
         <div className="container mx-auto max-w-7xl px-4 py-3">
           <nav className="flex items-center gap-2 text-sm text-gray-500">
@@ -49,7 +49,7 @@ export function GalleryDetailClient({ item }: { item: GalleryDetail }) {
         </div>
       </div>
 
-      {/* 閳光偓閳光偓 Hero Section 閳光偓閳光偓 */}
+      {/*  Hero Section  */}
       <section className="bg-navy-900 text-white">
         <div className="container mx-auto max-w-7xl">
           <div className="grid gap-0 lg:grid-cols-2 lg:gap-12">
@@ -106,7 +106,7 @@ export function GalleryDetailClient({ item }: { item: GalleryDetail }) {
 
       <div className="container mx-auto max-w-7xl px-4 py-12">
         <div className="grid gap-12 lg:grid-cols-3">
-          {/* 閳光偓閳光偓 Main Content 閳光偓閳光偓 */}
+          {/*  Main Content  */}
           <div className="lg:col-span-2 space-y-12">
             {/* Full Description */}
             <section>
@@ -245,7 +245,7 @@ export function GalleryDetailClient({ item }: { item: GalleryDetail }) {
             </section>
           </div>
 
-          {/* 閳光偓閳光偓 Sidebar 閳光偓閳光偓 */}
+          {/*  Sidebar  */}
           <aside className="space-y-8">
             {/* Specs Card */}
             <div className="sticky top-[130px] rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
@@ -300,7 +300,7 @@ export function GalleryDetailClient({ item }: { item: GalleryDetail }) {
         </div>
       </div>
 
-      {/* 閳光偓閳光偓 Related Projects CTA 閳光偓閳光偓 */}
+      {/*  Related Projects CTA  */}
       <section className="border-t border-gray-200 bg-white py-12">
         <div className="container mx-auto max-w-7xl px-4 text-center">
           <Link

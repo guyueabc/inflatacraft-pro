@@ -196,42 +196,9 @@ export async function POST(request: NextRequest) {
 
   } catch (error) {
     console.error("[POST /api/quote]", error);
-    // Even on error, return success to user — their data may have been saved
     return NextResponse.json({
-      success: true,
-      message: "需求提交成功，我们将尽快联系你",
-      nextUrl: "/quote/pending",
-    }, { status: 200 });
-  }
-}
-
-// ── GET Handler ────────────────────────────────────────────────────────────
-
-export async function GET(request: NextRequest) {
-  const { searchParams } = new URL(request.url);
-  const id = searchParams.get("id");
-
-  if (!id) {
-    return NextResponse.json({ error: "Quote ID required" }, { status: 400 });
-  }
-
-  try {
-    const submission = await prisma.formSubmission.findUnique({
-      where: { id },
-      select: {
-        id: true,
-        data: true,
-        createdAt: true,
-      },
-    });
-
-    if (!submission) {
-      return NextResponse.json({ error: "Quote not found" }, { status: 404 });
-    }
-
-    return NextResponse.json({ quote: submission });
-  } catch (error) {
-    console.error("[GET /api/quote]", error);
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+      success: false,
+      error: "Unable to submit your quote right now. Please try again.",
+    }, { status: 500 });
   }
 }

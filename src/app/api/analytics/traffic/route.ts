@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { requireAdmin } from "@/lib/admin-auth";
 
 // ============================================
 // 流量分析API - 支持多维度时间查询
@@ -30,6 +31,9 @@ interface PeriodStats {
 }
 
 export async function GET(request: NextRequest) {
+  const unauthorized = await requireAdmin();
+  if (unauthorized) return unauthorized;
+
   const { searchParams } = new URL(request.url);
   
   const view = searchParams.get("view") || "day"; // day, week, month

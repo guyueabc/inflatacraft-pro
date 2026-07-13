@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { ChevronLeft, ChevronRight, ShieldCheck, Flag, Star } from "lucide-react";
+import { ChevronLeft, ChevronRight, FileCheck, MessageCircle, PenTool } from "lucide-react";
 
 interface Slide {
   id: number;
@@ -39,7 +39,7 @@ const SLIDES: Slide[] = [
   {
     id: 3,
     headline: "From Sketch to Spectacle in Weeks",
-    subheadline: "Free 3D Renderings — Made in USA — Event Inflatables & Promotional Inflatables",
+    subheadline: "Free 3D Renderings — Event Inflatables & Promotional Inflatables",
     ctaPrimary: { label: "Get Free Quote", href: "/get-quote" },
     ctaSecondary: { label: "View Gallery", href: "/gallery" },
     placeholderLabel: "Custom Inflatable Arch",
@@ -48,9 +48,9 @@ const SLIDES: Slide[] = [
 ];
 
 const TRUST_BADGES = [
-  { icon: Flag, label: "Made in USA" },
-  { icon: Star, label: "20+ Years" },
-  { icon: ShieldCheck, label: "BBB A+" },
+  { icon: PenTool, label: "Custom Design" },
+  { icon: FileCheck, label: "Project Documentation" },
+  { icon: MessageCircle, label: "WhatsApp Support" },
 ];
 
 export function HeroCarousel() {

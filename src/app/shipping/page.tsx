@@ -6,12 +6,12 @@ export const metadata: Metadata = {
   title: "Custom Inflatable Shipping & Logistics Guide | InflatableModel",
   description:
     "How custom inflatables are shipped worldwide. Air freight, ocean freight, and domestic delivery explained. Shipping costs, timelines, packaging, customs, and tracking.",
-  alternates: { canonical: "https://www.qddjtx.com/shipping" },
+  alternates: { canonical: "https://qddjtx.com/shipping" },
   keywords: "inflatable shipping, inflatable delivery, inflatable freight, inflatable logistics, international shipping, air freight inflatable",
   openGraph: {
     title: "Shipping & Logistics Guide | InflatableModel",
     description: "How your custom inflatable gets from factory to your door.",
-    url: "https://www.qddjtx.com/shipping",
+    url: "https://qddjtx.com/shipping",
     type: "article",
   },
 };
@@ -76,8 +76,8 @@ export default function ShippingPage() {
   const breadcrumbJsonLd = {
     "@context": "https://schema.org", "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.qddjtx.com" },
-      { "@type": "ListItem", position: 2, name: "Shipping", item: "https://www.qddjtx.com/shipping" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://qddjtx.com" },
+      { "@type": "ListItem", position: 2, name: "Shipping", item: "https://qddjtx.com/shipping" },
     ],
   };
   return (

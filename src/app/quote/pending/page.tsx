@@ -1,68 +1,51 @@
 "use client";
 
-import { useState, useEffect, Suspense } from "react";
+import { Suspense, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { CheckCircle2, DollarSign, Clock, Package, FileText, AlertCircle, ArrowRight } from "lucide-react";
 
+interface QuoteEstimate {
+  priceRangeUsd: { min: number; max: number };
+  recommendedSystem: string;
+  productConfiguration?: string[];
+  productionTime: string;
+  shippingEstimate: string;
+  documentsRecommended?: string[];
+  requiredConfirmations?: string[];
+  notes?: string[];
+}
+
+interface QuotePayload {
+  data?: QuotePayload;
+  estimate?: QuoteEstimate;
+  leadScore?: { category: string; score: number };
+}
+
 function QuoteContent() {
   const searchParams = useSearchParams();
+  // The estimate is handed to this page by the submitting tab. An opaque
+  // database ID is displayed only as a reference and is never used to fetch
+  // contact details from a public endpoint.
   const quoteId = searchParams.get("id");
-  const [quote, setQuote] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-
-  useEffect(() => {
-    if (!quoteId) {
-      // Try sessionStorage (from direct form submit)
-      const cached = sessionStorage.getItem("quote_estimate");
-      if (cached) {
-        try {
-          setQuote(JSON.parse(cached));
-          setLoading(false);
-          return;
-        } catch {}
-      }
-      setError("No quote data found. Please submit the quote form first.");
-      setLoading(false);
-      return;
+  const [quote] = useState<QuotePayload | null>(() => {
+    if (typeof window === "undefined") return null;
+    const cached = sessionStorage.getItem("quote_estimate");
+    if (!cached) return null;
+    try {
+      return JSON.parse(cached) as QuotePayload;
+    } catch {
+      return null;
     }
+  });
 
-    // Fetch from API
-    fetch(`/api/quote?id=${quoteId}`)
-      .then((r) => r.json())
-      .then((data) => {
-        if (data.error) {
-          setError(data.error);
-        } else {
-          setQuote(data.quote);
-        }
-        setLoading(false);
-      })
-      .catch(() => {
-        setError("Failed to load quote data.");
-        setLoading(false);
-      });
-  }, [quoteId]);
-
-  if (loading) {
-    return (
-      <div className="flex min-h-[60vh] items-center justify-center">
-        <div className="text-center">
-          <div className="mx-auto h-12 w-12 animate-spin rounded-full border-4 border-navy-200 border-t-red-600" />
-          <p className="mt-4 text-sm text-gray-500">Loading your estimate...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (error) {
+  if (!quote) {
     return (
       <div className="flex min-h-[60vh] items-center justify-center px-4">
         <div className="max-w-md text-center">
           <AlertCircle className="mx-auto h-12 w-12 text-red-500" />
           <h1 className="mt-4 text-2xl font-bold text-navy-900">Quote Not Found</h1>
-          <p className="mt-2 text-gray-600">{error}</p>
+          <p className="mt-2 text-gray-600">No quote data found. Please submit the quote form first.</p>
           <Link href="/get-quote" className="mt-6 inline-flex items-center gap-2 rounded-lg bg-red-600 px-6 py-3 text-sm font-semibold text-white hover:bg-red-700">
             <ArrowRight className="h-4 w-4" /> Get a Quote
           </Link>
@@ -71,7 +54,7 @@ function QuoteContent() {
     );
   }
 
-  const data = quote?.data || quote;
+  const data = quote.data || quote;
   const estimate = data?.estimate;
   const leadScore = data?.leadScore;
 
@@ -164,7 +147,7 @@ function QuoteContent() {
             </div>
 
             {/* Documents Recommended */}
-            {estimate.documentsRecommended?.length > 0 && (
+            {estimate.documentsRecommended && estimate.documentsRecommended.length > 0 && (
               <div className="rounded-xl border border-navy-200 bg-white p-6 shadow-sm">
                 <h3 className="font-bold text-navy-900">Documents We Can Prepare</h3>
                 <ul className="mt-3 space-y-1.5 text-sm text-gray-600">
@@ -178,7 +161,7 @@ function QuoteContent() {
             )}
 
             {/* Required Confirmations */}
-            {estimate.requiredConfirmations?.length > 0 && (
+            {estimate.requiredConfirmations && estimate.requiredConfirmations.length > 0 && (
               <div className="rounded-xl border border-yellow-200 bg-yellow-50 p-6">
                 <h3 className="font-bold text-yellow-800">To Finalize Your Quote</h3>
                 <ul className="mt-3 space-y-1.5 text-sm text-yellow-700">
@@ -192,7 +175,7 @@ function QuoteContent() {
             )}
 
             {/* Notes */}
-            {estimate.notes?.length > 0 && (
+            {estimate.notes && estimate.notes.length > 0 && (
               <div className="rounded-lg bg-gray-50 p-4">
                 <ul className="space-y-1 text-xs text-gray-500">
                   {estimate.notes.map((n: string, i: number) => (

@@ -6,11 +6,15 @@ export const metadata: Metadata = {
   title: "Custom Inflatable Buying Guide: China Factory vs Local Maker | InflatableModel",
   description:
     "Complete buyer's guide for custom inflatables. Compare China factory direct vs local makers vs trading companies on price, quality, lead time, MOQ, warranty, and after-sales support.",
+  alternates: {
+    canonical: "https://qddjtx.com/buying-guide",
+  },
   openGraph: {
     title: "Custom Inflatable Buying Guide | InflatableModel",
     description:
       "China factory vs local maker: price, quality, lead time, MOQ, warranty compared.",
     type: "article",
+    url: "https://qddjtx.com/buying-guide",
   },
 };
 

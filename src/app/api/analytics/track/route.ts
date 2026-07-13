@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { requireAdmin } from "@/lib/admin-auth";
 import { createHash } from "crypto";
 
 let logTableReady = false;
@@ -363,6 +364,12 @@ export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
 
   if (searchParams.has("stats")) {
+    const unauthorized = await requireAdmin();
+    if (unauthorized) return unauthorized;
+
+    // Aggregate traffic data is consumed only by the authenticated admin UI.
+    // The proxy protects stats-mode requests while leaving the public beacon
+    // endpoint available for first-party analytics collection.
     try {
       const now = new Date();
       const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());

@@ -18,7 +18,7 @@ export function generateOrganizationJsonLd() {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "InflatableModel",
-    url: "https://www.qddjtx.com",
+    url: "https://qddjtx.com",
     description: "Custom inflatable manufacturing - giant product replicas, mascots, arches, costumes, and tents. Made in USA.",
     email: "inflatablemodel@showlovein.com",
     areaServed: "Worldwide",

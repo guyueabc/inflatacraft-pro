@@ -6,12 +6,12 @@ export const metadata: Metadata = {
   title: "Food & Beverage Inflatables | Giant Product Replicas | InflatableModel",
   description:
     "Giant inflatable food and beverage replicas for brand activations. Beer cans, soda bottles, snack bags, coffee cups, pizza boxes — 3–6 week turnaround. Free 3D renderings.",
-  alternates: { canonical: "https://www.qddjtx.com/industries/food-beverage" },
+  alternates: { canonical: "https://qddjtx.com/industries/food-beverage" },
   keywords: "food inflatable, beverage inflatable, giant beer can, inflatable soda bottle, snack bag inflatable, food brand replica, restaurant inflatable",
   openGraph: {
     title: "Food & Beverage Inflatables | InflatableModel",
     description: "Giant product replicas for food and beverage brands.",
-    url: "https://www.qddjtx.com/industries/food-beverage",
+    url: "https://qddjtx.com/industries/food-beverage",
     type: "article",
   },
 };
@@ -79,8 +79,8 @@ export default function FoodBeveragePage() {
   const breadcrumbJsonLd = {
     "@context": "https://schema.org", "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.qddjtx.com" },
-      { "@type": "ListItem", position: 2, name: "Food & Beverage", item: "https://www.qddjtx.com/industries/food-beverage" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://qddjtx.com" },
+      { "@type": "ListItem", position: 2, name: "Food & Beverage", item: "https://qddjtx.com/industries/food-beverage" },
     ],
   };
   return (

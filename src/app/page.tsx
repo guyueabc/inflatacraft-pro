@@ -5,17 +5,14 @@ import { ProductCategories } from "@/components/home/ProductCategories";
 import { FeaturedCases } from "@/components/home/FeaturedCases";
 import { HowItWorks } from "@/components/home/HowItWorks";
 import { TrustSignals } from "@/components/home/TrustSignals";
-import { ClientLogos } from "@/components/home/ClientLogos";
-import { Testimonials } from "@/components/home/Testimonials";
 import { QuickQuote } from "@/components/home/QuickQuote";
 import { CTABanner } from "@/components/home/CTABanner";
-import { StatsSection } from "@/components/home/StatsSection";
 
 export const metadata: Metadata = {
   title: "Custom Inflatables Manufacturer | Giant Replicas, Mascots & More | InflatableModel",
   description:
     "Custom inflatables with documented materials, safety specs, and project-ready production files. Giant replicas, mascots, arches, tents and games. Get a budgetary quote in 2 minutes.",
-  canonical: "https://www.qddjtx.com/",
+  canonical: "https://qddjtx.com/",
   openGraph: {
     title: "Custom Inflatables Manufacturer | InflatableModel",
     description:
@@ -23,7 +20,7 @@ export const metadata: Metadata = {
     type: "website",
     siteName: "InflatableModel",
     locale: "en_US",
-    url: "https://www.qddjtx.com/",
+    url: "https://qddjtx.com/",
   },
   twitter: {
     card: "summary_large_image",
@@ -45,9 +42,6 @@ export default function HomePage() {
       {/* 3. Product Categories Grid */}
       <ProductCategories />
 
-      {/* 4. Client Logo Wall */}
-      <ClientLogos />
-
       {/* 5. How It Works Timeline */}
       <HowItWorks />
 
@@ -57,17 +51,11 @@ export default function HomePage() {
       {/* 6. Featured Case Studies */}
       <FeaturedCases />
 
-      {/* 7. Testimonials Carousel */}
-      <Testimonials />
-
       {/* 8. Quick Quote Form */}
       <QuickQuote />
 
       {/* 9. Full-Width CTA Banner */}
       <CTABanner />
-
-      {/* 10. Stats / By the Numbers */}
-      <StatsSection />
     </>
   );
 }

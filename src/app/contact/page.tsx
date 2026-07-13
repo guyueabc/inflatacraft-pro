@@ -21,7 +21,7 @@ export default function ContactPage() {
             '@context': 'https://schema.org',
             '@type': 'Organization',
             name: 'InflatableModel',
-            url: 'https://www.qddjtx.com',
+            url: 'https://qddjtx.com',
             contactPoint: {
               '@type': 'ContactPoint',
               email: 'inflatablemodel@showlovein.com',

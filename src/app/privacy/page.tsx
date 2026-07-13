@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   title: "Privacy Policy | InflatableModel",
   description: "How InflatableModel collects, uses, and protects your personal information.",
   robots: { index: true, follow: true },
-  canonical: "https://www.qddjtx.com/privacy",
+  canonical: "https://qddjtx.com/privacy",
 };
 
 export default function PrivacyPolicyPage() {

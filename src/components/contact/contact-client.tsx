@@ -355,12 +355,13 @@ export function ContactPageClient() {
                             htmlFor="contact-phone"
                             className="block text-sm font-medium text-navy-700 mb-1.5"
                           >
-                            Phone number
+                            WhatsApp number
                           </label>
                           <input
                             id="contact-phone"
-                            type="tel"
-                            placeholder="+1 (555) 000-0000"
+                            type="text"
+                            inputMode="tel"
+                            placeholder="Include country code"
                             {...register("phone")}
                             className="w-full rounded-lg border border-navy-300 bg-white px-4 py-3 text-sm text-gray-900 placeholder-gray-400 transition-all focus:border-navy-700 focus:outline-none focus:ring-2 focus:ring-navy-500/20"
                           />

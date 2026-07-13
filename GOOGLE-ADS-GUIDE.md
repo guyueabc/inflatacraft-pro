@@ -61,7 +61,7 @@
 标题 2: Rush Orders — 3 Weeks
 标题 3: Free Design & Quote
 描述 1: Tight deadline? We deliver custom inflatables in 3 weeks. Product replicas, arches, mascots, tents. Free 3D rendering.
-描述 2: Limited production capacity. Submit your requirements now for priority scheduling. WhatsApp: +86 15376427736.
+描述 2: Submit your project requirements for review. Contact us on WhatsApp through the website.
 ```
 
 ## 第四步: 转化追踪

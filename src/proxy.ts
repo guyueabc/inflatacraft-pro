@@ -1,17 +1,20 @@
 import { NextRequest, NextResponse } from "next/server";
 import { jwtVerify } from "jose";
 
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "inflatacraft2025!";
-
 function getSecretKey() {
-  const secret = process.env.AUTH_SECRET || ADMIN_PASSWORD;
+  const secret = process.env.AUTH_SECRET;
+  if (!secret) {
+    throw new Error("AUTH_SECRET is required");
+  }
   return new TextEncoder().encode(secret + "::admin-cookie-secret");
 }
 
 async function verifyToken(token: string): Promise<boolean> {
   try {
-    await jwtVerify(token, getSecretKey());
-    return true;
+    const { payload } = await jwtVerify(token, getSecretKey(), {
+      algorithms: ["HS256"],
+    });
+    return payload.role === "admin";
   } catch {
     return false;
   }
@@ -20,14 +23,43 @@ async function verifyToken(token: string): Promise<boolean> {
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Only protect /admin routes (except /admin/login)
-  if (!pathname.startsWith("/admin") || pathname === "/admin/login") {
+  // The login endpoint and page must remain public.
+  if (
+    pathname === "/admin/login" ||
+    pathname.startsWith("/api/admin/login") ||
+    pathname.startsWith("/api/admin/logout")
+  ) {
     return NextResponse.next();
   }
 
-  // Allow login/logout API endpoints
-  if (pathname.startsWith("/api/admin/login") || pathname.startsWith("/api/admin/logout")) {
+  // Quote creation and analytics collection remain public, but their read
+  // endpoints expose lead or aggregate traffic data and require admin auth.
+  const isProtectedApi =
+    pathname.startsWith("/api/ads") ||
+    pathname.startsWith("/api/orders") ||
+    pathname.startsWith("/api/quotes") ||
+    pathname.startsWith("/api/upload") ||
+    (pathname.startsWith("/api/products") && request.method !== "GET") ||
+    (request.method === "GET" &&
+      (pathname.startsWith("/api/analytics/partial-lead") ||
+        pathname.startsWith("/api/analytics/traffic") ||
+        pathname === "/api/quote" ||
+        pathname.startsWith("/api/submit-quote") ||
+        (pathname.startsWith("/api/analytics/track") &&
+          request.nextUrl.searchParams.has("stats"))));
+
+  if (!pathname.startsWith("/admin") && !isProtectedApi) {
     return NextResponse.next();
+  }
+
+  if (!process.env.AUTH_SECRET) {
+    if (pathname.startsWith("/api/")) {
+      return NextResponse.json(
+        { error: "Admin authentication is not configured." },
+        { status: 503 },
+      );
+    }
+    return new NextResponse("Service Unavailable", { status: 503 });
   }
 
   const token = request.cookies.get("admin_token")?.value;
@@ -45,5 +77,17 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin/:path*"],
+  matcher: [
+    "/admin/:path*",
+    "/api/analytics/partial-lead/:path*",
+    "/api/analytics/track/:path*",
+    "/api/analytics/traffic/:path*",
+    "/api/ads/:path*",
+    "/api/products/:path*",
+    "/api/orders/:path*",
+    "/api/quote",
+    "/api/quotes/:path*",
+    "/api/submit-quote/:path*",
+    "/api/upload/:path*",
+  ],
 };

@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   title: "Terms of Service | InflatableModel",
   description: "Terms and conditions for using InflatableModel services and website.",
   robots: { index: true, follow: true },
-  canonical: "https://www.qddjtx.com/terms",
+  canonical: "https://qddjtx.com/terms",
 };
 
 export default function TermsPage() {

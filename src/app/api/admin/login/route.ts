@@ -4,8 +4,8 @@ import { NextRequest, NextResponse } from "next/server";
 
 // ── Configuration ──────────────────────────────────────────────────────────
 
-const ADMIN_USERNAME = process.env.ADMIN_USERNAME || "admin";
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "inflatacraft2025!";
+const ADMIN_USERNAME = process.env.ADMIN_USERNAME;
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 
 // ── In-memory rate limiter (IP-based) ──────────────────────────────────────
 
@@ -85,7 +85,10 @@ function checkRateLimit(ip: string): { allowed: boolean; error?: string } {
 // ── JWT helpers ────────────────────────────────────────────────────────────
 
 function getSecretKey() {
-  const secret = process.env.AUTH_SECRET || ADMIN_PASSWORD;
+  const secret = process.env.AUTH_SECRET;
+  if (!secret) {
+    throw new Error("AUTH_SECRET is required");
+  }
   return new TextEncoder().encode(secret + "::admin-cookie-secret");
 }
 
@@ -93,6 +96,14 @@ function getSecretKey() {
 
 export async function POST(request: NextRequest) {
   try {
+    if (!ADMIN_USERNAME || !ADMIN_PASSWORD || !process.env.AUTH_SECRET) {
+      console.error("[Admin Login] Missing required authentication environment variables");
+      return NextResponse.json(
+        { error: "Admin authentication is not configured." },
+        { status: 503 }
+      );
+    }
+
     const ip = getClientIP(request);
 
     // Rate limit check
