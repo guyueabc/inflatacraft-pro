@@ -4,7 +4,7 @@ import { z } from "zod";
 export const quoteSchema = z.object({
   // Required
   email: z.string().email("Please enter a valid email address."),
-  phone: z.string().optional().or(z.literal("")),
+  phone: z.string().trim().min(1, "Please enter your WhatsApp number."),
   // Basic info
   name: z.string().optional().or(z.literal("")),
   company: z.string().optional().or(z.literal("")),
@@ -23,7 +23,7 @@ export const quoteSchema = z.object({
   installationSurface: z.string().optional().or(z.literal("")),
   voltagePlug: z.string().optional().or(z.literal("")),
   artworkReady: z.string().optional().or(z.literal("")),
-  requiredDocuments: z.array(z.string()).optional().default([]),
+  requiredDocuments: z.array(z.string()).optional(),
   // Honeypot
   website: z.string().optional().or(z.literal("")),
 });

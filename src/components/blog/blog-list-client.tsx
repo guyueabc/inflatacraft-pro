@@ -22,23 +22,6 @@ import {
   ChevronRight,
 } from "lucide-react";
 
-// ── Types ──────────────────────────────────
-
-interface BlogPost {
-  slug: string;
-  title: string;
-  excerpt: string;
-  category: string;
-  author: string;
-  authorAvatar: string;
-  date: string;
-  readTime: string;
-  gradient: string;
-  imageSrc: string;
-  featured: boolean;
-}
-
-
 // ─ Constants ────────────────────────────────
 
 
@@ -66,7 +49,7 @@ export function BlogListClient() {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState<BlogCategory>("All");
 
-  const filteredPosts = useMemo(() => {
+  const filteredPosts = useMemo<BlogPost[]>(() => {
     let posts = [...BLOG_POSTS];
 
     if (activeCategory !== "All") {
@@ -246,7 +229,7 @@ export function BlogListClient() {
                   No articles found
                 </h3>
                 <p className="mb-4 max-w-sm text-sm text-gray-500">
-                  Try adjusting your search or filter to find what you're looking for.
+                  Try adjusting your search or filter to find what you&apos;re looking for.
                 </p>
                 <button
                   onClick={() => {
@@ -422,7 +405,7 @@ export function BlogListClient() {
             Ready to Scale Your Brand?
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-navy-300">
-            The strategies we cover in our blog — our team can implement for you. Let's talk about your next activation.
+            The strategies we cover in our blog — our team can implement for you. Let&apos;s talk about your next activation.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link

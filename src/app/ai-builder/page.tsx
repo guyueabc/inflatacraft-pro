@@ -106,6 +106,7 @@ export default function AIBuilderPage() {
       else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
         newErrors.email = "Please enter a valid email";
       }
+      if (!formData.phone.trim()) newErrors.phone = "WhatsApp number is required";
     }
 
     setErrors(newErrors);
@@ -147,21 +148,20 @@ export default function AIBuilderPage() {
         }),
       });
 
-      const data = await response.json();
+      const data = await response.json().catch(() => ({}));
 
-      if (!response.ok) {
-        throw new Error(data.error || "Submission failed");
+      if (!response.ok || data.success !== true) {
+        throw new Error("Unable to submit your quote right now. Please try again.");
       }
 
-      // Store estimate in sessionStorage for the pending page
+      // The durable API write has succeeded; keep the estimate available for the next page.
       if (data.quote || data.estimate) {
         try {
           sessionStorage.setItem("quote_estimate", JSON.stringify(data.quote || data));
         } catch {}
       }
 
-      // Redirect to pending page
-      router.push("/quote/pending");
+      router.push(data.nextUrl || "/quote/pending");
     } catch (error) {
       console.error("Submit error:", error);
       setErrors({ email: error instanceof Error ? error.message : "Submission failed. Please try again." });
@@ -200,7 +200,6 @@ export default function AIBuilderPage() {
     field: keyof FormData,
     type: string,
     placeholder: string,
-    required?: boolean
   ) => (
     <div className="space-y-1.5">
       <input
@@ -436,12 +435,12 @@ export default function AIBuilderPage() {
                   <label className="mb-1.5 block text-sm font-medium text-gray-700">
                     Email <span className="text-red-500">*</span>
                   </label>
-                  {renderInput("email", "email", "you@example.com", true)}
+                  {renderInput("email", "email", "you@example.com")}
                 </div>
 
                 <div>
                   <label className="mb-1.5 block text-sm font-medium text-gray-700">
-                    Phone / WhatsApp
+                    WhatsApp number <span className="text-red-500">*</span>
                   </label>
                   {renderInput("phone", "text", "Include country code")}
                 </div>

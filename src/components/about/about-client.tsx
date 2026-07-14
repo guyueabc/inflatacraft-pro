@@ -188,7 +188,7 @@ const fadeIn = {
 export function AboutPageClient() {
   return (
     <div className="min-h-screen bg-white">
-      {/* 鈺愨晲鈺?Hero Section 鈺愨晲鈺?*/}
+      {/* Hero Section */}
       <section className="relative overflow-hidden bg-navy-900 px-4 py-20 md:py-32">
         {/* Background pattern */}
         <div className="absolute inset-0 opacity-[0.03]">
@@ -262,7 +262,7 @@ export function AboutPageClient() {
         </div>
       </section>
 
-      {/* 鈺愨晲鈺?Company Story 鈺愨晲鈺?*/}
+      {/* Company Story */}
       <section className="px-4 py-20 md:py-28">
         <div className="container mx-auto max-w-7xl">
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
@@ -323,7 +323,7 @@ export function AboutPageClient() {
         </div>
       </section>
 
-      {/* 鈺愨晲鈺?Values Section 鈺愨晲鈺?*/}
+      {/* Values Section */}
       <section className="bg-navy-900 px-4 py-20 md:py-28">
         <div className="container mx-auto max-w-7xl">
           <motion.div
@@ -369,7 +369,7 @@ export function AboutPageClient() {
         </div>
       </section>
 
-      {/* 鈺愨晲鈺?Facility Section 鈺愨晲鈺?*/}
+      {/* Facility Section */}
       <section className="px-4 py-20 md:py-28">
         <div className="container mx-auto max-w-7xl">
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
@@ -437,7 +437,7 @@ export function AboutPageClient() {
         </div>
       </section>
 
-      {/* 鈺愨晲鈺?Team Section 鈺愨晲鈺?*/}
+      {/* Team Section */}
       <section className="bg-gray-50 px-4 py-20 md:py-28 border-t border-navy-100">
         <div className="container mx-auto max-w-7xl">
           <motion.div
@@ -487,7 +487,7 @@ export function AboutPageClient() {
         </div>
       </section>
 
-      {/* 鈺愨晲鈺?Company Timeline 鈺愨晲鈺?*/}
+      {/* Company Timeline */}
       <section className="px-4 py-20 md:py-28">
         <div className="container mx-auto max-w-4xl">
           <motion.div
@@ -552,7 +552,7 @@ export function AboutPageClient() {
         </div>
       </section>
 
-      {/* 鈺愨晲鈺?CTA 鈺愨晲鈺?*/}
+      {/* CTA */}
       <section className="bg-navy-900 py-16 md:py-20">
         <div className="container mx-auto px-4">
           <div className="flex flex-col items-center justify-between gap-8 rounded-2xl bg-gradient-to-r from-navy-800 via-navy-900 to-navy-800 px-8 py-12 md:flex-row md:px-16">

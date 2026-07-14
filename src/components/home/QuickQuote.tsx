@@ -2,7 +2,12 @@
 
 import React, { useState, useEffect, useRef, type FormEvent } from "react";
 import { cn } from "@/lib/utils";
-import { Send, Loader2, CheckCircle2, Phone, MessageCircle } from "lucide-react";
+import { Send, Loader2, CheckCircle2, MessageCircle } from "lucide-react";
+
+type AnalyticsWindow = Window & {
+  dataLayer?: Array<Record<string, unknown>>;
+  gtag?: (...args: unknown[]) => void;
+};
 
 const PRODUCT_TYPES = [
   "Giant Product Replica",
@@ -27,6 +32,17 @@ const initialForm: FormData = {
   phone: "",
   productType: "",
 };
+
+const publicSubmissionErrors = new Set([
+  "Please provide a valid email and check the form fields.",
+  "Too many submissions.",
+]);
+
+function safeSubmissionError(value: unknown): string {
+  return typeof value === "string" && publicSubmissionErrors.has(value)
+    ? value
+    : "Unable to submit your quote right now. Please try again or contact us on WhatsApp.";
+}
 
 export function QuickQuote() {
   const [form, setForm] = useState<FormData>(initialForm);
@@ -73,9 +89,9 @@ export function QuickQuote() {
     setStatus("submitting");
     setErrorMessage("");
 
-    if (!form.email) {
+    if (!form.email || !form.phone.trim()) {
       setStatus("idle");
-      setErrorMessage("Please provide your email so we can reach you.");
+      setErrorMessage("Please provide your email and WhatsApp number so we can reach you.");
       return;
     }
 
@@ -96,22 +112,25 @@ export function QuickQuote() {
         }),
       });
 
-      if (!res.ok) {
-        const err = await res.json().catch(() => ({ error: "Network error" }));
-        throw new Error(err.error || "Submission failed");
+      const result = await res.json().catch(() => ({}));
+      if (!res.ok || result.success !== true) {
+        throw new Error(safeSubmissionError(result.error));
       }
 
       sessionStorage.setItem("quote_submitted", "true");
-      (window as any).dataLayer?.push({ event: "quote_form_submitted" });
-      if (typeof (window as any).gtag === "function") {
-        (window as any).gtag("event", "conversion", { send_to: "AW-18234377845/TYNLCJu0_70cEPWM6vZD" });
-      }
+      const analyticsWindow = window as AnalyticsWindow;
+      analyticsWindow.dataLayer?.push({ event: "quote_form_submitted" });
+      analyticsWindow.gtag?.("event", "conversion", { send_to: "AW-18234377845/TYNLCJu0_70cEPWM6vZD" });
 
       setStatus("success");
       setForm(initialForm);
-    } catch (err: any) {
+    } catch (err: unknown) {
       setStatus("error");
-      setErrorMessage(err.message || "Something went wrong. Please try again or call us directly.");
+      setErrorMessage(
+        err instanceof Error && err.message
+          ? err.message
+          : "Something went wrong. Please try again or contact us on WhatsApp.",
+      );
     }
   };
 
@@ -159,12 +178,13 @@ export function QuickQuote() {
             </div>
 
             <div>
-              <span className="mb-1 block text-xs font-medium text-red-200">WhatsApp number</span>
+              <span className="mb-1 block text-xs font-medium text-red-200">WhatsApp number *</span>
               <input
                 id="qq-phone"
                 name="phone"
                 type="text"
                 inputMode="tel"
+                required
                 placeholder="Include country code"
                 value={form.phone}
                 onChange={handleChange}

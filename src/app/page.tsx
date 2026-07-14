@@ -12,7 +12,9 @@ export const metadata: Metadata = {
   title: "Custom Inflatables Manufacturer | Giant Replicas, Mascots & More | InflatableModel",
   description:
     "Custom inflatables with documented materials, safety specs, and project-ready production files. Giant replicas, mascots, arches, tents and games. Get a budgetary quote in 2 minutes.",
-  canonical: "https://qddjtx.com/",
+  alternates: {
+    canonical: "https://qddjtx.com/",
+  },
   openGraph: {
     title: "Custom Inflatables Manufacturer | InflatableModel",
     description:

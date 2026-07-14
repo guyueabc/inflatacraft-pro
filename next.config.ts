@@ -9,7 +9,7 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "**" },
     ],
     localPatterns: [
-      { pathname: "/images/**", search: "?" },
+      { pathname: "/images/**" },
     ],
   },
 };

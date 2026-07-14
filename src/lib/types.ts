@@ -13,6 +13,8 @@ import type {
   RenderingStatus,
   OrderStatus,
 } from "@prisma/client";
+import type {} from "next-auth";
+import type {} from "next-auth/jwt";
 
 // ─── Re-exports ─────────────────────────────────────────────────────────────
 

@@ -810,6 +810,7 @@ function FormField({
   error,
   placeholder,
   type = "text",
+  inputMode,
   className,
 }: {
   label: string;
@@ -819,6 +820,7 @@ function FormField({
   error?: string;
   placeholder?: string;
   type?: string;
+  inputMode?: React.InputHTMLAttributes<HTMLInputElement>["inputMode"];
   className?: string;
 }) {
   return (
@@ -829,6 +831,7 @@ function FormField({
       </label>
       <input
         type={type}
+        inputMode={inputMode}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}

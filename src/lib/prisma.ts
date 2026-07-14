@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, type Prisma } from "@prisma/client";
 
 /**
  * Singleton Prisma client — serverless-optimized connection pool.
@@ -11,10 +11,10 @@ const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined;
 };
 
-const logConfig =
+const logConfig: Prisma.LogLevel[] =
   process.env.NODE_ENV === "development"
-    ? (["query", "warn", "error"] as const)
-    : (["warn", "error"] as const);
+    ? ["query", "warn", "error"]
+    : ["warn", "error"];
 
 export const prisma =
   globalForPrisma.prisma ??

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import type { BlogDetail } from "@/lib/data/blog";
 import {
   ArrowLeft,
   ArrowRight,
@@ -23,31 +24,6 @@ import {
   List,
 } from "lucide-react";
 
-// Types
-
-interface BlogDetail {
-  slug: string;
-  title: string;
-  excerpt: string;
-  category: string;
-  author: string;
-  authorBio: string;
-  authorAvatar: string;
-  date: string;
-  readTime: string;
-  heroGradient: string;
-  sections: BlogSection[];
-  relatedPosts: { slug: string; title: string; gradient: string }[];
-}
-
-interface BlogSection {
-  heading: string;
-  content: string[];
-  image?: { gradient: string; label: string } | null;
-  list?: string[];
-  blockquote?: string;
-}
-
 // Content data is provided by the route
 
 
@@ -64,7 +40,7 @@ function formatDate(dateStr: string) {
 
 // Page Component
 
-export function BlogDetailClient({ post }: { post: any }) {
+export function BlogDetailClient({ post }: { post: BlogDetail }) {
   const [mobileTocOpen, setMobileTocOpen] = useState(false);
 
   if (!post) {
@@ -75,7 +51,7 @@ export function BlogDetailClient({ post }: { post: any }) {
             Article Not Found
           </h1>
           <p className="mt-4 text-gray-500">
-            The article you're looking for doesn't exist or has been moved.
+            The article you&apos;re looking for doesn&apos;t exist or has been moved.
           </p>
           <Link
             href="/blog"

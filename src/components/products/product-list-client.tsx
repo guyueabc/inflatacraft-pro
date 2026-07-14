@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo } from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import {
@@ -24,32 +24,30 @@ import {
 
 type SortValue = (typeof SORT_OPTIONS)[number]["value"];
 
+const CATEGORY_QUERY_MAP: Record<string, ProductCategory> = {
+  replica: "Product Replicas",
+  mascot: "Custom Mascots",
+  arch: "Advertising Arches",
+  costume: "Wearables",
+  tent: "Tents & Structures",
+  game: "Amusement Inflatables",
+};
+
+function initialCategories(): ProductCategory[] {
+  if (typeof window === "undefined") return [];
+  const category = new URLSearchParams(window.location.search).get("category");
+  const mapped = category ? CATEGORY_QUERY_MAP[category.toLowerCase()] : undefined;
+  return mapped ? [mapped] : [];
+}
+
 export function ProductListClient() {
   const [search, setSearch] = useState("");
-  const [selectedCategories, setSelectedCategories] = useState<ProductCategory[]>([]);
+  const [selectedCategories, setSelectedCategories] = useState<ProductCategory[]>(initialCategories);
   const [selectedLeadTime, setSelectedLeadTime] = useState<string | null>(null);
   const [sort, setSort] = useState<SortValue>("featured");
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
 
-  // Read ?category= from URL on mount
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const params = new URLSearchParams(window.location.search);
-    const catParam = params.get("category");
-    if (catParam) {
-      const map: Record<string, ProductCategory> = {
-        replica: "Product Replicas",
-        mascot: "Mascots",
-        arch: "Arches",
-        costume: "Costumes",
-        tent: "Tents",
-        game: "Games",
-      };
-      const cat = map[catParam.toLowerCase()];
-      if (cat) setSelectedCategories([cat]);
-    }
-  }, []);
 
   const toggleCategory = (cat: ProductCategory) => {
     setSelectedCategories((prev) =>

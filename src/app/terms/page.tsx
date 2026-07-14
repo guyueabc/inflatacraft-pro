@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   title: "Terms of Service | InflatableModel",
   description: "Terms and conditions for using InflatableModel services and website.",
   robots: { index: true, follow: true },
-  canonical: "https://qddjtx.com/terms",
+  alternates: { canonical: "https://qddjtx.com/terms" },
 };
 
 export default function TermsPage() {
@@ -50,7 +50,7 @@ export default function TermsPage() {
         <section>
           <h2 className="text-xl font-semibold text-navy-800">5. Warranty</h2>
           <p className="mt-2 leading-relaxed">
-            All inflatables come with a manufacturer's warranty covering defects in materials
+            All inflatables come with a manufacturer&apos;s warranty covering defects in materials
             and workmanship. Contact us for specific warranty terms related to your product.
           </p>
         </section>

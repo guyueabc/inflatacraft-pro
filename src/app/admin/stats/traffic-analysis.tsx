@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import type { LucideIcon } from "lucide-react";
 import {
   RefreshCw, Calendar, ChevronLeft, ChevronRight, TrendingUp, TrendingDown,
-  Users, Eye, Globe, BarChart3, ArrowUpRight, ArrowDownRight, Minus,
+  Users, Eye, Globe, BarChart3, ArrowUpRight, ArrowDownRight,
 } from "lucide-react";
 
 // ============================================
@@ -77,7 +78,10 @@ export function TrafficAnalysis() {
   }, [view, selectedDate, showCompare]);
 
   useEffect(() => {
-    fetchData();
+    const timeoutId = window.setTimeout(() => {
+      void fetchData();
+    }, 0);
+    return () => window.clearTimeout(timeoutId);
   }, [fetchData]);
 
   // 日期导航
@@ -389,7 +393,7 @@ export function TrafficAnalysis() {
                   <p className="text-sm text-blue-700">访问量 (PV)</p>
                   <div className="mt-2 flex items-center gap-2">
                     <span className="text-2xl font-bold text-blue-900">{data.stats.totalPV || data.stats.pv}</span>
-                    {data.compare.pvGrowth !== null && (
+                    {data.compare.pvGrowth != null && (
                       <span className={`flex items-center gap-1 text-sm font-medium ${
                         parseFloat(data.compare.pvGrowth) >= 0 ? "text-green-600" : "text-red-600"
                       }`}>
@@ -410,7 +414,7 @@ export function TrafficAnalysis() {
                   <p className="text-sm text-blue-700">独立访客 (UV)</p>
                   <div className="mt-2 flex items-center gap-2">
                     <span className="text-2xl font-bold text-blue-900">{data.stats.totalUV || data.stats.uv}</span>
-                    {data.compare.uvGrowth !== null && (
+                    {data.compare.uvGrowth != null && (
                       <span className={`flex items-center gap-1 text-sm font-medium ${
                         parseFloat(data.compare.uvGrowth) >= 0 ? "text-green-600" : "text-red-600"
                       }`}>
@@ -483,11 +487,10 @@ function MetricCard({
   label,
   value,
   growth,
-  prevValue,
   subLabel,
   color,
 }: {
-  icon: any;
+  icon: LucideIcon;
   label: string;
   value: number;
   growth?: string | null;

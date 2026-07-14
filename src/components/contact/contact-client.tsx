@@ -6,7 +6,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import {
-  Phone,
   Mail,
   MapPin,
   Clock,
@@ -30,12 +29,12 @@ import {
 // ── Types ────────────────────────────────────────────────────────────────────
 
 interface ContactFormData {
-  name: string;
+  name?: string;
   email: string;
   phone: string;
-  company: string;
-  subject: string;
-  message: string;
+  company?: string;
+  subject?: string;
+  message?: string;
 }
 
 // ── Constants ────────────────────────────────────────────────────────────────
@@ -113,10 +112,20 @@ const fadeInUp = {
   }),
 };
 
+const publicSubmissionErrors = new Set([
+  "Please provide a valid email and check the form fields.",
+  "Too many submissions.",
+]);
+
+function safeSubmissionError(value: unknown, fallback: string): string {
+  return typeof value === "string" && publicSubmissionErrors.has(value) ? value : fallback;
+}
+
 // ── Main Page ────────────────────────────────────────────────────────────────
 
 export function ContactPageClient() {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   const {
     register,
@@ -134,10 +143,36 @@ export function ContactPageClient() {
   });
 
   const onSubmit = useCallback(async (data: ContactFormData) => {
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    console.log("Contact form submission:", data);
-    setIsSubmitted(true);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    setSubmitError("");
+    try {
+      const response = await fetch("/api/submit-quote", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...data,
+          description: data.message,
+          productType: data.subject,
+          formType: "contact",
+        }),
+      });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || result.success !== true) {
+        throw new Error(
+          safeSubmissionError(
+            result.error,
+            "Unable to send your message right now. Please try again.",
+          ),
+        );
+      }
+      setIsSubmitted(true);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch (error) {
+      setSubmitError(
+        error instanceof Error
+          ? error.message
+          : "Unable to send your message right now. Please try again.",
+      );
+    }
   }, []);
 
   return (
@@ -277,15 +312,13 @@ export function ContactPageClient() {
                             htmlFor="contact-name"
                             className="block text-sm font-medium text-navy-700 mb-1.5"
                           >
-                            Full name <span className="text-red-500">*</span>
+                              Full name
                           </label>
                           <input
                             id="contact-name"
                             type="text"
                             placeholder="John Smith"
-                            {...register("name", {
-                              required: "Name is required",
-                            })}
+                            {...register("name")}
                             className={cn(
                               "w-full rounded-lg border bg-white px-4 py-3 text-sm text-gray-900 placeholder-gray-400 transition-all focus:outline-none focus:ring-2",
                               errors.name
@@ -293,11 +326,7 @@ export function ContactPageClient() {
                                 : "border-navy-300 focus:border-navy-700 focus:ring-navy-500/20"
                             )}
                           />
-                          {errors.name && (
-                            <p className="mt-1.5 text-xs text-red-600">
-                              {errors.name.message}
-                            </p>
-                          )}
+
                         </div>
                         <div>
                           <label
@@ -355,16 +384,28 @@ export function ContactPageClient() {
                             htmlFor="contact-phone"
                             className="block text-sm font-medium text-navy-700 mb-1.5"
                           >
-                            WhatsApp number
+                            WhatsApp number <span className="text-red-500">*</span>
                           </label>
                           <input
                             id="contact-phone"
                             type="text"
                             inputMode="tel"
                             placeholder="Include country code"
-                            {...register("phone")}
-                            className="w-full rounded-lg border border-navy-300 bg-white px-4 py-3 text-sm text-gray-900 placeholder-gray-400 transition-all focus:border-navy-700 focus:outline-none focus:ring-2 focus:ring-navy-500/20"
+                            {...register("phone", {
+                              required: "WhatsApp number is required",
+                            })}
+                            className={cn(
+                              "w-full rounded-lg border bg-white px-4 py-3 text-sm text-gray-900 placeholder-gray-400 transition-all focus:outline-none focus:ring-2",
+                              errors.phone
+                                ? "border-red-300 focus:ring-red-500/20"
+                                : "border-navy-300 focus:border-navy-700 focus:ring-navy-500/20",
+                            )}
                           />
+                          {errors.phone && (
+                            <p className="mt-1.5 text-xs text-red-600">
+                              {errors.phone.message}
+                            </p>
+                          )}
                         </div>
                       </div>
 
@@ -374,13 +415,11 @@ export function ContactPageClient() {
                           htmlFor="contact-subject"
                           className="block text-sm font-medium text-navy-700 mb-1.5"
                         >
-                          Subject <span className="text-red-500">*</span>
+                          Subject
                         </label>
                         <select
                           id="contact-subject"
-                          {...register("subject", {
-                            required: "Please select a subject",
-                          })}
+                          {...register("subject")}
                           className={cn(
                             "w-full rounded-lg border bg-white px-4 py-3 text-sm text-gray-900 transition-all focus:outline-none focus:ring-2",
                             errors.subject
@@ -395,11 +434,7 @@ export function ContactPageClient() {
                             </option>
                           ))}
                         </select>
-                        {errors.subject && (
-                          <p className="mt-1.5 text-xs text-red-600">
-                            {errors.subject.message}
-                          </p>
-                        )}
+
                       </div>
 
                       {/* Message */}
@@ -408,20 +443,13 @@ export function ContactPageClient() {
                           htmlFor="contact-message"
                           className="block text-sm font-medium text-navy-700 mb-1.5"
                         >
-                          Message <span className="text-red-500">*</span>
+                          Message
                         </label>
                         <textarea
                           id="contact-message"
                           rows={6}
                           placeholder="Tell us about your project, question, or request. The more detail you provide, the better we can help you."
-                          {...register("message", {
-                            required: "Message is required",
-                            minLength: {
-                              value: 10,
-                              message:
-                                "Please provide at least 10 characters",
-                            },
-                          })}
+                          {...register("message")}
                           className={cn(
                             "w-full rounded-lg border bg-white px-4 py-3 text-sm text-gray-900 placeholder-gray-400 transition-all focus:outline-none focus:ring-2 resize-y",
                             errors.message
@@ -429,11 +457,7 @@ export function ContactPageClient() {
                               : "border-navy-300 focus:border-navy-700 focus:ring-navy-500/20"
                           )}
                         />
-                        {errors.message && (
-                          <p className="mt-1.5 text-xs text-red-600">
-                            {errors.message.message}
-                          </p>
-                        )}
+
                       </div>
 
                       {/* Submit */}
@@ -459,6 +483,19 @@ export function ContactPageClient() {
                             </>
                           )}
                         </button>
+                        {submitError && (
+                          <p role="alert" className="mt-3 text-center text-sm text-red-600">
+                            {submitError}{" "}
+                            <a
+                              href="https://wa.me/8615376427736"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="font-semibold underline underline-offset-2"
+                            >
+                              Contact us on WhatsApp.
+                            </a>
+                          </p>
+                        )}
                       </div>
                     </form>
                   </div>

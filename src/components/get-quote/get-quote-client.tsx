@@ -8,8 +8,18 @@ import { cn } from "@/lib/utils";
 import { quoteSchema, PRODUCT_TYPES, BUDGET_RANGES, DEADLINES, INTENDED_USES, INDOOR_OUTDOOR, PEOPLE_INTERACT, COUNTRIES, VOLTAGE_PLUGS, ARTWORK_STATUS, INSTALLATION_SURFACES, type QuoteFormData } from "@/lib/validations/quote";
 import { Send, CheckCircle2, Phone, Mail } from "lucide-react";
 
+const publicSubmissionErrors = new Set([
+  "Please provide a valid email and check the form fields.",
+  "Too many submissions.",
+]);
+
+function safeSubmissionError(value: unknown, fallback: string): string {
+  return typeof value === "string" && publicSubmissionErrors.has(value) ? value : fallback;
+}
+
 export function GetQuoteClient() {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   const form = useForm<QuoteFormData>({
     resolver: zodResolver(quoteSchema),
@@ -66,34 +76,44 @@ export function GetQuoteClient() {
       return acc;
     }, {} as Record<string, string>);
 
+    setSubmitError("");
+
     try {
-      // Use /api/submit-quote (proven working with DingTalk + Supabase)
-      // Then try /api/quote for estimate (optional, won't fail the submission)
       const res = await fetch("/api/submit-quote", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...data, ...utm }),
       });
       const result = await res.json().catch(() => ({}));
-      // Store result for quote page
-      if (result.success) {
-        sessionStorage.setItem("quote_submitted", "true");
+      if (!res.ok || result.success !== true) {
+        throw new Error(
+          safeSubmissionError(
+            result.error,
+            "Unable to submit your quote right now. Please try again.",
+          ),
+        );
       }
-    } catch {
-      // Even if fetch fails, data may have been submitted, still show success page
-    }
 
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    // Conversion tracking — Analytics component pushes Google Ads conversion
-    sessionStorage.setItem("quote_submitted", "true");
-    // Push GTM conversion event
-    (window as any).dataLayer?.push({ event: "quote_form_submitted" });
-    // Google Ads conversion tracking (if gtag is loaded)
-    if (typeof (window as any).gtag === "function") {
-      (window as any).gtag("event", "conversion", { send_to: "AW-18234377845/TYNLCJu0_70cEPWM6vZD" });
+      setIsSubmitted(true);
+      sessionStorage.setItem("quote_submitted", "true");
+      const analyticsWindow = window as Window & {
+        dataLayer?: Array<Record<string, unknown>>;
+        gtag?: (...args: unknown[]) => void;
+      };
+      analyticsWindow.dataLayer?.push({ event: "quote_form_submitted" });
+      analyticsWindow.gtag?.("event", "conversion", {
+        send_to: "AW-18234377845/TYNLCJu0_70cEPWM6vZD",
+      });
+      try { window.scrollTo({ top: 0, behavior: "smooth" }); } catch {}
+    } catch (error) {
+      setSubmitError(
+        error instanceof Error
+          ? error.message
+          : "Unable to submit your quote right now. Please try again.",
+      );
+    } finally {
+      setIsSubmitting(false);
     }
-    try { window.scrollTo({ top: 0, behavior: "smooth" }); } catch {}
   };
 
   if (isSubmitted) {
@@ -136,13 +156,13 @@ export function GetQuoteClient() {
       <div className="mx-auto max-w-2xl">
         <div className="mb-10 text-center">
           <h1 className="font-heading text-3xl font-bold text-navy-900 md:text-4xl">Get a Free Quote</h1>
-          <p className="mt-3 text-gray-600">Just your email and phone — we&apos;ll handle the rest.</p>
+          <p className="mt-3 text-gray-600">Just your email and WhatsApp number — we&apos;ll handle the rest.</p>
         </div>
 
         <div className="rounded-xl border border-navy-200 bg-white p-5 shadow-sm sm:p-8">
-          {/* -- Required email and optional WhatsApp -- */}
+          {/* -- Required email and WhatsApp number -- */}
           <div className="mb-8 rounded-lg border-2 border-red-200 bg-red-50/30 p-5">
-            <p className="mb-4 text-sm font-semibold text-red-700">Email is required so we can respond to your request</p>
+            <p className="mb-4 text-sm font-semibold text-red-700">Email and WhatsApp number are required so we can respond to your request</p>
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
                 <label htmlFor="q-email" className="mb-1 block text-sm font-medium text-navy-700">Email *</label>
@@ -155,7 +175,7 @@ export function GetQuoteClient() {
                 {form.formState.errors.email && <p className="mt-1 text-xs text-red-600">{form.formState.errors.email.message}</p>}
               </div>
               <div>
-                <label htmlFor="q-phone" className="mb-1 block text-sm font-medium text-navy-700">WhatsApp number (optional)</label>
+                <label htmlFor="q-phone" className="mb-1 block text-sm font-medium text-navy-700">WhatsApp number *</label>
                 <div className="relative">
                   <Phone className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
                   <input id="q-phone" type="text" inputMode="tel" placeholder="Include country code" {...form.register("phone")}
@@ -302,6 +322,19 @@ export function GetQuoteClient() {
               <><Send className="h-4 w-4" /> Submit Quote Request</>
             )}
           </button>
+          {submitError && (
+            <p role="alert" className="mt-3 text-center text-sm text-red-600">
+              {submitError}{" "}
+              <a
+                href="https://wa.me/8615376427736"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold underline underline-offset-2"
+              >
+                Contact us on WhatsApp.
+              </a>
+            </p>
+          )}
           <p className="mt-3 text-center text-xs text-gray-400">We respect your privacy. No spam, ever.</p>
         </div>
       </div>
