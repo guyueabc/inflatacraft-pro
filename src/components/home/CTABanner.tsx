@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Phone, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 export function CTABanner() {
   return (
@@ -11,8 +11,8 @@ export function CTABanner() {
               Ready to Bring Your Brand to Life?
             </h2>
             <p className="mt-3 max-w-lg text-lg text-navy-300">
-              Let's discuss your project. Call us now or request a quote —
-              we'll get back to you within 24 hours.
+              Let&apos;s discuss your project. Contact us on WhatsApp or request a quote —
+              we&apos;ll get back to you within 24 hours.
             </p>
           </div>
 

@@ -5,14 +5,14 @@ const BASE_URL = "https://qddjtx.com";
 export const metadata: Metadata = {
   title: "Contact inflatablemodel — Get Your Custom Inflatable Quote",
   description:
-    "Contact inflatablemodel for custom inflatable manufacturing. Phone, email, live chat, or request a free quote. We respond within 24 hours.",
+    "Contact inflatablemodel through WhatsApp or the online quote form for custom inflatable inquiries.",
   alternates: {
     canonical: `${BASE_URL}/contact`,
   },
   openGraph: {
     title: "Contact inflatablemodel — Get Your Custom Inflatable Quote",
     description:
-      "Contact inflatablemodel for custom inflatable manufacturing. Phone, email, live chat, or request a free quote.",
+      "Contact inflatablemodel through WhatsApp or the online quote form for custom inflatable inquiries.",
     url: `${BASE_URL}/contact`,
     siteName: "inflatablemodel",
     type: "website",

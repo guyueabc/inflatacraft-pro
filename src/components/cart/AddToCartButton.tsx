@@ -26,7 +26,7 @@ export function AddToCartButton({
 }: AddToCartButtonProps) {
   const [added, setAdded] = useState(false);
   const [localQty, setLocalQty] = useState(1);
-  const { addItem, items, updateQuantity, removeItem } = useCartStore();
+  const { addItem, items, updateQuantity } = useCartStore();
 
   const existingItem = items.find((i) => i.productId === productId);
   const cartQty = existingItem?.quantity ?? 0;

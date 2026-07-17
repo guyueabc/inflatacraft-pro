@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, Clock, Wind, Zap } from "lucide-react";
+import { ArrowRight, CheckCircle2, Clock, Wind } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Inflatable Setup & Installation Guide | InflatableModel",
@@ -211,7 +211,7 @@ export default function SetupGuidePage() {
         <section className="border-t border-gray-200 bg-white py-16">
           <div className="container mx-auto max-w-4xl px-4 text-center">
             <h2 className="mb-4 text-3xl font-bold tracking-tight text-navy-900">Need Help with Setup?</h2>
-            <p className="mx-auto mb-8 max-w-2xl text-lg text-gray-600">Every order includes video tutorials and printed instructions. Questions? We're here.</p>
+            <p className="mx-auto mb-8 max-w-2xl text-lg text-gray-600">Every order includes video tutorials and printed instructions. Questions? We&apos;re here.</p>
             <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Link href="/get-quote" className="inline-flex items-center gap-2 rounded-xl bg-red-600 px-8 py-4 text-base font-semibold text-white shadow-lg shadow-red-600/30 transition-all hover:bg-red-500">
                 Get Free Quote <ArrowRight className="h-5 w-5" />

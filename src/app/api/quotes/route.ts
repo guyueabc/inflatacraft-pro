@@ -1,93 +1,14 @@
-import { prisma } from "@/lib/prisma";
-import { requireAdmin } from "@/lib/admin-auth";
-import { QuoteStatus, Prisma } from "@prisma/client";
-import { NextRequest, NextResponse } from "next/server";
-import { z } from "zod";
+import { NextResponse } from "next/server";
 
-
-// ─── Validation Schemas ─────────────────────────────────────────────────────
-
-const createQuoteSchema = z.object({
-  productType: z.string().min(1).max(200).optional(),
-  description: z.string().min(1).max(5000),
-  images: z.array(z.string().url()).max(20).default([]),
-  size: z.string().max(100).optional(),
-  quantity: z.number().int().positive().max(100_000).optional(),
-  budget: z.number().positive().max(100_000_000).optional(),
-  deadline: z.string().datetime().optional(),
-});
-
-// ─── POST /api/quotes — Create a new quote (admin only) ──────────────────────
-
-export async function POST(request: NextRequest) {
-  const unauthorized = await requireAdmin();
-  if (unauthorized) return unauthorized;
-
-  try {
-    
-
-    const body = await request.json();
-    const parsed = createQuoteSchema.safeParse(body);
-
-    if (!parsed.success) {
-      return NextResponse.json(
-        { error: "Validation failed", details: parsed.error.flatten().fieldErrors },
-        { status: 400 },
-      );
-    }
-
-    const quote = await prisma.quote.create({
-      data: {
-        userId: "public",
-        status: "DRAFT",
-        ...parsed.data,
-        deadline: parsed.data.deadline ? new Date(parsed.data.deadline) : undefined,
-        budget: parsed.data.budget ? new Prisma.Decimal(parsed.data.budget) : undefined,
-      },
-    });
-
-    return NextResponse.json(quote, { status: 201 });
-  } catch (error) {
-    console.error("[POST /api/quotes]", error);
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
-  }
+/**
+ * Quote records require a real customer/admin ownership model. The legacy
+ * endpoint used one shared `public` user and could mix unrelated projects.
+ * Public inquiries remain available through /api/submit-quote.
+ */
+export async function GET() {
+  return NextResponse.json({ code: "QUOTE_ACCOUNT_API_DISABLED", error: "Quote accounts are not available." }, { status: 501 });
 }
 
-// ─── GET /api/quotes — List quotes (admin only) ──────────────────────────────
-
-export async function GET(request: NextRequest) {
-  const unauthorized = await requireAdmin();
-  if (unauthorized) return unauthorized;
-
-  try {
-    
-
-    const { searchParams } = new URL(request.url);
-    const status = searchParams.get("status") as QuoteStatus | null;
-    const limit = Math.min(Math.max(Number(searchParams.get("limit")) || 20, 1), 100);
-    const offset = Math.max(Number(searchParams.get("offset")) || 0, 0);
-
-    const where: Prisma.QuoteWhereInput = { userId: "public" };
-    if (status) {
-      where.status = status;
-    }
-
-    const [quotes, total] = await Promise.all([
-      prisma.quote.findMany({
-        where,
-        orderBy: { createdAt: "desc" },
-        take: limit,
-        skip: offset,
-        include: {
-          renderings: { orderBy: { createdAt: "desc" }, take: 1 },
-        },
-      }),
-      prisma.quote.count({ where }),
-    ]);
-
-    return NextResponse.json({ quotes, total, limit, offset });
-  } catch (error) {
-    console.error("[GET /api/quotes]", error);
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
-  }
+export async function POST() {
+  return NextResponse.json({ code: "QUOTE_ACCOUNT_API_DISABLED", error: "Account quote creation is not available." }, { status: 501 });
 }

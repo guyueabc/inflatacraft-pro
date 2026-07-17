@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import { AboutPageClient } from "@/components/about/about-client";
 
 export const metadata: Metadata = {
-  title: "About Us | InflatableModel - USA Custom Inflatable Manufacturer",
-  description: "InflatableModel is a USA-based custom inflatable manufacturer. Giant product replicas, mascots, arches, costumes, tents, and games for brands worldwide. Free 3D renderings, 3-6 week turnaround.",
+  title: "About InflatableModel | Custom Inflatable Project Support",
+  description: "Learn about InflatableModel's approach to custom inflatable project planning, design coordination, and product information.",
   openGraph: {
-    title: "About InflatableModel | USA Custom Inflatables",
-    description: "USA-based custom inflatable manufacturer. Free 3D renderings. 3-6 week turnaround.",
+    title: "About InflatableModel | Custom Inflatable Project Support",
+    description: "Learn about InflatableModel's approach to custom inflatable projects.",
     type: "website",
   },
 };

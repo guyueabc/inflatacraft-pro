@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 
 import { useState, useMemo } from "react";
 import Link from "next/link";
@@ -386,11 +387,11 @@ function ProductCard({ product }: { product: (typeof products)[number] }) {
       className="group flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all hover:border-navy-300 hover:shadow-lg"
     >
       <div className="relative aspect-video sm:aspect-[4/3] overflow-hidden bg-gradient-to-br from-navy-100 to-navy-200">
-        <img
+        <Image
           src={`${product.images[0]}?v=1`}
           alt={product.name}
           className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-        />
+        width={800} height={600} unoptimized />
         <span className="absolute left-3 top-3 rounded-full bg-navy-700/80 px-2.5 py-0.5 text-xs font-medium text-white backdrop-blur-sm">
           {product.category}
         </span>
@@ -430,11 +431,11 @@ function ProductListItem({ product }: { product: (typeof products)[number] }) {
       className="group flex gap-6 overflow-hidden rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition-all hover:border-navy-300 hover:shadow-lg"
     >
       <div className="relative h-36 w-48 shrink-0 overflow-hidden rounded-lg bg-gradient-to-br from-navy-100 to-navy-200">
-        <img
+        <Image
           src={`${product.images[0]}?v=1`}
           alt={product.name}
           className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-        />
+        width={800} height={600} unoptimized />
         <span className="absolute left-2 top-2 rounded-full bg-navy-700/80 px-2 py-0.5 text-[10px] font-medium text-white backdrop-blur-sm">
           {product.category}
         </span>

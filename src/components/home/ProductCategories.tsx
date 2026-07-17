@@ -1,8 +1,8 @@
 "use client";
+import Image from "next/image";
 
 import Link from "next/link";
-import { cn } from "@/lib/utils";
-import { ArrowRight, Megaphone, Store, Gamepad2, Shirt, Lightbulb } from "lucide-react";
+import { ArrowRight, Megaphone, Store, Gamepad2, Lightbulb } from "lucide-react";
 
 interface Category {
   title: string;
@@ -94,12 +94,12 @@ export function ProductCategories() {
             >
               {/* Product image */}
               <div className="relative aspect-[4/3] w-full overflow-hidden bg-gray-100">
-                <img
+                <Image
                   src={category.imageSrc}
                   alt={category.title}
                   className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
                   loading="lazy"
-                />
+                width={800} height={600} unoptimized />
               </div>
               {/* Card body */}
               <div className="flex flex-1 flex-col p-6">

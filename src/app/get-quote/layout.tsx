@@ -3,16 +3,16 @@ import type { Metadata } from "next";
 const BASE_URL = "https://qddjtx.com";
 
 export const metadata: Metadata = {
-  title: "Request a Free Custom Inflatable Quote | inflatablemodel",
+  title: "Request a Custom Inflatable Quote | InflatableModel",
   description:
-    "Get a free custom inflatable quote in 24 hours. Share your project details and receive a detailed quote with free 3D renderings. No obligation.",
+    "Share your custom inflatable requirements for project review. Quotation timing and available design support vary by project.",
   alternates: {
     canonical: `${BASE_URL}/get-quote`,
   },
   openGraph: {
-    title: "Request a Free Custom Inflatable Quote | inflatablemodel",
+    title: "Request a Custom Inflatable Quote | InflatableModel",
     description:
-      "Get a free custom inflatable quote in 24 hours. Share your project details and receive a detailed quote with free 3D renderings.",
+      "Share your custom inflatable requirements for project review.",
     url: `${BASE_URL}/get-quote`,
     siteName: "inflatablemodel",
     type: "website",

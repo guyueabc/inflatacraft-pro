@@ -3,16 +3,16 @@ import type { Metadata } from "next";
 const BASE_URL = "https://qddjtx.com";
 
 export const metadata: Metadata = {
-  title: "Inflatable Industry Insights & Tips | inflatablemodel Blog",
+  title: "Custom Inflatable Planning & Care Guides | InflatableModel Blog",
   description:
-    "Expert insights on inflatable marketing, design tips, industry trends, and case studies from the world of giant brand activations. Read the inflatablemodel blog.",
+    "General educational guides for custom inflatable project planning, design review, inspection, cleaning, and storage.",
   alternates: {
     canonical: `${BASE_URL}/blog`,
   },
   openGraph: {
-    title: "Inflatable Industry Insights & Tips | inflatablemodel Blog",
+    title: "Custom Inflatable Planning & Care Guides | InflatableModel Blog",
     description:
-      "Expert insights on inflatable marketing, design tips, industry trends, and case studies from the world of giant brand activations.",
+      "General educational guides for custom inflatable project planning and product care.",
     url: `${BASE_URL}/blog`,
     siteName: "inflatablemodel",
     type: "website",

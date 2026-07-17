@@ -3,7 +3,7 @@ import { GetQuoteClient } from '@/components/get-quote/get-quote-client'
 
 export const metadata: Metadata = {
   title: 'Get a Free Quote | Custom Inflatables | InflatableModel',
-  description: 'Request a free custom inflatable quote. 3D renderings and pricing within 24 hours. USA manufacturing, worldwide shipping.',
+  description: 'Request a custom inflatable quote and share your project requirements with InflatableModel.',
   openGraph: {
     title: 'Get a Free Quote | InflatableModel',
     description: 'Request a free custom inflatable quote.',

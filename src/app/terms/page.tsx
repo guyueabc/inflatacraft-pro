@@ -33,36 +33,32 @@ export default function TermsPage() {
         <section>
           <h2 className="text-xl font-semibold text-navy-800">3. Production Timeline</h2>
           <p className="mt-2 leading-relaxed">
-            Standard production takes 3–6 weeks from design approval. Timelines may vary
-            based on project complexity and order volume. We will communicate any delays promptly.
+            Production and delivery estimates vary by specification, approval status, quantity,
+            production availability, and shipping method. Applicable timing is stated in the order documents.
           </p>
         </section>
 
         <section>
           <h2 className="text-xl font-semibold text-navy-800">4. Design & Intellectual Property</h2>
           <p className="mt-2 leading-relaxed">
-            You retain ownership of your brand assets and designs submitted to us. We provide
-            free 3D renderings for approved projects. Renderings remain our intellectual property
-            until a production order is placed.
+            You are responsible for having permission to use brand assets and designs submitted
+            for review. Artwork use, design-support scope, ownership, and licensing terms are
+            confirmed in the applicable written agreement.
           </p>
         </section>
 
         <section>
           <h2 className="text-xl font-semibold text-navy-800">5. Warranty</h2>
           <p className="mt-2 leading-relaxed">
-            All inflatables come with a manufacturer&apos;s warranty covering defects in materials
-            and workmanship. Contact us for specific warranty terms related to your product.
+            Any warranty, component coverage, exclusions, applicable period, and claim process
+            are only those stated in the final quotation or written order agreement.
           </p>
         </section>
 
         <section>
           <h2 className="text-xl font-semibold text-navy-800">6. Contact</h2>
           <p className="mt-2 leading-relaxed">
-            Questions about these terms? Email us at{" "}
-            <a href="mailto:inflatablemodel@showlovein.com" className="text-red-600 underline">
-              inflatablemodel@showlovein.com
-            </a>{" "}
-            or email us.
+            Questions about these terms? Contact us through WhatsApp or the online quote form.
           </p>
         </section>
       </div>

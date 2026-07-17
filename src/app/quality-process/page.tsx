@@ -3,127 +3,29 @@ import Link from "next/link";
 import { ArrowRight, ClipboardCheck } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Quality Process | inflatablemodel",
+  title: "Custom Inflatable Inspection Planning | InflatableModel",
   description:
-    "Our 10-step quality process for custom inflatables — from material check to pre-shipment documentation. Every stage is documented and verified.",
+    "A neutral checklist for defining product-specific approval, inspection, documentation, acceptance, and packing requirements.",
+  alternates: { canonical: "https://qddjtx.com/quality-process" },
 };
 
 const steps = [
-  {
-    title: "Material Check",
-    desc: "Incoming fabric and components are inspected for denier weight, coating consistency, color matching, and flame retardancy certification before any cutting begins.",
-  },
-  {
-    title: "Digital Artwork Confirmation",
-    desc: "A digital proof with exact dimensions, colors (Pantone matched), logo placement, and structural details is sent for your written approval before production starts.",
-  },
-  {
-    title: "Cutting",
-    desc: "Fabric panels are precision-cut using plotted patterns and CNC cutting tables to ensure consistent panel sizes and clean edges across every unit.",
-  },
-  {
-    title: "Printing",
-    desc: "Graphics are applied using dye-sublimation, digital UV, or screen printing depending on the material and design. Color accuracy is checked against the approved proof.",
-  },
-  {
-    title: "Sewing or Welding",
-    desc: "Panels are joined using industrial sewing machines (double-stitched) or high-frequency welding, selected based on material type and structural requirements.",
-  },
-  {
-    title: "Reinforcement",
-    desc: "High-stress areas — anchor points, inflation ports, seams, and corners — receive additional reinforcement layers and webbing to extend product lifespan.",
-  },
-  {
-    title: "Inflation Test",
-    desc: "Every unit is fully inflated and held under pressure for a minimum of 30 minutes to verify structural integrity, seam sealing, and blower compatibility.",
-  },
-  {
-    title: "Cleaning",
-    desc: "The finished inflatable is wiped down and inspected for loose threads, adhesive residue, and print defects before entering the packing stage.",
-  },
-  {
-    title: "Packing",
-    desc: "The product is loosely folded (never creased sharply), placed in a durable storage bag with the blower, stakes, ropes, and repair kit, then boxed for shipping.",
-  },
-  {
-    title: "Pre-Shipment Documentation",
-    desc: "Final photos, measurements, material certificates, and packing list are compiled and sent to the buyer for approval before the shipment leaves our facility.",
-  },
+  ["Define the controlling specification", "Identify the approved dimensions, artwork, material, construction, accessories, documentation, operating assumptions, and packaging."],
+  ["Agree on acceptance criteria", "State measurable criteria, tolerances, visual expectations, required evidence, and which deviations require buyer approval."],
+  ["Confirm material evidence", "Specify which supplier declarations, test reports, samples, color references, or batch records are required for the exact order."],
+  ["Approve artwork and configuration", "Use a written approval document and record revisions. A visual rendering alone should not replace the production specification."],
+  ["Plan in-process checks", "Decide whether dimensions, printing, seams, reinforcement, components, or other features need documented checks during production."],
+  ["Plan final inspection", "Agree on inflation or functional checks, measurement scope, photos or video, accessory verification, and any independent inspection."],
+  ["Handle nonconformity", "Define review, correction, reinspection, waiver, replacement, refund, and evidence requirements in the written terms."],
+  ["Approve packing and handoff", "Confirm the packing list, labels, packaging evidence, freight handoff, condition reporting, and record retention."],
 ];
 
 export default function QualityProcessPage() {
   return (
-    <div className="min-h-screen bg-white">
-      {/* Hero */}
-      <section className="bg-navy-900 px-4 py-16 text-white">
-        <div className="container mx-auto max-w-4xl">
-          <div className="mb-4 flex items-center gap-2">
-            <ClipboardCheck className="h-6 w-6 text-red-400" />
-            <p className="text-sm font-medium uppercase tracking-wider text-red-400">
-              Quality Process
-            </p>
-          </div>
-          <h1 className="mb-4 text-3xl font-bold tracking-tight md:text-5xl">
-            Quality Process
-          </h1>
-          <p className="text-lg text-gray-300">
-            Every custom inflatable passes through a documented 10-step quality
-            process — from incoming material inspection to pre-shipment
-            documentation. No unit ships without a full inflation test and buyer
-            approval.
-          </p>
-        </div>
-      </section>
-
-      {/* Process Timeline */}
-      <section className="py-12">
-        <div className="container mx-auto max-w-4xl px-4">
-          <h2 className="mb-8 text-2xl font-bold tracking-tight text-navy-900">
-            10-Step Production Process
-          </h2>
-          <div className="relative space-y-6">
-            {/* Vertical line */}
-            <div className="absolute left-5 top-2 h-full w-0.5 bg-gray-200 md:left-6" />
-            {steps.map((s, idx) => (
-              <div
-                key={idx}
-                className="relative flex items-start gap-4 md:gap-6"
-              >
-                <div className="relative z-10 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-navy-900 text-sm font-bold text-white md:h-12 md:w-12 md:text-base">
-                  {idx + 1}
-                </div>
-                <div className="flex-1 rounded-xl border border-gray-200 bg-white p-5">
-                  <h3 className="mb-1 text-lg font-bold text-navy-900">
-                    {s.title}
-                  </h3>
-                  <p className="text-sm leading-relaxed text-gray-600">
-                    {s.desc}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="border-t border-gray-200 bg-white py-16">
-        <div className="container mx-auto max-w-4xl px-4 text-center">
-          <h2 className="mb-4 text-3xl font-bold tracking-tight text-navy-900">
-            Ready to See It in Action?
-          </h2>
-          <p className="mx-auto mb-8 max-w-2xl text-lg text-gray-600">
-            Start your project today and follow each step from material check to
-            shipment.
-          </p>
-          <Link
-            href="/get-quote"
-            className="inline-flex items-center gap-2 rounded-xl bg-red-600 px-8 py-4 text-base font-semibold text-white shadow-lg shadow-red-600/30 transition-all hover:bg-red-500"
-          >
-            Start Your Project <ArrowRight className="h-5 w-5" />
-          </Link>
-        </div>
-      </section>
-    </div>
+    <main className="min-h-screen bg-white">
+      <section className="bg-navy-900 px-4 py-16 text-white"><div className="container mx-auto max-w-4xl"><div className="mb-4 flex items-center gap-2"><ClipboardCheck className="h-6 w-6 text-red-400" /><p className="text-sm font-medium uppercase tracking-wider text-red-400">Inspection Planning</p></div><h1 className="text-4xl font-bold tracking-tight md:text-5xl">Define Quality in the Order Documents</h1><p className="mt-4 text-lg text-gray-300">Inspection scope and acceptance evidence vary by product. This page does not claim that every order follows a fixed process or automatically includes specified tests or certificates.</p></div></section>
+      <section className="py-14"><div className="container mx-auto max-w-4xl px-4"><div className="space-y-5">{steps.map(([title, description], index) => <article key={title} className="flex gap-5 rounded-xl border border-gray-200 p-6"><div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-navy-900 font-bold text-white">{index + 1}</div><div><h2 className="font-bold text-navy-900">{title}</h2><p className="mt-2 text-sm leading-relaxed text-gray-700">{description}</p></div></article>)}</div></div></section>
+      <section className="bg-gray-50 px-4 py-14 text-center"><h2 className="text-2xl font-bold text-navy-900">Request a written inspection scope</h2><p className="mx-auto mt-3 max-w-2xl text-gray-600">Confirm the exact product, responsible parties, criteria, evidence, timing, and remedy before approval.</p><Link href="/get-quote" className="mt-6 inline-flex items-center gap-2 rounded-xl bg-red-600 px-8 py-4 font-semibold text-white hover:bg-red-500">Request a Proposal <ArrowRight className="h-5 w-5" /></Link></section>
+    </main>
   );
 }

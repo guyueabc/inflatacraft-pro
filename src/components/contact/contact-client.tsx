@@ -6,8 +6,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import {
-  Mail,
-  MapPin,
   Clock,
   MessageCircle,
   Send,
@@ -19,11 +17,6 @@ import {
   ShoppingCart,
   PenTool,
   Truck,
-  Globe,
-  AtSign,
-  Camera,
-  Building2,
-  Play,
 } from "lucide-react";
 
 // ── Types ────────────────────────────────────────────────────────────────────
@@ -54,24 +47,8 @@ const CONTACT_CARDS = [
   {
     icon: MessageCircle,
     title: "WhatsApp",
-    lines: ["Chat with our team instantly", "Average response: under 2 min"],
+    lines: ["Send project details through WhatsApp", "Response time varies"],
     action: { label: "Start Chat", href: "https://wa.me/8615376427736" },
-  },
-  {
-    icon: Mail,
-    title: "Email",
-    lines: ["inflatablemodel@showlovein.com"],
-    action: { label: "Send Email", href: "mailto:inflatablemodel@showlovein.com" },
-  },
-  {
-    icon: MapPin,
-    title: "Address",
-    lines: [
-      "7426 Industrial Parkway",
-      "Detroit, MI 48216",
-      "United States",
-    ],
-    action: { label: "Get Directions", href: "#" },
   },
   {
     icon: Clock,
@@ -83,14 +60,6 @@ const CONTACT_CARDS = [
     ],
     action: null,
   },
-];
-
-const SOCIAL_LINKS = [
-  { label: "Facebook", href: "#", icon: Globe },
-  { label: "Twitter", href: "#", icon: AtSign },
-  { label: "Instagram", href: "#", icon: Camera },
-  { label: "LinkedIn", href: "#", icon: Building2 },
-  { label: "YouTube", href: "#", icon: Play },
 ];
 
 const FAQ_QUICK_LINKS = [
@@ -204,9 +173,9 @@ export function ContactPageClient() {
               Let&apos;s Start a Conversation
             </h1>
             <p className="mt-6 text-lg text-navy-300 leading-relaxed max-w-2xl mx-auto">
-              Whether you have a project in mind, need a quote, or just want to
-              learn more about what we do — our team is ready to help. We
-              respond within 24 hours, usually much faster.
+              Whether you have a project in mind, need a quote, or want to
+              learn more, send the requirements through the form or WhatsApp.
+              Response time varies.
             </p>
           </motion.div>
         </div>
@@ -232,11 +201,9 @@ export function ContactPageClient() {
                   Message Sent!
                 </h2>
                 <p className="mt-4 text-lg text-gray-600 leading-relaxed">
-                  Thank you for reaching out. A member of our team will review
-                  your message and respond within{" "}
-                  <strong className="text-navy-900">24 hours</strong>. In the
-                  meantime, feel free to browse our gallery or learn more about
-                  our process.
+                  Thank you for reaching out. Your message has been received
+                  for review. Response time varies; you can also contact us
+                  through WhatsApp.
                 </p>
 
                 <div className="mt-8 rounded-xl border border-navy-200 bg-white p-6 text-left shadow-sm">
@@ -248,7 +215,7 @@ export function ContactPageClient() {
                       <span className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-red-600 text-xs font-bold text-white">
                         1
                       </span>
-                      Our team reviews your message within 2 hours
+                      Your submitted requirements are reviewed
                     </li>
                     <li className="flex gap-2">
                       <span className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-red-600 text-xs font-bold text-white">
@@ -296,8 +263,8 @@ export function ContactPageClient() {
                       Send Us a Message
                     </h2>
                     <p className="text-sm text-gray-500 mb-8">
-                      Fill out the form below and we&apos;ll get back to you
-                      within 24 hours.
+                      Fill out the form below or contact us through WhatsApp.
+                      Response time varies.
                     </p>
 
                     <form
@@ -550,18 +517,6 @@ export function ContactPageClient() {
                     ))}
                   </div>
 
-                  {/* Map Placeholder */}
-                  <div className="mt-6 rounded-xl border-2 border-dashed border-navy-300 bg-navy-50 aspect-[16/9] flex items-center justify-center overflow-hidden">
-                    <div className="text-center">
-                      <MapPin className="mx-auto h-8 w-8 text-navy-400" />
-                      <p className="mt-2 text-sm font-medium text-navy-500">
-                        Map
-                      </p>
-                      <p className="text-xs text-navy-400">
-                        7426 Industrial Parkway, Detroit, MI 48216
-                      </p>
-                    </div>
-                  </div>
                 </div>
               </motion.div>
             )}
@@ -572,40 +527,6 @@ export function ContactPageClient() {
       {/* ═══ Social + FAQ Quick Links ═══ */}
       {!isSubmitted && (
         <>
-          {/* Social links */}
-          <section className="bg-white border-t border-navy-100 px-4 py-12">
-            <div className="container mx-auto max-w-7xl">
-              <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={fadeInUp}
-                custom={0}
-                className="text-center"
-              >
-                <h2 className="font-heading text-2xl font-bold text-navy-900">
-                  Follow Us
-                </h2>
-                <p className="mt-2 text-gray-600">
-                  See our latest projects, behind-the-scenes content, and
-                  company news.
-                </p>
-                <div className="mt-6 flex items-center justify-center gap-4">
-                  {SOCIAL_LINKS.map((social) => (
-                    <a
-                      key={social.label}
-                      href={social.href}
-                      aria-label={social.label}
-                      className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-navy-200 text-navy-500 transition-all hover:border-red-600 hover:bg-red-600 hover:text-white"
-                    >
-                      <social.icon className="h-5 w-5" />
-                    </a>
-                  ))}
-                </div>
-              </motion.div>
-            </div>
-          </section>
-
           {/* FAQ Quick Links */}
           <section className="px-4 py-12 border-t border-navy-100 bg-gray-50">
             <div className="container mx-auto max-w-7xl">

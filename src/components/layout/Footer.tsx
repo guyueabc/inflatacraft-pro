@@ -2,11 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
 import {
-  Phone,
-  Mail,
-  MapPin,
   ArrowRight,
   Globe,
   AtSign,
@@ -128,8 +124,8 @@ export function Footer() {
             </Link>
 
             <p className="mb-6 max-w-sm text-sm leading-relaxed text-white/60">
-              Premium custom inflatable manufacturing for businesses worldwide.
-              From concept to creation — we bring your brand to life at scale.
+              Custom inflatable product options for project-specific review.
+              Final specifications and terms are confirmed in writing.
             </p>
 
             {/* Newsletter */}
@@ -138,7 +134,7 @@ export function Footer() {
                 Stay Inflated
               </h4>
               <p className="mb-3 text-sm text-white/50">
-                Get tips, case studies, and exclusive offers.
+                Get general planning and product-care updates.
               </p>
               <form
                 onSubmit={handleNewsletterSubmit}
@@ -234,25 +230,9 @@ export function Footer() {
             reserved.
           </p>
 
-          {/* Badges */}
-          <div className="flex flex-col items-center gap-3 text-sm text-white/40 sm:flex-row sm:gap-6">
-            <span className="flex items-center gap-1.5">
-              <span className="text-xs font-semibold uppercase tracking-widest text-white/60">
-                Made in
-              </span>
-              <span className="inline-flex items-center rounded bg-red-600 px-2 py-0.5 text-xs font-bold text-white">
-                USA
-              </span>
-            </span>
-            <span className="flex items-center gap-1.5">
-              <span className="text-xs font-semibold uppercase tracking-widest text-white/60">
-                BBB Rating
-              </span>
-              <span className="inline-flex items-center rounded bg-white/10 px-2 py-0.5 text-xs font-bold text-white">
-                A+
-              </span>
-            </span>
-          </div>
+          <p className="text-sm text-white/40">
+            Custom inflatable project support
+          </p>
         </div>
       </div>
     </footer>

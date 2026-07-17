@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Share2, ExternalLink, Link as LinkIcon, Mail, Copy, Check } from "lucide-react";
+import { Share2, ExternalLink, Link as LinkIcon, Copy, Check } from "lucide-react";
 
 interface ShareButtonProps {
   productName: string;
@@ -57,13 +57,7 @@ export function ShareButton({ productName }: ShareButtonProps) {
           >
             <LinkIcon className="h-4 w-4" />
           </a>
-          <a
-            href={`mailto:?subject=${encodeURIComponent(productName)}&body=${encodeURIComponent(shareUrl)}`}
-            className="flex h-9 w-9 items-center justify-center rounded-lg text-gray-500 transition-colors hover:bg-red-50 hover:text-red-600"
-            aria-label="Share via Email"
-          >
-            <Mail className="h-4 w-4" />
-          </a>
+
           <button
             onClick={handleCopyLink}
             className="flex h-9 w-9 items-center justify-center rounded-lg text-gray-500 transition-colors hover:bg-gray-100 hover:text-navy-700"

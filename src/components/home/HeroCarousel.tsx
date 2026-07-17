@@ -20,8 +20,8 @@ interface Slide {
 const SLIDES: Slide[] = [
   {
     id: 1,
-    headline: "Scale Your Brand 100×",
-    subheadline: "Custom Inflatable Manufacturer — Giant Inflatables in 3–6 Weeks",
+    headline: "Plan a Custom Inflatable",
+    subheadline: "Share the intended use, dimensions, artwork, destination, and deadline for review",
     ctaPrimary: { label: "Get Free Quote", href: "/get-quote" },
     ctaSecondary: { label: "View Gallery", href: "/gallery" },
     placeholderLabel: "Giant Product Replica",
@@ -29,8 +29,8 @@ const SLIDES: Slide[] = [
   },
   {
     id: 2,
-    headline: "Turn Your Product Into a Landmark",
-    subheadline: "Giant Inflatable Replicas & Advertising Inflatables That Drive Sales",
+    headline: "Explore Product Replica Ideas",
+    subheadline: "Review possible shapes and customization directions without guaranteed marketing outcomes",
     ctaPrimary: { label: "Get Free Quote", href: "/get-quote" },
     ctaSecondary: { label: "View Gallery", href: "/gallery" },
     placeholderLabel: "Inflatable Mascot",
@@ -38,8 +38,8 @@ const SLIDES: Slide[] = [
   },
   {
     id: 3,
-    headline: "From Sketch to Spectacle in Weeks",
-    subheadline: "Free 3D Renderings — Event Inflatables & Promotional Inflatables",
+    headline: "Confirm the Project in Writing",
+    subheadline: "Final design support, specification, documentation, production, and delivery terms vary by project",
     ctaPrimary: { label: "Get Free Quote", href: "/get-quote" },
     ctaSecondary: { label: "View Gallery", href: "/gallery" },
     placeholderLabel: "Custom Inflatable Arch",

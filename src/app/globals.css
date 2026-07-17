@@ -146,7 +146,6 @@ img {
 /* Disable user zoom on inputs (iOS) */
 input[type="text"],
 input[type="email"],
-input[type="tel"],
 input[type="number"],
 select,
 textarea {

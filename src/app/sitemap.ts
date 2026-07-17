@@ -1,7 +1,6 @@
 import { type MetadataRoute } from 'next'
 import { products } from '@/lib/data/products'
 import { BLOG_DATA } from '@/lib/data/blog'
-import { GALLERY_DATA } from '@/lib/data/gallery'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = 'https://qddjtx.com'
@@ -48,13 +47,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: 'monthly' as const,
     priority: 0.7,
   }))
-  const galleryPages: MetadataRoute.Sitemap = Object.keys(GALLERY_DATA).map((id) => ({
-    url: base + '/gallery/' + id,
-    lastModified: now,
-    changeFrequency: 'monthly' as const,
-    priority: 0.8,
-  }))
 
 
-  return [...core, ...productPages, ...blogPages, ...galleryPages]
+  return [...core, ...productPages, ...blogPages]
 }

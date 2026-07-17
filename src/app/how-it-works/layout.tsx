@@ -3,16 +3,16 @@ import type { Metadata } from "next";
 const BASE_URL = "https://qddjtx.com";
 
 export const metadata: Metadata = {
-  title: "How Custom Inflatables Are Made — Process & Timeline | inflatablemodel",
+  title: "Custom Inflatable Project Review Process | InflatableModel",
   description:
-    "Learn how custom inflatables are made: consultation, 3D design, approval, production, and delivery. Our proven 5-step process delivers quality in 3-6 weeks.",
+    "Learn how requirements, proposal scope, written approval, production details, and delivery arrangements are reviewed for a custom inflatable project.",
   alternates: {
     canonical: `${BASE_URL}/how-it-works`,
   },
   openGraph: {
-    title: "How Custom Inflatables Are Made — Process & Timeline | inflatablemodel",
+    title: "Custom Inflatable Project Review Process | InflatableModel",
     description:
-      "Learn how custom inflatables are made: consultation, 3D design, approval, production, and delivery. Our proven 5-step process.",
+      "Learn how custom inflatable project requirements and written terms are reviewed.",
     url: `${BASE_URL}/how-it-works`,
     siteName: "inflatablemodel",
     type: "website",

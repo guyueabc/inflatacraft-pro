@@ -1,23 +1,15 @@
 "use client";
+import Image from "next/image";
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import Image from "next/image";
-import { cn } from "@/lib/utils";
 import {
-  Shield,
-  MapPin,
   Lightbulb,
   Heart,
-  ArrowRight,
-  Phone,
-  Award,
-  Factory,
-  Users,
-  Globe,
-  Star,
+
   CheckCircle2,
-  Building2,
+  MessageCircle,
+  ArrowRight,
 } from "lucide-react";
 
 // ── Types ────────────────────────────────────────────────────────────────────
@@ -28,143 +20,28 @@ interface ValueProp {
   description: string;
 }
 
-interface TeamMember {
-  name: string;
-  role: string;
-  bio: string;
-  initials: string;
-}
-
-interface Milestone {
-  year: string;
-  title: string;
-  description: string;
-}
 
 // ── Data ─────────────────────────────────────────────────────────────────────
 
 const VALUES: ValueProp[] = [
   {
-    icon: Shield,
-    title: "Quality First",
-    description:
-      "Every product undergoes a mandatory 24-hour continuous inflation test before it leaves our facility. We use premium 210D—00D fabrics, reinforced double-stitched seams, and dye-sublimation printing for vibrant, long-lasting results. Zero defects is our standard.",
-  },
-  {
-    icon: MapPin,
-    title: "Made in USA",
-    description:
-      "All design, engineering, and manufacturing happens right here in our United States facility. This means faster turnaround, tighter quality control, easier communication, and the confidence that comes from American craftsmanship.",
-  },
-  {
     icon: Lightbulb,
-    title: "Innovation Driven",
+    title: "Project Planning",
     description:
-      "We invest continuously in the latest 3D design software, dye-sublimation printing technology, and manufacturing equipment. Our interactive 3D model viewer lets clients inspect and annotate designs from any browser before production begins.",
+      "Share the intended use, approximate size, branding requirements, deadline, and reference images so the project can be reviewed before specifications are confirmed.",
   },
   {
     icon: Heart,
-    title: "Customer Obsessed",
+    title: "Clear Communication",
     description:
-      "Every project gets a dedicated project manager — a single point of contact from first sketch to final delivery. Unlimited design revisions, 24-hour response times, and installation support are standard. Your success is our reputation.",
+      "Use the online quote form or WhatsApp to discuss project-specific requirements and confirm the next steps.",
   },
 ];
 
-const TEAM_MEMBERS: TeamMember[] = [
-  {
-    name: "Michael Reynolds",
-    role: "Founder & CEO",
-    bio: "Founded inflatablemodel in 2003 after 15 years in industrial textile manufacturing. A hands-on leader who still reviews every major project design.",
-    initials: "MR",
-  },
-  {
-    name: "Sarah Chen",
-    role: "VP of Design & Engineering",
-    bio: "20+ years in 3D industrial design. Leads our team of 12 designers and engineers. Pioneered our interactive 3D model review platform.",
-    initials: "SC",
-  },
-  {
-    name: "David Okonkwo",
-    role: "Director of Manufacturing",
-    bio: "Oversees our 50,000 sq ft facility. 18 years in textile manufacturing. Certified in Six Sigma Black Belt — drives our quality metrics.",
-    initials: "DO",
-  },
-  {
-    name: "Jennifer Walsh",
-    role: "Head of Client Success",
-    bio: "Ensures every client has an exceptional experience. Leads a team of 8 dedicated project managers. Former marketing director at a Fortune 500 brand.",
-    initials: "JW",
-  },
-  {
-    name: "Carlos Mendez",
-    role: "Lead Design Engineer",
-    bio: "Specializes in complex structural inflatables. Background in aerospace engineering brings unique perspective to large-scale inflatable design.",
-    initials: "CM",
-  },
-  {
-    name: "Amanda Foster",
-    role: "Director of Partnerships",
-    bio: "Manages distributor relationships and strategic partnerships. 12 years in B2B sales. Has onboarded over 200 brand partners.",
-    initials: "AF",
-  },
-];
-
-const MILESTONES: Milestone[] = [
-  {
-    year: "2003",
-    title: "Founded in Detroit, MI",
-    description:
-      "Michael Reynolds launches inflatablemodel from a 2,000 sq ft workshop with three employees, focusing on custom inflatable mascots for local sports teams.",
-  },
-  {
-    year: "2006",
-    title: "First Fortune 500 Client",
-    description:
-      "Lands first major brand partnership with a national food & beverage company. The project — a 15-foot product replica — becomes a trade show sensation.",
-  },
-  {
-    year: "2010",
-    title: "Expanded to 20,000 sq ft Facility",
-    description:
-      "Moved to a larger manufacturing space to accommodate growing demand. Added dye-sublimation printing capabilities and expanded the design team to 8.",
-  },
-  {
-    year: "2013",
-    title: "Launched Distributor Program",
-    description:
-      "Created the inflatablemodel distributor network, enabling agencies and promotional product companies to offer custom inflatables under their own brand.",
-  },
-  {
-    year: "2016",
-    title: "Reached 1,000 Projects Milestone",
-    description:
-      "Completed our 1,000th project. Expanded into international markets with dedicated shipping and customs support for global clients.",
-  },
-  {
-    year: "2019",
-    title: "Moved to 50,000 sq ft Facility",
-    description:
-      "Opened our current state-of-the-art manufacturing facility with expanded production lines, an in-house photo studio, and a dedicated quality testing lab.",
-  },
-  {
-    year: "2021",
-    title: "3D Interactive Design Platform",
-    description:
-      "Launched our proprietary 3D model viewer, allowing clients to inspect, rotate, and annotate designs in real-time from any browser. Industry first.",
-  },
-  {
-    year: "2024",
-    title: "5,000+ Projects & 200+ Brands",
-    description:
-      "Crossed 5,000 completed projects and 200 active brand partners. Expanded team to 85+ employees. Continued investment in sustainable manufacturing practices.",
-  },
-];
 
 const TRUST_BADGES = [
-  { label: "BBB Rating", value: "A+", icon: Award },
-  { label: "Made in", value: "USA", icon: MapPin },
-  { label: "Projects Completed", value: "5,000+", icon: CheckCircle2 },
-  { label: "Brand Partners", value: "200+", icon: Users },
+  { label: "Contact", value: "WhatsApp", icon: MessageCircle },
+  { label: "Planning", value: "Project-specific", icon: CheckCircle2 },
 ];
 
 // ── Animation Variants ───────────────────────────────────────────────────────
@@ -214,13 +91,10 @@ export function AboutPageClient() {
                 About Us
               </p>
               <h1 className="font-heading text-4xl font-bold tracking-tight text-white md:text-5xl lg:text-6xl">
-                Crafting Giant Impressions Since 2003
+                Custom Inflatable Project Support
               </h1>
               <p className="mt-6 text-lg text-navy-300 leading-relaxed max-w-xl">
-                For over 20 years, inflatablemodel has been the trusted
-                manufacturing partner for brands that demand the extraordinary.
-                From Fortune 500 product launches to Super Bowl halftime shows,
-                we engineer inflatables that stop crowds and make headlines.
+                Explore project-planning information for custom inflatable products and share your requirements through the online quote form or WhatsApp.
               </p>
 
               <div className="mt-8 flex flex-wrap gap-3">
@@ -247,12 +121,12 @@ export function AboutPageClient() {
               className="relative"
             >
               <div className="relative aspect-[4/3] rounded-2xl bg-gradient-to-br from-navy-800 to-navy-700 border border-white/10 overflow-hidden">
-                <img
+                <Image
                   src="/images/products/custom-inflatable-event-tent/custom-inflatable-event-tent-1.jpg?v=1"
-                  alt="inflatablemodel Manufacturing Facility"
+                  alt="Custom inflatable event tent example"
                   loading="lazy"
                   className="absolute inset-0 h-full w-full object-cover"
-                />
+                width={800} height={600} unoptimized />
               </div>
               {/* Decorative accent */}
               <div className="absolute -bottom-4 -right-4 h-24 w-24 rounded-2xl bg-red-600/20 border border-red-600/30 backdrop-blur-sm hidden lg:block" />
@@ -275,12 +149,12 @@ export function AboutPageClient() {
               className="relative"
             >
               <div className="relative aspect-[4/3] rounded-2xl bg-gradient-to-br from-navy-100 to-navy-50 border border-navy-200 overflow-hidden">
-                <img
+                <Image
                   src="/images/products/pop-up-dome-canopy/pop-up-dome-canopy-1.jpg?v=1"
-                  alt="inflatablemodel Headquarters"
+                  alt="Custom inflatable canopy example"
                   loading="lazy"
                   className="absolute inset-0 h-full w-full object-cover"
-                />
+                width={800} height={600} unoptimized />
               </div>
               <div className="absolute -bottom-3 -right-3 h-20 w-20 rounded-2xl bg-red-100 border border-red-200 hidden lg:block" />
             </motion.div>
@@ -294,29 +168,13 @@ export function AboutPageClient() {
               custom={0}
             >
               <h2 className="font-heading text-3xl font-bold text-navy-900 md:text-4xl">
-                From Workshop to Industry Leader
+                Plan Around Your Requirements
               </h2>
               <p className="mt-4 text-gray-600 leading-relaxed">
-                inflatablemodel started in 2003 in a small Detroit workshop with a
-                single industrial sewing machine and a belief that brands
-                deserved better inflatables. Founder Michael Reynolds, a veteran
-                of industrial textile manufacturing, saw an industry dominated by
-                overseas production, inconsistent quality, and long lead times.
+                Custom inflatable projects vary by intended use, scale, artwork, installation conditions, deadline, and destination requirements.
               </p>
               <p className="mt-4 text-gray-600 leading-relaxed">
-                He set out to build something different: a US-based
-                manufacturing operation that combined old-world craftsmanship
-                with cutting-edge design technology. The goal was simple —
-                deliver better inflatables, faster, with a level of service that
-                made clients feel like partners, not order numbers.
-              </p>
-              <p className="mt-4 text-gray-600 leading-relaxed">
-                Today, inflatablemodel operates from a 50,000 square foot
-                facility with over 85 employees. We&apos;ve completed more than
-                5,000 projects for 200+ brands across 30+ countries. But our
-                founding principle hasn&apos;t changed: every single inflatable
-                gets the same obsessive attention to detail that Michael insisted
-                on from day one.
+                Share these details before production so materials, accessories, documentation, and delivery expectations can be reviewed for the specific project.
               </p>
             </motion.div>
           </div>
@@ -369,11 +227,10 @@ export function AboutPageClient() {
         </div>
       </section>
 
-      {/* Facility Section */}
+      {/* Project Review Section */}
       <section className="px-4 py-20 md:py-28">
         <div className="container mx-auto max-w-7xl">
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-            {/* Stats */}
             <motion.div
               initial="hidden"
               whileInView="visible"
@@ -382,23 +239,17 @@ export function AboutPageClient() {
               custom={0}
             >
               <h2 className="font-heading text-3xl font-bold text-navy-900 md:text-4xl">
-                Our 50,000 sq ft Manufacturing Facility
+                Confirm Specifications Before Production
               </h2>
               <p className="mt-4 text-gray-600 leading-relaxed">
-                Every inflatablemodel product is designed, engineered, and
-                manufactured under one roof in the United States. Our facility
-                combines advanced technology with skilled craftsmanship to
-                deliver exceptional quality on every project.
+                Product dimensions, materials, anchoring, accessories, artwork, safety documentation, production timing, and delivery arrangements should be confirmed for each order.
               </p>
-
               <div className="mt-8 grid grid-cols-2 gap-6">
                 {[
-                  { value: "50,000", label: "Square Feet" },
-                  { value: "85+", label: "Team Members" },
-                  { value: "12", label: "Design Engineers" },
-                  { value: "24", label: "Production Lines" },
-                  { value: "5,000+", label: "Projects Completed" },
-                  { value: "30+", label: "Countries Served" },
+                  { value: "Use", label: "Intended Application" },
+                  { value: "Size", label: "Required Dimensions" },
+                  { value: "Date", label: "Project Deadline" },
+                  { value: "Files", label: "Artwork & References" },
                 ].map((stat) => (
                   <div
                     key={stat.label}
@@ -414,8 +265,6 @@ export function AboutPageClient() {
                 ))}
               </div>
             </motion.div>
-
-            {/* Facility image placeholder */}
             <motion.div
               initial="hidden"
               whileInView="visible"
@@ -424,12 +273,12 @@ export function AboutPageClient() {
               className="relative"
             >
               <div className="relative aspect-[3/4] rounded-2xl bg-gradient-to-br from-navy-100 to-navy-50 border border-navy-200 overflow-hidden">
-                <img
+                <Image
                   src="/images/products/pop-up-dome-canopy/pop-up-dome-canopy-1.jpg?v=1"
-                  alt="inflatablemodel Production Floor"
+                  alt="Custom inflatable project example"
                   loading="lazy"
                   className="absolute inset-0 h-full w-full object-cover"
-                />
+                width={800} height={600} unoptimized />
               </div>
               <div className="absolute -bottom-4 -left-4 h-16 w-16 rounded-2xl bg-red-100 border border-red-200 hidden lg:block" />
             </motion.div>
@@ -437,122 +286,7 @@ export function AboutPageClient() {
         </div>
       </section>
 
-      {/* Team Section */}
-      <section className="bg-gray-50 px-4 py-20 md:py-28 border-t border-navy-100">
-        <div className="container mx-auto max-w-7xl">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeInUp}
-            custom={0}
-            className="mb-16 text-center"
-          >
-            <h2 className="font-heading text-3xl font-bold text-navy-900 md:text-4xl">
-              Meet the Leadership Team
-            </h2>
-            <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
-              The people behind the giant inflatables. A team of designers,
-              engineers, and manufacturing experts dedicated to your success.
-            </p>
-          </motion.div>
 
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {TEAM_MEMBERS.map((member, idx) => (
-              <motion.div
-                key={member.name}
-                custom={idx}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={fadeInUp}
-                className="rounded-2xl border border-navy-200 bg-white p-6 text-center shadow-sm transition-shadow hover:shadow-md"
-              >
-                {/* Avatar placeholder */}
-                <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-navy-700 to-navy-900 text-2xl font-bold text-white shadow-lg">
-                  {member.initials}
-                </div>
-                <h3 className="mt-5 font-heading text-lg font-bold text-navy-900">
-                  {member.name}
-                </h3>
-                <p className="text-sm font-semibold text-red-600">
-                  {member.role}
-                </p>
-                <p className="mt-3 text-sm text-gray-600 leading-relaxed">
-                  {member.bio}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Company Timeline */}
-      <section className="px-4 py-20 md:py-28">
-        <div className="container mx-auto max-w-4xl">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeInUp}
-            custom={0}
-            className="mb-16 text-center"
-          >
-            <h2 className="font-heading text-3xl font-bold text-navy-900 md:text-4xl">
-              Our Journey
-            </h2>
-            <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
-              Key milestones from a small workshop to an industry leader.
-            </p>
-          </motion.div>
-
-          <div className="relative">
-            {/* Center line */}
-            <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-navy-200 md:-translate-x-px" />
-
-            <div className="space-y-12">
-              {MILESTONES.map((milestone, idx) => (
-                <motion.div
-                  key={milestone.year}
-                  custom={idx}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: "-60px" }}
-                  variants={fadeInUp}
-                  className={cn(
-                    "relative pl-12 md:pl-0",
-                    idx % 2 === 0
-                      ? "md:pr-[calc(50%+2rem)] md:text-right"
-                      : "md:pl-[calc(50%+2rem)] md:text-left"
-                  )}
-                >
-                  {/* Dot */}
-                  <div
-                    className={cn(
-                      "absolute top-1.5 h-4 w-4 rounded-full border-4 border-red-600 bg-white z-10",
-                      "left-[calc(1rem-6px)] md:left-1/2 md:-translate-x-1/2"
-                    )}
-                  />
-
-                  <div className="rounded-xl border border-navy-200 bg-white p-5 shadow-sm">
-                    <span className="inline-block rounded-full bg-red-50 px-3 py-1 text-xs font-bold text-red-700">
-                      {milestone.year}
-                    </span>
-                    <h3 className="mt-2 font-heading text-lg font-bold text-navy-900">
-                      {milestone.title}
-                    </h3>
-                    <p className="mt-2 text-sm text-gray-600 leading-relaxed">
-                      {milestone.description}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
       <section className="bg-navy-900 py-16 md:py-20">
         <div className="container mx-auto px-4">
           <div className="flex flex-col items-center justify-between gap-8 rounded-2xl bg-gradient-to-r from-navy-800 via-navy-900 to-navy-800 px-8 py-12 md:flex-row md:px-16">
@@ -561,8 +295,7 @@ export function AboutPageClient() {
                 Let&apos;s Build Something Massive Together
               </h2>
               <p className="mt-3 max-w-lg text-lg text-navy-300">
-                Ready to create an inflatable that makes your brand impossible
-                to ignore? Our team is standing by.
+                Share your project requirements through WhatsApp or the online quote form.
               </p>
             </div>
             <div className="flex flex-col items-center gap-4 sm:flex-row">

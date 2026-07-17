@@ -90,7 +90,7 @@ export function Testimonials() {
             What Our Clients Say
           </h2>
           <p className="mt-4 text-lg text-gray-600">
-            Don't take our word for it — hear from the brands we've helped
+            Don&apos;t take our word for it — hear from the brands we&apos;ve helped
             scale.
           </p>
         </div>

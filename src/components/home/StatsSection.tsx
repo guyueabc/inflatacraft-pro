@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { cn } from "@/lib/utils";
 import { Factory, Users, CalendarCheck, MapPin } from "lucide-react";
 
 interface Stat {

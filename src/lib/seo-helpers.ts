@@ -19,9 +19,7 @@ export function generateOrganizationJsonLd() {
     "@type": "Organization",
     name: "InflatableModel",
     url: "https://qddjtx.com",
-    description: "Custom inflatable manufacturing - giant product replicas, mascots, arches, costumes, and tents. Made in USA.",
-    email: "inflatablemodel@showlovein.com",
-    areaServed: "Worldwide",
+    description: "Custom inflatable product information for giant product replicas, mascots, arches, costumes, tents, and other promotional inflatables.",
     knowsAbout: [
       "Custom Inflatables",
       "Giant Product Replicas",

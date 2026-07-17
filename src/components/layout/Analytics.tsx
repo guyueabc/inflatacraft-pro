@@ -2,7 +2,7 @@
 
 import Script from "next/script";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 const GOOGLE_ADS_ID = "AW-18234377845";
 
@@ -61,13 +61,39 @@ function MetaPixel() {
 
 function Tracker() {
   const pathname = usePathname();
-  const [ready, setReady] = useState(false);
 
-  useEffect(() => { setReady(true); }, []);
+  const getTrackingIds = () => {
+    const fallback = () => {
+      const random = globalThis.crypto?.randomUUID?.().replaceAll("-", "") || `${Date.now()}${Math.random()}`.replace(".", "");
+      return { visitorId: random, sessionId: random };
+    };
+    try {
+      const visitorKey = "analytics_visitor_id";
+      const sessionKey = "analytics_session";
+      let visitorId = localStorage.getItem(visitorKey);
+      if (!visitorId) {
+        visitorId = crypto.randomUUID().replaceAll("-", "");
+        localStorage.setItem(visitorKey, visitorId);
+      }
+
+      const now = Date.now();
+      const stored = sessionStorage.getItem(sessionKey);
+      let session: { id: string; expiresAt: number } | null = null;
+      try { session = stored ? JSON.parse(stored) : null; } catch { session = null; }
+      if (!session || session.expiresAt <= now) {
+        session = { id: crypto.randomUUID().replaceAll("-", ""), expiresAt: now + 30 * 60 * 1000 };
+      } else {
+        session.expiresAt = now + 30 * 60 * 1000;
+      }
+      sessionStorage.setItem(sessionKey, JSON.stringify(session));
+      return { visitorId, sessionId: session.id };
+    } catch {
+      return fallback();
+    }
+  };
 
   // Page view beacon — sends tracking data to Supabase via 1px GIF
   useEffect(() => {
-    if (!ready) return;
     const sp = new URLSearchParams(window.location.search);
     const params = new URLSearchParams();
     params.set("p", pathname || "/");
@@ -76,11 +102,13 @@ function Tracker() {
       const v = sp.get(k);
       if (v) params.set(k, v);
     });
+    const { visitorId, sessionId } = getTrackingIds();
+    params.set("vid", visitorId);
+    params.set("sid", sessionId);
     new Image().src = "/api/analytics/track?" + params.toString();
-  }, [pathname, ready]);
+  }, [pathname]);
 
   useEffect(() => {
-    if (!ready) return;
     const sp = new URLSearchParams(window.location.search);
     const adParams = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "gclid", "gbraid", "wbraid", "fbclid"];
     const hasAd = adParams.some((p) => sp.has(p));
@@ -90,20 +118,19 @@ function Tracker() {
         const val = sp.get(p);
         if (val) { try { sessionStorage.setItem(p, val); } catch {} captured[p] = val; }
       });
-      (window as any).dataLayer?.push({ event: "ad_params_captured", ...captured });
+      window.dataLayer?.push({ event: "ad_params_captured", ...captured });
     }
-  }, [pathname, ready]);
+  }, [pathname]);
 
   useEffect(() => {
-    if (!ready) return;
     if (sessionStorage.getItem("quote_submitted") === "true") {
-      (window as any).dataLayer?.push({ event: "conversion_quote_submitted" });
-      if (typeof (window as any).gtag === "function") {
-        (window as any).gtag("event", "conversion", { send_to: `${GOOGLE_ADS_ID}/TYNLCJu0_70cEPWM6vZD` });
+      window.dataLayer?.push({ event: "conversion_quote_submitted" });
+      if (typeof window.gtag === "function") {
+        window.gtag("event", "conversion", { send_to: `${GOOGLE_ADS_ID}/TYNLCJu0_70cEPWM6vZD` });
       }
       sessionStorage.removeItem("quote_submitted");
     }
-  }, [pathname, ready]);
+  }, [pathname]);
 
   return null;
 }

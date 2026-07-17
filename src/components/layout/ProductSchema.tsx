@@ -15,18 +15,6 @@ export function ProductSchema({ product }: ProductSchemaProps) {
       "@type": "Brand",
       name: "InflatableModel",
     },
-    offers: {
-      "@type": "Offer",
-      availability: product.inStock
-        ? "https://schema.org/InStock"
-        : "https://schema.org/OutOfStock",
-      ...(product.price
-        ? {
-            price: product.price,
-            priceCurrency: "USD",
-          }
-        : {}),
-    },
   };
 
   return (

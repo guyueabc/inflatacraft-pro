@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+import type { LucideIcon } from "lucide-react";
 import {
   BarChart3, Eye, Send, TrendingUp, Users, Globe, MousePointerClick,
   RefreshCw, Download, Mail, Phone, Building, Calendar, DollarSign,
-  Package, MessageSquare, MapPin, Clock, ShieldCheck, AlertCircle,
+  Package, MessageSquare, MapPin, Clock, ShieldCheck,
   ShoppingCart, Target, Zap, Activity,
 } from "lucide-react";
 
@@ -28,9 +29,32 @@ interface TrafficStats {
   sources: Array<{ source: string; type: string; count: number }>;
 }
 
+interface SubmissionData {
+  name?: string;
+  email?: string;
+  phone?: string;
+  company?: string;
+  productType?: string;
+  quantity?: string;
+  budgetRange?: string;
+  deadline?: string;
+  description?: string;
+}
+
+interface PartialLead {
+  id: number;
+  email: string | null;
+  phone: string | null;
+  name: string | null;
+  company: string | null;
+  product_type: string | null;
+  page: string;
+  created_at: string;
+}
+
 interface Submission {
   id: string;
-  data: any;
+  data: SubmissionData;
   ipAddress: string;
   utmSource: string | null;
   utmMedium: string | null;
@@ -41,38 +65,48 @@ interface Submission {
 export function StatsDashboard() {
   const [trafficStats, setTrafficStats] = useState<TrafficStats | null>(null);
   const [submissions, setSubmissions] = useState<Submission[]>([]);
-  const [partialLeads, setPartialLeads] = useState<any[]>([]);
+  const [partialLeads, setPartialLeads] = useState<PartialLead[]>([]);
+  const [loadedAt, setLoadedAt] = useState(() => Date.now());
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [selectedTab, setSelectedTab] = useState<"overview" | "traffic" | "submissions" | "conversion" | "products">("overview");
   const [expandedSubmission, setExpandedSubmission] = useState<string | null>(null);
 
-  const fetchData = async () => {
+  const [periodStart] = useState(() => {
+    const date = new Date();
+    date.setHours(0, 0, 0, 0);
+    return date.toISOString();
+  });
+  const fetchData = useCallback(async () => {
     setLoading(true);
     setError("");
     try {
       const [trafficRes, subsRes, partialRes] = await Promise.all([
         fetch("/api/analytics/track?stats=summary"),
-        fetch("/api/submit-quote?limit=100"),
+        fetch(`/api/submit-quote?limit=100&start=${encodeURIComponent(periodStart)}`),
         fetch("/api/analytics/partial-lead?limit=100"),
       ]);
-      if (!trafficRes.ok) throw new Error("数据加载失败");
+      if (!trafficRes.ok || !subsRes.ok || !partialRes.ok) throw new Error("数据加载失败");
       const tData = await trafficRes.json();
       setTrafficStats(tData);
-      if (subsRes.ok) {
-        const subsData = await subsRes.json();
-        setSubmissions(subsData.submissions || []);
-      }
+      const subsData = await subsRes.json();
+      setSubmissions(subsData.submissions || []);
       const partialData = await partialRes.json();
       setPartialLeads(partialData.partialLeads || []);
-    } catch (e: any) {
-      setError(e.message || "加载失败");
+      setLoadedAt(Date.now());
+    } catch (error: unknown) {
+      setError(error instanceof Error ? error.message : "加载失败");
     } finally {
       setLoading(false);
     }
-  };
+  }, [periodStart]);
 
-  useEffect(() => { fetchData(); }, []);
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      void fetchData();
+    }, 0);
+    return () => window.clearTimeout(timer);
+  }, [fetchData]);
 
   const exportCSV = () => {
     const headers = ["时间", "姓名", "邮箱", "电话", "公司", "产品类型", "数量", "预算", "截止日期", "描述", "IP", "来源"];
@@ -95,7 +129,7 @@ export function StatsDashboard() {
 
   const formatTime = (dateStr: string) => {
     const d = new Date(dateStr);
-    const diff = Date.now() - d.getTime();
+    const diff = loadedAt - d.getTime();
     const mins = Math.floor(diff / 60000);
     const hours = Math.floor(diff / 3600000);
     const days = Math.floor(diff / 86400000);
@@ -515,9 +549,16 @@ export function StatsDashboard() {
                         <p className="text-sm text-gray-700">{s.data.description}</p>
                       </div>
                     )}
-                    <div className="mt-4 flex gap-2">
-                      <a href={`mailto:${s.data?.email}`} className="inline-flex items-center gap-1 rounded-lg bg-navy-600 px-3 py-1.5 text-xs text-white hover:bg-navy-700"><Mail className="h-3 w-3" /> 发送邮件</a>
-                    </div>
+                    {s.data?.phone && (
+                      <div className="mt-4 flex gap-2">
+                        <a
+                          href="https://wa.me/8615376427736"
+                          className="inline-flex items-center gap-1 rounded-lg bg-navy-600 px-3 py-1.5 text-xs text-white hover:bg-navy-700"
+                        >
+                          <Phone className="h-3 w-3" /> WhatsApp
+                        </a>
+                      </div>
+                    )}
                   </div>
                 )}
               </div>
@@ -782,7 +823,7 @@ export function StatsDashboard() {
 // Sub-components
 // ============================================
 function KPICard({ icon: Icon, label, value, change, changeType, color }: {
-  icon: any;
+  icon: LucideIcon;
   label: string;
   value: number | string;
   change: string;
@@ -867,7 +908,7 @@ function TrafficBar({ label, pv, uv, total, color, badge, badgeColor }: {
   );
 }
 
-function DetailItem({ icon: Icon, label, value }: { icon: any; label: string; value?: string }) {
+function DetailItem({ icon: Icon, label, value }: { icon: LucideIcon; label: string; value?: string }) {
   return (
     <div className="flex items-center gap-2">
       <Icon className="h-4 w-4 text-gray-400" />

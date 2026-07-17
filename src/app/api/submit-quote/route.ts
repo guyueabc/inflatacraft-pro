@@ -169,8 +169,16 @@ export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
     const limit = Math.min(Math.max(Number(searchParams.get("limit")) || 50, 1), 200);
+    const startParam = searchParams.get("start");
+    const start = startParam ? new Date(startParam) : null;
+    if (start && Number.isNaN(start.getTime())) {
+      return NextResponse.json({ error: "Invalid start date" }, { status: 400 });
+    }
     const submissions = await prisma.formSubmission.findMany({
-      where: { formType: { in: ["quote", "contact"] } },
+      where: {
+        formType: { in: ["quote", "contact"] },
+        ...(start ? { createdAt: { gte: start } } : {}),
+      },
       orderBy: { createdAt: "desc" },
       take: limit,
       select: { id: true, data: true, ipAddress: true, utmSource: true, utmMedium: true, utmCampaign: true, createdAt: true },

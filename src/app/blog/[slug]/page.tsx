@@ -46,7 +46,7 @@ export default async function BlogDetailPage({
     '@type': 'BlogPosting',
     headline: post.title,
     description: post.excerpt,
-    author: { '@type': 'Person', name: post.author },
+    author: { '@type': 'Organization', name: post.author },
     datePublished: post.date,
     image: '/images/og-default.jpg',
     publisher: {

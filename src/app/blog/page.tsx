@@ -4,11 +4,11 @@ import { BlogListClient } from '@/components/blog/blog-list-client';
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: 'Blog | Inflatable Marketing Insights | InflatableModel',
-  description: 'Expert guides on custom inflatable marketing, ROI strategies, trade show tips, case studies, and industry trends. Insights from the USA leading inflatable manufacturer.',
+  title: 'Blog | Custom Inflatable Planning Guides | InflatableModel',
+  description: 'General educational guides for planning, designing, inspecting, cleaning, and storing custom inflatable products. Confirm all project-specific requirements before ordering.',
   openGraph: {
     title: 'Blog | InflatableModel',
-    description: 'Expert guides on custom inflatable marketing.',
+    description: 'Educational guides for custom inflatable project planning and product care.',
     type: 'website',
   },
 };

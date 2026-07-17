@@ -2,9 +2,7 @@ import type { Metadata } from "next";
 import { HeroCarousel } from "@/components/home/HeroCarousel";
 import { ValueProps } from "@/components/home/ValueProps";
 import { ProductCategories } from "@/components/home/ProductCategories";
-import { FeaturedCases } from "@/components/home/FeaturedCases";
 import { HowItWorks } from "@/components/home/HowItWorks";
-import { TrustSignals } from "@/components/home/TrustSignals";
 import { QuickQuote } from "@/components/home/QuickQuote";
 import { CTABanner } from "@/components/home/CTABanner";
 
@@ -46,12 +44,6 @@ export default function HomePage() {
 
       {/* 5. How It Works Timeline */}
       <HowItWorks />
-
-      {/* 5b. Trust Signals — Safety, Quality, Materials, Downloads */}
-      <TrustSignals />
-
-      {/* 6. Featured Case Studies */}
-      <FeaturedCases />
 
       {/* 8. Quick Quote Form */}
       <QuickQuote />

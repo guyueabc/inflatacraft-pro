@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 
 import { useState, useMemo } from "react";
 import Link from "next/link";
@@ -13,11 +14,8 @@ import {
   Clock,
   User,
   BookOpen,
-  TrendingUp,
   Lightbulb,
-  FileText,
   Wrench,
-  CalendarDays,
   Tag,
   ChevronRight,
 } from "lucide-react";
@@ -26,11 +24,8 @@ import {
 
 
 const CATEGORY_ICONS: Record<Exclude<BlogCategory, "All">, React.ReactNode> = {
-  "Industry Trends": <TrendingUp className="h-4 w-4" />,
   "How-To Guides": <Lightbulb className="h-4 w-4" />,
-  "Case Studies": <FileText className="h-4 w-4" />,
   "Product Care": <Wrench className="h-4 w-4" />,
-  Events: <CalendarDays className="h-4 w-4" />,
 };
 
 // ─ Helpers ─────────────────────────────────
@@ -71,7 +66,6 @@ export function BlogListClient() {
   }, [searchQuery, activeCategory]);
 
   const featuredPost = BLOG_POSTS.find((p) => p.featured);
-  const regularPosts = filteredPosts.filter((p) => !p.featured);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -85,9 +79,8 @@ export function BlogListClient() {
             Blog &amp; Resources
           </h1>
           <p className="max-w-2xl text-lg text-gray-300">
-            Expert insights on inflatable marketing, design tips, industry trends,
-            and behind-the-scenes case studies from the world of giant brand
-            activations.
+            General educational guides for custom inflatable project planning,
+            design review, inspection, cleaning, and storage.
           </p>
         </div>
       </section>
@@ -157,12 +150,12 @@ export function BlogListClient() {
                         featuredPost.gradient
                       )}
                     >
-                      <img
+                      <Image
                         src={`${featuredPost.imageSrc}?v=1`}
                         alt={featuredPost.title}
                         loading="lazy"
                         className="absolute inset-0 h-full w-full object-cover"
-                      />
+                      width={800} height={600} unoptimized />
                     </div>
 
                     {/* Featured Content */}
@@ -265,12 +258,12 @@ export function BlogListClient() {
                             post.gradient
                           )}
                         >
-                          <img
+                          <Image
                             src={`${post.imageSrc}?v=1`}
                             alt={post.title}
                             loading="lazy"
                             className="absolute inset-0 h-full w-full object-cover"
-                          />
+                          width={800} height={600} unoptimized />
                         </div>
 
                         {/* Content */}

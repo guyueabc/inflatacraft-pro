@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 
 import { useState } from "react";
 import Link from "next/link";
@@ -172,13 +173,13 @@ export function FeaturedCases() {
               >
                 {/* Image */}
                 <div className="relative aspect-[4/3] w-full overflow-hidden bg-gray-100">
-                  <img
+                  <Image
                     src={study.imageSrc}
                     alt={study.clientName}
                     loading="lazy"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                     className="h-full w-full object-contain"
-                  />
+                  width={800} height={600} unoptimized />
                 </div>
                 <div className="p-5">
                   <div className="flex items-center gap-2">

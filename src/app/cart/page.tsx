@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { cn } from "@/lib/utils";
 import { useCartStore, type CartItem } from "@/stores/cartStore";
 import {
   ShoppingCart,
@@ -22,18 +21,12 @@ export default function CartPage() {
     removeItem,
     updateQuantity,
     clearCart,
-    getSubtotal,
     getShipping,
-    getTax,
-    getTotal,
     getItemCount,
     getCustomItemCount,
   } = useCartStore();
 
-  const subtotal = getSubtotal();
   const shipping = getShipping();
-  const tax = getTax();
-  const total = getTotal();
   const itemCount = getItemCount();
   const customItemCount = getCustomItemCount();
 
@@ -85,8 +78,8 @@ export default function CartPage() {
               <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
               <p>
                 Items marked as <strong>Custom Quote</strong> will be converted to a
-                quote request at checkout. A sales representative will contact you
-                with pricing within 24 hours.
+                quote request at checkout. Quotation timing depends on the
+                submitted requirements and current review queue.
               </p>
             </div>
           </div>
@@ -198,7 +191,7 @@ export default function CartPage() {
                 </div>
                 <div className="flex items-center gap-2 text-xs text-gray-500">
                   <Package className="h-4 w-4 text-navy-600" />
-                  Made in USA • 1 Year Warranty
+                  Custom product — final specifications confirmed before production
                 </div>
               </div>
             </div>

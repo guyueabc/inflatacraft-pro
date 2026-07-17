@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { StatsDashboard } from "./stats-dashboard";
-import { TrafficAnalysis } from "./traffic-analysis";
 
 export const metadata: Metadata = {
   title: "数据分析看板 | InflatableModel",

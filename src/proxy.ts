@@ -59,7 +59,9 @@ export async function proxy(request: NextRequest) {
         { status: 503 },
       );
     }
-    return new NextResponse("Service Unavailable", { status: 503 });
+    const loginUrl = new URL("/admin/login", request.url);
+    loginUrl.searchParams.set("from", pathname);
+    return NextResponse.redirect(loginUrl);
   }
 
   const token = request.cookies.get("admin_token")?.value;

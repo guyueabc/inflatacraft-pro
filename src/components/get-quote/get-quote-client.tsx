@@ -1,8 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { useEffect, useRef } from "react";
-import { useForm } from "react-hook-form";
+import { useState, useEffect, useRef } from "react";
+import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { cn } from "@/lib/utils";
 import { quoteSchema, PRODUCT_TYPES, BUDGET_RANGES, DEADLINES, INTENDED_USES, INDOOR_OUTDOOR, PEOPLE_INTERACT, COUNTRIES, VOLTAGE_PLUGS, ARTWORK_STATUS, INSTALLATION_SURFACES, type QuoteFormData } from "@/lib/validations/quote";
@@ -30,10 +29,12 @@ export function GetQuoteClient() {
 
   // (comment)
   const formRef = useRef<QuoteFormData | null>(null);
-  const values = form.watch();
+  const values = useWatch({ control: form.control });
 
   // (comment)
-  useEffect(() => { formRef.current = values; }, [values]);
+  useEffect(() => {
+    if (values.email && values.phone) formRef.current = values as QuoteFormData;
+  }, [values]);
 
   // (comment)
   useEffect(() => {

@@ -1,0 +1,3 @@
+-- Existing production databases already contain the original analytics tables.
+-- After baselining 20260717000000_baseline there is no further DDL required.
+-- This migration is intentionally empty so fresh databases remain replayable.

@@ -4,53 +4,27 @@ export function OrganizationSchema() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "inflatablemodel",
-    description:
-      "Custom inflatable manufacturing — giant product replicas, mascots, arches, costumes, tents, and games. 3-6 week turnaround. Free 3D renderings.",
+    name: "InflatableModel",
+    description: "Custom inflatable product options and project-specific quotation support.",
     url: "https://qddjtx.com",
-    email: "inflatablemodel@showlovein.com",
-    address: {
-      "@type": "PostalAddress",
-      addressCountry: "CN",
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "sales",
+      url: "https://wa.me/8615376427736",
     },
-    sameAs: [
-      "https://facebook.com/inflatablemodel",
-      "https://twitter.com/inflatablemodel",
-      "https://instagram.com/inflatablemodel",
-      "https://linkedin.com/company/inflatablemodel",
-    ],
   };
 
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-    />
-  );
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />;
 }
 
 export function WebSiteSchema() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "inflatablemodel",
+    name: "InflatableModel",
     url: "https://qddjtx.com",
-    description:
-      "B2B custom inflatable manufacturer: giant product replicas, mascots, arches, costumes, tents, and games. 3-6 week turnaround, free 3D renderings.",
-    potentialAction: {
-      "@type": "SearchAction",
-      target: {
-        "@type": "EntryPoint",
-        urlTemplate: "https://qddjtx.com/search?q={search_term_string}",
-      },
-      "query-input": "required name=search_term_string",
-    },
+    description: "Custom inflatable product information and project-specific quotation support.",
   };
 
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-    />
-  );
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />;
 }

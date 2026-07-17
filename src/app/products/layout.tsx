@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import ProductsPage from "./page";
 
 const BASE_URL = "https://qddjtx.com";
 

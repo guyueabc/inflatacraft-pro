@@ -1,4 +1,3 @@
-import { cn } from "@/lib/utils";
 import { Lightbulb, PenTool, Truck } from "lucide-react";
 
 interface Step {
@@ -12,23 +11,23 @@ const STEPS: Step[] = [
   {
     number: "01",
     icon: Lightbulb,
-    title: "Share Your Idea",
+    title: "Share Your Requirements",
     description:
-      "Tell us about your product, mascot, or activation concept. Send us a sketch, photo, or napkin drawing — our design team takes it from there with a free consultation.",
+      "Send the intended use, approximate size, reference images, artwork, destination, and deadline for project review.",
   },
   {
     number: "02",
     icon: PenTool,
-    title: "We Design & Render",
+    title: "Review the Proposal",
     description:
-      "Our engineers create a 3D model and photorealistic rendering within days. You review, request revisions, and approve the final design before production begins.",
+      "Review the visual reference, written specification, included accessories, documentation, commercial terms, and requested revisions before approval.",
   },
   {
     number: "03",
     icon: Truck,
-    title: "Production & Delivery",
+    title: "Confirm Production & Delivery",
     description:
-      "Once approved, we manufacture your custom inflatable in our U.S. facility using commercial grade materials. In 3–6 weeks, your giant inflatable ships directly to your door.",
+      "Production location, inspection scope, lead time, packaging, and delivery arrangements are confirmed in writing for the approved order.",
   },
 ];
 
@@ -41,8 +40,8 @@ export function HowItWorks() {
             How It Works
           </h2>
           <p className="mt-4 text-lg text-navy-300">
-            Three simple steps from idea to inflatable. We handle the
-            complexity — you focus on your campaign.
+            A project-specific review from initial requirements to written
+            production and delivery confirmation.
           </p>
         </div>
 
@@ -51,7 +50,7 @@ export function HowItWorks() {
           <div className="absolute left-0 right-0 top-12 hidden h-0.5 bg-gradient-to-r from-red-500 via-red-400 to-red-500 md:block" />
 
           <div className="relative grid gap-12 md:grid-cols-3">
-            {STEPS.map((step, idx) => (
+            {STEPS.map((step) => (
               <div key={step.number} className="relative flex flex-col items-center text-center">
                 {/* Step circle */}
                 <div className="relative z-10 flex h-24 w-24 items-center justify-center rounded-full border-4 border-red-500 bg-navy-900">

@@ -52,18 +52,14 @@ export default function PrivacyPolicyPage() {
           <h2 className="text-xl font-semibold text-navy-800">5. Your Rights</h2>
           <p className="mt-2 leading-relaxed">
             You may request access to, correction of, or deletion of your personal data at
-            any time by contacting us at inflatablemodel@showlovein.com.
+            any time by contacting us through WhatsApp or the online quote form.
           </p>
         </section>
 
         <section>
           <h2 className="text-xl font-semibold text-navy-800">6. Contact</h2>
           <p className="mt-2 leading-relaxed">
-            Questions about this policy? Email us at{" "}
-            <a href="mailto:inflatablemodel@showlovein.com" className="text-red-600 underline">
-              inflatablemodel@showlovein.com
-            </a>{" "}
-            or email us.
+            Questions about this policy? Contact us through WhatsApp or the online quote form.
           </p>
         </section>
       </div>

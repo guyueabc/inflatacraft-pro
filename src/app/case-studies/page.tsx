@@ -1,208 +1,108 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { GALLERY_DATA } from "@/lib/data/gallery";
-import { ArrowRight, TrendingUp, Eye, Users, Star } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Custom Inflatable Case Studies by Industry | InflatableModel",
+  title: "Custom Inflatable Application Ideas | InflatableModel",
   description:
-    "Real results from custom inflatable campaigns. Giant product replicas, mascots, arches, and tents that drove measurable ROI for food, sports, retail, and trade show brands.",
+    "Explore neutral application ideas for custom inflatable product replicas, arches, mascots, tents, and event displays. Examples are illustrative and do not represent verified customer results.",
   alternates: { canonical: "https://qddjtx.com/case-studies" },
-  keywords: "inflatable case study, inflatable success story, custom inflatable results, inflatable ROI, inflatable marketing results",
   openGraph: {
-    title: "Case Studies | InflatableModel",
-    description: "Real campaigns, real results — custom inflatable success stories.",
+    title: "Custom Inflatable Application Ideas | InflatableModel",
+    description: "Illustrative custom inflatable application ideas without customer or performance claims.",
     url: "https://qddjtx.com/case-studies",
     type: "website",
   },
 };
 
-// Additional case data beyond gallery
-const additionalCases = [
+const applications = [
   {
-    client: "SnapChip Snacks",
-    industry: "Food & Beverage",
-    product: "Giant Chip Bag Replica",
-    campaign: "12-State Supermarket Grand Opening Tour",
-    metric: "12M",
-    metricLabel: "Organic Impressions",
-    result: "22% sales lift across 48 stores in 6 months",
-    slug: "snapchip-case-study",
-    blogSlug: true,
+    title: "Product Replica Display",
+    description:
+      "An oversized three-dimensional representation of product packaging for an event, retail display, or photo area.",
+    considerations: "Confirm available space, artwork, viewing direction, power access, and installation conditions.",
   },
   {
-    client: "Apex Motors",
-    industry: "Sports & Automotive",
-    product: "Finish Line Arch",
-    campaign: "NASCAR Race Weekend Activation",
-    metric: "2M+",
-    metricLabel: "Spectator Impressions",
-    result: "Sponsor recall increased 40% post-event",
-    slug: "apex-motors-finish-arch",
-    blogSlug: false,
+    title: "Entrance Arch or Tunnel",
+    description:
+      "A customizable entrance structure for a race, fan zone, exhibition, or temporary event route.",
+    considerations: "Confirm span, clear height, ground surface, anchoring options, and venue approval requirements.",
   },
   {
-    client: "FrostBite Brewing",
-    industry: "Food & Beverage",
-    product: "20ft Beer Can Replica",
-    campaign: "18 Summer Festivals Nationwide",
-    metric: "3x",
-    metricLabel: "Booth Traffic Increase",
-    result: "Landed biggest retail partner at first festival",
-    slug: "frostbite-brewing-giant-can",
-    blogSlug: false,
+    title: "Mascot or Character Display",
+    description:
+      "A stationary or wearable character concept based on approved artwork and intended audience interaction.",
+    considerations: "Confirm proportions, operator needs, visibility, access points, and the approved specification.",
+  },
+  {
+    title: "Inflatable Event Tent",
+    description:
+      "A branded temporary space that may be configured for product information, sampling, or event shelter.",
+    considerations: "Confirm footprint, weather exposure, installation surface, accessories, and local venue rules.",
   },
 ];
 
-const industryFilter = [
-  { name: "All Industries", count: 3 },
-  { name: "Food & Beverage", count: 2 },
-  { name: "Sports & Automotive", count: 1 },
-  { name: "Retail", count: 0 },
-  { name: "Trade Shows", count: 0 },
-];
-
-const metrics = [
-  { icon: TrendingUp, value: "22%", label: "Average Sales Lift" },
-  { icon: Eye, value: "14M+", label: "Total Impressions" },
-  { icon: Users, value: "3x", label: "Avg Booth Traffic" },
-  { icon: Star, value: "98%", label: "Client Satisfaction" },
-];
-
-export default function CaseStudiesPage() {
+export default function ApplicationIdeasPage() {
   const breadcrumbJsonLd = {
-    "@context": "https://schema.org", "@type": "BreadcrumbList",
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Home", item: "https://qddjtx.com" },
-      { "@type": "ListItem", position: 2, name: "Case Studies", item: "https://qddjtx.com/case-studies" },
+      { "@type": "ListItem", position: 2, name: "Application Ideas", item: "https://qddjtx.com/case-studies" },
     ],
   };
+
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
-      <div className="min-h-screen bg-white">
-      {/* Hero */}
-      <section className="bg-navy-900 px-4 py-16 text-white">
-        <div className="container mx-auto max-w-4xl">
-          <p className="mb-2 text-sm font-medium uppercase tracking-wider text-red-400">Case Studies</p>
-          <h1 className="mb-4 text-4xl font-bold tracking-tight md:text-5xl">Real Campaigns. Real Results.</h1>
-          <p className="text-lg text-gray-300">
-            See how brands across industries used custom inflatables to drive measurable ROI — from 22% sales lifts to 12M organic impressions.
-          </p>
-        </div>
-      </section>
-
-      {/* Stats */}
-      <section className="border-b border-gray-200 bg-white py-10">
-        <div className="container mx-auto max-w-6xl px-4">
-          <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
-            {metrics.map((m, idx) => (
-              <div key={idx} className="text-center">
-                <m.icon className="mx-auto mb-2 h-8 w-8 text-red-500" />
-                <p className="text-3xl font-bold text-navy-900">{m.value}</p>
-                <p className="text-sm text-gray-500">{m.label}</p>
-              </div>
-            ))}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd).replace(/</g, "\\u003c") }}
+      />
+      <main className="min-h-screen bg-white">
+        <section className="bg-navy-900 px-4 py-16 text-white">
+          <div className="container mx-auto max-w-4xl">
+            <p className="mb-2 text-sm font-medium uppercase tracking-wider text-red-400">Planning Reference</p>
+            <h1 className="mb-4 text-4xl font-bold tracking-tight md:text-5xl">Custom Inflatable Application Ideas</h1>
+            <p className="max-w-3xl text-lg text-gray-300">
+              These are illustrative product applications, not verified customer case studies, endorsements, or guaranteed marketing results.
+            </p>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Industry Filter */}
-      <section className="border-b border-gray-200 bg-gray-50 py-6">
-        <div className="container mx-auto max-w-7xl px-4">
-          <div className="flex flex-wrap gap-2">
-            {industryFilter.map((f, idx) => (
-              <button
-                key={idx}
-                className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
-                  idx === 0 ? "bg-navy-900 text-white" : "bg-white text-navy-700 border border-gray-200 hover:border-navy-300"
-                }`}
-              >
-                {f.name} ({f.count})
-              </button>
-            ))}
+        <section className="py-14">
+          <div className="container mx-auto max-w-5xl px-4">
+            <div className="mb-8 rounded-xl border border-amber-200 bg-amber-50 p-5 text-sm leading-relaxed text-amber-900">
+              Images and concepts on this website are visual references. Final size, construction, accessories, documentation,
+              delivery terms, and installation requirements must be confirmed in the written quotation and approved specification.
+            </div>
+            <div className="grid gap-6 md:grid-cols-2">
+              {applications.map((item) => (
+                <article key={item.title} className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                  <h2 className="text-xl font-bold text-navy-900">{item.title}</h2>
+                  <p className="mt-3 text-sm leading-relaxed text-gray-600">{item.description}</p>
+                  <h3 className="mt-5 text-sm font-semibold text-navy-900">Confirm before ordering</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-gray-600">{item.considerations}</p>
+                </article>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Case Cards */}
-      <section className="py-12">
-        <div className="container mx-auto max-w-7xl px-4">
-          <div className="grid gap-8 lg:grid-cols-2">
-            {additionalCases.map((c, idx) => (
-              <div key={idx} className="overflow-hidden rounded-2xl border border-gray-200 bg-white">
-                <div className="bg-gradient-to-br from-navy-700 to-navy-900 px-6 py-8">
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="rounded-full bg-red-600 px-3 py-1 text-xs font-bold text-white">{c.industry}</span>
-                    <div className="text-right">
-                      <p className="text-2xl font-bold text-red-400">{c.metric}</p>
-                      <p className="text-xs text-gray-300">{c.metricLabel}</p>
-                    </div>
-                  </div>
-                  <h3 className="text-xl font-bold text-white">{c.client}</h3>
-                  <p className="text-sm text-gray-300">{c.product}</p>
-                </div>
-                <div className="p-6">
-                  <p className="mb-2 text-sm font-semibold text-navy-900">{c.campaign}</p>
-                  <p className="mb-4 text-sm text-gray-600">{c.result}</p>
-                  {c.blogSlug ? (
-                    <Link href={`/blog/${c.slug}`} className="inline-flex items-center gap-1 text-sm font-semibold text-red-600 hover:text-red-700">
-                      Read Full Case Study <ArrowRight className="h-4 w-4" />
-                    </Link>
-                  ) : (
-                    <Link href={`/gallery/${c.slug}`} className="inline-flex items-center gap-1 text-sm font-semibold text-red-600 hover:text-red-700">
-                      View Details <ArrowRight className="h-4 w-4" />
-                    </Link>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Industries Section */}
-      <section className="py-12 bg-gray-50">
-        <div className="container mx-auto max-w-4xl px-4">
-          <h2 className="mb-2 text-2xl font-bold tracking-tight text-navy-900">Explore by Industry</h2>
-          <p className="mb-8 text-sm text-gray-500">See how inflatables work for your specific industry</p>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <Link href="/industries/trade-shows" className="rounded-xl border border-gray-200 bg-white p-5 transition-all hover:border-navy-300 hover:shadow-lg">
-              <h3 className="mb-1 text-base font-bold text-navy-900">Trade Shows</h3>
-              <p className="text-sm text-gray-500">CES, NAB, SEMA booth solutions</p>
-            </Link>
-            <Link href="/industries/retail" className="rounded-xl border border-gray-200 bg-white p-5 transition-all hover:border-navy-300 hover:shadow-lg">
-              <h3 className="mb-1 text-base font-bold text-navy-900">Retail</h3>
-              <p className="text-sm text-gray-500">Grand openings & store promotions</p>
-            </Link>
-            <Link href="/industries/sports" className="rounded-xl border border-gray-200 bg-white p-5 transition-all hover:border-navy-300 hover:shadow-lg">
-              <h3 className="mb-1 text-base font-bold text-navy-900">Sports Events</h3>
-              <p className="text-sm text-gray-500">Stadium activation & fan zones</p>
-            </Link>
-            <Link href="/industries/food-beverage" className="rounded-xl border border-gray-200 bg-white p-5 transition-all hover:border-navy-300 hover:shadow-lg">
-              <h3 className="mb-1 text-base font-bold text-navy-900">Food & Beverage</h3>
-              <p className="text-sm text-gray-500">Giant product replicas that sell</p>
+        <section className="border-t border-gray-200 bg-gray-50 py-14">
+          <div className="container mx-auto max-w-4xl px-4 text-center">
+            <h2 className="text-3xl font-bold text-navy-900">Discuss Your Requirements</h2>
+            <p className="mx-auto mt-3 max-w-2xl text-gray-600">
+              Share the intended use, venue, approximate size, artwork, destination, and deadline for a project-specific review.
+            </p>
+            <Link
+              href="/get-quote"
+              className="mt-7 inline-flex items-center gap-2 rounded-xl bg-red-600 px-8 py-4 font-semibold text-white transition-colors hover:bg-red-500"
+            >
+              Request a Quote <ArrowRight className="h-5 w-5" />
             </Link>
           </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="border-t border-gray-200 bg-white py-16">
-        <div className="container mx-auto max-w-4xl px-4 text-center">
-          <h2 className="mb-4 text-3xl font-bold tracking-tight text-navy-900">Your Brand Could Be Next</h2>
-          <p className="mx-auto mb-8 max-w-2xl text-lg text-gray-600">Get a custom inflatable that delivers measurable results.</p>
-          <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Link href="/get-quote" className="inline-flex items-center gap-2 rounded-xl bg-red-600 px-8 py-4 text-base font-semibold text-white shadow-lg shadow-red-600/30 transition-all hover:bg-red-500">
-              Get Free Quote <ArrowRight className="h-5 w-5" />
-            </Link>
-            <Link href="/get-quote" className="inline-flex items-center gap-2 rounded-xl border border-navy-300 bg-white px-8 py-4 text-base font-semibold text-navy-900 transition-all hover:border-navy-500 hover:bg-gray-50">
-              Get Similar Project Quote <ArrowRight className="h-5 w-5" />
-            </Link>
-          </div>
-        </div>
-      </section>
-      </div>
+        </section>
+      </main>
     </>
   );
 }

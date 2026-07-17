@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 
 import { useState } from "react";
 import { cn } from "@/lib/utils";
@@ -14,11 +15,11 @@ export function ProductGallery({ images, name }: ProductGalleryProps) {
   return (
     <div>
       <div className="relative mb-4 aspect-[4/3] overflow-hidden rounded-xl bg-gradient-to-br from-navy-100 to-navy-200">
-        <img
+        <Image
           src={`${images[selectedImage]}?v=1`}
           alt={name}
           className="h-full w-full object-cover"
-        />
+        width={800} height={600} unoptimized />
       </div>
 
       {images.length > 1 && (
@@ -34,11 +35,11 @@ export function ProductGallery({ images, name }: ProductGalleryProps) {
                   : "border-transparent hover:border-gray-300"
               )}
             >
-              <img
+              <Image
                 src={`${img}?v=1`}
                 alt={`${name} ${idx + 1}`}
                 className="h-full w-full object-cover"
-              />
+              width={800} height={600} unoptimized />
             </button>
           ))}
         </div>

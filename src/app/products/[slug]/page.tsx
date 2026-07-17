@@ -1,106 +1,51 @@
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getProductBySlug, getRelatedProducts } from "@/lib/data/products";
 import { ProductGallery } from "@/components/products/product-gallery";
 import { ShareButton } from "@/components/products/share-button";
 import { ProductSchema } from "@/components/layout/ProductSchema";
-import {
-  Clock,
-  Truck,
-  ShieldCheck,
-  RotateCcw,
-  Star,
-  Award,
-  Printer,
-  CheckCircle2,
-  HelpCircle,
-  Package,
-  Ruler,
-  Palette,
-  AlertTriangle,
-  ClipboardList,
-  CalendarClock,
-  Box,
-} from "lucide-react";
+import { AlertTriangle, CheckCircle2 } from "lucide-react";
 import type { Metadata } from "next";
 
-// Pre-generate all product pages at build time
 export async function generateStaticParams() {
   const { products } = await import("@/lib/data/products");
-  return products.map((p) => ({ slug: p.slug }));
+  return products.map((product) => ({ slug: product.slug }));
 }
 
-// Dynamic metadata for each product page — GEO-optimized descriptions
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const product = getProductBySlug(slug);
-
-  if (!product) {
-    return { title: "Product Not Found" };
-  }
-
-  const geoDescription = product.geoSummary || product.description;
-
+  if (!product) return { title: "Product Not Found" };
   return {
-    title: product.name + " | Custom Inflatable Manufacturer | InflatableModel",
-    description: geoDescription,
-    alternates: {
-      canonical: `https://qddjtx.com/products/${product.slug}`,
-    },
+    title: `${product.name} | Custom Inflatable Product Type | InflatableModel`,
+    description: product.description,
+    alternates: { canonical: `https://qddjtx.com/products/${product.slug}` },
     openGraph: {
       title: product.name,
-      description: geoDescription,
+      description: product.description,
       images: product.images.slice(0, 4),
       type: "website",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: product.name,
-      description: geoDescription,
-      images: product.images.slice(0, 1),
     },
   };
 }
 
-export default async function ProductDetailPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+const planningItems = [
+  "Intended use and operating environment",
+  "Approximate dimensions and available footprint",
+  "Authorized artwork and visual references",
+  "Required quantity, destination, and deadline",
+  "Venue, electrical, anchoring, and document requirements",
+];
+
+export default async function ProductDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const product = getProductBySlug(slug);
-
-  if (!product) {
-    notFound();
-  }
-
+  if (!product) notFound();
   const related = getRelatedProducts(product, 4);
-
-  // FAQPage JSON-LD — critical for AI engine citation
-  const faqJsonLd =
-    product.faqs && product.faqs.length > 0
-      ? {
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          mainEntity: product.faqs.map((faq) => ({
-            "@type": "Question",
-            name: faq.question,
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: faq.answer,
-            },
-          })),
-        }
-      : null;
 
   return (
     <>
-      {/* JSON-LD structured data for Google Rich Results + AI visibility */}
-      {/* BreadcrumbList */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -108,397 +53,85 @@ export default async function ProductDetailPage({
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
-              {
-                "@type": "ListItem",
-                position: 1,
-                name: "Home",
-                item: "https://qddjtx.com",
-              },
-              {
-                "@type": "ListItem",
-                position: 2,
-                name: "Products",
-                item: "https://qddjtx.com/products",
-              },
-              {
-                "@type": "ListItem",
-                position: 3,
-                name: product.name,
-              },
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://qddjtx.com" },
+              { "@type": "ListItem", position: 2, name: "Products", item: "https://qddjtx.com/products" },
+              { "@type": "ListItem", position: 3, name: product.name },
             ],
-          }),
+          }).replace(/</g, "\\u003c"),
         }}
       />
-      {/* Product */}
       <ProductSchema product={product} />
-      {/* FAQPage — critical for AI citation */}
-      {faqJsonLd && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-        />
-      )}
-
-      <div className="min-h-screen bg-white pb-24 md:pb-0">
-        {/* Breadcrumb */}
-        <div className="border-b border-gray-200 bg-white">
-          <div className="container mx-auto max-w-7xl px-4 py-3">
-            <nav className="flex items-center gap-2 text-sm text-gray-500">
-              <Link href="/" className="hover:text-navy-700">
-                Home
-              </Link>
-              <span>/</span>
-              <Link href="/products" className="hover:text-navy-700">
-                Products
-              </Link>
-              <span>/</span>
-              <span className="font-medium text-navy-900 truncate">
-                {product.name}
-              </span>
-            </nav>
-          </div>
+      <main className="min-h-screen bg-white pb-24 md:pb-0">
+        <div className="border-b border-gray-200">
+          <nav className="container mx-auto flex max-w-7xl items-center gap-2 px-4 py-3 text-sm text-gray-500">
+            <Link href="/">Home</Link><span>/</span><Link href="/products">Products</Link><span>/</span>
+            <span className="truncate font-medium text-navy-900">{product.name}</span>
+          </nav>
         </div>
 
-        {/* Product hero */}
         <section className="container mx-auto max-w-7xl px-4 py-8 lg:py-12">
           <div className="grid gap-8 lg:grid-cols-2">
-            {/* Image Gallery */}
+            <ProductGallery images={product.images} name={product.name} />
             <div>
-              <div className="relative mb-4">
-                <div className="absolute left-4 top-4 z-10 flex gap-2">
-                  {product.featured && (
-                    <span className="inline-flex items-center gap-1 rounded-full bg-red-600 px-3 py-1 text-xs font-semibold text-white">
-                      <Star className="h-3 w-3 fill-current" />
-                      Featured
-                    </span>
-                  )}
-                  {product.isCustom && (
-                    <span className="rounded-full bg-navy-700 px-3 py-1 text-xs font-semibold text-white">
-                      Custom
-                    </span>
-                  )}
-                </div>
-              </div>
-              <ProductGallery images={product.images} name={product.name} />
-            </div>
+              <span className="rounded-full bg-navy-100 px-3 py-1 text-xs font-semibold text-navy-700">{product.category}</span>
+              <h1 className="mt-4 text-3xl font-bold tracking-tight text-navy-900 lg:text-4xl">{product.name}</h1>
+              <p className="mt-5 text-base leading-relaxed text-gray-700">{product.description}</p>
 
-            {/* Product Info */}
-            <div>
-              <div className="mb-2">
-                <span className="rounded-full bg-navy-100 px-3 py-1 text-xs font-semibold text-navy-700">
-                  {product.category}
-                </span>
-              </div>
-
-              <h1 className="mb-3 text-3xl font-bold tracking-tight text-navy-900 lg:text-4xl">
-                {product.name}
-              </h1>
-
-              {/* GEO Summary — conclusion-first, answer-optimized */}
-              {product.geoSummary && (
-                <div className="mb-6 rounded-xl border-l-4 border-navy-600 bg-navy-50 p-4">
-                  <p className="text-base leading-relaxed text-navy-900">
-                    {product.geoSummary}
-                  </p>
-                </div>
-              )}
-
-              {/* Fallback to longDescription if no geoSummary */}
-              {!product.geoSummary && (
-                <p className="mb-6 text-base leading-relaxed text-gray-600">
-                  {product.longDescription || product.description}
-                </p>
-              )}
-
-              {/* Quote CTA */}
-              <div className="mb-6">
-                <div className="rounded-lg border-2 border-red-200 bg-red-50 p-4">
-                  <p className="text-lg font-semibold text-red-700">
-                    Custom Quote Required
-                  </p>
-                  <p className="mt-1 text-sm text-red-600">
-                    Pricing varies based on size, materials, and complexity. Contact us for a free quote.
+              <div className="mt-7 rounded-xl border border-amber-200 bg-amber-50 p-5 text-sm leading-relaxed text-amber-900">
+                <div className="flex items-start gap-2">
+                  <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0" />
+                  <p>
+                    Images are visual references for this product type. They do not represent a verified customer case,
+                    endorsement, exact specification, inventory item, certification, performance result, or guaranteed deliverable.
                   </p>
                 </div>
               </div>
 
-              <div className="mb-8">
-                <div className="flex flex-wrap gap-3">
-                  <a
-                    href={`/get-quote?product=${encodeURIComponent(product.name)}`}
-                    className="inline-flex items-center gap-2 rounded-lg bg-red-600 px-8 py-4 text-base font-semibold text-white transition-all hover:bg-red-700 active:scale-95"
-                  >
-                    Get Custom Quote
-                  </a>
-                </div>
+              <div className="mt-7 rounded-xl border border-gray-200 p-5">
+                <h2 className="text-lg font-bold text-navy-900">Information needed for review</h2>
+                <ul className="mt-4 space-y-3 text-sm text-gray-700">
+                  {planningItems.map((item) => (
+                    <li key={item} className="flex gap-2"><CheckCircle2 className="h-5 w-5 shrink-0 text-green-600" />{item}</li>
+                  ))}
+                </ul>
               </div>
 
-              {/* Quick highlights */}
-              <div className="mb-8 grid grid-cols-2 gap-3">
-                {product.leadTime && (
-                  <div className="flex items-center gap-2 rounded-lg border border-gray-200 p-3">
-                    <Clock className="h-5 w-5 text-navy-600" />
-                    <div>
-                      <p className="text-xs text-gray-500">Lead Time</p>
-                      <p className="text-sm font-semibold text-navy-900">
-                        {product.leadTime}
-                      </p>
-                    </div>
-                  </div>
-                )}
-                <div className="flex items-center gap-2 rounded-lg border border-gray-200 p-3">
-                  <Truck className="h-5 w-5 text-navy-600" />
-                  <div>
-                    <p className="text-xs text-gray-500">Shipping</p>
-                    <p className="text-sm font-semibold text-navy-900">
-                      Free over 
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2 rounded-lg border border-gray-200 p-3">
-                  <ShieldCheck className="h-5 w-5 text-navy-600" />
-                  <div>
-                    <p className="text-xs text-gray-500">Warranty</p>
-                    <p className="text-sm font-semibold text-navy-900">
-                      1 Year
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2 rounded-lg border border-gray-200 p-3">
-                  <Award className="h-5 w-5 text-navy-600" />
-                  <div>
-                    <p className="text-xs text-gray-500">Made In</p>
-                    <p className="text-sm font-semibold text-navy-900">USA</p>
-                  </div>
-                </div>
+              <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+                <Link href="/get-quote" className="rounded-lg bg-red-600 px-7 py-3 text-center font-semibold text-white hover:bg-red-500">Request a Custom Quote</Link>
+                <a href="https://wa.me/8615376427736" target="_blank" rel="noopener noreferrer" className="rounded-lg border border-gray-300 px-7 py-3 text-center font-semibold text-navy-900 hover:bg-gray-50">WhatsApp</a>
               </div>
-
-              {/* Share */}
-              <ShareButton productName={product.name} />
+              <div className="mt-5"><ShareButton productName={product.name} /></div>
             </div>
           </div>
         </section>
 
-        {/* GEO Comparison Table — AI loves structured comparison data */}
-        {product.comparison && product.comparison.length > 0 && (
-          <section className="border-t border-gray-200 bg-white py-12">
-            <div className="container mx-auto max-w-7xl px-4">
-              <h2 className="mb-2 text-2xl font-bold tracking-tight text-navy-900">
-                Why Choose {product.name}?
-              </h2>
-              <p className="mb-8 text-sm text-gray-500">
-                Comparison: InflatableModel vs. budget alternatives
-              </p>
-              <div className="overflow-hidden rounded-xl border border-gray-200 bg-white">
-                <div className="overflow-x-auto -mx-4 sm:mx-0">
-                  <table className="w-full min-w-[640px] text-left">
-                    <thead>
-                      <tr className="border-b border-gray-200 bg-gray-50">
-                        <th className="px-3 sm:px-6 py-4 text-sm font-bold text-navy-900">
-                          Feature
-                        </th>
-                        <th className="px-3 sm:px-6 py-4 text-sm font-bold text-navy-700">
-                          <span className="inline-flex items-center gap-1.5">
-                            <CheckCircle2 className="h-4 w-4 text-green-600" />
-                            InflatableModel
-                          </span>
-                        </th>
-                        <th className="px-3 sm:px-6 py-4 text-sm font-bold text-gray-400">
-                          Budget Alternative
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-gray-100">
-                      {product.comparison.map((row, idx) => (
-                        <tr
-                          key={idx}
-                          className={idx % 2 === 0 ? "bg-white" : "bg-gray-50/50"}
-                        >
-                          <td className="px-3 sm:px-6 py-4 text-sm font-semibold text-navy-900">
-                            {row.feature}
-                          </td>
-                          <td className="px-3 sm:px-6 py-4 text-sm text-green-800">
-                            <span className="inline-flex items-start gap-1.5">
-                              <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-green-600" />
-                              {row.inflatablemodel}
-                            </span>
-                          </td>
-                          <td className="px-3 sm:px-6 py-4 text-sm text-gray-500">
-                            {row.budgetAlternative}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </section>
-        )}
-
-        {/* Specs Table */}
-        <section className="border-t border-gray-200 bg-gray-50 py-12">
-          <div className="container mx-auto max-w-7xl px-4">
-            <h2 className="mb-8 text-2xl font-bold tracking-tight text-navy-900">
-              Technical Specifications
-            </h2>
-            <div className="overflow-hidden rounded-xl border border-gray-200 bg-white">
-              <div className="overflow-x-auto -mx-4 sm:mx-0"><table className="w-full min-w-[320px] text-left">
-                <tbody className="divide-y divide-gray-100">
-                  {Object.entries(product.specs).map(([key, value], idx) => {
-                    // 改进 camelCase 转显示文本
-                    const displayKey = key
-                      .replace(/([A-Z])/g, " $1")
-                      .replace(/^./, str => str.toUpperCase())
-                      .trim();
-                    
-                    // 处理数组值显示
-                    const displayValue = Array.isArray(value) 
-                      ? value.join(", ")
-                      : value;
-                    
-                    return (
-                    <tr
-                      key={key}
-                      className={idx % 2 === 0 ? "bg-white" : "bg-gray-50/50"}
-                    >
-                      <td className="w-32 sm:w-64 px-3 sm:px-6 py-4 text-sm font-semibold text-navy-900">
-                        {displayKey}
-                      </td>
-                      <td className="px-3 sm:px-6 py-4 text-sm text-gray-700">
-                        {displayValue}
-                      </td>
-                    </tr>
-                    );
-                  })}
-                </tbody>
-              </table></div>
-            </div>
+        <section className="border-y border-gray-200 bg-gray-50 py-12">
+          <div className="container mx-auto max-w-4xl px-4">
+            <h2 className="text-2xl font-bold text-navy-900">Project-specific confirmation</h2>
+            <p className="mt-4 leading-relaxed text-gray-700">
+              Final dimensions, material, printing, accessories, blower, electrical configuration, anchoring, documentation,
+              production location, inspection scope, price, schedule, warranty if any, shipping, and delivery terms are only
+              those stated in the approved quotation or written order documents.
+            </p>
           </div>
         </section>
 
-        {/* GEO FAQ Section — buyer-verbatim questions with direct answers */}
-        {product.faqs && product.faqs.length > 0 && (
-          <section className="border-t border-gray-200 bg-white py-12">
-            <div className="container mx-auto max-w-4xl px-4">
-              <div className="mb-8 flex items-center gap-3">
-                <HelpCircle className="h-7 w-7 text-navy-600" />
-                <h2 className="text-2xl font-bold tracking-tight text-navy-900">
-                  Frequently Asked Questions
-                </h2>
-              </div>
-              <div className="space-y-4">
-                {product.faqs.map((faq, idx) => (
-                  <div
-                    key={idx}
-                    className="rounded-xl border border-gray-200 bg-gray-50/50 p-5"
-                  >
-                    <h3 className="mb-2 text-base font-semibold text-navy-900">
-                      {faq.question}
-                    </h3>
-                    <p className="text-sm leading-relaxed text-gray-700">
-                      {faq.answer}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
-
-        {/* Trust badges */}
-        <section className="border-t border-gray-200 bg-white py-12">
-          <div className="container mx-auto max-w-7xl px-4">
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {[
-                {
-                  icon: RotateCcw,
-                  title: "Satisfaction Guarantee",
-                  desc: "Not satisfied? We'll make it right. 100% satisfaction guaranteed.",
-                },
-                {
-                  icon: ShieldCheck,
-                  title: "1 Year Warranty",
-                  desc: "All products covered against manufacturing defects for 12 months.",
-                },
-                {
-                  icon: Truck,
-                  title: "Free Shipping",
-                  desc: "Complimentary shipping on all orders over  within the continental US.",
-                },
-                {
-                  icon: Printer,
-                  title: "Free 3D Renderings",
-                  desc: "See your design before production with complimentary digital mockups.",
-                },
-              ].map((badge, idx) => (
-                <div
-                  key={idx}
-                  className="flex flex-col items-center rounded-xl border border-gray-200 p-6 text-center"
-                >
-                  <badge.icon className="mb-3 h-8 w-8 text-navy-600" />
-                  <h3 className="mb-1 text-sm font-semibold text-navy-900">
-                    {badge.title}
-                  </h3>
-                  <p className="text-xs text-gray-500">{badge.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Related Products */}
         {related.length > 0 && (
-          <section className="border-t border-gray-200 bg-gray-50 py-12">
+          <section className="py-12">
             <div className="container mx-auto max-w-7xl px-4">
-              <h2 className="mb-8 text-2xl font-bold tracking-tight text-navy-900">
-                Related Products
-              </h2>
-              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                {related.map((rp) => (
-                  <Link
-                    key={rp.id}
-                    href={`/products/${rp.slug}`}
-                    className="group flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all hover:border-navy-300 hover:shadow-lg"
-                  >
-                    <div className="relative aspect-[4/3] bg-gradient-to-br from-navy-100 to-navy-200">
-                      <img
-                        src={`${rp.images[0]}?v=1`}
-                        alt={rp.name}
-                        className="h-full w-full object-cover"
-                      />
-                      <span className="absolute left-2 top-2 rounded-full bg-navy-700/80 px-2 py-0.5 text-[10px] font-medium text-white backdrop-blur-sm">
-                        {rp.category}
-                      </span>
-                    </div>
-                    <div className="flex flex-1 flex-col p-4">
-                      <h3 className="mb-1 text-sm font-semibold text-navy-900 line-clamp-2">
-                        {rp.name}
-                      </h3>
-                      <div className="mt-auto pt-2">
-                        <span className="text-xs font-semibold text-red-600">
-                          Custom Quote
-                        </span>
-                      </div>
-                    </div>
+              <h2 className="mb-7 text-2xl font-bold text-navy-900">Related Product Types</h2>
+              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                {related.map((item) => (
+                  <Link key={item.id} href={`/products/${item.slug}`} className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm hover:shadow-md">
+                    <div className="aspect-[4/3] bg-gray-100"><Image src={`${item.images[0]}?v=1`} alt={`${item.name} visual reference`} className="h-full w-full object-contain" width={800} height={600} unoptimized /></div>
+                    <div className="p-4"><h3 className="font-semibold text-navy-900">{item.name}</h3><p className="mt-1 text-xs text-gray-500">Custom quote required</p></div>
                   </Link>
                 ))}
               </div>
             </div>
           </section>
         )}
-      
-        {/* Mobile: Fixed bottom CTA */}
-        <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-gray-200 shadow-[0_-4px_20px_rgba(0,0,0,0.08)] px-4 py-3">
-          <a
-            href="/get-quote"
-            className="flex w-full items-center justify-center gap-2 rounded-lg bg-red-600 px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-red-600/20 transition-all hover:bg-red-500 active:scale-[0.98]"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-            Get Free Quote &mdash; Free 3D Rendering
-          </a>
-        </div>
-      </div>
+      </main>
     </>
   );
 }

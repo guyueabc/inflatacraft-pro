@@ -47,7 +47,7 @@ test.describe("InflatableModel E2E Tests", () => {
     await page.goto("/get-quote");
 
     // The email input should be present
-    const emailInput = page.locator('input[type="email"]');
+    const emailInput = page.getByRole("textbox", { name: "Email *" });
     await expect(emailInput).toBeVisible({ timeout: 15000 });
 
     // Fill with invalid email
@@ -58,7 +58,7 @@ test.describe("InflatableModel E2E Tests", () => {
     await submitButton.click();
 
     // Should show validation error from react-hook-form + zod
-    const errorMessage = page.locator("text=请输入有效的邮箱地址");
+    const errorMessage = page.getByText("Please enter a valid email address.");
     await expect(errorMessage).toBeVisible({ timeout: 5000 });
   });
 
