@@ -9,15 +9,15 @@ interface ValueProp {
 const VALUE_PROPS: ValueProp[] = [
   {
     icon: Box,
-    title: "Free 3D Rendering",
+    title: "Visual Review",
     description:
-      "See your inflatable before it's built. We create photorealistic 3D renderings at no cost so you can visualize every detail and approve with confidence.",
+      "Confirm which drawings or renderings are available, the revision scope, and which approved visual controls production for your project.",
   },
   {
     icon: Clock,
-    title: "3–6 Week Turnaround",
+    title: "Schedule Confirmation",
     description:
-      "From concept to completion in as little as three weeks. Our streamlined design-to-production pipeline keeps your campaign on schedule without sacrificing quality.",
+      "Share your required date and destination so production and delivery estimates can be confirmed in writing with appropriate contingency.",
   },
   {
     icon: ClipboardCheck,

@@ -3,7 +3,7 @@ import type { Prisma } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 import { createHmac } from "crypto";
 import {
-  estimateInflatableQuote,
+  buildQuoteReview,
   type IntendedUse,
   type IndoorOutdoor,
   type QuoteInput,
@@ -189,7 +189,9 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Generate pricing estimate (pure calculation, no external dependency)
+    // Generate an internal planning aid (pure calculation, no external dependency).
+    // Values are stored with the lead for staff review; they are not returned to
+    // the public form because project details require written confirmation.
     const quoteInput: QuoteInput = {
       productType: parseProductType(body.productType),
       intendedUse: parseIntendedUse(body.intendedUse),
@@ -203,7 +205,7 @@ export async function POST(request: NextRequest) {
       requiredDocuments: body.requiredDocuments || [],
     };
 
-    const estimate = estimateInflatableQuote(quoteInput);
+    const quoteReview = buildQuoteReview(quoteInput);
 
     // Generate lead score
     const leadContact: LeadContactInput = {
@@ -233,10 +235,9 @@ export async function POST(request: NextRequest) {
     };
     const leadScore = scoreLead(leadContact, leadSignals);
 
-    const estimateJson = {
-      ...estimate,
-      productConfiguration: estimate.productConfiguration.map((item) => ({ ...item })),
-      priceRangeUsd: { ...estimate.priceRangeUsd },
+    const quoteReviewJson = {
+      ...quoteReview,
+      productConfiguration: quoteReview.productConfiguration.map((item) => ({ ...item })),
     } satisfies Prisma.InputJsonObject;
     const leadScoreJson = { ...leadScore } satisfies Prisma.InputJsonObject;
 
@@ -270,7 +271,7 @@ export async function POST(request: NextRequest) {
             budgetRange: body.budgetRange || "",
             deadline: body.deadline || "",
             requiredDocuments: body.requiredDocuments,
-            estimate: estimateJson,
+            estimate: quoteReviewJson,
             leadScore: leadScoreJson,
           },
           ipAddress: ip,
@@ -298,8 +299,6 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       success: true,
       quoteId: dbSubmissionId,
-      estimate,
-      leadScore,
       nextUrl: `/quote/pending?id=${dbSubmissionId}`,
     }, { status: 201 });
 

@@ -12,7 +12,7 @@ export function CTABanner() {
             </h2>
             <p className="mt-3 max-w-lg text-lg text-navy-300">
               Let&apos;s discuss your project. Contact us on WhatsApp or request a quote —
-              we&apos;ll get back to you within 24 hours.
+              response time varies with the request and current queue.
             </p>
           </div>
 

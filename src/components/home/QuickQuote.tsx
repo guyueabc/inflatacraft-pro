@@ -152,8 +152,8 @@ export function QuickQuote() {
             Get a Free Quote
           </h2>
           <p className="mt-4 text-lg text-red-100">
-            Fill out the form below and our team will respond within 24 hours
-            with a custom estimate — no obligation.
+            Share your contact details and product type for a project-specific
+            review. Response time varies with the request and current queue.
           </p>
         </div>
 
@@ -262,7 +262,7 @@ function SuccessMessage() {
         Quote Request Received!
       </h3>
       <p className="mt-2 text-red-100">
-        Our team will reach out within 24 hours with your custom estimate.
+        Your requirements were received for review. Response time varies with the project and current queue.
       </p>
       <div className="mt-6 flex flex-col gap-3 sm:flex-row">
         <a
@@ -283,7 +283,7 @@ function SuccessMessage() {
         </a>
       </div>
       <p className="mt-4 text-center text-sm text-red-200">
-        No obligation · No spam · Response within 24 hours · <a href="/privacy" className="underline hover:text-white">Privacy Policy</a>
+        Project-specific review · <a href="/privacy" className="underline hover:text-white">Privacy Policy</a>
       </p>
     </div>
   );

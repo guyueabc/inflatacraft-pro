@@ -11,33 +11,34 @@ import {
 export const metadata: Metadata = {
   title: "Materials & Printing | inflatablemodel",
   description:
-    "Materials and printing options for custom inflatables. PVC tarpaulin, Oxford fabric, PVC-coated polyester, TPU, flame-retardant options. Dye-sublimation, digital, and screen printing. Seam reinforcement and blower power options.",
+    "A project-planning guide to discussing custom inflatable materials, printing, seams, electrical equipment, and documentation before they are confirmed in a quotation.",
+  alternates: { canonical: "https://qddjtx.com/materials" },
 };
 
 const materials = [
   {
     name: "PVC Tarpaulin",
-    desc: "Heavy-duty vinyl-coated fabric (0.55mm typical). Waterproof, tear-resistant, and the industry standard for large outdoor inflatables, slides, and bouncers. Available in flame-retardant grades.",
+    desc: "A vinyl-coated fabric option often considered for applications that need welded seams or a heavier construction. Confirm thickness, weight, coating, intended use, and any test documentation for the exact order.",
     icon: Layers,
   },
   {
     name: "Oxford Fabric",
-    desc: "Lightweight woven nylon/polyester (210D–500D). Easy to fold, transport, and store. Ideal for product replicas, mascots, arches, and promotional inflatables used at events.",
+    desc: "A woven nylon or polyester option commonly considered where packability and lower weight matter. Confirm fiber, denier, coating, print method, and intended indoor or outdoor use for the project.",
     icon: Layers,
   },
   {
     name: "PVC-Coated Polyester",
-    desc: "Polyester scrim coated with PVC on both sides. Combines high tensile strength with waterproofing. Used for permanent installations, water slides, and extreme-duty applications.",
+    desc: "Polyester scrim with a PVC coating can be considered for selected structures. Suitability depends on the construction, seam method, loading, environment, maintenance, and product-specific specification.",
     icon: Layers,
   },
   {
     name: "TPU",
-    desc: "Thermoplastic polyurethane — lightweight, flexible, and environmentally friendlier than PVC. Used for medical-grade, food-safe, or eco-conscious applications requiring transparent or soft-touch surfaces.",
+    desc: "Thermoplastic polyurethane can be discussed for projects needing particular flexibility, transparency, or surface characteristics. Any environmental, medical, or food-contact suitability requires separate evidence for the exact material and use.",
     icon: Layers,
   },
   {
-    name: "Flame-Retardant Options",
-    desc: "NFPA 701-certified flame-retardant materials available across PVC and Oxford fabric lines. Certificates of compliance provided on request. Required by most US venues and insurers.",
+    name: "Fire-Performance Documentation",
+    desc: "Ask the venue or responsible authority which test method and documents apply. Confirm that any report or certificate matches the exact material, manufacturer, date, market, and intended use before ordering.",
     icon: Layers,
   },
 ];
@@ -45,7 +46,7 @@ const materials = [
 const printingMethods = [
   {
     name: "Dye-Sublimation",
-    desc: "Ink is heat-transferred into the fabric fibers for vibrant, permanent color. Best for Oxford fabric. Resistant to cracking and peeling. 2–4 year outdoor fade resistance.",
+    desc: "A heat-transfer process used with compatible fabrics. Color, finish, weather exposure, cleaning limits, and expected service conditions should be confirmed from a project-specific sample or specification.",
   },
   {
     name: "Digital Print",
@@ -58,17 +59,17 @@ const printingMethods = [
 ];
 
 const seamInfo = [
-  "Double-stitched seams at all primary panel joins using nylon bonding thread",
-  "High-frequency (HF) welding for PVC tarpaulin — creates airtight, waterproof bonds",
-  "Reinforcement webbing at anchor D-rings, inflation ports, and high-stress corners",
-  "Stress test: every seam verified during the 30-minute inflation test",
+  "Confirm whether each panel joint is sewn, welded, bonded, or uses another documented construction method.",
+  "Match the seam method to the exact material, inflation system, intended environment, and maintenance plan.",
+  "Identify reinforcement and attachment details for inflation ports, anchor points, and other project-specific load paths.",
+  "Agree in writing on inspection scope, acceptance criteria, records, and any independent testing before production.",
 ];
 
 const powerOptions = [
-  { label: "Voltage", value: "110V (US) / 220V (EU / international)" },
-  { label: "Plug Types", value: "US / EU / UK / AU" },
-  { label: "Blower Certification", value: "UL / ETL / CE available" },
-  { label: "Circuit Requirement", value: "Dedicated 15A circuit recommended" },
+  { label: "Electrical Supply", value: "Confirm destination voltage, frequency, available current, and venue supply." },
+  { label: "Plug & Connection", value: "Confirm the exact plug, extension lead, protection, and weather exposure for the site." },
+  { label: "Equipment Documents", value: "Verify the supplied blower model, marking or listing, and matching documents in writing." },
+  { label: "Site Review", value: "Have the venue or a qualified person confirm circuit and installation requirements." },
 ];
 
 export default function MaterialsPage() {
@@ -87,8 +88,8 @@ export default function MaterialsPage() {
             Materials &amp; Printing
           </h1>
           <p className="text-lg text-gray-300">
-            The right material and printing method determine durability, weight,
-            and visual impact. Here&apos;s what we offer — and how to choose.
+            Use this guide to discuss material, printing, construction, and
+            documentation. Final selections must be confirmed for the exact project.
           </p>
         </div>
       </section>
@@ -193,8 +194,8 @@ export default function MaterialsPage() {
             Need Detailed Material Specs?
           </h2>
           <p className="mx-auto mb-8 max-w-2xl text-lg text-gray-600">
-            Contact us for a full material specification sheet tailored to your
-            project.
+            Request the available material specification and supporting documents
+            for your intended product, venue, and destination.
           </p>
           <Link
             href="/contact"

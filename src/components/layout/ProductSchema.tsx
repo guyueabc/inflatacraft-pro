@@ -20,7 +20,7 @@ export function ProductSchema({ product }: ProductSchemaProps) {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd).replace(/</g, "\\u003c") }}
     />
   );
 }

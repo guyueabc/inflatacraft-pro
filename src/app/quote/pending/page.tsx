@@ -1,45 +1,17 @@
 "use client";
 
-import { Suspense, useState } from "react";
+import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { CheckCircle2, DollarSign, Clock, Package, FileText, AlertCircle, ArrowRight } from "lucide-react";
-
-interface QuoteEstimate {
-  priceRangeUsd: { min: number; max: number };
-  recommendedSystem: string;
-  productConfiguration?: string[];
-  productionTime: string;
-  shippingEstimate: string;
-  documentsRecommended?: string[];
-  requiredConfirmations?: string[];
-  notes?: string[];
-}
-
-interface QuotePayload {
-  data?: QuotePayload;
-  estimate?: QuoteEstimate;
-  leadScore?: { category: string; score: number };
-}
+import { AlertCircle, CheckCircle2, ArrowRight } from "lucide-react";
 
 function QuoteContent() {
   const searchParams = useSearchParams();
-  // The estimate is handed to this page by the submitting tab. An opaque
-  // database ID is displayed only as a reference and is never used to fetch
-  // contact details from a public endpoint.
+  // An opaque database ID is displayed only as a reference and is never used
+  // to fetch contact details from a public endpoint.
   const quoteId = searchParams.get("id");
-  const [quote] = useState<QuotePayload | null>(() => {
-    if (typeof window === "undefined") return null;
-    const cached = sessionStorage.getItem("quote_estimate");
-    if (!cached) return null;
-    try {
-      return JSON.parse(cached) as QuotePayload;
-    } catch {
-      return null;
-    }
-  });
 
-  if (!quote) {
+  if (!quoteId) {
     return (
       <div className="flex min-h-[60vh] items-center justify-center px-4">
         <div className="max-w-md text-center">
@@ -54,10 +26,6 @@ function QuoteContent() {
     );
   }
 
-  const data = quote.data || quote;
-  const estimate = data?.estimate;
-  const leadScore = data?.leadScore;
-
   return (
     <div className="min-h-[calc(100vh-200px)] bg-gray-50 px-4 py-12">
       <div className="mx-auto max-w-3xl">
@@ -66,126 +34,23 @@ function QuoteContent() {
           <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
             <CheckCircle2 className="h-8 w-8 text-green-600" />
           </div>
-          <h1 className="mt-4 text-3xl font-bold text-navy-900">Your Project Estimate</h1>
-          <p className="mt-2 text-gray-600">Here&apos;s a preliminary quote based on your project details.</p>
+          <h1 className="mt-4 text-3xl font-bold text-navy-900">Quote Request Received</h1>
+          <p className="mt-2 text-gray-600">Your project details were saved for review.</p>
         </div>
 
         {/* Quote ID */}
-        {quoteId && (
-          <div className="mt-4 rounded-lg border border-navy-200 bg-navy-50 px-4 py-2 text-center text-sm text-navy-700">
-            Reference ID: <span className="font-mono font-semibold">{quoteId}</span>
-          </div>
-        )}
+        <div className="mt-4 rounded-lg border border-navy-200 bg-navy-50 px-4 py-2 text-center text-sm text-navy-700">
+          Reference ID: <span className="font-mono font-semibold">{quoteId}</span>
+        </div>
 
-        {/* Lead Score Badge */}
-        {leadScore && (
-          <div className="mt-4 flex justify-center">
-            <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold ${
-              leadScore.category === "A" ? "bg-green-100 text-green-700" :
-              leadScore.category === "B" ? "bg-yellow-100 text-yellow-700" :
-              "bg-gray-100 text-gray-600"
-            }`}>
-              Priority: {leadScore.category} (Score: {leadScore.score}/100)
-            </span>
-          </div>
-        )}
-
-        {/* Estimate Card */}
-        {estimate && (
-          <div className="mt-6 space-y-4">
-            {/* Price Range */}
-            <div className="rounded-xl border-2 border-red-200 bg-white p-6 shadow-sm">
-              <div className="flex items-center gap-3">
-                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-red-50">
-                  <DollarSign className="h-6 w-6 text-red-600" />
-                </div>
-                <div>
-                  <h2 className="text-lg font-bold text-navy-900">Budgetary Price Range</h2>
-                  <p className="text-sm text-gray-500">USD — for early project planning</p>
-                </div>
-              </div>
-              <p className="mt-4 text-3xl font-extrabold text-navy-900">
-                ${estimate.priceRangeUsd.min.toLocaleString()} – ${estimate.priceRangeUsd.max.toLocaleString()}
-              </p>
-              <p className="mt-2 text-xs text-gray-400">
-                This is a budgetary range, not a final quotation. Final price depends on size, material, printing, accessories, documentation, packing and shipping.
-              </p>
-            </div>
-
-            {/* Product Configuration */}
-            <div className="rounded-xl border border-navy-200 bg-white p-6 shadow-sm">
-              <div className="flex items-center gap-3">
-                <Package className="h-5 w-5 text-navy-600" />
-                <h3 className="font-bold text-navy-900">Recommended System</h3>
-              </div>
-              <p className="mt-2 text-sm font-medium text-navy-700">{estimate.recommendedSystem}</p>
-              <ul className="mt-3 space-y-1.5 text-sm text-gray-600">
-                {estimate.productConfiguration?.map((c: string, i: number) => (
-                  <li key={i} className="flex gap-2">
-                    <span className="text-navy-400">•</span> {c}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Production Time */}
-            <div className="rounded-xl border border-navy-200 bg-white p-6 shadow-sm">
-              <div className="flex items-center gap-3">
-                <Clock className="h-5 w-5 text-navy-600" />
-                <h3 className="font-bold text-navy-900">Production Timeline</h3>
-              </div>
-              <p className="mt-2 text-sm text-gray-600">{estimate.productionTime}</p>
-            </div>
-
-            {/* Shipping */}
-            <div className="rounded-xl border border-navy-200 bg-white p-6 shadow-sm">
-              <div className="flex items-center gap-3">
-                <FileText className="h-5 w-5 text-navy-600" />
-                <h3 className="font-bold text-navy-900">Shipping Estimate</h3>
-              </div>
-              <p className="mt-2 text-sm text-gray-600">{estimate.shippingEstimate}</p>
-            </div>
-
-            {/* Documents Recommended */}
-            {estimate.documentsRecommended && estimate.documentsRecommended.length > 0 && (
-              <div className="rounded-xl border border-navy-200 bg-white p-6 shadow-sm">
-                <h3 className="font-bold text-navy-900">Documents We Can Prepare</h3>
-                <ul className="mt-3 space-y-1.5 text-sm text-gray-600">
-                  {estimate.documentsRecommended.map((d: string, i: number) => (
-                    <li key={i} className="flex gap-2">
-                      <CheckCircle2 className="h-4 w-4 flex-shrink-0 text-green-500" /> {d}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {/* Required Confirmations */}
-            {estimate.requiredConfirmations && estimate.requiredConfirmations.length > 0 && (
-              <div className="rounded-xl border border-yellow-200 bg-yellow-50 p-6">
-                <h3 className="font-bold text-yellow-800">To Finalize Your Quote</h3>
-                <ul className="mt-3 space-y-1.5 text-sm text-yellow-700">
-                  {estimate.requiredConfirmations.map((c: string, i: number) => (
-                    <li key={i} className="flex gap-2">
-                      <AlertCircle className="h-4 w-4 flex-shrink-0 text-yellow-600" /> {c}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {/* Notes */}
-            {estimate.notes && estimate.notes.length > 0 && (
-              <div className="rounded-lg bg-gray-50 p-4">
-                <ul className="space-y-1 text-xs text-gray-500">
-                  {estimate.notes.map((n: string, i: number) => (
-                    <li key={i}>• {n}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </div>
-        )}
+        <div className="mt-6 rounded-xl border border-navy-200 bg-white p-6 shadow-sm">
+          <h2 className="text-lg font-bold text-navy-900">What happens next</h2>
+          <ul className="mt-3 space-y-3 text-sm text-gray-600">
+            <li className="flex gap-2"><CheckCircle2 className="h-4 w-4 flex-shrink-0 text-green-600" /> The requested dimensions, artwork, materials, accessories, documentation, packing, destination, and shipping method require project-specific confirmation.</li>
+            <li className="flex gap-2"><CheckCircle2 className="h-4 w-4 flex-shrink-0 text-green-600" /> Price, production schedule, delivery estimate, performance claims, and supplied documents are not confirmed until they appear in a written quotation for this project.</li>
+            <li className="flex gap-2"><CheckCircle2 className="h-4 w-4 flex-shrink-0 text-green-600" /> You can send additional requirements through the authorized WhatsApp link or the contact page below.</li>
+          </ul>
+        </div>
 
         {/* CTA */}
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
@@ -200,9 +65,8 @@ function QuoteContent() {
           </Link>
         </div>
 
-        {/* Disclaimer */}
         <div className="mt-8 rounded-lg bg-navy-50 p-4 text-center text-xs text-navy-600">
-          This is a budgetary estimate for early project planning. Final quotation depends on confirmed dimensions, artwork, material, accessories, documentation requirements, packing size, destination and shipping method. Local compliance and venue requirements should be confirmed by the buyer before operation.
+          Local compliance, venue approval, installation conditions, and operating requirements must be confirmed for the exact project before use.
         </div>
       </div>
     </div>

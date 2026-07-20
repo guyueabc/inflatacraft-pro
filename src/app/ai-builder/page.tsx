@@ -154,13 +154,6 @@ export default function AIBuilderPage() {
         throw new Error("Unable to submit your quote right now. Please try again.");
       }
 
-      // The durable API write has succeeded; keep the estimate available for the next page.
-      if (data.quote || data.estimate) {
-        try {
-          sessionStorage.setItem("quote_estimate", JSON.stringify(data.quote || data));
-        } catch {}
-      }
-
       router.push(data.nextUrl || "/quote/pending");
     } catch (error) {
       console.error("Submit error:", error);
@@ -241,7 +234,7 @@ export default function AIBuilderPage() {
         {/* Header */}
         <div className="mb-8 text-center">
           <h1 className="text-3xl font-bold text-navy-900">AI Project Builder</h1>
-          <p className="mt-2 text-gray-600">Get a budgetary estimate in 2 minutes</p>
+          <p className="mt-2 text-gray-600">Send project details for a project-specific quotation review</p>
         </div>
 
         {/* Progress Bar */}
@@ -499,7 +492,7 @@ export default function AIBuilderPage() {
                   </>
                 ) : (
                   <>
-                    Get Estimate <Check className="h-4 w-4" />
+                    Submit for Review <Check className="h-4 w-4" />
                   </>
                 )}
               </button>

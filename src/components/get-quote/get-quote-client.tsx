@@ -124,9 +124,9 @@ export function GetQuoteClient() {
           <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-green-100 sm:h-20 sm:w-20">
             <CheckCircle2 className="h-8 w-8 text-green-600 sm:h-10 sm:w-10" />
           </div>
-          <h1 className="mt-6 font-heading text-3xl font-bold text-navy-900">需求提交成功，我们将尽快联系你</h1>
+          <h1 className="mt-6 font-heading text-3xl font-bold text-navy-900">Quote Request Received</h1>
           <p className="mt-3 leading-relaxed text-gray-600">
-            Thank you! Our team will review your requirements and get back to you within <strong>24 hours</strong>.
+            Thank you! Your requirements were received for review. Response time varies with the project and current queue.
           </p>
 
           <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center">
@@ -143,8 +143,8 @@ export function GetQuoteClient() {
             <h3 className="font-semibold text-navy-800">What happens next?</h3>
             <ol className="mt-3 space-y-2 text-sm text-gray-600">
               <li className="flex gap-2"><span className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-red-600 text-xs font-bold text-white">1</span> Our team reviews your requirements</li>
-              <li className="flex gap-2"><span className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-red-600 text-xs font-bold text-white">2</span> We create a free 3D rendering of your design</li>
-              <li className="flex gap-2"><span className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-red-600 text-xs font-bold text-white">3</span> You receive a detailed quote within 24 hours</li>
+              <li className="flex gap-2"><span className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-red-600 text-xs font-bold text-white">2</span> Available visual references and revisions are confirmed for the project</li>
+              <li className="flex gap-2"><span className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-red-600 text-xs font-bold text-white">3</span> You receive the available specification and commercial terms for review</li>
             </ol>
           </div>
         </div>

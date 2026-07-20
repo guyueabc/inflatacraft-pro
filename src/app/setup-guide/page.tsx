@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, Clock, Wind } from "lucide-react";
+import { ArrowRight, CheckCircle2, Wind } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Inflatable Setup & Installation Guide | InflatableModel",
@@ -17,62 +17,59 @@ export const metadata: Metadata = {
 };
 
 const setupSteps = [
-  { step: 1, title: "Unpack & Inspect", time: "2 min", desc: "Remove inflatable from storage bag. Inspect for any shipping damage. Unfold on a clean, flat surface." },
-  { step: 2, title: "Choose Location", time: "5 min", desc: "Select a flat, debris-free area. Check for overhead obstacles (power lines, tree branches, ceiling height). Allow 3 ft clearance on all sides." },
-  { step: 3, title: "Connect Blower", time: "2 min", desc: "Attach the blower tube to the inflation port on the inflatable. Secure with the included strap or zipper. Ensure the deflation zipper is fully closed." },
-  { step: 4, title: "Anchor Down", time: "5 min", desc: "Place ground stakes at each anchor point (D-rings). For indoor use, use sandbags (20–50 lbs each). For hard surfaces, use water ballast bags." },
-  { step: 5, title: "Inflate", time: "3–10 min", desc: "Turn on the blower. The inflatable will take shape in 3–10 minutes depending on size. Do not stand inside during inflation." },
-  { step: 6, title: "Final Adjustments", time: "3 min", desc: "Once fully inflated, adjust positioning. Tighten anchor ropes. Check that all D-rings are secured. Your inflatable is ready!" },
+  { step: 1, title: "Read the Product Instructions", desc: "Use the instructions supplied for the exact product. Confirm the components, installation plan, responsible person, venue rules, and acceptable conditions before setup." },
+  { step: 2, title: "Inspect the Product & Site", desc: "Stop if the product, blower, cable, attachments, or packaging shows damage. Check the proposed area for overhead, surface, access, egress, electrical, and public-interaction hazards." },
+  { step: 3, title: "Confirm Electrical Equipment", desc: "Match the blower, voltage, frequency, plug, protection, extension leads, and weather rating to the destination and site. Use a qualified person where required." },
+  { step: 4, title: "Install the Specified Anchoring", desc: "Follow the product- and site-specific anchoring plan. The attachment type, location, capacity, quantity, and surface suitability must be confirmed for the installation." },
+  { step: 5, title: "Inflate Under Control", desc: "Keep people clear while inflating, monitor the product and attachments, and stop if the shape, blower, seams, clearances, or site conditions are not as expected." },
+  { step: 6, title: "Complete a Pre-Use Check", desc: "Before operation, verify the approved position, clearances, anchoring, electrical setup, access control, supervision, weather plan, and any venue or authority sign-off." },
 ];
 
 const setupTimes = [
-  { size: "6–8 ft replica", people: "1 person", time: "10 min" },
-  { size: "10–15 ft replica", people: "1–2 people", time: "15 min" },
-  { size: "15–20 ft replica", people: "2 people", time: "20 min" },
-  { size: "20–30 ft replica", people: "2–3 people", time: "30 min" },
-  { size: "Arch (10–20 ft)", people: "2 people", time: "20 min" },
-  { size: "Event tent (10×10)", people: "2 people", time: "30 min" },
-  { size: "Mascot costume", people: "1 person", time: "5 min" },
+  { factor: "Product configuration", review: "Dimensions, mass, inflation system, number of components, and attachment layout" },
+  { factor: "Site conditions", review: "Surface, access, clearance, egress, public separation, weather, and lighting" },
+  { factor: "Installation resources", review: "Competent people, lifting or access equipment, ballast or anchors, and electrical supply" },
+  { factor: "Approval requirements", review: "Venue method statement, responsible-person check, authority review, and documented handover" },
 ];
 
 const safetyRules = [
-  { rule: "Wind Limit", detail: "Deflate if winds exceed 25 mph (40 km/h). Sustained 30+ mph can cause damage or injury." },
-  { rule: "Indoor Clearance", detail: "Maintain minimum 2 ft clearance from ceiling, lights, and sprinklers." },
-  { rule: "Power Supply", detail: "Use dedicated circuit. Do not share with other high-draw equipment. Standard 110V/15A or 220V/10A." },
-  { rule: "Supervision", detail: "Never leave operating inflatable unattended in public areas. Assign a staff member to monitor." },
-  { rule: "Weather", detail: "Deflate during rain storms, snow, or lightning. Water accumulation can damage seams and blower." },
-  { rule: "Sharp Objects", detail: "Keep away from sharp edges, thorns, and hot surfaces. Inspect area before setup." },
+  { rule: "Weather & Wind", detail: "Use only within the written limit for the exact product and installation. Monitor conditions and follow a documented shutdown plan; do not substitute a generic website number." },
+  { rule: "Clearance & Egress", detail: "Have the venue confirm clearance from ceilings, services, sprinklers, power lines, exits, roads, and neighboring activities." },
+  { rule: "Power Supply", detail: "Use the supplied or specified equipment and have voltage, current, plug, protection, extension leads, and weather exposure confirmed for the site." },
+  { rule: "Supervision", detail: "Assign competent supervision and control public access according to the product, activity, venue, and applicable requirements." },
+  { rule: "Site Changes", detail: "Stop operation when weather, surface, anchoring, electrical supply, public behavior, or other site conditions move outside the approved plan." },
+  { rule: "Damage & Maintenance", detail: "Do not operate damaged equipment. Isolate it and obtain the appropriate inspection or repair before reuse." },
 ];
 
 const teardownSteps = [
-  "Turn off and unplug the blower",
-  "Open the deflation zipper fully",
-  "Press out remaining air by walking on the inflatable from top to bottom",
-  "Fold loosely — never crease sharply or use tight rolling",
-  "Place in storage bag with blower, stakes, and ropes",
-  "Store in cool, dry place away from direct sunlight",
+  "Close the area to users and follow the product-specific shutdown instructions.",
+  "Isolate electrical equipment before disconnecting it, using a qualified person where required.",
+  "Release air and attachments in the documented sequence while keeping people clear of moving fabric and hardware.",
+  "Inspect and record damage, contamination, wetness, missing parts, or maintenance needs before packing.",
+  "Clean, dry, fold, pack, and store the product according to its material and supplied instructions.",
+  "Keep the blower, attachments, records, and other identified components with the correct product.",
 ];
 
 const faqItems = [
   {
     question: "How long does it take to set up a custom inflatable?",
     answer:
-      "Setup time depends on size. A 6–8 ft product replica: 10 minutes with 1 person. A 15–20 ft replica: 20 minutes with 2 people. An event tent: 30 minutes with 2 people. A mascot costume: 5 minutes. The blower does most of the work — most of the time is spent on positioning and anchoring.",
+      "There is no universal setup time or crew size. It depends on the exact configuration, site, access, anchoring, electrical supply, weather, competence, equipment, and approval process. Use the product-specific instructions and installation plan.",
   },
   {
     question: "What power do I need for the blower?",
     answer:
-      "Most inflatables use a 110V blower (US) or 220V (EU/international) drawing 6–8 amps. A standard 15 amp household circuit is sufficient for most units. For 20+ ft inflatables, you may need a 1.5 HP blower drawing 10–12 amps. Always use a dedicated circuit — do not share with other equipment. Generators rated 2000W+ work for outdoor events.",
+      "Use the blower and electrical specification supplied for the exact product. Confirm destination voltage and frequency, plug, current, protection, extension leads, generator compatibility, and weather exposure with the venue or a qualified person before operation.",
   },
   {
     question: "How do I anchor my inflatable outdoors?",
     answer:
-      "Each inflatable has 4–12 D-ring anchor points. For grass/soil: drive 12-inch metal ground stakes (included) at 45° angle. For concrete/asphalt: use 20–50 lb sandbags or water ballast bags on each D-ring. For extreme wind conditions, add 200 lb sandbags and ratchet straps. Always use all anchor points — do not skip any.",
+      "Use a product- and site-specific anchoring plan. Confirm the supplied attachment points, loads, anchor or ballast type, capacity, quantity, surface, underground services, wind limit, inspection, and shutdown procedure. Generic ballast or stake values are not suitable for every installation.",
   },
   {
     question: "How do I take down and store my inflatable?",
     answer:
-      "Turn off blower, open deflation zipper, press out remaining air by walking from top to bottom. Fold loosely (do not crease sharply). Place in the included storage bag with blower, stakes, and ropes. Store in a cool, dry place away from direct sunlight. Proper storage extends lifespan to 5+ years.",
+      "Follow the instructions for the exact product. Close the area, isolate power, release air and attachments in the documented sequence, inspect for damage or moisture, and clean, dry, pack, and store the material as specified. No generic lifespan is promised.",
   },
 ];
 
@@ -96,15 +93,16 @@ export default function SetupGuidePage() {
   };
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd).replace(/</g, "\\u003c") }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd).replace(/</g, "\\u003c") }} />
       <div className="min-h-screen bg-white">
         <section className="bg-navy-900 px-4 py-16 text-white">
           <div className="container mx-auto max-w-4xl">
             <p className="mb-2 text-sm font-medium uppercase tracking-wider text-red-400">Setup Guide</p>
             <h1 className="mb-4 text-4xl font-bold tracking-tight md:text-5xl">Inflatable Setup & Installation</h1>
             <p className="text-lg text-gray-300">
-              Step-by-step guide to setting up, anchoring, and taking down your custom inflatable. No tools required — setup takes 10–30 minutes.
+              A planning checklist for product-specific setup, anchoring, operation,
+              teardown, and site approval—not a substitute for supplied instructions.
             </p>
           </div>
         </section>
@@ -118,9 +116,8 @@ export default function SetupGuidePage() {
                 <div key={idx} className="flex items-start gap-4 rounded-xl border border-gray-200 bg-white p-5">
                   <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-navy-900 text-sm font-bold text-white">{s.step}</div>
                   <div className="flex-1">
-                    <div className="flex items-center justify-between flex-wrap gap-2">
+                    <div>
                       <h3 className="text-lg font-bold text-navy-900">{s.title}</h3>
-                      <span className="flex items-center gap-1 text-xs text-gray-500"><Clock className="h-3 w-3" />{s.time}</span>
                     </div>
                     <p className="mt-1 text-sm text-gray-600">{s.desc}</p>
                   </div>
@@ -133,22 +130,20 @@ export default function SetupGuidePage() {
         {/* Setup Time Reference */}
         <section className="py-12 bg-gray-50">
           <div className="container mx-auto max-w-4xl px-4">
-            <h2 className="mb-8 text-2xl font-bold tracking-tight text-navy-900">Setup Time by Size</h2>
+            <h2 className="mb-8 text-2xl font-bold tracking-tight text-navy-900">Factors That Determine Setup Resources</h2>
             <div className="overflow-hidden rounded-xl border border-gray-200 bg-white">
               <table className="w-full text-left">
                 <thead>
                   <tr className="border-b border-gray-200 bg-gray-50">
-                    <th className="px-6 py-4 text-sm font-bold text-navy-900">Inflatable Size</th>
-                    <th className="px-6 py-4 text-sm font-bold text-navy-900">People Needed</th>
-                    <th className="px-6 py-4 text-sm font-bold text-navy-900">Total Time</th>
+                    <th className="px-6 py-4 text-sm font-bold text-navy-900">Factor</th>
+                    <th className="px-6 py-4 text-sm font-bold text-navy-900">What to Confirm</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100">
                   {setupTimes.map((row, idx) => (
                     <tr key={idx} className={idx % 2 === 0 ? "bg-white" : "bg-gray-50/50"}>
-                      <td className="px-6 py-4 text-sm font-semibold text-navy-900">{row.size}</td>
-                      <td className="px-6 py-4 text-sm text-gray-600">{row.people}</td>
-                      <td className="px-6 py-4 text-sm font-semibold text-green-700">{row.time}</td>
+                      <td className="px-6 py-4 text-sm font-semibold text-navy-900">{row.factor}</td>
+                      <td className="px-6 py-4 text-sm text-gray-600">{row.review}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -211,7 +206,7 @@ export default function SetupGuidePage() {
         <section className="border-t border-gray-200 bg-white py-16">
           <div className="container mx-auto max-w-4xl px-4 text-center">
             <h2 className="mb-4 text-3xl font-bold tracking-tight text-navy-900">Need Help with Setup?</h2>
-            <p className="mx-auto mb-8 max-w-2xl text-lg text-gray-600">Every order includes video tutorials and printed instructions. Questions? We&apos;re here.</p>
+            <p className="mx-auto mb-8 max-w-2xl text-lg text-gray-600">Request the instructions and installation information available for the exact product before approving an order.</p>
             <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Link href="/get-quote" className="inline-flex items-center gap-2 rounded-xl bg-red-600 px-8 py-4 text-base font-semibold text-white shadow-lg shadow-red-600/30 transition-all hover:bg-red-500">
                 Get Free Quote <ArrowRight className="h-5 w-5" />

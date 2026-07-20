@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "AI Project Builder | InflatableModel",
-  description: "Build your custom inflatable project and get a budgetary estimate in 2 minutes.",
+  description: "Submit custom inflatable project details for project-specific quotation review and written confirmation.",
   alternates: { canonical: "https://qddjtx.com/ai-builder" },
 };
 
