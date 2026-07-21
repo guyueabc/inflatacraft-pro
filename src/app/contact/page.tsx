@@ -2,10 +2,10 @@ import type { Metadata } from 'next'
 import { GetQuoteClient } from '@/components/get-quote/get-quote-client'
 
 export const metadata: Metadata = {
-  title: 'Contact Us | Get a Free Quote | InflatableModel',
+  title: 'Contact Us | Request a Quote | InflatableModel',
   description: 'Contact InflatableModel through WhatsApp or the online quote form for custom inflatable inquiries.',
   openGraph: {
-    title: 'Contact InflatableModel | Get a Free Quote',
+    title: 'Contact InflatableModel | Request a Quote',
     description: 'Contact us through WhatsApp or the online form for custom inflatable inquiries.',
     type: 'website',
   },

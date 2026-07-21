@@ -60,7 +60,7 @@ export function FloatingCTA() {
           className="flex items-center gap-2 rounded-full bg-red-600 px-5 py-3 text-sm font-semibold text-white shadow-lg transition-all hover:bg-red-500 hover:shadow-xl"
         >
           <MessageSquareText className="h-4 w-4" />
-          Get Free Quote
+          Request Quote
         </Link>
       </div>
 
@@ -85,7 +85,7 @@ export function FloatingCTA() {
           className="flex flex-[1.5] items-center justify-center gap-2 bg-red-600 py-3.5 text-sm font-semibold text-white transition-colors active:bg-red-700"
         >
           <MessageSquareText className="h-5 w-5" />
-          Get Free Quote
+          Request Quote
         </Link>
       </div>
     </>

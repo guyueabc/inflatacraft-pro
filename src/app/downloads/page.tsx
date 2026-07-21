@@ -11,40 +11,50 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Downloads & Resources | inflatablemodel",
+  title: "Project Resources | inflatablemodel",
   description:
-    "Downloadable resources for custom inflatable projects — project checklist, material options sheet, setup and anchoring checklist, daily inspection checklist, and maintenance and storage guide.",
+    "Online planning resources for custom inflatable projects, including buyer, material, setup, inspection, and maintenance guidance.",
+  alternates: {
+    canonical: "https://qddjtx.com/downloads",
+  },
+  openGraph: {
+    title: "Project Resources | inflatablemodel",
+    description:
+      "Online planning resources for custom inflatable project review and product care.",
+    url: "https://qddjtx.com/downloads",
+    type: "website",
+  },
 };
 
 const resources = [
   {
-    title: "Inflatable Project Checklist",
-    desc: "Complete checklist for planning your inflatable project",
-    file: "inflatable-project-checklist",
+    title: "Supplier Evaluation Guide",
+    desc: "Review offers, specifications, evidence, inspections, and delivery terms",
+    href: "/buying-guide",
     icon: ClipboardList,
   },
   {
-    title: "Material Options Sheet",
-    desc: "Compare PVC, Oxford, TPU and flame-retardant options",
-    file: "material-options-sheet",
+    title: "Material Planning Guide",
+    desc: "Review material categories and the evidence to request for each project",
+    href: "/materials",
     icon: FileText,
   },
   {
-    title: "Setup & Anchoring Checklist",
-    desc: "Site preparation and anchoring guidelines",
-    file: "setup-anchoring-checklist",
+    title: "Setup & Installation Guide",
+    desc: "Plan site, electrical, anchoring, operation, and teardown requirements",
+    href: "/setup-guide",
     icon: ClipboardCheck,
   },
   {
-    title: "Daily Inspection Checklist",
-    desc: "Pre-use inspection for safe operation",
-    file: "daily-inspection-checklist",
+    title: "Inspection Planning Guide",
+    desc: "Define approval, inspection, evidence, acceptance, and packing requirements",
+    href: "/quality-process",
     icon: ClipboardCheck,
   },
   {
-    title: "Maintenance & Storage Guide",
-    desc: "Cleaning, folding, storage and repair tips",
-    file: "maintenance-storage-guide",
+    title: "Cleaning, Inspection & Storage Guide",
+    desc: "General product-care guidance with project-specific limitations",
+    href: "/blog/inflatable-maintenance-guide",
     icon: Wrench,
   },
 ];
@@ -58,16 +68,15 @@ export default function DownloadsPage() {
           <div className="mb-4 flex items-center gap-2">
             <Download className="h-6 w-6 text-red-400" />
             <p className="text-sm font-medium uppercase tracking-wider text-red-400">
-              Downloads &amp; Resources
+              Project Resources
             </p>
           </div>
           <h1 className="mb-4 text-3xl font-bold tracking-tight md:text-5xl">
-            Downloads &amp; Resources
+            Project Resources
           </h1>
           <p className="text-lg text-gray-300">
-            Practical guides and checklists for every stage of your inflatable
-            project — from planning to daily operation and long-term
-            maintenance.
+            Read the currently available planning guides for project review,
+            materials, setup, inspection, and product care.
           </p>
         </div>
       </section>
@@ -76,7 +85,7 @@ export default function DownloadsPage() {
       <section className="py-12">
         <div className="container mx-auto max-w-7xl px-4">
           <h2 className="mb-8 text-2xl font-bold tracking-tight text-navy-900">
-            Available Resources
+            Online Resources
           </h2>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {resources.map((r, idx) => {
@@ -93,13 +102,13 @@ export default function DownloadsPage() {
                   <p className="mb-6 flex-1 text-sm leading-relaxed text-gray-600">
                     {r.desc}
                   </p>
-                  <a
-                    href={`/downloads/${r.file}.pdf`}
+                  <Link
+                    href={r.href}
                     className="inline-flex items-center gap-2 rounded-lg border border-navy-200 bg-navy-50 px-4 py-2.5 text-sm font-semibold text-navy-900 transition-all hover:bg-navy-100"
                   >
-                    <Download className="h-4 w-4" />
-                    Download
-                  </a>
+                    Open Resource
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
                 </div>
               );
             })}
@@ -113,7 +122,8 @@ export default function DownloadsPage() {
           <div className="flex items-start gap-4 rounded-xl border-l-4 border-navy-400 bg-white p-6">
             <PackageSearch className="mt-0.5 h-6 w-6 flex-shrink-0 text-navy-500" />
             <p className="text-sm leading-relaxed text-gray-700">
-              More resources coming soon. Contact us for specific documentation.
+              For product-specific documentation, include the required documents
+              and destination requirements in your inquiry.
             </p>
           </div>
         </div>

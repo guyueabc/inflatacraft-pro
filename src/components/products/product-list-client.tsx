@@ -8,7 +8,6 @@ import {
   products,
   CATEGORIES,
   SORT_OPTIONS,
-  LEAD_TIMES,
   type ProductCategory,
 } from "@/lib/data/products";
 import {
@@ -44,7 +43,6 @@ function initialCategories(): ProductCategory[] {
 export function ProductListClient() {
   const [search, setSearch] = useState("");
   const [selectedCategories, setSelectedCategories] = useState<ProductCategory[]>(initialCategories);
-  const [selectedLeadTime, setSelectedLeadTime] = useState<string | null>(null);
   const [sort, setSort] = useState<SortValue>("featured");
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
@@ -75,11 +73,6 @@ export function ProductListClient() {
       filtered = filtered.filter((p) => selectedCategories.includes(p.category));
     }
 
-    // Lead time filter
-    if (selectedLeadTime) {
-      filtered = filtered.filter((p) => p.leadTime?.startsWith(selectedLeadTime));
-    }
-
     // Sort
     switch (sort) {
       case "newest":
@@ -92,17 +85,15 @@ export function ProductListClient() {
     }
 
     return filtered;
-  }, [search, selectedCategories, selectedLeadTime, sort]);
+  }, [search, selectedCategories, sort]);
 
   const hasActiveFilters =
     selectedCategories.length > 0 ||
-    selectedLeadTime !== null ||
     search.trim().length > 0;
 
   const clearFilters = () => {
     setSearch("");
     setSelectedCategories([]);
-    setSelectedLeadTime(null);
   };
 
   return (
@@ -198,15 +189,6 @@ export function ProductListClient() {
                   <X className="h-3 w-3" />
                 </button>
               ))}
-              {selectedLeadTime && (
-                <button
-                  onClick={() => setSelectedLeadTime(null)}
-                  className="inline-flex items-center gap-1 rounded-full bg-navy-100 px-2.5 py-0.5 text-xs font-medium text-navy-700 hover:bg-navy-200"
-                >
-                  Lead: {selectedLeadTime} weeks
-                  <X className="h-3 w-3" />
-                </button>
-              )}
               <button
                 onClick={clearFilters}
                 className="text-xs font-medium text-red-600 hover:text-red-700"
@@ -245,34 +227,6 @@ export function ProductListClient() {
                 ))}
               </div>
             </div>
-
-            {/* Lead Time */}
-            <div>
-              <h3 className="mb-2 text-sm font-semibold uppercase tracking-wider text-navy-900">
-                <Clock className="mr-2 inline h-4 w-4" />
-                Lead Time
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                {LEAD_TIMES.map((lt) => (
-                  <button
-                    key={lt.value}
-                    onClick={() =>
-                      setSelectedLeadTime(
-                        selectedLeadTime === lt.value ? null : lt.value
-                      )
-                    }
-                    className={cn(
-                      "rounded-full border px-3 py-1 text-xs font-medium transition-colors",
-                      selectedLeadTime === lt.value
-                        ? "border-navy-700 bg-navy-700 text-white"
-                        : "border-gray-300 text-gray-700 hover:border-navy-300"
-                    )}
-                  >
-                    {lt.label}
-                  </button>
-                ))}
-              </div>
-            </div>
           </div>
         </div>
       )}
@@ -302,35 +256,6 @@ export function ProductListClient() {
                         className="h-4 w-4 rounded border-gray-300 text-navy-700 accent-navy-700 focus:ring-navy-500"
                       />
                       {cat}
-                    </label>
-                  ))}
-                </div>
-              </div>
-
-              {/* Lead Time */}
-              <div>
-                <h3 className="mb-3 flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-navy-900">
-                  <Clock className="h-4 w-4" />
-                  Lead Time
-                </h3>
-                <div className="space-y-1.5">
-                  {LEAD_TIMES.map((lt) => (
-                    <label
-                      key={lt.value}
-                      className="flex cursor-pointer items-center gap-2.5 rounded-md px-2 py-1.5 text-sm text-gray-700 transition-colors hover:bg-gray-50"
-                    >
-                      <input
-                        type="radio"
-                        name="lead-time"
-                        checked={selectedLeadTime === lt.value}
-                        onChange={() =>
-                          setSelectedLeadTime(
-                            selectedLeadTime === lt.value ? null : lt.value
-                          )
-                        }
-                        className="h-4 w-4 border-gray-300 text-navy-700 accent-navy-700 focus:ring-navy-500"
-                      />
-                      {lt.label}
                     </label>
                   ))}
                 </div>

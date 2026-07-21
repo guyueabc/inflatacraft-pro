@@ -97,17 +97,125 @@ test.describe("InflatableModel E2E Tests", () => {
   });
 
   // ────────────────────────────────────────────────────────────
-  // 6. Downloads page loads with H1
+  // 6. Downloads page exposes verified online resources and canonical
   // ────────────────────────────────────────────────────────────
-  test("downloads page loads with H1", async ({ page }) => {
+  test("downloads page exposes working online resources and its own canonical", async ({ page }) => {
     await page.goto("/downloads");
     await expect(
       page.getByRole("heading", { level: 1 })
     ).toBeVisible({ timeout: 15000 });
+
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+      "href",
+      "https://qddjtx.com/downloads"
+    );
+
+    const expectedResources = [
+      "/buying-guide",
+      "/materials",
+      "/setup-guide",
+      "/quality-process",
+      "/blog/inflatable-maintenance-guide",
+    ];
+    for (const href of expectedResources) {
+      const resourceLink = page.locator(`a[href="${href}"]`, {
+        hasText: "Open Resource",
+      });
+      await expect(resourceLink).toHaveCount(1);
+      await expect(resourceLink).toBeVisible();
+
+      const response = await page.request.get(href);
+      expect(response.status(), `${href} should return HTTP 200`).toBe(200);
+    }
+    await expect(page.locator('a[href$=".pdf"]')).toHaveCount(0);
   });
 
   // ────────────────────────────────────────────────────────────
-  // 7. Materials page loads with H1
+  // 7. Products page does not expose unsupported fixed lead-time filters
+  // ────────────────────────────────────────────────────────────
+  test("products page omits unsupported fixed lead-time filters", async ({ page }) => {
+    await page.goto("/products");
+    await expect(page.getByRole("heading", { level: 1 })).toBeVisible({ timeout: 15000 });
+    await expect(page.getByText("Lead Time", { exact: true })).toHaveCount(0);
+    await expect(page.getByText(/^(1-2|3-4|5-6) Weeks$/)).toHaveCount(0);
+  });
+
+  // ────────────────────────────────────────────────────────────
+  // 8. Cart uses quote-only commercial terms without blank totals
+  // ────────────────────────────────────────────────────────────
+  test("cart presents a complete quote request summary", async ({ page }) => {
+    await page.addInitScript(() => {
+      window.localStorage.setItem(
+        "inflatacraft-cart",
+        JSON.stringify({
+          state: {
+            items: [
+              {
+                id: "e2e-cart-item",
+                productId: "inflatable-arch",
+                name: "Inflatable Arch",
+                price: null,
+                quantity: 2,
+                image: "",
+                isCustom: true,
+              },
+            ],
+          },
+          version: 0,
+        })
+      );
+    });
+
+    await page.goto("/cart");
+    const summary = page
+      .getByRole("heading", { name: "Quote Request Summary" })
+      .locator("..");
+    await expect(summary).toBeVisible({ timeout: 15000 });
+    await expect(summary.getByText("Selected items", { exact: true })).toBeVisible();
+    await expect(
+      summary.getByText("Confirmed in written quote", { exact: true })
+    ).toHaveCount(2);
+    await expect(
+      summary.getByRole("link", { name: "Request Project Quote" })
+    ).toHaveAttribute("href", "/get-quote");
+    await expect(
+      summary.getByText(/^(Subtotal|Tax \(estimated\)|Total)$/)
+    ).toHaveCount(0);
+    expect((await page.locator("body").innerText()).toLowerCase()).not.toContain(
+      "checkout"
+    );
+  });
+
+  // ────────────────────────────────────────────────────────────
+  // 9. llms.txt only publishes working product links and neutral gallery copy
+  // ────────────────────────────────────────────────────────────
+  test("llms.txt publishes working product links and neutral gallery copy", async ({
+    page,
+  }) => {
+    const response = await page.request.get("/llms.txt");
+    expect(response.status()).toBe(200);
+    const text = await response.text();
+
+    expect(text).toContain(
+      "Gallery: https://qddjtx.com/gallery — Visual references for product forms and customization options"
+    );
+    expect(text).not.toContain("Case studies and past projects");
+
+    const productPaths = [
+      ...new Set(text.match(/\/products\/[a-z0-9-]+/g) ?? []),
+    ];
+    expect(productPaths).toHaveLength(6);
+    for (const productPath of productPaths) {
+      const productResponse = await page.request.get(productPath);
+      expect(
+        productResponse.status(),
+        `${productPath} should return HTTP 200`
+      ).toBe(200);
+    }
+  });
+
+  // ────────────────────────────────────────────────────────────
+  // 10. Materials page loads with H1
   // ────────────────────────────────────────────────────────────
   test("materials page loads with H1", async ({ page }) => {
     await page.goto("/materials");
@@ -117,7 +225,7 @@ test.describe("InflatableModel E2E Tests", () => {
   });
 
   // ────────────────────────────────────────────────────────────
-  // 8. AI builder page loads with H1
+  // 11. AI builder page loads with H1
   // ────────────────────────────────────────────────────────────
   test("ai-builder page loads with H1", async ({ page }) => {
     await page.goto("/ai-builder");
@@ -127,7 +235,7 @@ test.describe("InflatableModel E2E Tests", () => {
   });
 
   // ────────────────────────────────────────────────────────────
-  // 9. Quote pending page loads
+  // 12. Quote pending page loads
   // ────────────────────────────────────────────────────────────
   test("quote pending page loads", async ({ page }) => {
     await page.goto("/quote/pending", { waitUntil: "domcontentloaded" });
@@ -140,7 +248,7 @@ test.describe("InflatableModel E2E Tests", () => {
   });
 
   // ────────────────────────────────────────────────────────────
-  // 10. Admin/login redirects to login page when accessing /admin/stats
+  // 13. Admin/login redirects to login page when accessing /admin/stats
   // ────────────────────────────────────────────────────────────
   test("admin/stats redirects to login when unauthenticated", async ({
     page,

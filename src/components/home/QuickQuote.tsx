@@ -149,7 +149,7 @@ export function QuickQuote() {
       <div className="container mx-auto px-4">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="font-heading text-2xl font-bold tracking-tight text-white sm:text-3xl md:text-4xl">
-            Get a Free Quote
+            Request a Quote
           </h2>
           <p className="mt-4 text-lg text-red-100">
             Share your contact details and product type for a project-specific
@@ -243,7 +243,7 @@ export function QuickQuote() {
               ) : (
                 <>
                   <Send className="h-5 w-5" />
-                  Get My Free Quote
+                  Submit Quote Request
                 </>
               )}
             </button>

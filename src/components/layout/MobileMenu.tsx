@@ -116,7 +116,7 @@ export function MobileMenu({ isOpen, onClose, navLinks }: MobileMenuProps) {
             { label: "Safety & Compliance", href: "/safety-compliance" },
             { label: "Quality Process", href: "/quality-process" },
             { label: "Materials & Printing", href: "/materials" },
-            { label: "Downloads", href: "/downloads" },
+            { label: "Resources", href: "/downloads" },
           ].map((link) => (
             <Link
               key={link.href}

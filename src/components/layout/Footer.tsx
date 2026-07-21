@@ -52,7 +52,7 @@ const FOOTER_COLUMNS = [
       { label: "Material Specs", href: "/materials" },
       { label: "Safety & Compliance", href: "/safety-compliance" },
       { label: "Quality Process", href: "/quality-process" },
-      { label: "Downloads", href: "/downloads" },
+      { label: "Resources", href: "/downloads" },
       { label: "Shipping Info", href: "/shipping" },
       { label: "Setup Guide", href: "/setup-guide" },
       { label: "FAQ", href: "/faq" },

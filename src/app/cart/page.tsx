@@ -21,12 +21,10 @@ export default function CartPage() {
     removeItem,
     updateQuantity,
     clearCart,
-    getShipping,
     getItemCount,
     getCustomItemCount,
   } = useCartStore();
 
-  const shipping = getShipping();
   const itemCount = getItemCount();
   const customItemCount = getCustomItemCount();
 
@@ -77,9 +75,9 @@ export default function CartPage() {
             <div className="flex items-start gap-2 text-sm text-yellow-800">
               <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
               <p>
-                Items marked as <strong>Custom Quote</strong> will be converted to a
-                quote request at checkout. Quotation timing depends on the
-                submitted requirements and current review queue.
+                Items marked as <strong>Custom Quote</strong> are included in your
+                quote request. Quotation timing depends on the submitted
+                requirements and current review queue.
               </p>
             </div>
           </div>
@@ -120,74 +118,57 @@ export default function CartPage() {
             </div>
           </div>
 
-          {/* Order summary */}
+          {/* Quote request summary */}
           <div className="lg:col-span-1">
             <div className="sticky top-24 rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
               <h2 className="mb-4 text-lg font-bold text-navy-900">
-                Order Summary
+                Quote Request Summary
               </h2>
 
               <div className="space-y-3 text-sm">
-                <div className="flex justify-between">
-                  <span className="text-gray-600">
-                    Subtotal ({itemCount} items)
-                  </span>
+                <div className="flex justify-between gap-4">
+                  <span className="text-gray-600">Selected items</span>
                   <span className="font-semibold text-navy-900">
-
+                    {itemCount}
                   </span>
                 </div>
 
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Shipping</span>
-                  {shipping === 0 ? (
-                    <span className="font-semibold text-green-600">FREE</span>
-                  ) : (
-                    <span className="font-semibold text-navy-900">
-
-                    </span>
-                  )}
-                </div>
-
-                {shipping > 0 && (
-                  <p className="text-xs text-gray-400">
-                    Free shipping on orders over $500. Add{" "}
-
-                  </p>
-                )}
-
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Tax (estimated)</span>
-                  <span className="font-semibold text-navy-900">
-
+                <div className="flex justify-between gap-4">
+                  <span className="text-gray-600">Pricing</span>
+                  <span className="text-right font-semibold text-navy-900">
+                    Confirmed in written quote
                   </span>
                 </div>
 
-                <div className="border-t border-gray-200 pt-3">
-                  <div className="flex justify-between text-base">
-                    <span className="font-bold text-navy-900">Total</span>
-                    <span className="font-bold text-navy-900">
-
-                    </span>
-                  </div>
+                <div className="flex justify-between gap-4">
+                  <span className="text-gray-600">Shipping and tax</span>
+                  <span className="text-right font-semibold text-navy-900">
+                    Confirmed in written quote
+                  </span>
                 </div>
+
+                <p className="border-t border-gray-200 pt-3 text-xs leading-relaxed text-gray-500">
+                  Final specifications, schedule, and commercial terms are
+                  confirmed after project review.
+                </p>
               </div>
 
               <Link
-                href="/checkout"
+                href="/get-quote"
                 className="mt-6 flex w-full items-center justify-center gap-2 rounded-lg bg-red-600 px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-red-700 active:scale-95"
               >
-                Proceed to Checkout
+                Request Project Quote
               </Link>
 
               {/* Trust signals */}
               <div className="mt-6 space-y-3 border-t border-gray-100 pt-4">
                 <div className="flex items-center gap-2 text-xs text-gray-500">
                   <ShieldCheck className="h-4 w-4 text-green-600" />
-                  Secure checkout with SSL encryption
+                  Secure quote submission with SSL encryption
                 </div>
                 <div className="flex items-center gap-2 text-xs text-gray-500">
                   <Truck className="h-4 w-4 text-navy-600" />
-                  Free shipping on orders over $500
+                  Shipping terms confirmed in writing
                 </div>
                 <div className="flex items-center gap-2 text-xs text-gray-500">
                   <Package className="h-4 w-4 text-navy-600" />

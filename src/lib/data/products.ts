@@ -82,13 +82,6 @@ export const SORT_OPTIONS = [
   { label: "Newest", value: "newest" },
 ] as const;
 
-export const LEAD_TIMES = [
-  { label: "1-2 Weeks", value: "1-2" },
-  { label: "3-4 Weeks", value: "3-4" },
-  { label: "5-6 Weeks", value: "5-6" },
-  { label: "Custom", value: "custom" },
-] as const;
-
 
 export const products: Product[] = [
   {

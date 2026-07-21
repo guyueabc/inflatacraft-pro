@@ -209,7 +209,7 @@ export default function SetupGuidePage() {
             <p className="mx-auto mb-8 max-w-2xl text-lg text-gray-600">Request the instructions and installation information available for the exact product before approving an order.</p>
             <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Link href="/get-quote" className="inline-flex items-center gap-2 rounded-xl bg-red-600 px-8 py-4 text-base font-semibold text-white shadow-lg shadow-red-600/30 transition-all hover:bg-red-500">
-                Get Free Quote <ArrowRight className="h-5 w-5" />
+                Request Quote <ArrowRight className="h-5 w-5" />
               </Link>
             </div>
           </div>

@@ -36,10 +36,10 @@
 ```
 最终到达网址: https://qddjtx.com/get-quote?utm_source=google&utm_medium=cpc&utm_campaign=search
 标题 1: Custom Inflatable Manufacturer
-标题 2: Free 3D Rendering & Quote
-标题 3: 3-6 Week Turnaround
-描述 1: Giant product replicas, mascots, arches, costumes & tents. B2B manufacturing with free 3D preview. 20+ years experience.
-描述 2: Get your free custom quote in 24 hours. Trusted by brands worldwide. Start your project today.
+标题 2: Request a Custom Quote
+标题 3: Confirm Scope in Writing
+描述 1: Explore replicas, mascots, arches, costumes and tents for branded events.
+描述 2: Share dimensions, artwork and destination. Scope and terms are confirmed per project.
 ```
 
 ### 广告 B
@@ -47,20 +47,20 @@
 ```
 最终到达网址: https://qddjtx.com/gallery?utm_source=google&utm_medium=cpc&utm_campaign=search_gallery
 标题 1: Giant Inflatable Replicas
-标题 2: See Our Case Studies
+标题 2: Explore Product Ideas
 标题 3: Made for Trade Shows & Events
-描述 1: From beverage cans to building-sized inflatables — browse 16 real projects. Free rendering with every order.
-描述 2: Custom manufacturing, worldwide shipping. 3-6 week turnaround. Click to browse our gallery.
+描述 1: Browse inflatable product and design examples for events, promotions and branded displays.
+描述 2: Review formats, then request project specifications and delivery terms in writing.
 ```
 
 ### 广告 C
 
 ```
 最终到达网址: https://qddjtx.com/get-quote?utm_source=google&utm_medium=cpc&utm_campaign=search_urgent
-标题 1: Need an Inflatable Fast?
-标题 2: Rush Orders — 3 Weeks
-标题 3: Free Design & Quote
-描述 1: Tight deadline? We deliver custom inflatables in 3 weeks. Product replicas, arches, mascots, tents. Free 3D rendering.
+标题 1: Have a Target Event Date?
+标题 2: Request Schedule Review
+标题 3: Share Project Requirements
+描述 1: Share your target date, destination and requirements for a feasibility review.
 描述 2: Submit your project requirements for review. Contact us on WhatsApp through the website.
 ```
 
@@ -71,7 +71,7 @@
 2. 选择: 网站
 3. 转化名称: Quote Form Submit
 4. 类别: 提交潜在客户表单
-5. 价值: $500 (默认)
+5. 价值: 不设置未经真实订单数据支持的固定值；有可核验数据后再配置
 6. 统计方式: 每次
 7. 点击"使用 Google 跟踪代码管理器"
 8. 复制"转化 ID"和"转化标签" — 告诉我，我来更新代码

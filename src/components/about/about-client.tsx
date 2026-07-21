@@ -310,7 +310,7 @@ export function AboutPageClient() {
                 href="/get-quote"
                 className="inline-flex items-center gap-2 rounded-lg bg-red-600 px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-red-600/30 transition-all hover:bg-red-500 hover:shadow-red-500/40 active:scale-95"
               >
-                Get Free Quote
+                Request Quote
                 <ArrowRight className="h-5 w-5" />
               </Link>
             </div>

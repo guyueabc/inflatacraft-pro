@@ -297,7 +297,7 @@ export function BlogDetailClient({ post }: { post: BlogDetail }) {
                   href="/get-quote"
                   className="flex w-full items-center justify-center gap-2 rounded-lg bg-red-600 px-4 py-3 text-sm font-semibold transition-colors hover:bg-red-500"
                 >
-                  Get Free Consultation
+                  Request Project Review
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
