@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "FAQ | InflatableModel",
     description: "Answers to common questions about custom inflatables.",
+    url: "https://qddjtx.com/faq",
     type: "website",
   },
 };

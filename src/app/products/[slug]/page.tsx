@@ -24,6 +24,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     openGraph: {
       title: product.name,
       description: product.description,
+      url: `https://qddjtx.com/products/${product.slug}`,
       images: product.images.slice(0, 4),
       type: "website",
     },

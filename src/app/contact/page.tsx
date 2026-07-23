@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Contact InflatableModel | Request a Quote',
     description: 'Contact us through WhatsApp or the online form for custom inflatable inquiries.',
+    url: 'https://qddjtx.com/contact',
     type: 'website',
   },
 }

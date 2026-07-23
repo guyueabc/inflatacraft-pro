@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Request a Quote | InflatableModel',
     description: 'Share your custom inflatable requirements for project review.',
+    url: 'https://qddjtx.com/get-quote',
     type: 'website',
   },
 }
