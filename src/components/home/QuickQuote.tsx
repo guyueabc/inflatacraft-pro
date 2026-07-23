@@ -2,12 +2,9 @@
 
 import React, { useState, useEffect, useRef, type FormEvent } from "react";
 import { cn } from "@/lib/utils";
+import { getLeadTrackingPayload, getPartialLeadTrackingPayload, markPartialLeadSent, partialLeadAlreadySent, trackClientEvent } from "@/lib/analytics/client";
 import { Send, Loader2, CheckCircle2, MessageCircle } from "lucide-react";
 
-type AnalyticsWindow = Window & {
-  dataLayer?: Array<Record<string, unknown>>;
-  gtag?: (...args: unknown[]) => void;
-};
 
 const PRODUCT_TYPES = [
   "Giant Product Replica",
@@ -49,6 +46,10 @@ export function QuickQuote() {
   const formRef = useRef(form);
   useEffect(() => { formRef.current = form; }, [form]);
 
+  useEffect(() => {
+    trackClientEvent("quote_form_viewed", { form_type: "quote", page: window.location.pathname, placement: "home_quick_quote" });
+  }, []);
+
   // Save partial data to sessionStorage + beforeunload beacon
   useEffect(() => {
     const t = setTimeout(() => {
@@ -61,14 +62,17 @@ export function QuickQuote() {
 
   useEffect(() => {
     const send = () => {
-      if (sessionStorage.getItem('partial_sent') === '1') return;
-      sessionStorage.setItem('partial_sent', '1');
+      if (partialLeadAlreadySent()) return;
       const d = formRef.current;
       if (!d.email && !d.phone) return;
-      const adParams = ["utm_source","utm_medium","utm_campaign","utm_term","utm_content","gclid"];
-      const utm: Record<string,string> = {};
-      adParams.forEach((k) => { try { const v = sessionStorage.getItem(k); if (v) utm[k] = v; } catch {} });
-      navigator.sendBeacon("/api/analytics/partial-lead", JSON.stringify({ ...d, ...utm }));
+      markPartialLeadSent();
+      navigator.sendBeacon("/api/analytics/partial-lead", JSON.stringify({
+        email: d.email || "",
+        phone: d.phone || "",
+        name: d.name || "",
+        productType: d.productType || "",
+        ...getPartialLeadTrackingPayload(),
+      }));
     };
     window.addEventListener("beforeunload", send);
     window.addEventListener("pagehide", send);
@@ -95,9 +99,7 @@ export function QuickQuote() {
       return;
     }
 
-    const adParams = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "gclid", "gbraid", "wbraid", "fbclid"];
-    const utm: Record<string, string> = {};
-    adParams.forEach((k) => { try { const v = sessionStorage.getItem(k); if (v) utm[k] = v; } catch {} });
+    const tracking = getLeadTrackingPayload();
 
     try {
       const res = await fetch("/api/submit-quote", {
@@ -108,7 +110,8 @@ export function QuickQuote() {
           email: form.email,
           phone: form.phone,
           productType: form.productType,
-          ...utm,
+          formType: "quote",
+          ...tracking,
         }),
       });
 
@@ -117,10 +120,8 @@ export function QuickQuote() {
         throw new Error(safeSubmissionError(result.error));
       }
 
-      sessionStorage.setItem("quote_submitted", "true");
-      const analyticsWindow = window as AnalyticsWindow;
-      analyticsWindow.dataLayer?.push({ event: "quote_form_submitted" });
-      analyticsWindow.gtag?.("event", "conversion", { send_to: "AW-18234377845/TYNLCJu0_70cEPWM6vZD" });
+      trackClientEvent("quote_form_submitted", { form_type: "quote", page: window.location.pathname });
+      window.gtag?.("event", "conversion", { send_to: "AW-18234377845/TYNLCJu0_70cEPWM6vZD" });
 
       setStatus("success");
       setForm(initialForm);

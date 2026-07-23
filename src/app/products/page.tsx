@@ -6,9 +6,11 @@ export const revalidate = 3600;
 export const metadata: Metadata = {
   title: "Products Catalog | InflatableModel",
   description: "Browse our complete range of custom inflatables - giant product replicas, mascots, arches, costumes, tents, and interactive games.",
+  alternates: { canonical: "https://qddjtx.com/products" },
   openGraph: {
     title: "Products | InflatableModel",
     description: "Browse our complete range of custom inflatables.",
+    url: "https://qddjtx.com/products",
     type: "website",
   },
 };

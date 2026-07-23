@@ -3,6 +3,7 @@
 import Script from "next/script";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
+import { readAttributionValue, getExternalReferrer, trackClientEvent } from "@/lib/analytics/client";
 
 const GOOGLE_ADS_ID = "AW-18234377845";
 
@@ -94,13 +95,14 @@ function Tracker() {
 
   // Page view beacon — sends tracking data to Supabase via 1px GIF
   useEffect(() => {
-    const sp = new URLSearchParams(window.location.search);
     const params = new URLSearchParams();
     params.set("p", pathname || "/");
-    params.set("r", document.referrer || "");
+    params.set("r", getExternalReferrer());
     ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "gclid", "gbraid", "wbraid"].forEach((k) => {
-      const v = sp.get(k);
-      if (v) params.set(k, v);
+      const v = readAttributionValue(k);
+      if (v) {
+        params.set(k, v);
+      }
     });
     const { visitorId, sessionId } = getTrackingIds();
     params.set("vid", visitorId);
@@ -123,14 +125,20 @@ function Tracker() {
   }, [pathname]);
 
   useEffect(() => {
-    if (sessionStorage.getItem("quote_submitted") === "true") {
-      window.dataLayer?.push({ event: "conversion_quote_submitted" });
-      if (typeof window.gtag === "function") {
-        window.gtag("event", "conversion", { send_to: `${GOOGLE_ADS_ID}/TYNLCJu0_70cEPWM6vZD` });
+    const handleClick = (event: MouseEvent) => {
+      const target = event.target instanceof Element ? event.target.closest("a") : null;
+      const href = target?.getAttribute("href") || "";
+      if (!target || !href) return;
+      const label = target.textContent?.trim().replace(/\s+/g, " ").slice(0, 100) || "";
+      if (href.includes("wa.me/8615376427736")) {
+        trackClientEvent("whatsapp_click", { page: window.location.pathname, label, href });
+      } else if (href === "/get-quote" || href.startsWith("/get-quote?")) {
+        trackClientEvent("quote_cta_click", { page: window.location.pathname, label, href });
       }
-      sessionStorage.removeItem("quote_submitted");
-    }
-  }, [pathname]);
+    };
+    document.addEventListener("click", handleClick);
+    return () => document.removeEventListener("click", handleClick);
+  }, []);
 
   return null;
 }

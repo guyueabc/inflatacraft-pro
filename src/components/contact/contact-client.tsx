@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { getLeadTrackingPayload, trackClientEvent } from "@/lib/analytics/client";
 import {
   Clock,
   MessageCircle,
@@ -122,6 +123,7 @@ export function ContactPageClient() {
           description: data.message,
           productType: data.subject,
           formType: "contact",
+          ...getLeadTrackingPayload(),
         }),
       });
       const result = await response.json().catch(() => ({}));
@@ -134,6 +136,7 @@ export function ContactPageClient() {
         );
       }
       setIsSubmitted(true);
+      trackClientEvent("contact_form_submitted", { form_type: "contact", page: window.location.pathname });
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (error) {
       setSubmitError(

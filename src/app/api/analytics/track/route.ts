@@ -33,9 +33,11 @@ function clientIp(request: NextRequest): string {
     || "0.0.0.0";
 }
 
-function trafficType(source: string, medium: string, clickId: string): string {
+function trafficType(source: string, medium: string, clickId: string, referrerDomain: string): string {
   if (clickId || medium === "cpc" || medium === "ppc" || medium === "paid") return "ads";
-  if (["google", "bing", "yahoo", "baidu", "duckduckgo"].includes(source) && medium === "organic") return "organic";
+  const isSearchReferrer = /(^|\.)google\.|(^|\.)bing\.com$|(^|\.)yahoo\.|(^|\.)baidu\.com$|(^|\.)duckduckgo\.com$|(^|\.)yandex\./.test(referrerDomain);
+  if ((["google", "bing", "yahoo", "baidu", "duckduckgo", "yandex"].includes(source) && medium === "organic")
+    || isSearchReferrer) return "organic";
   if (["facebook", "linkedin", "twitter", "instagram", "youtube", "tiktok"].includes(source)) return "social";
   if (source) return "referral";
   return "direct";
@@ -159,10 +161,10 @@ export async function GET(request: NextRequest) {
   const clickId = sanitizeAnalyticsValue(searchParams.get("gclid") || searchParams.get("gbraid") || searchParams.get("wbraid"), 200);
   const source = sanitizeAnalyticsValue(searchParams.get("utm_source"), 100).toLowerCase();
   const medium = sanitizeAnalyticsValue(searchParams.get("utm_medium"), 100).toLowerCase();
-  const type = trafficType(source, medium, clickId);
   const referrer = sanitizeAnalyticsValue(searchParams.get("r"), 1000);
   let referrerDomain = "";
   try { referrerDomain = referrer ? new URL(referrer).hostname.slice(0, 253) : ""; } catch { referrerDomain = ""; }
+  const type = trafficType(source, medium, clickId, referrerDomain);
   const headerCountry = sanitizeAnalyticsValue(request.headers.get("x-vercel-ip-country"), 2).toUpperCase();
   const country = /^[A-Z]{2}$/.test(headerCountry) ? headerCountry : classifyCountry(ip);
   const isOwner = isOwnerIp(ip);

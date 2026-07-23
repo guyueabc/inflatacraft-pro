@@ -12,6 +12,7 @@ export const metadata: Metadata = {
   },
 }
 
-export default function GetQuotePage() {
-  return <GetQuoteClient />
+export default async function GetQuotePage({ searchParams }: { searchParams: Promise<{ product?: string }> }) {
+  const params = await searchParams;
+  return <GetQuoteClient initialProduct={params.product || ""} />
 }

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { FAQPageClient } from "@/components/faq/faq-client";
+import { FAQ_DATA } from "@/lib/data/faq";
 
 export const metadata: Metadata = {
   title: "Frequently Asked Questions | InflatableModel",
@@ -12,15 +13,9 @@ export const metadata: Metadata = {
   },
 };
 
-const faqItems = [
-  {
-    question: "How do I get a quote?",
-    answer:
-      "Submit your project details through our online quote form or contact us through WhatsApp. Include the type of inflatable, approximate size, quantity, deadline, and any reference images so the project can be reviewed.",
-  },
-];
-
 export default function FAQPage() {
+  const faqItems = FAQ_DATA.flatMap((category) => category.items);
+
   return (
     <>
       <script

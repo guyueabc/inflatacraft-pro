@@ -12,7 +12,8 @@ export const metadata: Metadata = {
   },
 }
 
-export default function ContactPage() {
+export default async function ContactPage({ searchParams }: { searchParams: Promise<{ product?: string }> }) {
+  const params = await searchParams;
   return (
     <>
       <script
@@ -50,7 +51,7 @@ export default function ContactPage() {
       </section>
 
       {/* Same form as /get-quote */}
-      <GetQuoteClient />
+      <GetQuoteClient initialProduct={params.product || ""} />
     </>
   )
 }

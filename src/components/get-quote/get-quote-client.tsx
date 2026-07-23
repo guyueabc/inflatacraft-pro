@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { cn } from "@/lib/utils";
+import { getLeadTrackingPayload, getPartialLeadTrackingPayload, markPartialLeadSent, partialLeadAlreadySent, trackClientEvent } from "@/lib/analytics/client";
 import { quoteSchema, PRODUCT_TYPES, BUDGET_RANGES, DEADLINES, INTENDED_USES, INDOOR_OUTDOOR, PEOPLE_INTERACT, COUNTRIES, VOLTAGE_PLUGS, ARTWORK_STATUS, INSTALLATION_SURFACES, type QuoteFormData } from "@/lib/validations/quote";
 import { Send, CheckCircle2, Phone, Mail } from "lucide-react";
 
@@ -16,9 +17,10 @@ function safeSubmissionError(value: unknown, fallback: string): string {
   return typeof value === "string" && publicSubmissionErrors.has(value) ? value : fallback;
 }
 
-export function GetQuoteClient() {
+export function GetQuoteClient({ initialProduct = "" }: { initialProduct?: string }) {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState("");
+  const contextProduct = initialProduct.trim();
 
   const form = useForm<QuoteFormData>({
     resolver: zodResolver(quoteSchema),
@@ -31,12 +33,23 @@ export function GetQuoteClient() {
   const formRef = useRef<QuoteFormData | null>(null);
   const values = useWatch({ control: form.control });
 
+  useEffect(() => {
+    if (!contextProduct) return;
+    form.setValue("productType", contextProduct, { shouldDirty: false });
+    trackClientEvent("quote_form_viewed", { form_type: window.location.pathname === "/contact" ? "contact" : "quote", page: window.location.pathname, product: contextProduct });
+  }, [contextProduct, form]);
+
   // (comment)
   useEffect(() => {
-    if (values.email && values.phone) formRef.current = values as QuoteFormData;
+    if (values.email || values.phone) formRef.current = values as QuoteFormData;
   }, [values]);
 
   // (comment)
+  useEffect(() => {
+    if (window.location.search.includes("product=")) return;
+    trackClientEvent("quote_form_viewed", { form_type: window.location.pathname === "/contact" ? "contact" : "quote", page: window.location.pathname });
+  }, []);
+
   useEffect(() => {
     const timer = setTimeout(() => {
       if (values.email) {
@@ -49,14 +62,18 @@ export function GetQuoteClient() {
   // (comment)
   useEffect(() => {
     const sendPartial = () => {
-      if (sessionStorage.getItem('partial_sent') === '1') return;
-      sessionStorage.setItem('partial_sent', '1');
+      if (partialLeadAlreadySent()) return;
       const partial = formRef.current;
       if (!partial?.email && !partial?.phone) return;
-      const adParams = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "gclid"];
-      const utm: Record<string, string> = {};
-      adParams.forEach((k) => { try { const v = sessionStorage.getItem(k); if (v) utm[k] = v; } catch {} });
-      navigator.sendBeacon("/api/analytics/partial-lead", JSON.stringify({ ...partial, ...utm }));
+      markPartialLeadSent();
+      navigator.sendBeacon("/api/analytics/partial-lead", JSON.stringify({
+        email: partial.email || "",
+        phone: partial.phone || "",
+        name: partial.name || "",
+        company: partial.company || "",
+        productType: partial.productType || "",
+        ...getPartialLeadTrackingPayload(),
+      }));
     };
     window.addEventListener("beforeunload", sendPartial);
     window.addEventListener("pagehide", sendPartial);
@@ -70,12 +87,8 @@ export function GetQuoteClient() {
   const onSubmit = async (data: QuoteFormData) => {
     setIsSubmitting(true);
     // (comment)
-    const adParams = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "gclid", "gbraid", "wbraid", "fbclid"];
-    const utm = adParams.reduce((acc, k) => {
-      const v = sessionStorage.getItem(k);
-      if (v) acc[k] = v;
-      return acc;
-    }, {} as Record<string, string>);
+    const tracking = getLeadTrackingPayload();
+    const formType = window.location.pathname === "/contact" ? "contact" : "quote";
 
     setSubmitError("");
 
@@ -83,7 +96,7 @@ export function GetQuoteClient() {
       const res = await fetch("/api/submit-quote", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...data, ...utm }),
+        body: JSON.stringify({ ...data, formType, ...tracking }),
       });
       const result = await res.json().catch(() => ({}));
       if (!res.ok || result.success !== true) {
@@ -96,13 +109,8 @@ export function GetQuoteClient() {
       }
 
       setIsSubmitted(true);
-      sessionStorage.setItem("quote_submitted", "true");
-      const analyticsWindow = window as Window & {
-        dataLayer?: Array<Record<string, unknown>>;
-        gtag?: (...args: unknown[]) => void;
-      };
-      analyticsWindow.dataLayer?.push({ event: "quote_form_submitted" });
-      analyticsWindow.gtag?.("event", "conversion", {
+      trackClientEvent(`${formType}_form_submitted`, { form_type: formType, page: window.location.pathname });
+      window.gtag?.("event", "conversion", {
         send_to: "AW-18234377845/TYNLCJu0_70cEPWM6vZD",
       });
       try { window.scrollTo({ top: 0, behavior: "smooth" }); } catch {}
@@ -209,6 +217,7 @@ export function GetQuoteClient() {
               <select id="q-product" {...form.register("productType")}
                 className="w-full rounded-lg border border-navy-300 bg-white px-4 py-3 text-sm text-gray-900 transition-all focus:border-navy-700 focus:outline-none focus:ring-2 focus:ring-navy-500/20">
                 <option value="">Select a product type...</option>
+                {contextProduct && !PRODUCT_TYPES.some((type) => type === contextProduct) && <option value={contextProduct}>{contextProduct}</option>}
                 {PRODUCT_TYPES.map((pt) => <option key={pt} value={pt}>{pt}</option>)}
               </select>
             </div>

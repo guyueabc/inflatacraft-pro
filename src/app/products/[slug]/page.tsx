@@ -98,7 +98,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
               </div>
 
               <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-                <Link href="/get-quote" className="rounded-lg bg-red-600 px-7 py-3 text-center font-semibold text-white hover:bg-red-500">Request a Custom Quote</Link>
+                <Link href={`/get-quote?product=${encodeURIComponent(product.name)}`} className="rounded-lg bg-red-600 px-7 py-3 text-center font-semibold text-white hover:bg-red-500">Request a Custom Quote</Link>
                 <a href="https://wa.me/8615376427736" target="_blank" rel="noopener noreferrer" className="rounded-lg border border-gray-300 px-7 py-3 text-center font-semibold text-navy-900 hover:bg-gray-50">WhatsApp</a>
               </div>
               <div className="mt-5"><ShareButton productName={product.name} /></div>
