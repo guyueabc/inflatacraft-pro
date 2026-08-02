@@ -182,10 +182,10 @@ export async function GET(request: NextRequest) {
         visitorId, ip, country, sessionId, type, isOwner, isTest, device, browser, os
       ),
       prisma.$executeRawUnsafe(
-        `INSERT INTO visitor_logs (visitor_id, ip_address, is_owner, is_test, traffic_type, created_at)
-         SELECT $1,$2,$3,$4,$5,NOW()
+        `INSERT INTO visitor_logs (visitor_id, is_owner, is_test, traffic_type, created_at)
+         SELECT $1,$2,$3,$4,NOW()
          WHERE NOT EXISTS (SELECT 1 FROM visitor_logs WHERE visitor_id=$1 AND created_at::date=CURRENT_DATE)`,
-        visitorId, ip, isOwner, isTest, type
+        visitorId, isOwner, isTest, type
       ),
     ]);
   } catch (error: unknown) {
