@@ -20,7 +20,7 @@ vi.mock("@/lib/admin-auth", () => ({
 import { GET } from "../../src/app/api/analytics/track/route";
 
 describe("analytics page-view beacon", () => {
-  it("keeps the visitor log insert compatible with the deployed legacy table", async () => {
+  it("writes the page view without depending on the legacy visitor_logs schema", async () => {
     transaction.mockResolvedValueOnce([]);
 
     const request = new NextRequest(
@@ -29,14 +29,12 @@ describe("analytics page-view beacon", () => {
     const response = await GET(request);
 
     expect(response.status).toBe(200);
-    expect(executeRaw).toHaveBeenCalledTimes(2);
-    const call = executeRaw.mock.calls.at(1);
+    expect(executeRaw).toHaveBeenCalledTimes(1);
+    const call = executeRaw.mock.calls.at(0);
     expect(call).toBeDefined();
     const [query, ...values] = call as unknown as [string, ...unknown[]];
-    expect(query).toContain(
-      "INSERT INTO visitor_logs (visitor_id, is_owner, is_test, traffic_type, created_at)"
-    );
-    expect(query).not.toContain("ip_address");
-    expect(values).toHaveLength(4);
+    expect(query).toContain("INSERT INTO page_views");
+    expect(query).not.toContain("visitor_logs");
+    expect(values).toHaveLength(18);
   });
 });
