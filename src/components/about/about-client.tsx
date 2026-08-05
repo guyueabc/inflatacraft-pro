@@ -196,7 +196,7 @@ export function AboutPageClient() {
               What We Stand For
             </h2>
             <p className="mt-4 text-lg text-navy-300 max-w-2xl mx-auto">
-              Four principles that guide every decision we make and every
+              Principles that guide every decision we make and every
               inflatable we build.
             </p>
           </motion.div>
