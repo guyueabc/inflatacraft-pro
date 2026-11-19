@@ -1,0 +1,73 @@
+name: Supabase DB backup
+
+# 每日 03:00 UTC（北京时间 11:00）导出一次 Supabase 全库，保留 30 天。
+# 为什么放在 GitHub Actions 而不是 Vercel Cron：
+#   vercel.json 里 API 函数 maxDuration=30s，整库导出会超时，超时只会留下残缺备份。
+# 依赖的仓库 Secret：
+#   SUPABASE_DB_URL = Supabase → Project Settings → Database → Connection string → Session pooler
+#   格式 postgresql://postgres.<project-ref>:<password>@aws-0-<region>.pooler.supabase.com:5432/postgres
+#   （必须用 Session pooler：GitHub Runner 只有 IPv4，Supabase 直连地址是 IPv6）
+# 恢复方式：
+#   gunzip -c qddjtx-*.sql.gz | psql "$SUPABASE_DB_URL"
+
+on:
+  schedule:
+    - cron: "0 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  dump:
+    name: pg_dump all tables
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Fail fast if secret is missing
+        env:
+          PGURL: ${{ secrets.SUPABASE_DB_URL }}
+        run: |
+          if [ -z "${PGURL}" ]; then
+            echo "::error::仓库 Secret SUPABASE_DB_URL 未设置，备份不会执行。"
+            exit 1
+          fi
+          echo "secret 已设置（长度 ${#PGURL}）"
+
+      - name: Dump with pg_dump 17
+        env:
+          PGURL: ${{ secrets.SUPABASE_DB_URL }}
+        run: |
+          set -euo pipefail
+          STAMP=$(date -u +%Y%m%dT%H%M%SZ)
+          mkdir -p backup
+          docker run --rm -i \
+            -v "$PWD/backup:/backup" \
+            -e PGURL="$PGURL" \
+            -w /backup \
+            postgres:17-alpine \
+            sh -c 'pg_dump --no-owner --no-privileges --clean --if-exists "$PGURL" | gzip -9 > "qddjtx-'"$STAMP"'.sql.gz"'
+          FILE="backup/qddjtx-${STAMP}.sql.gz"
+          ls -l "$FILE"
+          gzip -t "$FILE"
+          SIZE=$(stat -c%s "$FILE")
+          TABLES=$(gunzip -c "$FILE" | grep -c '^CREATE TABLE' || true)
+          echo "- 文件：\`$FILE\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "- 大小：$SIZE 字节" >> "$GITHUB_STEP_SUMMARY"
+          echo "- 表数量：$TABLES" >> "$GITHUB_STEP_SUMMARY"
+          if [ "$SIZE" -lt 20000 ]; then
+            echo "::error::备份文件只有 $SIZE 字节，疑似导出失败或连接错误"
+            exit 1
+          fi
+          if [ "$TABLES" -lt 8 ]; then
+            echo "::error::只导出了 $TABLES 张表，预期 10 张，导出不完整"
+            exit 1
+          fi
+
+      - name: Upload artifact (30 days)
+        uses: actions/upload-artifact@v4
+        with:
+          name: supabase-backup-${{ github.run_id }}
+          path: backup/*.sql.gz
+          retention-days: 30
+          if-no-files-found: error

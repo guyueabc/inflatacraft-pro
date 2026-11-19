@@ -41,12 +41,7 @@
       "maxDuration": 30
     }
   },
-  "crons": [
-    {
-      "path": "/api/cron/db-backup",
-      "schedule": "0 3 * * *"
-    }
-  ],
+  "crons": [],
   "github": {
     "enabled": true,
     "autoAlias": true,
