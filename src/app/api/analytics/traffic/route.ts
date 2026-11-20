@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { requireAdmin } from "@/lib/admin-auth";
 import { prisma } from "@/lib/prisma";
+import { addUtcDays, resolveTrafficWindow } from "@/lib/analytics/date-range";
 
 type AggregateRow = {
   total_pv: number;
@@ -18,20 +19,6 @@ type DailyRow = AggregateRow & { date: Date };
 type HourRow = { hour: number; pv: number };
 
 const FILTER = "is_owner = FALSE AND is_test = FALSE AND country IS DISTINCT FROM 'CN'";
-const MAX_RANGE_DAYS = 366;
-
-function validDate(value: string | null, fallback = new Date()): Date {
-  if (!value || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return fallback;
-  const date = new Date(`${value}T00:00:00.000Z`);
-  if (Number.isNaN(date.getTime())) throw new Error("Invalid date");
-  return date;
-}
-
-function addDays(date: Date, days: number) {
-  const result = new Date(date);
-  result.setUTCDate(result.getUTCDate() + days);
-  return result;
-}
 
 async function aggregate(start: Date, end: Date): Promise<AggregateRow> {
   const rows = await prisma.$queryRawUnsafe<AggregateRow[]>(
@@ -80,27 +67,17 @@ export async function GET(request: NextRequest) {
   if (unauthorized) return unauthorized;
   try {
     const params = new URL(request.url).searchParams;
-    const view = params.get("view") || "day";
-    if (!["day", "week", "month", "range"].includes(view)) return NextResponse.json({ error: "Invalid view" }, { status: 400 });
-    const target = validDate(params.get("date"));
-    let start = target;
-    let end = addDays(start, 1);
-    if (view === "week") {
-      const weekday = start.getUTCDay() || 7;
-      start = addDays(start, 1 - weekday);
-      end = addDays(start, 7);
-    } else if (view === "month") {
-      start = new Date(Date.UTC(target.getUTCFullYear(), target.getUTCMonth(), 1));
-      end = new Date(Date.UTC(target.getUTCFullYear(), target.getUTCMonth() + 1, 1));
-    } else if (view === "range") {
-      start = validDate(params.get("start"));
-      end = addDays(validDate(params.get("end")), 1);
-    }
-    const days = Math.ceil((end.getTime() - start.getTime()) / 86400000);
-    if (days < 1 || days > MAX_RANGE_DAYS) return NextResponse.json({ error: `Range must be 1-${MAX_RANGE_DAYS} days` }, { status: 400 });
+    const resolved = resolveTrafficWindow({
+      view: params.get("view"),
+      date: params.get("date"),
+      start: params.get("start"),
+      end: params.get("end"),
+    });
+    if (!resolved.ok) return NextResponse.json({ error: resolved.error }, { status: 400 });
+    const { view, start, end, days } = resolved;
 
     const compare = params.get("compare") === "true";
-    const previousStart = addDays(start, -days);
+    const previousStart = addUtcDays(start, -days);
     const [current, series, previous] = await Promise.all([aggregate(start, end), daily(start, end), compare ? aggregate(previousStart, start) : null]);
     const currentStats = stats(current, days);
     const peak = series.reduce((best, item) => item.pv > (best?.pv || -1) ? item : best, series[0]);
