@@ -37,20 +37,43 @@ c.connect().then(async () => {
 
 VT="$(python -c "import json;print(json.load(open(r'C:\Users\Administrator\AppData\Roaming\xdg.data\com.vercel.cli\auth.json'))['token'])")"
 
+# 预检：token 失效时 CLI 会静默卡住，而此刻数据库密码已经重置、线上正在报错。
+# 必须在动任何变量前把这一条查出来，否则会像 2026-11-26 那样卡在半途。
+TOKEN_CODE="$(curl -s -o /dev/null -w '%{http_code}' -H "Authorization: Bearer $VT" https://api.vercel.com/v2/user || true)"
+if [ "$TOKEN_CODE" != "200" ]; then
+  echo "✗ Vercel token 无效（HTTP $TOKEN_CODE）。先跑一次刷新：" >&2
+  echo "  NODE_USE_ENV_PROXY=1 HTTPS_PROXY=http://127.0.0.1:7890 npx vercel whoami" >&2
+  exit 1
+fi
+
 upsert_env() {
   local key="$1"
-  local tmp
+  local id tmp
+  # 按 key 查现有变量 id：sensitive 类型的值读不回来，但可以按 id 整体替换
+  id="$(curl -s -H "Authorization: Bearer $VT" \
+    "https://api.vercel.com/v9/projects/$PROJECT_ID/env?teamId=$TEAM_ID" \
+    | python -c "
+import json,sys
+key=sys.argv[1]
+for e in json.load(sys.stdin).get('envs',[]):
+    if e.get('key')==key:
+        print(e['id']); break
+" "$key")"
+
   tmp="$(mktemp)"
   python - "$key" "$URL" > "$tmp" <<'PY'
 import json, sys
 print(json.dumps({"key": sys.argv[1], "value": sys.argv[2], "type": "sensitive", "target": ["production"]}))
 PY
-  # 先删同名（若存在），再新建，避免 PATCH 对 sensitive 类型的限制
-  curl -s -o /dev/null -X DELETE -H "Authorization: Bearer $VT" \
-    "https://api.vercel.com/v9/projects/$PROJECT_ID/env/$key?teamId=$TEAM_ID" || true
+
   local code
-  code="$(curl -s -o /tmp/envresp.$$ -w '%{http_code}' -X POST -H "Authorization: Bearer $VT" -H "Content-Type: application/json" \
-    --data @"$tmp" "https://api.vercel.com/v10/projects/$PROJECT_ID/env?teamId=$TEAM_ID")"
+  if [ -n "$id" ]; then
+    code="$(curl -s -o /tmp/envresp.$$ -w '%{http_code}' -X PATCH -H "Authorization: Bearer $VT" -H "Content-Type: application/json" \
+      --data @"$tmp" "https://api.vercel.com/v9/projects/$PROJECT_ID/env/$id?teamId=$TEAM_ID")"
+  else
+    code="$(curl -s -o /tmp/envresp.$$ -w '%{http_code}' -X POST -H "Authorization: Bearer $VT" -H "Content-Type: application/json" \
+      --data @"$tmp" "https://api.vercel.com/v10/projects/$PROJECT_ID/env?teamId=$TEAM_ID")"
+  fi
   if [ "$code" != "200" ] && [ "$code" != "201" ]; then
     echo "  ✗ 写入 $key 失败（HTTP $code）：$(head -c 300 /tmp/envresp.$$)" >&2; rm -f "$tmp" "/tmp/envresp.$$"; exit 1
   fi
